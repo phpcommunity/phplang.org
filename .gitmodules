@@ -1,0 +1,3 @@
+[submodule "php-langspec"]
+	path = php-langspec
+	url = https://github.com/php/php-langspec.git
