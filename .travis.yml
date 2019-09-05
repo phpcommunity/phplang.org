@@ -1,0 +1,38 @@
+language: generic
+sudo: false
+dist: xenial
+
+php: 7.2.15
+
+cache:
+  directories:
+    - /home/travis/.cargo
+    - /home/travis/build/phpcommunity/phplang.org/target
+    - /home/travis/.rustup
+    - /home/travis/.cache/sccache
+
+install:
+  - curl -sSf https://build.travis-ci.org/files/rustup-init.sh | sh -s -- --default-toolchain=stable -y
+
+before_script:
+  - export PATH=${TRAVIS_HOME}/.cargo/bin:$PATH
+  - rustc --version
+  - rustup --version
+  - cargo --version
+  - php --version
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers "^0.3" mdbook)
+  - cargo install-update -a
+
+script:
+  - php tools/toc.php
+  - mdbook build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: ./book
+  verbose: true
+  on:
+    branch: master

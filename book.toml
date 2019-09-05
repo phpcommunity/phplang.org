@@ -1,0 +1,14 @@
+[book]
+authors = ["The PHP Group"]
+language = "en"
+multilingual = false
+src = "src"
+title = "PHP Language Specification"
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+curly-quotes = true
+git-repository-url = "https://github.com/php/php-langspec"
