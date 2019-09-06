@@ -12,7 +12,7 @@ chdir($langspecDir);
 $langspecHash = exec('git rev-parse HEAD');
 $langspecShortHash = substr($langspecHash, 0, 7);
 
-$generationDate = gmdate('j F Y \a\t G:i e');
+$generationDate = gmdate('j F Y \a\t H:i e');
 
 $colophonPattern = "/<!-- Begin Colophon -->(.*)<!-- End Colophon -->\n/s";
 
