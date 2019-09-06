@@ -1,0 +1,345 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Conversions - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html" class="active"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#conversions" id="conversions">Conversions</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>Explicit type conversion is performed using the <a href="10-expressions.html#cast-operator">cast operator</a>.
+If an operation or language construct expects operand of one type and a value of another type is given,
+implicit (automatic) conversion will be performed. Same will happen with most internal functions, though some
+functions may do different things depending on argument type and thus would not perform the conversion.</p>
+<p>If an expression is converted to its own type, the type and value of the
+result are the same as the type and value of the expression.</p>
+<p>Conversions to <code>resource</code> and <code>null</code> types can not be performed.</p>
+<h2><a class="header" href="#converting-to-boolean-type" id="converting-to-boolean-type">Converting to Boolean Type</a></h2>
+<p>The [result type] (http://www.php.net/manual/en/language.types.boolean.php#language.types.boolean.casting) is <a href="05-types.html#the-boolean-type"><code>bool</code></a>.</p>
+<p>If the source type is <code>int</code> or <code>float</code>, then if the source value tests equal
+to 0, the result value is <code>FALSE</code>; otherwise, the result value is <code>TRUE</code>.</p>
+<p>If the source value is <code>NULL</code>, the result value is <code>FALSE</code>.</p>
+<p>If the source is an empty string or the string “0”, the result value is
+<code>FALSE</code>; otherwise, the result value is <code>TRUE</code>.</p>
+<p>If the source is an array with zero elements, the result value is <code>FALSE</code>;
+otherwise, the result value is <code>TRUE</code>.</p>
+<p>If the source is an object, the result value is <code>TRUE</code>.</p>
+<p>If the source is a resource, the result value is <code>TRUE</code>.</p>
+<p>The library function <a href="http://www.php.net/boolval"><code>boolval</code></a> allows values to be converted to
+<code>bool</code>.</p>
+<h2><a class="header" href="#converting-to-integer-type" id="converting-to-integer-type">Converting to Integer Type</a></h2>
+<p>The <a href="http://www.php.net/manual/en/language.types.integer.php#language.types.integer.casting">result type</a>  is <a href="05-types.html#the-integer-type"><code>int</code></a>.</p>
+<p>If the source type is <code>bool</code>, then if the source value is <code>FALSE</code>, the
+result value is 0; otherwise, the result value is 1.</p>
+<p>If the source type is <code>float</code>, for the values <code>INF</code>, <code>-INF</code>, and <code>NAN</code>, the
+result value is zero. For all other values, if the
+precision can be preserved (that is, the float is within the range of an
+integer), the fractional part is rounded towards zero. If the precision cannot
+be preserved, the following conversion algorithm is used, where <em>X</em> is
+defined as two to the power of the number of bits in an integer (for example,
+2 to the power of 32, i.e. 4294967296):</p>
+<ol>
+<li>We take the floating point remainder (wherein the remainder has the same
+sign as the dividend) of dividing the float by <em>X</em>, rounded towards zero.</li>
+<li>If the remainder is less than zero, it is rounded towards
+infinity and <em>X</em> is added.</li>
+<li>This result is converted to an unsigned integer.</li>
+<li>This result is converted to a signed integer by treating the unsigned
+integer as a two’s complement representation of the signed integer.</li>
+</ol>
+<p>Implementations may implement this conversion differently (for example, on some
+architectures there may be hardware support for this specific conversion mode)
+so long as the result is the same.</p>
+<p>If the source value is <code>NULL</code>, the result value is 0.</p>
+<p>If the source is a <a href="05-types.html#the-string-type">numeric string or leading-numeric string</a>
+having integer format, if the precision can be preserved the result
+value is that string’s integer value; otherwise, the result is
+undefined. If the source is a numeric string or leading-numeric string
+having floating-point format, the string’s floating-point value is
+treated as described above for a conversion from <code>float</code>. The trailing
+non-numeric characters in leading-numeric strings are ignored.  For any
+other string, the result value is 0.</p>
+<p>If the source is an array with zero elements, the result value is 0;
+otherwise, the result value is 1.</p>
+<p>If the source is an object, if the class defines a conversion function,
+the result is determined by that function (this is currently available only to internal classes).
+If not, the conversion is invalid, the result is assumed to be 1 and a non-fatal error is produced.</p>
+<p>If the source is a resource, the result is the resource’s unique ID.</p>
+<p>The library function <a href="http://php.net/manual/function.intval.php"><code>intval</code></a> allows values
+to be converted to <code>int</code>.</p>
+<h2><a class="header" href="#converting-to-floating-point-type" id="converting-to-floating-point-type">Converting to Floating-Point Type</a></h2>
+<p>The <a href="http://www.php.net/manual/en/language.types.float.php#language.types.float.casting">result type</a> is <a href="05-types.html#the-floating-point-type"><code>float</code></a>.</p>
+<p>If the source type is <code>int</code>, if the precision can be preserved the result
+value is the closest approximation to the source value; otherwise, the
+result is undefined.</p>
+<p>If the source is a <a href="05-types.html#the-string-type">numeric string or leading-numeric string</a>
+having integer format, the string’s integer value is treated as
+described above for a conversion from <code>int</code>. If the source is a numeric
+string or leading-numeric string having floating-point format, the
+result value is the closest approximation to the string’s floating-point
+value. The trailing non-numeric characters in leading-numeric strings
+are ignored. For any other string, the result value is 0.</p>
+<p>If the source is an object, if the class defines a conversion function,
+the result is determined by that function (this is currently available only to internal classes).
+If not, the conversion is invalid, the result is assumed to be 1.0 and a non-fatal error is produced.</p>
+<p>For sources of all other types, the conversion result is obtained by first
+<a href="#converting-to-integer-type">converting the source value to <code>int</code></a> and then to <code>float</code>.</p>
+<p>The library function <a href="http://www.php.net/floatval"><code>floatval</code></a> allows values to be converted to
+float.</p>
+<h2><a class="header" href="#converting-to-string-type" id="converting-to-string-type">Converting to String Type</a></h2>
+<p>The <a href="http://www.php.net/manual/en/language.types.string.php#language.types.string.casting">result type</a> is <a href="05-types.html#the-string-type"><code>string</code></a>.</p>
+<p>If the source type is <code>bool</code>, then if the source value is <code>FALSE</code>, the
+result value is the empty string; otherwise, the result value is “1”.</p>
+<p>If the source type is <code>int</code> or <code>float</code>, then the result value is a string
+containing the textual representation of the source value (as specified
+by the library function <a href="http://www.php.net/sprintf"><code>sprintf</code></a>).</p>
+<p>If the source value is <code>NULL</code>, the result value is the empty string.</p>
+<p>If the source is an array, the conversion is invalid. The result value is
+the string “Array” and a non-fatal error is produced.</p>
+<p>If the source is an object, then if that object’s class has a
+<a href="14-classes.html#method-__tostring"><code>__toString</code> method</a>, the result value is the string returned
+by that method; otherwise, the conversion is invalid and a fatal error is produced.</p>
+<p>If the source is a resource, the result value is an
+implementation-defined string.</p>
+<p>The library function <a href="http://www.php.net/strval"><code>strval</code></a> allows values to be converted to
+string.</p>
+<h2><a class="header" href="#converting-to-array-type" id="converting-to-array-type">Converting to Array Type</a></h2>
+<p>The <a href="http://www.php.net/manual/en/language.types.array.php#language.types.array.casting">result type</a> is <a href="05-types.html#the-array-type"><code>array</code></a>.</p>
+<p>If the source value is <code>NULL</code>, the result value is an array of zero
+elements.</p>
+<p>If the source type is scalar or <code>resource</code> and it is non-<code>NULL</code>, the result value is
+an array of one element under the key 0 whose value is that of the source.</p>
+<p>If the source is an object, the result is
+an <a href="http://php.net/manual/language.types.array.php">array</a> of
+zero or more elements, where the elements are key/value pairs
+corresponding to the
+<a href="http://php.net/manual/language.types.object.php">object</a>‘s
+instance properties. The order of insertion of the elements into the
+array is the lexical order of the instance properties in the
+<a href="14-classes.html#class-members"><em>class-member-declarations</em></a> list.</p>
+<p>For public instance properties, the keys of the array elements would
+be the same as the property name.</p>
+<p>The key for a private instance property has the form “\0<em>class</em>\0<em>name</em>“,
+where the <em>class</em> is the class name, and the <em>name</em> is the property name.</p>
+<p>The key for a protected instance property has the form “\0*\0<em>name</em>“,
+where <em>name</em> is that of the property.</p>
+<p>The value for each key is that from the corresponding property, or <code>NULL</code> if
+the property was not initialized.</p>
+<h2><a class="header" href="#converting-to-object-type" id="converting-to-object-type">Converting to Object Type</a></h2>
+<p>The <a href="http://www.php.net/manual/en/language.types.object.php#language.types.object.casting">result type</a> is <a href="05-types.html#objects"><code>object</code></a>.</p>
+<p>If the source has any type other than object, the result is an instance
+of the predefined class <a href="14-classes.html#class-stdclass"><code>stdClass</code></a>. If the value of the source
+is <code>NULL</code>, the instance is empty. If the value of the source has a scalar
+type and is non-<code>NULL</code>, or is a <code>resource</code>, the instance contains a public property called
+<code>scalar</code> whose value is that of the source. If the value of the source is
+an array, the instance contains a set of public properties whose names
+and values are those of the corresponding key/value pairs in the source.
+The order of the properties is the order of insertion of the source’s
+elements.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/07-variables.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/09-lexical-structure.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/07-variables.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/09-lexical-structure.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

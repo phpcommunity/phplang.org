@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Constants - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html" class="active"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#constants" id="constants">Constants</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>A <em>constant</em> is a <a href="09-lexical-structure.html#names">named</a> value. Once defined, the value
+of the constant can not be changed.</p>
+<p>A constant can be defined in one of two ways: as a <em>c-constant</em> using a
+<a href="14-classes.html#constants"><em>const-declaration</em></a>, or as a <em>d-constant</em> by calling the library
+function <a href="http://www.php.net/define"><code>define</code></a>. However, the two approaches differ slightly.
+Specifically:</p>
+<ul>
+<li>The name of a c-constant must comply with the lexical grammar for a
+name while that for a d-constant can contain any source character.</li>
+<li>If <code>define</code> is able to define the given name, it returns <code>TRUE</code>;
+otherwise, it returns <code>FALSE</code>.</li>
+</ul>
+<p>The constants can only hold a value of a <a href="05-types.html#scalar-types">scalar type</a>, an array or a <a href="05-types.html#resources">resource</a>.</p>
+<p>The library function <a href="http://www.php.net/defined"><code>defined</code></a> reports if a given name (specified as
+a string) is defined as a constant. The library function <a href="http://www.php.net/constant"><code>constant</code></a>
+returns the value of a given constant whose name is specified as a
+string.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">const MAX_HEIGHT = 10.5;              // define two (case-sensitive) c-constants
+const UPPER_LIMIT = MAX_HEIGHT;
+define('COEFFICIENT_1', 2.345, TRUE); // define a case-insensitive d-constant (deprecated)
+define('FAILURE', FALSE, FALSE);      // define a case-sensitive d-constant
+</code></pre>
+<h2><a class="header" href="#context-dependent-constants" id="context-dependent-constants">Context-Dependent Constants</a></h2>
+<p>The following constants—sometimes referred to as <em>magic constants</em>—are
+automatically available to all scripts; their values are not fixed and they are case-insensitive:</p>
+<table><thead><tr><th>Constant Name</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>__CLASS__</code></td><td><code>string</code>; The name of the current class. From within a trait method, the name of the class in which that trait is used. If the current namespace is other than the default, the namespace name and <code>\</code> are prepended, in that order. If used outside all classes, the value is the empty string.</td></tr>
+<tr><td><code>__COMPILER_HALT_OFFSET__</code></td><td><code>int</code>; When the <a href="04-basic-concepts.html#__halt_compiler"><code>__halt_compiler();</code></a> construct is used, this constant contains the byte offset in the source file immediately following the <code>__halt_compiler();</code> token in this file.</td></tr>
+<tr><td><code>__DIR__</code></td><td><code>string</code>; The directory name of the script. A directory separator is only appended for the root directory.</td></tr>
+<tr><td><code>__FILE__</code></td><td><code>string</code>; The full name of the script.</td></tr>
+<tr><td><code>__FUNCTION__</code></td><td><code>string</code>; Inside a function, the name of the current function exactly as it was declared, with the following prepended: If a named namespace exists, that namespace name followed by ““. If used outside all functions, the result is the empty string. For a method, no parent-class prefix is present. (See <code>__METHOD__</code> and <a href="13-functions.html#anonymous-functions">anonymous functions</a>).</td></tr>
+<tr><td><code>__LINE__</code></td><td><code>int</code>; the number of the current source line.</td></tr>
+<tr><td><code>__METHOD__</code></td><td><code>string</code>; Inside a method, the name of the current method exactly as it was declared, with the following prepended, in order: If a named namespace exists, that namespace name followed by <code>\</code>; the parent class name or trait name followed by <code>::</code>. If used outside all methods, the result is the same as for <code>__FUNCTION__</code>.</td></tr>
+<tr><td><code>__NAMESPACE__</code></td><td><code>string</code>; The name of the current namespace exactly as it was declared. For the default namespace, the result is the empty string.</td></tr>
+<tr><td><code>__TRAIT__</code></td><td><code>string</code>; The name of the current trait. From within a trait method, the name of the current trait. If used outside all traits, the result is the empty string.</td></tr>
+</tbody></table>
+<p>Constant names beginning with __ are reserved for future use by the Engine.</p>
+<h2><a class="header" href="#core-predefined-constants" id="core-predefined-constants">Core Predefined Constants</a></h2>
+<p>The following constants are automatically available to all scripts; they are case-sensitive with the exception of <code>NULL</code>, <code>TRUE</code> and <code>FALSE</code>:</p>
+<table><thead><tr><th>Constant Name</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>DEFAULT_INCLUDE_PATH</code></td><td><code>string</code>; the <a href="http://www.php.net/fopen"><code>fopen</code></a> library function include path is used if it is not overridden by the <code>php.ini</code> setting <code>include_path</code>.</td></tr>
+<tr><td><code>E_ALL</code></td><td><code>int</code>; All errors and warnings, as supported.</td></tr>
+<tr><td><code>E_COMPILE_ERROR</code></td><td><code>int</code>; Fatal compile-time errors. This is like an <code>E_ERROR</code>, except that <code>E_COMPILE_ERROR</code> is generated by the scripting engine.</td></tr>
+<tr><td><code>E_COMPILE_WARNING</code></td><td><code>int</code>; Compile-time warnings (non-fatal errors). This is like an <code>E_WARNING</code>, except that <code>E_COMPILE_WARNING</code> is generated by the scripting engine.</td></tr>
+<tr><td><code>E_CORE_ERROR</code></td><td><code>int</code>; Fatal errors that occur during PHP’s initial start-up. This is like an <code>E_ERROR</code>, except that <code>E_CORE_ERROR</code> is generated by the core of PHP.</td></tr>
+<tr><td><code>E_CORE_WARNING</code></td><td><code>int</code>; Warnings (non-fatal errors) that occur during PHP’s initial start-up. This is like an <code>E_WARNING</code>, except that <code>E_CORE_WARNING</code> is generated by the core of PHP.</td></tr>
+<tr><td><code>E_DEPRECATED</code></td><td><code>int</code>; Deprecation notices. Enable this to receive warnings about code that will not work in future versions.</td></tr>
+<tr><td><code>E_ERROR</code></td><td><code>int</code>; Fatal run-time errors. These indicate errors that cannot be recovered from, such as a memory allocation problem. Execution of the script is halted.</td></tr>
+<tr><td><code>E_NOTICE</code></td><td><code>int</code>; Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script.</td></tr>
+<tr><td><code>E_PARSE</code></td><td><code>int</code>; Compile-time parse errors.</td></tr>
+<tr><td><code>E_RECOVERABLE_ERROR</code></td><td><code>int</code>; Catchable fatal error. It indicates that a probably dangerous error occurred, but did not leave the Engine in an unstable state. If the error is not caught by a user defined handler (see the library function <a href="http://www.php.net/set_error_handler"><code>set_error_handler</code></a>), the application aborts as it was an <code>E_ERROR</code>.</td></tr>
+<tr><td><code>E_STRICT</code></td><td><code>int</code>; Have PHP suggest changes to the source code to ensure the best interoperability.</td></tr>
+<tr><td><code>E_USER_DEPRECATED</code></td><td><code>int</code>; User-generated error message. This is like an <code>E_DEPRECATED</code>, except that <code>E_USER_DEPRECATED</code> is generated in PHP code by using the library function <a href="http://www.php.net/trigger_error"><code>trigger_error</code></a>.</td></tr>
+<tr><td><code>E_USER_ERROR</code></td><td><code>int</code>; User-generated error message. This is like an <code>E_ERROR</code>, except that <code>E_USER_ERROR</code> is generated in PHP code by using the library function <a href="http://www.php.net/trigger_error"><code>trigger_error</code></a>.</td></tr>
+<tr><td><code>E_USER_NOTICE</code></td><td><code>int</code>; User-generated warning message. This is like an <code>E_NOTICE</code>, except that <code>E_USER_NOTICE</code> is generated in PHP code by using the library function <a href="http://www.php.net/trigger_error"><code>trigger_error</code></a>.</td></tr>
+<tr><td><code>E_USER_WARNING</code></td><td><code>int</code>; User-generated warning message. This is like an <code>E_WARNING</code>, except that  <code>E_USER_WARNING</code> is generated in PHP code by using the library function <a href="http://www.php.net/trigger_error"><code>trigger_error</code></a>.</td></tr>
+<tr><td><code>E_WARNING</code></td><td><code>int</code>; Run-time warnings (non-fatal errors). Execution of the script is not halted.</td></tr>
+<tr><td><code>E_USER_DEPRECATED</code></td><td><code>int</code>; User-generated warning message. This is like an <code>E_DEPRECATED</code>, except that <code>E_USER_DEPRECATED</code> is generated in PHP code by using the library function <a href="http://www.php.net/trigger_error"><code>trigger_error</code></a>.</td></tr>
+<tr><td><code>FALSE</code></td><td><code>bool</code>; the case-insensitive Boolean value <code>FALSE</code>.</td></tr>
+<tr><td><code>INF</code></td><td><code>float</code>; Infinity</td></tr>
+<tr><td><code>M_1_PI</code></td><td><code>float</code>; 1/pi</td></tr>
+<tr><td><code>M_2_PI</code></td><td><code>float</code>; 2/pi</td></tr>
+<tr><td><code>M_2_SQRTPI</code></td><td><code>float</code>; 2/sqrt(pi)</td></tr>
+<tr><td><code>M_E</code></td><td><code>float</code>; e</td></tr>
+<tr><td><code>M_EULER</code></td><td><code>float</code>; Euler constant</td></tr>
+<tr><td><code>M_LN10</code></td><td><code>float</code>; log_e 10</td></tr>
+<tr><td><code>M_LN2</code></td><td><code>float</code>; log_e 2</td></tr>
+<tr><td><code>M_LNPI</code></td><td><code>float</code>; log_e(pi)</td></tr>
+<tr><td><code>M_LOG10E</code></td><td><code>float</code>; log_10 e</td></tr>
+<tr><td><code>M_LOG2E</code></td><td><code>float</code>; log_2 e</td></tr>
+<tr><td><code>M_PI</code></td><td><code>float</code>; Pi</td></tr>
+<tr><td><code>M_PI_2</code></td><td><code>floa</code>t; pi/2</td></tr>
+<tr><td><code>M_PI_4</code></td><td><code>float</code>; pi/4</td></tr>
+<tr><td><code>M_SQRT1_2</code></td><td><code>float</code>; 1/sqrt(2)</td></tr>
+<tr><td><code>M_SQRT2</code></td><td><code>float</code>; sqrt(2)</td></tr>
+<tr><td><code>M_SQRT3</code></td><td><code>float</code>; sqrt(3)</td></tr>
+<tr><td><code>M_SQRTPI</code></td><td><code>float</code>; sqrt(pi)</td></tr>
+<tr><td><code>NAN</code></td><td><code>float</code>; Not-a-Number</td></tr>
+<tr><td><code>NULL</code></td><td><code>null</code>; the case-insensitive value <code>NULL</code>.</td></tr>
+<tr><td><code>PHP_BINARY</code></td><td><code>string</code>; the PHP binary path during script execution.</td></tr>
+<tr><td><code>PHP_BINDIR</code></td><td><code>string</code>; the installation location of the binaries.</td></tr>
+<tr><td><code>PHP_CONFIG_FILE_PATH</code></td><td><code>string</code>; location from which php.ini values were parsed</td></tr>
+<tr><td><code>PHP_CONFIG_FILE_SCAN_DIR</code></td><td><code>string</code>; The directory containing multiple INI files, all of which were parsed on start-up.</td></tr>
+<tr><td><code>PHP_DEBUG</code></td><td><code>int</code>; Indicates whether the engine was built with debugging enabled.</td></tr>
+<tr><td><code>PHP_EOL</code></td><td><code>string</code>; the end-of-line terminator for this platform.</td></tr>
+<tr><td><code>PHP_EXTENSION_DIR</code></td><td><code>string</code>; The directory to be searched by the library function <a href="http://www.pph.net/dl"><code>dl</code></a> when looking for runtime extensions.</td></tr>
+<tr><td><code>PHP_EXTRA_VERSION</code></td><td><code>string</code>; the current PHP extra version.</td></tr>
+<tr><td><code>PHP_INT_MAX</code></td><td><code>int</code>; the maximum representable value for an integer.</td></tr>
+<tr><td><code>PHP_INT_MIN</code></td><td><code>int</code>; the minimum representable value for an integer.</td></tr>
+<tr><td><code>PHP_INT_SIZE</code></td><td><code>int</code>; the number of bytes used to represent an integer.</td></tr>
+<tr><td><code>PHP_FLOAT_DIG</code></td><td><code>int</code>; the number of decimal digits that can be rounded into a float and back without precision loss.</td></tr>
+<tr><td><code>PHP_FLOAT_EPSILON</code></td><td><code>float</code>; the smallest representable positive number <code>x</code>, so that <code>x + 1.0 != 1.0</code>.</td></tr>
+<tr><td><code>PHP_FLOAT_MIN</code></td><td><code>float</code>; the smallest representable normalized floating point number larger than zero.</td></tr>
+<tr><td><code>PHP_FLOAT_MAX</code></td><td><code>float</code>; the largest representable floating point number.</td></tr>
+<tr><td><code>PHP_MAJOR_VERSION</code></td><td><code>int</code>; the current PHP major version</td></tr>
+<tr><td><code>PHP_MANDIR</code></td><td><code>string</code>; the installation location of the manual pages.</td></tr>
+<tr><td><code>PHP_MAXPATHLEN</code></td><td><code>int</code>; the maximum length of a fully qualified filename supported by this build.</td></tr>
+<tr><td><code>PHP_MINOR_VERSION</code></td><td><code>int</code>; the current PHP minor version.</td></tr>
+<tr><td><code>PHP_OS</code></td><td><code>string</code>; the current operating system.</td></tr>
+<tr><td><code>PHP_OS_FAMILY</code></td><td><code>string</code>; the operating system family PHP was built for. Either of ‘Windows’, ‘BSD’, ‘Darwin’, ‘Solaris’, ‘Linux’ or ‘Unknown’.</td></tr>
+<tr><td><code>PHP_PREFIX</code></td><td><code>string</code>; the value to which “--prefix” was set when configured.</td></tr>
+<tr><td><code>PHP_RELEASE_VERSION</code></td><td><code>int</code>; the current PHP release version.</td></tr>
+<tr><td><code>PHP_ROUND_HALF_DOWN</code></td><td><code>int</code>; Round halves down.</td></tr>
+<tr><td><code>PHP_ROUND_HALF_EVEN</code></td><td><code>int</code>; Round halves to even numbers.</td></tr>
+<tr><td><code>PHP_ROUND_HALF_ODD</code></td><td><code>int</code>; Round halves to odd numbers.</td></tr>
+<tr><td><code>PHP_ROUND_HALF_UP</code></td><td><code>int</code>; Round halves up.</td></tr>
+<tr><td><code>PHP_SAPI</code></td><td><code>string</code>; the Server API for this build.</td></tr>
+<tr><td><code>PHP_SHLIB_SUFFIX</code></td><td><code>string</code>; build-platform’s shared library suffix.</td></tr>
+<tr><td><code>PHP_SYSCONFDIR</code></td><td><code>string</code>; the PHP system configuration directory.</td></tr>
+<tr><td><code>PHP_VERSION</code></td><td><code>string</code>; the current PHP version in the form “major.minor.release[extra]“.</td></tr>
+<tr><td><code>PHP_VERSION_ID</code></td><td><code>int</code>; the current PHP version.</td></tr>
+<tr><td><code>PHP_ZTS</code></td><td><code>int</code>; Indicates whether the compiler was built with thread safety enabled.</td></tr>
+<tr><td><code>STDIN</code></td><td><code>resource</code>; File resource that maps to standard input (<code>php://stdin</code>).</td></tr>
+<tr><td><code>STDOUT</code></td><td><code>resource</code>; File resource that maps to standard output (<code>php://stdout</code>).</td></tr>
+<tr><td><code>STDERR</code></td><td><code>resource</code>; File resource that maps to standard error (<code>php://stderr</code>).</td></tr>
+<tr><td><code>TRUE</code></td><td><code>bool</code>; the case-insensitive Boolean value <code>TRUE</code>.</td></tr>
+</tbody></table>
+<p>The members of the <code>E_*</code> family have values that are powers of 2, so
+they can be combined meaningfully using bitwise operators.</p>
+<h2><a class="header" href="#user-defined-constants" id="user-defined-constants">User-Defined Constants</a></h2>
+<p>A constant may be defined inside or outside of functions, inside
+a <a href="14-classes.html#constants">class</a>, or inside an <a href="15-interfaces.html#constants">interface</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/05-types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/07-variables.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/05-types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/07-variables.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

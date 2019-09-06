@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Traits - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html" class="active"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#traits" id="traits">Traits</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>PHP’s class model allows <a href="14-classes.html#general">single inheritance</a> only with contracts
+being enforced separately via <a href="15-interfaces.html#general">interfaces</a>. A <em>trait</em> can provide
+both implementation and contracts. Specifically, a class can inherit
+from a base class while also using code from one or more traits.
+At the same time, that class can implement contracts from one or more
+interfaces as well as from one or more traits. The use of a trait by a
+class does not involve any inheritance hierarchy, so unrelated classes
+can use the same trait. In summary, a trait is a set of methods and/or
+state information that can be reused.</p>
+<p>Traits are designed to support classes; a trait cannot be instantiated
+directly.</p>
+<p>The members of a trait each have <a href="14-classes.html#general">visibility</a>, which applies once
+they are used by a given class. The class that uses a trait can change
+the visibility of any of that trait’s members, by either widening or
+narrowing that visibility. For example, a private trait member can be
+made public in the using class, and a public trait member can be made
+private in that class.</p>
+<p>Once implementation comes from both a base class and one or more traits,
+name conflicts can occur. However, trait usage provides the means for
+disambiguating such conflicts. Names gotten from a trait can also be
+given aliases.</p>
+<p>A class member with a given name overrides one with the same name in any
+traits that class uses, which, in turn, overrides any such name from
+base classes.</p>
+<p>Traits can contain both instance and static members, including both
+methods and properties. In the case of a trait with a static property,
+each class using that trait has its own instance of that property.</p>
+<p>Methods in a trait have full access to all members of any class in which
+that trait is used.</p>
+<h2><a class="header" href="#trait-declarations" id="trait-declarations">Trait Declarations</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+trait-declaration:
+  'trait' name '{' trait-member-declarations? '}'
+
+trait-member-declarations:
+  trait-member-declaration
+  trait-member-declarations trait-member-declaration
+
+trait-member-declaration:
+  property-declaration
+  method-declaration
+  constructor-declaration
+  destructor-declaration
+  trait-use-clauses
+-->
+<pre>
+<i id="grammar-trait-declaration">trait-declaration:</i>
+   trait   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   {   <i><a href="#grammar-trait-member-declarations">trait-member-declarations</a></i><sub>opt</sub>   }
+
+<i id="grammar-trait-member-declarations">trait-member-declarations:</i>
+   <i><a href="#grammar-trait-member-declaration">trait-member-declaration</a></i>
+   <i><a href="#grammar-trait-member-declarations">trait-member-declarations</a></i>   <i><a href="#grammar-trait-member-declaration">trait-member-declaration</a></i>
+
+<i id="grammar-trait-member-declaration">trait-member-declaration:</i>
+   <i><a href="14-classes.html#grammar-property-declaration">property-declaration</a></i>
+   <i><a href="14-classes.html#grammar-method-declaration">method-declaration</a></i>
+   <i><a href="14-classes.html#grammar-constructor-declaration">constructor-declaration</a></i>
+   <i><a href="14-classes.html#grammar-destructor-declaration">destructor-declaration</a></i>
+   <i><a href="#grammar-trait-use-clauses">trait-use-clauses</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>A <em>trait-declaration</em> defines a named set of members, which are made
+available to any class that uses that trait.</p>
+<p>Trait names are case-insensitive.</p>
+<p>The members of a trait are those specified by its <em>trait-member-declaration</em>
+clauses, and members imported from any other traits using <em>trait-use-clauses</em>.</p>
+<p>A trait may contain the following members:</p>
+<ul>
+<li><a href="14-classes.html#properties">Properties</a> – the variables made available to the class in which the
+trait is used.</li>
+<li><a href="14-classes.html#methods">Methods</a> – the computations and actions that can be performed by the
+class in which the trait is used.</li>
+<li><a href="14-classes.html#constructors">Constructor</a> – the actions required to initialize an instance of the
+class in which the trait is used.</li>
+<li><a href="14-classes.html#destructors">Destructor</a> – the actions to be performed when an instance of the
+class in which the trait is used is no longer needed.</li>
+</ul>
+<p>If a member has no explicit visibility, <code>public</code> is assumed.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">trait T
+{
+  private $prop1 = 1000;
+  protected static $prop2;
+  var $prop3;
+  public function compute( ... ) { ... }
+  public static function getData( ... ) { ... }
+}
+</code></pre>
+<h2><a class="header" href="#trait-uses" id="trait-uses">Trait Uses</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+trait-use-clauses:
+  trait-use-clause
+  trait-use-clauses trait-use-clause
+
+trait-use-clause:
+  'use' trait-name-list trait-use-specification
+
+trait-name-list:
+  qualified-name
+  trait-name-list ',' qualified-name
+
+trait-use-specification:
+  ';'
+  '{' trait-select-and-alias-clauses? '}'
+
+trait-select-and-alias-clauses:
+  trait-select-and-alias-clause
+  trait-select-and-alias-clauses trait-select-and-alias-clause
+
+trait-select-and-alias-clause:
+  trait-select-insteadof-clause ';'
+  trait-alias-as-clause ';'
+
+trait-select-insteadof-clause:
+  qualified-name '::' name 'insteadof' trait-name-list
+
+trait-alias-as-clause:
+  name 'as' visibility-modifier? name
+  name 'as' visibility-modifier name?
+-->
+<pre>
+<i id="grammar-trait-use-clauses">trait-use-clauses:</i>
+   <i><a href="#grammar-trait-use-clause">trait-use-clause</a></i>
+   <i><a href="#grammar-trait-use-clauses">trait-use-clauses</a></i>   <i><a href="#grammar-trait-use-clause">trait-use-clause</a></i>
+
+<i id="grammar-trait-use-clause">trait-use-clause:</i>
+   use   <i><a href="#grammar-trait-name-list">trait-name-list</a></i>   <i><a href="#grammar-trait-use-specification">trait-use-specification</a></i>
+
+<i id="grammar-trait-name-list">trait-name-list:</i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+   <i><a href="#grammar-trait-name-list">trait-name-list</a></i>   ,   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+
+<i id="grammar-trait-use-specification">trait-use-specification:</i>
+   ;
+   {   <i><a href="#grammar-trait-select-and-alias-clauses">trait-select-and-alias-clauses</a></i><sub>opt</sub>   }
+
+<i id="grammar-trait-select-and-alias-clauses">trait-select-and-alias-clauses:</i>
+   <i><a href="#grammar-trait-select-and-alias-clause">trait-select-and-alias-clause</a></i>
+   <i><a href="#grammar-trait-select-and-alias-clauses">trait-select-and-alias-clauses</a></i>   <i><a href="#grammar-trait-select-and-alias-clause">trait-select-and-alias-clause</a></i>
+
+<i id="grammar-trait-select-and-alias-clause">trait-select-and-alias-clause:</i>
+   <i><a href="#grammar-trait-select-insteadof-clause">trait-select-insteadof-clause</a></i>   ;
+   <i><a href="#grammar-trait-alias-as-clause">trait-alias-as-clause</a></i>   ;
+
+<i id="grammar-trait-select-insteadof-clause">trait-select-insteadof-clause:</i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>   ::   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   insteadof   <i><a href="#grammar-trait-name-list">trait-name-list</a></i>
+
+<i id="grammar-trait-alias-as-clause">trait-alias-as-clause:</i>
+   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   as   <i><a href="14-classes.html#grammar-visibility-modifier">visibility-modifier</a></i><sub>opt</sub>   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>
+   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   as   <i><a href="14-classes.html#grammar-visibility-modifier">visibility-modifier</a></i>   <i><a href="09-lexical-structure.html#grammar-name">name</a></i><sub>opt</sub>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The <em>name</em> items in <em>trait-name-list</em> must designate trait names, excluding
+the name of the trait being declared.</p>
+<p>The left-hand <em>name</em> in <em>trait-select-insteadof-clause</em> must
+unambiguously designate a member of a trait made available by
+<em>trait-use-clauses</em>. The right-hand <em>name</em> in
+<em>trait-select-insteadof-clause</em> must unambiguously designate a trait
+made available by <em>trait-use-clauses</em>.</p>
+<p>The left-hand <em>name</em> in <em>trait-alias-as-clause</em> must unambiguously
+designate a member of a trait made available by <em>trait-use-clauses</em>.
+The right-hand <em>name</em> in <em>trait-alias-as-clause</em> must be a new,
+unqualified name.</p>
+<p><strong>Semantics</strong></p>
+<p><em>trait-use-clauses</em> can be used as part of <em>trait-member-declarations</em>
+or <em>class-member-declarations</em> to import members of a trait into a
+different trait or a class. This is done via one or more <em>trait-use-clause</em>
+items, each of which contains a comma-separated list of trait names.
+A <em>trait-use-clause</em> list ends in a semicolon or a brace-delimited set of
+<em>trait-select-insteadof-clause</em> and <em>trait-alias-as-clause</em> statements.</p>
+<p>A <em>trait-select-insteadof-clause</em> allows to avoid name clashes.
+Specifically, the left-hand <em>name</em> designates which name to be used from
+of a pair of names. That is, <code>T1::compute insteadof T2</code>; indicates that
+calls to method compute, for example, should be satisfied by a method of
+that name in trait <code>T1</code> rather than <code>T2</code>.</p>
+<p>A <em>trait-alias-as-clause</em> allows a (possibly qualified) name to be
+assigned a simple alias name. Specifically, the left-hand <em>name</em> in
+<em>trait-alias-as-clause</em> designates a name made available by
+<em>trait-use-clauses</em> - that is to be aliased, and the right-hand <em>name</em>
+is the alias.</p>
+<p>If <em>trait-alias-as-clause</em> contains a visibility-modifier,
+if a right-hand name is provided, the modifier controls the visibility of the alias,
+otherwise, it controls the visibility of the left-hand name.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">trait T1 { public function compute( ... ) { ... } }
+trait T2 { public function compute( ... ) { ... } }
+trait T3 { public function sort( ... ) { ... } }
+trait T4
+{
+  use T3;
+  use T1, T2
+  {
+    T1::compute insteadof T2; // disambiguate between two computes
+    T3::sort as private sorter; // make alias with adjusted visibility
+  }
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/15-interfaces.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/17-exception-handling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/15-interfaces.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/17-exception-handling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

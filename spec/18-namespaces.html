@@ -1,0 +1,506 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Namespaces - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html" class="active"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#namespaces" id="namespaces">Namespaces</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>A problem encountered when managing large projects is that of avoiding
+the use of the same name in the same scope for different purposes. This
+is especially problematic in a language that supports modular design and
+component libraries.</p>
+<p>A <em>namespace</em> is a container for a set of (typically related)
+definitions of classes, interfaces, traits, functions, and constants.
+Namespaces serve two purposes:</p>
+<ul>
+<li>They help avoid name collisions.</li>
+<li>They allow certain long names to be accessed via shorter, more
+convenient and readable, names.</li>
+</ul>
+<p>A namespace may have <em>sub-namespaces</em>, where a sub-namespace name shares
+a common prefix with another namespace. For example, the namespace
+<code>Graphics</code> might have sub-namespaces <code>Graphics\D2</code> and <code>Graphics\D3</code>, for
+two- and three-dimensional facilities, respectively. Apart from their
+common prefix, a namespace and its sub-namespaces have no special
+relationship. The namespace whose prefix is part of a sub-namespace need
+not actually exist for the sub-namespace to exist. That is, <code>NS1\Sub</code> can
+exist without <code>NS1</code>.</p>
+<p>In the absence of any namespace definition, the names of subsequent
+classes, interfaces, traits, functions, and constants are in the
+<em>default namespace</em>, which has no name, per se.</p>
+<p>The namespaces <code>PHP</code>, <code>php</code>, and sub-namespaces beginning with those
+prefixes are reserved for use by PHP.</p>
+<h2><a class="header" href="#defining-namespaces" id="defining-namespaces">Defining Namespaces</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+namespace-definition:
+  'namespace' name ';'
+  'namespace' name? compound-statement
+-->
+<pre>
+<i id="grammar-namespace-definition">namespace-definition:</i>
+   namespace   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   ;
+   namespace   <i><a href="09-lexical-structure.html#grammar-name">name</a></i><sub>opt</sub>   <i><a href="11-statements.html#grammar-compound-statement">compound-statement</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Except for white space and <a href="11-statements.html#the-declare-statement"><em>declare-statement</em></a>, the
+first occurrence of a <em>namespace-definition</em> in a script must be the
+first thing in that script.</p>
+<p>All occurrence of a <em>namespace-definition</em> in a script must have the
+<em>compound-statement</em> form or must not have that form; the two forms
+cannot be mixed within the same script file.</p>
+<p>When a script contains source code that is not inside a namespace, and
+source code that is inside one or namespaces, the namespaced code must
+use the <em>compound-statement</em> form of <em>namespace-definition</em>.</p>
+<p><em>compound-statement</em> must not contain a <em>namespace-definition</em>.</p>
+<p><strong>Semantics</strong></p>
+<p>Although a namespace may contain any PHP source code, the fact that that
+code is contained in a namespace affects only the declaration and name
+resolution of classes, interfaces, traits, functions, and constants.
+For each of those, if they are defined using <a href="#name-lookup">unqualified or qualified name</a>,
+the current namespace name is prepended to the specified name.
+Note that while definition has a short name, the name known to the engine
+is always the full name, and can be either specified as fully qualified name,
+composed from current namespace name and specified name, or <a href="#namespace-use-declarations">imported</a>.</p>
+<p>Namespace and sub-namespace names are case-insensitive.</p>
+<p>The pre-defined constant <a href="06-constants.html#context-dependent-constants"><code>__NAMESPACE__</code></a> contains the name of
+the current namespace.</p>
+<p>When the same namespace is defined in multiple scripts, and those
+scripts are combined into the same program, the namespace is considered
+the merger of its individual contributions.</p>
+<p>The scope of the non-<em>compound-statement</em> form of <em>namespace-definition</em>
+runs until the end of the script, or until the lexically next
+<em>namespace-definition</em>, whichever comes first. The scope of the
+<em>compound-statement</em> form is the <em>compound-statement</em>.</p>
+<p><strong>Examples</strong></p>
+<p>Script1.php:</p>
+<pre><code class="language-PHP">namespace NS1;
+...       // __NAMESPACE__ is &quot;NS1&quot;
+namespace NS3\Sub1;
+...       // __NAMESPACE__ is &quot;NS3\Sub1&quot;
+</code></pre>
+<p>Script2.php:</p>
+<pre><code class="language-PHP">namespace NS1
+{
+...       // __NAMESPACE__ is &quot;NS1&quot;
+}
+namespace
+{
+...       // __NAMESPACE__ is &quot;&quot;
+}
+namespace NS3\Sub1;
+{
+...       // __NAMESPACE__ is &quot;NS3\Sub1&quot;
+}
+</code></pre>
+<h2><a class="header" href="#namespace-use-declarations" id="namespace-use-declarations">Namespace Use Declarations</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+namespace-use-declaration:
+  'use' namespace-function-or-const? namespace-use-clauses ';'
+  'use' namespace-function-or-const '\'? namespace-name '\' '{' namespace-use-group-clauses-1 '}' ';'
+  'use' '\'? 'namespace-name' '\' '{' namespace-use-group-clauses-2 '}' ';'
+
+namespace-use-clauses:
+  namespace-use-clause
+  namespace-use-clauses ',' namespace-use-clause
+
+namespace-use-clause:
+  qualified-name namespace-aliasing-clause?
+
+namespace-aliasing-clause:
+  'as' name
+
+namespace-function-or-const:
+  'function'
+  'const'
+
+namespace-use-group-clauses-1:
+  namespace-use-group-clause-1
+  namespace-use-group-clauses-1 ',' namespace-use-group-clause-1
+
+namespace-use-group-clause-1:
+  namespace-name namespace-aliasing-clause?
+
+namespace-use-group-clauses-2:
+  namespace-use-group-clause-2
+  namespace-use-group-clauses-2 ',' namespace-use-group-clause-2
+
+namespace-use-group-clause-2:
+  namespace-function-or-const? namespace-name namespace-aliasing-clause?
+-->
+<pre>
+<i id="grammar-namespace-use-declaration">namespace-use-declaration:</i>
+   use   <i><a href="#grammar-namespace-function-or-const">namespace-function-or-const</a></i><sub>opt</sub>   <i><a href="#grammar-namespace-use-clauses">namespace-use-clauses</a></i>   ;
+   use   <i><a href="#grammar-namespace-function-or-const">namespace-function-or-const</a></i>   \<sub>opt</sub>   <i><a href="09-lexical-structure.html#grammar-namespace-name">namespace-name</a></i>   \   {   <i><a href="#grammar-namespace-use-group-clauses-1">namespace-use-group-clauses-1</a></i>   }   ;
+   use   \<sub>opt</sub>   namespace-name   \   {   <i><a href="#grammar-namespace-use-group-clauses-2">namespace-use-group-clauses-2</a></i>   }   ;
+
+<i id="grammar-namespace-use-clauses">namespace-use-clauses:</i>
+   <i><a href="#grammar-namespace-use-clause">namespace-use-clause</a></i>
+   <i><a href="#grammar-namespace-use-clauses">namespace-use-clauses</a></i>   ,   <i><a href="#grammar-namespace-use-clause">namespace-use-clause</a></i>
+
+<i id="grammar-namespace-use-clause">namespace-use-clause:</i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>   <i><a href="#grammar-namespace-aliasing-clause">namespace-aliasing-clause</a></i><sub>opt</sub>
+
+<i id="grammar-namespace-aliasing-clause">namespace-aliasing-clause:</i>
+   as   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>
+
+<i id="grammar-namespace-function-or-const">namespace-function-or-const:</i>
+   function
+   const
+
+<i id="grammar-namespace-use-group-clauses-1">namespace-use-group-clauses-1:</i>
+   <i><a href="#grammar-namespace-use-group-clause-1">namespace-use-group-clause-1</a></i>
+   <i><a href="#grammar-namespace-use-group-clauses-1">namespace-use-group-clauses-1</a></i>   ,   <i><a href="#grammar-namespace-use-group-clause-1">namespace-use-group-clause-1</a></i>
+
+<i id="grammar-namespace-use-group-clause-1">namespace-use-group-clause-1:</i>
+   <i><a href="09-lexical-structure.html#grammar-namespace-name">namespace-name</a></i>   <i><a href="#grammar-namespace-aliasing-clause">namespace-aliasing-clause</a></i><sub>opt</sub>
+
+<i id="grammar-namespace-use-group-clauses-2">namespace-use-group-clauses-2:</i>
+   <i><a href="#grammar-namespace-use-group-clause-2">namespace-use-group-clause-2</a></i>
+   <i><a href="#grammar-namespace-use-group-clauses-2">namespace-use-group-clauses-2</a></i>   ,   <i><a href="#grammar-namespace-use-group-clause-2">namespace-use-group-clause-2</a></i>
+
+<i id="grammar-namespace-use-group-clause-2">namespace-use-group-clause-2:</i>
+   <i><a href="#grammar-namespace-function-or-const">namespace-function-or-const</a></i><sub>opt</sub>   <i><a href="09-lexical-structure.html#grammar-namespace-name">namespace-name</a></i>   <i><a href="#grammar-namespace-aliasing-clause">namespace-aliasing-clause</a></i><sub>opt</sub>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>A <em>namespace-use-declaration</em> must not occur except at the top level or directly in the context of a <em>namespace-definition</em>.</p>
+<p>If the same <em>qualified-name</em>, <em>name</em>, or <em>namespace-name</em> is imported multiple times in the same
+scope, each occurrence must have a different alias.</p>
+<p><strong>Semantics</strong></p>
+<p>If <em>namespace-use-declaration</em> has a <em>namespace-function-or-const</em> with value <code>function</code>, the statement imports
+one or more functions. If <em>namespace-use-declaration</em> has a <em>namespace-function-or-const</em> with value <code>const</code>, the statement imports one or more constants. Otherwise, <em>namespace-use-declaration</em> has no <em>namespace-function-or-const</em>. In that case, if <em>namespace-use-clauses</em> is present, the names being imported are considered to be classes/interfaces/traits. Otherwise, <em>namespace-use-group-clauses-2</em> is present, in which case, the names being imported are considered to be functions, constants, or classes/interfaces/traits based on the respective presence of <code>function</code> or <code>const</code>, or the absence of <em>namespace-function-or-const</em> on each <em>namespace-name</em> in subordinate <em>namespace-use-group-clause-2</em>s.</p>
+<p>Note that constant, function and class imports live in different spaces, so the same name
+can be used as function and class import and apply to the respective cases of class and function use,
+without interfering with each other.</p>
+<p>A <em>namespace-use-declaration</em> <em>imports</em> — that is, makes available — one or
+more names into a scope, optionally giving them each an alias. Each of
+those names may designate a namespace, a sub-namespace, a class, an
+interface, or a trait. If a <em>namespace-aliasing-clause</em> is present, its
+<em>name</em> is the alias for <em>qualified-name</em>, <em>name</em>, or <em>namespace-name</em>. Otherwise, the right-most name component
+in <em>qualified-name</em> is the implied alias for <em>qualified-name</em>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">namespace NS1
+{
+  const CON1 = 100;
+  function f() { ... }
+  class C { ... }
+  interface I { ... }
+  trait T { ... }
+}
+
+namespace NS2
+{
+  use \NS1\C, \NS1\I, \NS1\T;
+  class D extends C implements I
+  {
+    use T;  // trait (and not a namespace use declaration)
+  }
+  $v = \NS1\CON1; // explicit namespace still needed for constants
+  \NS1\f();   // explicit namespace still needed for functions
+
+  use \NS1\C as C2; // C2 is an alias for the class name \NS1\C
+  $c2 = new C2;
+
+  // importing a group of classes and interfaces
+  use \NS\{C11, C12, I10};
+
+  // importing a function
+  use function \My\Full\functionName;
+
+  // aliasing a function
+  use function \NS1\f as func;
+  use function \NS\{f1, g1 as myG};
+
+  // importing a constant
+  use const \NS1\CON1;
+  use \NS\{const CON11, const CON12};
+
+  $v = CON1; // imported constant
+  func();   // imported function
+
+  // importing a class, a constant, and a function
+  use \NS\ { C2 as CX, const CON2 as CZ, function f1 as FZ };
+}
+</code></pre>
+<p>Note that the <em>qualified-name</em> is treated as absolute even if it does not start with <code>\</code>.
+For example:</p>
+<pre><code class="language-PHP">namespace b
+{
+  class B
+  {
+    function foo(){ echo &quot;goodbye&quot;; }
+  }
+}
+
+namespace a\b
+{
+  class B
+  {
+    function foo(){ echo &quot;hello&quot;; }
+  }
+}
+
+namespace a
+{
+  $b = new b\B();
+  $b-&gt;foo(); // hello
+  use b\B as C;
+  $b = new C();
+  $b-&gt;foo(); // goodbye
+}
+</code></pre>
+<h2><a class="header" href="#name-lookup" id="name-lookup">Name Lookup</a></h2>
+<p>When an existing name is used in source code, the Engine must determine
+how that name is found with respect to namespace lookup. For this
+purpose, names can have one of the three following forms:</p>
+<ul>
+<li>Unqualified name: Such names are just simple names without any
+prefix, as in the class name <code>Point</code> in the following expression:
+<code>$p = new Point(3,5)</code>. If the current namespace is <code>NS1</code>, the name
+<code>Point</code> resolves to <code>NS1\Point</code>. If the current namespace is the
+default namespace, the name <code>Point</code> resolves to just <code>Point</code>. In the
+case of an unqualified function or constant name, if that name does
+not exist in the current namespace, a global function or constant by
+that name is used.</li>
+<li>Qualified name: Such names have a prefix consisting of a namespace
+name and/or one or more levels of sub-namespace names,
+preceding a class, interface, trait, function, or constant name.
+Such names are relative. For example, <code>D2\Point</code> could be used to
+refer to the class <code>Point</code> in the sub-namespace <code>D2</code> of the current
+namespace. One special case of this is when the first component of
+the name is the keyword <code>namespace</code>. This means “the current
+namespace”.</li>
+<li>Fully qualified name: Such names begin with a backslash (<code>\</code>) and are
+followed optionally by a namespace name and one or more levels of
+sub-namespace names, and, finally, a class, interface, trait,
+function, or constant name. Such names are absolute. For example,
+<code>\Graphics\D2\Point</code> could be used to refer unambiguously to the
+class <code>Point</code> in namespace <code>Graphics</code>, sub-namespace <code>D2</code>.</li>
+</ul>
+<p>However, if an unqualified name is used in a context where it represents the name
+of a constant or function, within a non-default namespace, if this namespace does not have
+such constant of function defined, the global unqualified name is used.</p>
+<p>For example:</p>
+<pre><code class="language-PHP">&lt;?php
+namespace A\B\C;
+function strlen($str)
+{
+    return 42;
+}
+print strlen(&quot;Life, Universe and Everything&quot;); // prints 42
+print mb_strlen(&quot;Life, Universe and Everything&quot;); // calls global function and prints 29
+</code></pre>
+<p>The names of the standard types (such as <code>Exception</code>), constants (such as
+<code>PHP_INT_MAX</code>), and library functions (such as <code>is_null</code>) are defined outside
+any namespace. To refer unambiguously to such names, one can prefix them
+with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT_MAX</code>, and <code>\is_null</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/17-exception-handling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/19-grammar.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/17-exception-handling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/19-grammar.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

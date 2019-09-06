@@ -1,0 +1,596 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Variables - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html" class="active"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#variables" id="variables">Variables</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>A <em>variable</em> is a named area of data storage that contains a PHP value. A variable is represented by a <a href="04-basic-concepts.html#general">VSlot</a>. A variable is created by <a href="04-basic-concepts.html#assignment">assigning a value</a> to it.
+A variable is destroyed by <em>unsetting</em> it, either by an explicit call to the <a href="11-statements.html#the-unset-statement"><code>unset</code> statement</a>, or by the Engine. The intrinsic <a href="10-expressions.html#isset"><code>isset</code></a> tests if a given variable exists and is not set to <code>NULL</code>.
+If a variable, which is not defined so far, is used in an expression, then different strategies are applied which determine whether the variable is defined implicitly or a substitution value is used instead and whether a notice is emitted or not. The strategies depend on the kind of the variable as well as on the context where the undefined variable is being used. The strategies are elaborated in the sub-sections of the different <a href="#kinds-of-variables">kinds of variables</a> below.</p>
+<p>Variables have <a href="09-lexical-structure.html#names">names</a>. Distinct variables may have
+the same name provided they are in different <a href="04-basic-concepts.html#scope">scopes</a>.</p>
+<p>A <a href="06-constants.html#general">constant</a> is a variable that, once initialized, its value cannot
+be changed.</p>
+<p>Based on the context in which it is declared, a variable has a <a href="04-basic-concepts.html#scope">scope</a> and a <a href="04-basic-concepts.html#storage-duration">storage duration</a>.</p>
+<p>A <em>superglobal</em> variable is a global variable that is accessible in all scopes without
+the need for a <a href="#global-variables"><em>global-declaration</em></a>.</p>
+<p>The following kinds of variable may exist in a script:</p>
+<ul>
+<li><a href="#constants">Constant</a>.</li>
+<li><a href="#local-variables">Local variable</a>.</li>
+<li><a href="#array-elements">Array element</a>.</li>
+<li><a href="#function-statics">Function static</a>.</li>
+<li><a href="#global-variables">Global variable</a>.</li>
+<li><a href="#instance-properties">Instance property</a>.</li>
+<li><a href="#static-properties">Static class property</a>.</li>
+<li><a href="#class-and-interface-constants">Class and interface constant</a>.</li>
+</ul>
+<h2><a class="header" href="#kinds-of-variables" id="kinds-of-variables">Kinds of Variables</a></h2>
+<h3><a class="header" href="#constants" id="constants">Constants</a></h3>
+<p><strong>Syntax</strong></p>
+<p>See <a href="06-constants.html#general">constants section</a>.</p>
+<p><strong>Constraints</strong></p>
+<p>Outside of a class or interface, a c-constant can be defined only at the
+top level of a script.</p>
+<p><strong>Semantics</strong></p>
+<p>See <a href="06-constants.html#general">constants</a> and <a href="14-classes.html#constants">class constants</a>.</p>
+<p>A constant defined outside of a class or interface is a <a href="#general">superglobal</a>. A constant has static <a href="04-basic-concepts.html#storage-duration">storage duration</a>
+and is a non-modifiable lvalue.</p>
+<p><strong>Undefined Constants</strong></p>
+<p>Undefined constants are not defined implicitly -- forward usages of constants are also classified as undefined constants here. A distinction between class/interface constants and top level constants is made.</p>
+<p>For top level constants: For unqualified usages, the name of the undefined constant (as string) is used as substitution value. Moreover, a warning is emitted stating that the corresponding constant was undefined. For qualified usages, an exception of type <a href="14-classes.html#class-error"><code>Error</code></a> is thrown.</p>
+<p>For class/interface constants: An exception of type <a href="14-classes.html#class-error"><code>Error</code></a> is thrown, stating that the corresponding constant was undefined.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">const MAX_HEIGHT = 10.5;        // define two c-constants
+const UPPER_LIMIT = MAX_HEIGHT;
+define('COEFFICIENT_1', 2.345); // define two d-constants
+define('FAILURE', TRUE);
+
+// Examples of undefined constants
+echo NON_EXISTING_CONSTANT;     // uses 'NON_EXISTING_CONSTANT' as substitution
+                                // value and emits a warning stating that the
+                                // constant was undefined.
+
+echo NON_EXISTING_CONSTANT;     // same here, the constant is still undefined
+                                // and 'NON_EXISTING_CONSTANT' is used as
+                                // substitution value and a warning is emitted
+                                // again.
+
+echo MAX_LENGTH;                // same here due to a forward usage
+                                // (MAX_LENGTH is defined further below).
+                                // 'MAX_LENGTH' is used as substitution
+                                // value and a warning is emitted.
+
+echo \NON_EXISTING_CONSTANT;    // qualified use of undefined constant. Throws
+                                // an exception of type Error.
+
+const MAX_LENGTH = 7.5;
+
+echo Exception::MESSAGE;        // undefined class constant. Throws an exception
+                                // of type Error.
+
+</code></pre>
+<h3><a class="header" href="#local-variables" id="local-variables">Local Variables</a></h3>
+<p><strong>Syntax</strong></p>
+<p>See Semantics below.</p>
+<p><strong>Semantics</strong></p>
+<p>Except for a parameter, a local variable is never defined explicitly;
+instead, it is created when it is first assigned a value. A local
+variable can be assigned to as a parameter in the parameter list of a
+<a href="13-functions.html#function-definitions">function definition</a> or inside any <a href="11-statements.html#compound-statements">compound statement</a>. It
+has function <a href="04-basic-concepts.html#scope">scope</a> and automatic <a href="04-basic-concepts.html#storage-duration">storage duration</a>. A local
+variable is a modifiable lvalue.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">function doit($p1)  // assigned the value TRUE when called
+{
+  $count = 10;
+    ...
+  if ($p1)
+  {
+    $message = &quot;Can't open master file.&quot;;
+    ...
+  }
+  ...
+}
+doit(TRUE);
+// -----------------------------------------
+function f()
+{
+  $lv = 1;
+  echo &quot;\$lv = $lv\n&quot;;
+  ++$lv;
+}
+for ($i = 1; $i &lt;= 3; ++$i)
+  f();
+</code></pre>
+<p>Unlike the <a href="#function-statics">function static equivalent</a>, function <code>f</code> outputs
+“<code>$lv = 1</code>“ each time.</p>
+<p>See the recursive function example in <a href="04-basic-concepts.html#storage-duration">storage duration section</a>.</p>
+<p><a name="undefined-local-variables"></a>
+<strong>Undefined Local Variables</strong></p>
+<p>A distinction is made based on the context where an undefined local variable is used.</p>
+<p><em>byVal Context</em></p>
+<p>PHP does not implicitly define an undefined local variable and uses <code>NULL</code> as substitution value instead. Furthermore, a notice is emitted, stating that the corresponding variable was undefined, unless the variable is used</p>
+<ol>
+<li>as the single expression in a statement.</li>
+<li>as argument of <a href="10-expressions.html#isset">isset</a>.</li>
+<li>as argument of <a href="10-expressions.html#empty">empty</a>.</li>
+<li>as the left hand side of the <a href="10-expressions.html#coalesce-operator">coalesce operator <code>??</code></a>.</li>
+</ol>
+<p>Since undefined local variables are not defined implicitly, they stay undefined. In general, a VSlot is not created for undefined variables used in a byValue context.</p>
+<p><em>byRef Context</em></p>
+<p>If the undefined variable is used in a byRef context then PHP defines the variable implicitly. Hence, a VSlot is created for it and <code>NULL</code> is stored in it. A notice is <em>not</em> emitted in such a case.</p>
+<p><em>Examples of Undefined Variables</em></p>
+<p>Following some examples which outlines the behaviour with undefined local variables.</p>
+<pre><code class="language-PHP">// The following 4 cases outline the exceptions of undefined variables
+// used in byValue context where no notice is emitted.
+$a;
+isset($a);
+empty($a);
+$a ?? 'default Value';
+
+$a = 1;    // a VSlot for $a was created and 1 was assigned.
+
+$b = $c;   // a VSlot for $b was created and the value of $c was assigned to
+           // it. But because $c in turn was undefined, NULL was used as
+           // substitution value instead. In addition, a notice was
+           // emitted stating that $c was undefined.
+
+$d = $c;   // a VSlot for $d was created and the value of $c was assigned to
+           // it. But since $c is still undefined, NULL was used as
+           // substitution value instead and another notice was emitted
+           // stating $c was undefined.
+
+$d + $e;   // $e was undefined and `NULL` was used as substitution value
+           // instead. In addition, a notice was emitted stating that
+           // $e was undefined.
+
+$f = &amp;$g;  // a VSlot for $f was created which points to the VSlot of $g.
+           // $g in turn was undefined but was defined implicitly because the
+           // assignment was byRef. Thus a VSlot for $g was created and `NULL`
+           // was assigned to it. A notice was *not* emitted.
+
+$h = $g;   // a VSlot for $h was created and the value of $g (which is NULL)
+           // was assigned to it.
+
+function foo($x){}
+
+foo($i);   // $i was undefined and NULL was used as substitution value
+           // instead. In addition, a notice was emitted stating that $i
+           // was undefined.
+
+$j = $i;   // a VSlot for $j was created and the value of $i was assigned to
+           // it. But because $i in turn was still undefined, NULL was used
+           // as substitution value instead. Another notice was emitted
+           // stating that $i was undefined.
+
+function bar(&amp;$x){}
+
+bar($k);   // $k was undefined but implicitly defined because it was passed to
+           // the function bar byRef. Thus a VSlot for $k was created and
+           // NULL was assigned to it. A notice was *not* emitted.
+
+$l = $k;   // a VSlot for $l was created and the value of $k (which is NULL)
+           // was assigned to it.
+
+</code></pre>
+<h3><a class="header" href="#array-elements" id="array-elements">Array Elements</a></h3>
+<p><strong>Syntax</strong></p>
+<p><a href="12-arrays.html#arrays">Arrays</a> are created using the <a href="10-expressions.html#array-creation-operator">array-creation operator</a>. At the same time, one or more elements
+may be created for that array. New elements are inserted into an
+existing array via the <a href="10-expressions.html#simple-assignment">simple-assignment operator</a> in
+conjunction with the subscript <a href="10-expressions.html#subscript-operator">operator <code>[]</code></a>. Elements can be
+removed by calling the <a href="11-statements.html#the-unset-statement"><code>unset</code> statement</a>.</p>
+<p><strong>Semantics</strong></p>
+<p>The <a href="04-basic-concepts.html#scope">scope</a> of an array element is the same as the scope of that
+array’s name. An array element has allocated <a href="04-basic-concepts.html#storage-duration">storage duration</a>.</p>
+<p><strong>Undefined Array Elements</strong></p>
+<p>Similar to <a href="#undefined-local-variables">undefined local variables</a>, a distinction is made based on the context where an undefined array element is used.</p>
+<p><em>byValue Context</em></p>
+<p>If one tries to access an undefined array element, then <code>NULL</code> is used as substitution value and a notice is emitted, stating that an undefined offset was used. The undefined offset is not created implicitly and a subsequent access results in another notice.</p>
+<p><em>byRef Context</em></p>
+<p>PHP defines implicitly an undefined array element when it is accessed byRef, a VSlot for the corresponding undefined offset is created and <code>NULL</code> is assigned to it. A notice is <em>not</em> emitted in this case.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$colors = [&quot;red&quot;, &quot;white&quot;, &quot;blue&quot;]; // create array with 3 elements
+$colors[] = &quot;green&quot;;                // insert a new element
+
+echo $colors[100];      // element with offset 100 is undefined and NULL is
+                        // used as substitution value. Moreover, a notice is
+                        // emitted stating that an undefined offset was used.
+
+echo $colors[100];      // element with offset 100 is still undefined and NULL
+                        // is used as substitution value instead. Another
+                        // notice is emitted.
+
+$b = &amp;colors[100];      // a VSlot for $b is created which points to the array
+                        // element with the offset 100. An array element with
+                        // offset 100 was undefined but implicitly defined
+                        // because the assignment is byRef. Thus a VSlot for
+                        // the array element with offset 100 is created and
+                        // NULL is assigned to it. A notice is *not* emitted.
+</code></pre>
+<h3><a class="header" href="#function-statics" id="function-statics">Function Statics</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+function-static-declaration:
+  'static' static-variable-name-list ';'
+
+static-variable-name-list:
+  static-variable-declaration
+  static-variable-name-list ',' static-variable-declaration
+
+static-variable-declaration:
+  variable-name function-static-initializer?
+
+function-static-initializer:
+  '=' constant-expression
+-->
+<pre>
+<i id="grammar-function-static-declaration">function-static-declaration:</i>
+   static   <i><a href="#grammar-static-variable-name-list">static-variable-name-list</a></i>   ;
+
+<i id="grammar-static-variable-name-list">static-variable-name-list:</i>
+   <i><a href="#grammar-static-variable-declaration">static-variable-declaration</a></i>
+   <i><a href="#grammar-static-variable-name-list">static-variable-name-list</a></i>   ,   <i><a href="#grammar-static-variable-declaration">static-variable-declaration</a></i>
+
+<i id="grammar-static-variable-declaration">static-variable-declaration:</i>
+   <i><a href="09-lexical-structure.html#grammar-variable-name">variable-name</a></i>   <i><a href="#grammar-function-static-initializer">function-static-initializer</a></i><sub>opt</sub>
+
+<i id="grammar-function-static-initializer">function-static-initializer:</i>
+   =   <i><a href="10-expressions.html#grammar-constant-expression">constant-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>A function static must be defined inside a function.</p>
+<p><strong>Semantics</strong></p>
+<p>A function static may be defined inside any <a href="11-statements.html#compound-statements">compound statement</a>.
+It is a modifiable lvalue.</p>
+<p>A function static has function <a href="04-basic-concepts.html#scope">scope</a> and static <a href="04-basic-concepts.html#storage-duration">storage duration</a>.</p>
+<p>The value of a function static is retained across calls to its parent
+function. Each time the function containing a function static
+declaration is called, that execution is dealing with an <a href="04-basic-concepts.html#general">alias</a>
+to that static variable. If that alias is passed to the <a href="11-statements.html#the-unset-statement"><code>unset</code> statement</a>,
+only that alias is destroyed. The next time that function is called, a new alias is created.</p>
+<p><strong>Undefined Function Statics</strong></p>
+<p>Function statics are explicitly defined and thus cannot be undefined.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">function f()
+{
+  static $fs = 1;
+  echo &quot;\$fs = $fs\n&quot;;
+  ++$fs;
+}
+for ($i = 1; $i &lt;= 3; ++$i)
+  f();
+</code></pre>
+<p>Unlike the <a href="#local-variables">local variable equivalent</a>, function <code>f</code> outputs “<code>$fs = 1</code>“, “<code>$fs = 2</code>“, and “<code>$fs = 3</code>“, as <code>$fs</code> retains its value across
+calls.</p>
+<p><a name="hidingNotice"></a>
+Be also aware that declaring a function static can hide a local variable and/or a global variable with the same name. The value of the local or global variable is not taken over as initial value of the function static. Subsequent modifications of the variable only modify the function static and do not affect the local nor the global variable. An example:</p>
+<pre><code class="language-PHP">function f(){
+  $fs = 10;             // assign 10 to the local variable $fs
+  static $fs;           // define a function static with name $fs
+  echo &quot;\$fs = $fs\n&quot;;  // $fs =
+  $fs = 5;              // assign 5 to the function static $fs (local variable is not modified)
+  echo &quot;\$fs = $fs\n&quot;;  // $fs = 5
+  global $fs;           // define a global variable with name $fs
+  echo &quot;\$fs = $fs\n&quot;;  // $fs =
+  $fs = 3;              // assign 3 to the global variable $fs (function static and local variable is not modified
+  echo &quot;\$fs = $fs\n&quot;;  // $fs = 3
+  static $fs;
+  ++$fs;                // increment function static $fs
+  echo &quot;\$fs = $fs\n&quot;;  // $fs = 6
+}
+f();
+echo &quot;\$fs = $fs\n&quot;;    // $fs = 3
+</code></pre>
+<h3><a class="header" href="#global-variables" id="global-variables">Global Variables</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+global-declaration:
+  'global' variable-name-list ';'
+
+variable-name-list:
+  simple-variable
+  variable-name-list ',' simple-variable
+-->
+<pre>
+<i id="grammar-global-declaration">global-declaration:</i>
+   global   <i><a href="#grammar-variable-name-list">variable-name-list</a></i>   ;
+
+<i id="grammar-variable-name-list">variable-name-list:</i>
+   <i><a href="10-expressions.html#grammar-simple-variable">simple-variable</a></i>
+   <i><a href="#grammar-variable-name-list">variable-name-list</a></i>   ,   <i><a href="10-expressions.html#grammar-simple-variable">simple-variable</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>A global variable is never defined explicitly; instead, it is created
+when it is first assigned a value. That may be done at the top level of
+a script, or from within a block in which that variable has been
+declared (<em>imported</em>, that is) using the <code>global</code> keyword.</p>
+<p>One of the <a href="#predefined-variables">predefined variables</a>,
+<a href="http://php.net/manual/reserved.variables.globals.php"><code>$GLOBALS</code></a> is
+a <a href="#general">superglobal</a> array whose elements’ key/value pairs contain the
+name and value, respectively, of each global variable currently defined.
+As such, a global variable <code>gv</code> can be initialized with the value <code>v</code>,
+and possibly be created, using the following form of assignment:</p>
+<p><code>$GLOBALS['gv'] = v</code></p>
+<p>As <code>$GLOBALS</code> is a superglobal, <code>gv</code> need not first be the subject of a
+<em>global-declaration</em>.</p>
+<p>A global variable has global <a href="04-basic-concepts.html#scope">scope</a> and static
+<a href="04-basic-concepts.html#storage-duration">storage duration</a>. A global variable is a modifiable lvalue.</p>
+<p>When a global value is imported into a function, each time the function
+is called, that execution is dealing with an <a href="04-basic-concepts.html#general">alias</a> to that
+global variable. If that alias is passed to the <a href="11-statements.html#the-unset-statement"><code>unset</code> statement</a>,
+only that alias is destroyed. The next time that function
+is called, a new alias is created with the current value of the global variable.</p>
+<p><strong>Undefined Global Variables</strong></p>
+<p>The same rules as for <a href="#undefined-local-variables">undefined local variables</a> apply.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$colors = array(&quot;red&quot;, &quot;white&quot;, &quot;blue&quot;);
+$GLOBALS['done'] = FALSE;
+// -----------------------------------------
+$min = 10; $max = 100; $average = NULL;
+global $min, $max;         // allowed, but serves no purpose
+function compute($p)
+{
+  global $min, $max;
+  global $average;
+  $average = ($max + $min)/2;
+
+  if ($p)
+  {
+    global $result;
+    $result = 3.456;  // initializes a global, creating it, if necessary
+  }
+}
+compute(TRUE);
+echo &quot;\$average = $average\n&quot;;  // $average = 55
+echo &quot;\$result = $result\n&quot;;  // $result = 3.456
+// -----------------------------------------
+$g = 100;
+function f()
+{
+  $v = 'g';
+  global $$v;          // import global $g
+  ...
+}
+</code></pre>
+<p>Be also aware that declaring a variable global can hide a local variable and/or a function static with the same name. See <a href="#hidingNotice">static variables section</a> for an example.</p>
+<h3><a class="header" href="#instance-properties" id="instance-properties">Instance Properties</a></h3>
+<p>These are described in <a href="14-classes.html#properties">class instance properties section</a>.
+They have class <a href="04-basic-concepts.html#scope">scope</a> of the defining class and
+allocated <a href="04-basic-concepts.html#storage-duration">storage duration</a>.
+Access to the instance properties is governed by <a href="14-classes.html#general">visibility rules</a>.</p>
+<h3><a class="header" href="#static-properties" id="static-properties">Static Properties</a></h3>
+<p>These are described in <a href="14-classes.html#properties">class static properties section</a>.
+They have class <a href="04-basic-concepts.html#scope">scope</a> of the defining class
+and static <a href="04-basic-concepts.html#storage-duration">storage duration</a>.
+Access to the static properties is governed by <a href="14-classes.html#general">visibility rules</a>.</p>
+<h3><a class="header" href="#class-and-interface-constants" id="class-and-interface-constants">Class and Interface Constants</a></h3>
+<p>These are described in <a href="14-classes.html#constants">class constants section</a> and <a href="15-interfaces.html#constants">interface constants section</a>. They have class <a href="04-basic-concepts.html#scope">scope</a> of the defining class or interface
+and static <a href="04-basic-concepts.html#storage-duration">storage duration</a>.</p>
+<h2><a class="header" href="#predefined-variables" id="predefined-variables">Predefined Variables</a></h2>
+<p>The following global variables are available to all scripts:</p>
+<table><thead><tr><th>Variable Name</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>$argc</code></td><td><code>int</code>; The number of command-line arguments passed to the script. This is at least 1. (See <code>$argv</code> below). This may not be available in non-command-line builds of the Engine.</td></tr>
+<tr><td><code>$argv</code></td><td><code>array</code>; An array of <code>$argc</code> elements containing the command-line arguments passed to the script as strings. Each element has an <code>int</code> key with the keys being numbered sequentially starting at zero through <code>$argc-1</code>. <code>$argv[0]</code> is the name of the script. It is implementation-defined as to how white space on command lines is handled, whether letter casing is preserved, which characters constitute quotes, or how <code>$argv[0]</code>‘s string is formatted. As to how command-line arguments are defined, is unspecified. This may not be available in non-command-line builds of the Engine.</td></tr>
+<tr><td><code>$_COOKIE</code></td><td><code>array</code>; The variables passed to the current script via HTTP Cookies.</td></tr>
+<tr><td><code>$_ENV</code></td><td><code>array</code>; An array in which the environment variable names are element keys, and the environment variable value strings are element values. As to how an environment variable is defined, is unspecified.</td></tr>
+<tr><td><code>$_FILES</code></td><td><code>array</code>; The items uploaded to the current script via the HTTP POST method.</td></tr>
+<tr><td><code>$_GET</code></td><td><code>array</code>; The variables passed to the current script via the URL parameters.</td></tr>
+<tr><td><code>$GLOBALS</code></td><td><code>array</code>; A <a href="#general">superglobal</a> array containing the names of all variables that are currently defined in the global scope of the script. The variable names are the element keys, and the variable values are the element values.</td></tr>
+<tr><td><code>$_POST</code></td><td><code>array</code>; The variables passed to the current script via the HTTP POST method.</td></tr>
+<tr><td><code>$_REQUEST</code></td><td><code>array</code>; By default contains the contents of <code>$_COOKIE</code>, <code>$_GET</code>, and <code>$_POST</code>. The exact contents may depend on the Engine settings.</td></tr>
+<tr><td><code>$_SERVER</code></td><td><code>array</code>; Server and execution environment information, such as headers, paths, and script locations. The entries in this array are taken from the Engine environment, e.g. the webserver.</td></tr>
+<tr><td><code>$_SESSION</code></td><td><code>array</code>; The session variables available to the current script. This global is defined only if a <a href="http://php.net/manual/en/book.session.php">session</a> is active.</td></tr>
+</tbody></table>
+<p>All <code>$_*</code> variables above are superglobals. The exact set of the variables available may depend on the implementation, the Engine build and the environment.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/06-constants.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/08-conversions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/06-constants.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/08-conversions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

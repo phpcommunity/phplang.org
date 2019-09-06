@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Types - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html" class="active"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#types" id="types">Types</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>The meaning of a value is determined by its <em>type</em>. PHP’s types are
+categorized as <em>scalar types</em> and <em>composite types</em>. The scalar types
+are <a href="#the-boolean-type">Boolean</a>, <a href="#the-integer-type">integer</a>, <a href="#the-floating-point-type">floating point</a>, <a href="#the-string-type">string</a>, and <a href="#the-null-type">null</a>. The composite types are <a href="#the-array-type">array</a>,
+and <a href="#objects">object</a>. The <a href="#resources">resource</a> is an opaque type whose internal structure is not specified and depends
+on the implementation.</p>
+<p>The scalar types are <em>value types</em>. That is, a variable of scalar type
+behaves as though it contains its own value.</p>
+<p>The composite types can contain other variables, besides the variable itself, e.g.
+array contains its elements and object contains its properties.</p>
+<p>The objects and resources are <em>handle types</em>. The type contains information — in a <em>handle</em> —
+that leads to the value. The differences between value and handle types become apparent
+when it comes to understanding the <a href="04-basic-concepts.html#the-memory-model">semantics</a> of assignment, and passing
+arguments to, and returning values from, functions.</p>
+<p>Variables are not declared to have a particular type. Instead, a
+variable’s type is determined at runtime by the value it contains.
+The same variable can contain values of different types at different times.</p>
+<p>Useful library functions for interrogating and using type information
+include <a href="http://www.php.net/gettype"><code>gettype</code></a>, <a href="http://www.php.net/is_type"><code>is_type</code></a>, <a href="http://www.php.net/settype"><code>settype</code></a>, and <a href="http://www.php.net/var_dump"><code>var_dump</code></a>.</p>
+<h2><a class="header" href="#scalar-types" id="scalar-types">Scalar Types</a></h2>
+<h3><a class="header" href="#general-1" id="general-1">General</a></h3>
+<p>The integer and floating-point types are collectively known as
+<em>arithmetic types</em>. The library function <a href="http://www.php.net/is_numeric"><code>is_numeric</code></a> indicates if
+a given value is a number or a numeric <a href="#the-string-type">string</a>.</p>
+<p>The library function <a href="http://www.php.net/is_scalar"><code>is_scalar</code></a> indicates if a given value has a
+scalar type. However, that function does not consider <code>NULL</code> to be scalar.
+To test for <code>NULL</code>, use <a href="http://www.php.net/is_null"><code>is_null</code></a>.</p>
+<p>Some objects may support arithmetic and other scalar operations and/or be
+convertible to scalar types (this is currently available only to internal classes).
+Such object types together with scalar types are called <em>scalar-compatible types</em>.
+Note that the same object type may be scalar-compatible for one operation but not for another.</p>
+<h3><a class="header" href="#the-boolean-type" id="the-boolean-type">The Boolean Type</a></h3>
+<p>The Boolean type is <code>bool</code>, for which the name <code>boolean</code> is a synonym. This
+type is capable of storing two distinct values, which correspond to the
+Boolean values <a href="06-constants.html#core-predefined-constants"><code>true</code> and <code>false</code></a>, respectively.
+The internal representation of this type and its values is unspecified.</p>
+<p>The library function <a href="http://www.php.net/is_bool"><code>is_bool</code></a> indicates if a given value has type
+<code>bool</code>.</p>
+<h3><a class="header" href="#the-integer-type" id="the-integer-type">The Integer Type</a></h3>
+<p>There is one integer type, <code>int</code>, for which the name <code>integer</code> is a synonym.
+This type is binary, signed, and uses twos-complement representation for
+negative values. The range of values that can be stored is
+implementation-defined; however, the range [-2147483648, 2147483647],
+must be supported. This range must be finite.</p>
+<p>Certain operations on integer values produce a mathematical result that
+cannot be represented as an integer. Examples include the following:</p>
+<ul>
+<li>Incrementing the largest value or decrementing the smallest value.</li>
+<li>Applying the unary minus to the smallest value.</li>
+<li>Multiplying, adding, or subtracting two values.</li>
+</ul>
+<p>In such cases, the computation is done as though the types of the values were
+<code>float</code> with the result having that type.</p>
+<p>The constants <a href="06-constants.html#core-predefined-constants"><code>PHP_INT_SIZE</code>, <code>PHP_INT_MIN</code> and <code>PHP_INT_MAX</code></a> define certain
+characteristics about type <code>int</code>.</p>
+<p>The library function <a href="http://www.php.net/is_int"><code>is_int</code></a> indicates if a given value has type
+<code>int</code>.</p>
+<h3><a class="header" href="#the-floating-point-type" id="the-floating-point-type">The Floating-Point Type</a></h3>
+<p>There is one floating-point type, <code>float</code>, for which the names <code>double</code> and
+<code>real</code> are synonyms. The <code>float</code> type must support at least the range and
+precision of IEEE 754 64-bit double-precision representation.</p>
+<p>The library function <a href="http://www.php.net/is_float"><code>is_float</code></a> indicates if a given value has type
+<code>float</code>. The library function <a href="http://www.php.net/is_finite"><code>is_finite</code></a> indicates if a given
+floating-point value is finite. The library function <a href="http://www.php.net/is_infinite"><code>is_infinite</code></a>
+indicates if a given floating-point value is infinite. The library
+function <a href="http://www.php.net/is_nan"><code>is_nan</code></a> indicates if a given floating-point value is a
+<code>NaN</code>.</p>
+<h3><a class="header" href="#the-string-type" id="the-string-type">The String Type</a></h3>
+<p>A string is a set of contiguous bytes that represents a sequence of zero
+or more characters.</p>
+<p>Conceptually, a string can be considered as an <a href="#the-array-type">array</a> of
+bytes—the <em>elements</em>—whose keys are the <code>int</code> values starting at zero. The
+type of each element is <code>string</code>. However, a string is <em>not</em> considered a
+collection, so it cannot be iterated over.</p>
+<p>A string whose length is zero is an <em>empty string</em>.</p>
+<p>As to how the bytes in a string translate into characters is
+unspecified.</p>
+<p>Although a user of a string might choose to ascribe special semantics to
+bytes having the value <code>\0</code>, from PHP’s perspective, such <em>null bytes</em>
+have no special meaning. PHP does not assume strings contain any specific
+data or assign special values to any bytes or sequences. However, many
+library functions assume the strings they receive as arguments are UTF-8
+encoded, often without explicitly mentioning that fact.</p>
+<p>A <em>numeric string</em> is a string whose content exactly matches the pattern
+defined by the <em>str-numeric</em> production below.
+A <em>leading-numeric string</em> is a string whose initial characters follow
+the requirements of a numeric string, and whose trailing characters are
+non-numeric. A <em>non-numeric string</em> is a string that is not a numeric
+string.</p>
+<!-- GRAMMAR
+str-numeric::
+  str-whitespace? sign? str-number
+
+str-whitespace::
+  str-whitespace? str-whitespace-char
+
+str-whitespace-char::
+  new-line
+  "Space character (0x20)"
+  "Horizontal-tab character (0x09)"
+  "Vertical-tab character (0x0B)"
+  "Form-feed character (0x0C)"
+
+str-number::
+  digit-sequence
+  floating-literal
+-->
+<pre>
+<i id="grammar-str-numeric">str-numeric::</i>
+   <i><a href="#grammar-str-whitespace">str-whitespace</a></i><sub>opt</sub>   <i><a href="09-lexical-structure.html#grammar-sign">sign</a></i><sub>opt</sub>   <i><a href="#grammar-str-number">str-number</a></i>
+
+<i id="grammar-str-whitespace">str-whitespace::</i>
+   <i><a href="#grammar-str-whitespace">str-whitespace</a></i><sub>opt</sub>   <i><a href="#grammar-str-whitespace-char">str-whitespace-char</a></i>
+
+<i id="grammar-str-whitespace-char">str-whitespace-char::</i>
+   <i><a href="09-lexical-structure.html#grammar-new-line">new-line</a></i>
+   Space character (0x20)
+   Horizontal-tab character (0x09)
+   Vertical-tab character (0x0B)
+   Form-feed character (0x0C)
+
+<i id="grammar-str-number">str-number::</i>
+   <i><a href="09-lexical-structure.html#grammar-digit-sequence">digit-sequence</a></i>
+   <i><a href="09-lexical-structure.html#grammar-floating-literal">floating-literal</a></i>
+</pre>
+<p>Note that <em>digit-sequence</em> is interpreted as having base-10 (so <code>&quot;0377&quot;</code> is treated as 377 decimal with a redundant
+leading zero, rather than as octal 377).</p>
+<p>Only one mutation operation may be performed on a string, offset
+assignment, which involves the simple assignment <a href="10-expressions.html#simple-assignment">operator =</a>.</p>
+<p>The library function <a href="http://www.php.net/is_string"><code>is_string</code></a> indicates if a given value has
+type string.</p>
+<h3><a class="header" href="#the-null-type" id="the-null-type">The Null Type</a></h3>
+<p>The null type has only one possible value, <a href="06-constants.html#core-predefined-constants"><code>NULL</code></a>. The representation
+of this type and its value is unspecified.</p>
+<p>The library function <a href="http://www.php.net/is_null"><code>is_null</code></a> indicates if a given value is <code>NULL</code>.</p>
+<h2><a class="header" href="#composite-types" id="composite-types">Composite Types</a></h2>
+<h3><a class="header" href="#the-array-type" id="the-array-type">The Array Type</a></h3>
+<p>An array is a data structure that contains a collection of zero or more
+elements whose values are accessed through keys that are of type <code>int</code> or
+<code>string</code>. See more details in <a href="12-arrays.html#arrays">arrays chapter</a>.</p>
+<p>The library function <a href="http://www.php.net/is_array"><code>is_array</code></a> indicates if a given value is an
+array.</p>
+<h3><a class="header" href="#objects" id="objects">Objects</a></h3>
+<p>An <em>object</em> is an instance of a <a href="14-classes.html#classes">class</a>. Each distinct
+<a href="14-classes.html#class-declarations"><em>class-declaration</em></a> defines a new class type, and each class
+type is an object type. The representation of object types is unspecified.</p>
+<p>The library function <a href="http://www.php.net/is_object"><code>is_object</code></a> indicates if a given value is an
+object, and the library function
+<a href="http://php.net/manual/function.get-class.php"><code>get_class</code></a> indicates the name of an object’s class.</p>
+<h3><a class="header" href="#resources" id="resources">Resources</a></h3>
+<p>A <a href="http://php.net/manual/language.types.resource.php"><em>resource</em></a>
+is a descriptor to some sort of external entity. Examples include
+files, databases, and network sockets.</p>
+<p>A resource is an abstract entity whose representation is unspecified.
+Resources are only created or consumed by the implementation; they are
+never created or consumed by PHP code.</p>
+<p>Each distinct resource has a unique identity of some unspecified form.</p>
+<p>The library function <a href="http://www.php.net/is_resource"><code>is_resource</code></a> indicates if a given value is a
+resource, and the library function
+<a href="http://php.net/manual/function.get-resource-type.php"><code>get_resource_type</code></a> indicates the type of a resource.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/04-basic-concepts.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/06-constants.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/04-basic-concepts.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/06-constants.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

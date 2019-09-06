@@ -1,0 +1,3099 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Expressions - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html" class="active"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#expressions" id="expressions">Expressions</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>An <em>expression</em> involves one or more terms and zero or more operators.</p>
+<p>A <em>full expression</em> is an expression that is not part of another
+expression.</p>
+<p>A <em>side effect</em> is an action that changes the state of the execution
+environment. (Examples of such actions are modifying a variable, writing
+to a device or file, or calling a function that performs such
+operations).</p>
+<p>When an expression is evaluated, it produces a result. It might also
+produce a side effect. Only a few operators produce side effects. (For
+example, given the <a href="11-statements.html#expression-statements">expression statement</a> <code>$v = 10</code>; the
+expression 10 is evaluated to the result 10, and there is no side
+effect. Then the assignment operator is executed, which results in the
+side effect of <code>$v</code> being modified. The result of the whole expression is
+the value of <code>$v</code> after the assignment has taken place. However, that
+result is never used. Similarly, given the expression statement <code>++$v</code>;
+the expression is evaluated to the result incremented-value-of-<code>$v</code>, and
+the side effect is that <code>$v</code> is actually incremented. Again, the result
+is never used).</p>
+<p>The occurrence of value computation and side effects is delimited by
+<em>sequence points</em>, places in a program’s execution at which all the
+computations and side effects previously promised are complete, and no
+computations or side effects of future operations have yet begun. There
+is a sequence point at the end of each full expression. The <a href="#logical-and-operator-form-1">logical and</a>,
+<a href="#logical-inclusive-or-operator-form-1">logical or</a>,
+<a href="#logical-inclusive-or-operator-form-1">conditional</a>, <a href="#coalesce-operator">coalesce</a> and <a href="#function-call-operator">function call</a>
+operators each contain a sequence point. (For example, in the
+following series of expression statements, <code>$a = 10; ++$a; $b = $a;</code>,
+there is sequence point at the end of each full expression, so the
+assignment to <code>$a</code> is completed before <code>$a</code> is incremented, and the
+increment is completed before the assignment to <code>$b</code>).</p>
+<p>When an expression contains multiple operators, the <em>precedence</em> of
+those operators controls the order in which those operators are applied.
+(For example, the expression <code>$a - $b / $c</code> is evaluated as
+<code>$a - ($b / $c)</code> because the <code>/</code> operator has higher precedence than the
+binary <code>-</code> operator). The precedence of an operator is determined by the
+definition of its associated grammar production.</p>
+<p>If an operand occurs between two operators having the same precedence,
+the order in which the operations are performed is determined by those
+operators’ <em>associativity</em>. With <em>left-associative</em> operators,
+operations are performed left-to-right. (For example, <code>$a + $b - $c</code> is
+evaluated as <code>($a + $b) - $c</code>). With <em>right-associative</em> operators,
+operations are performed right-to-left. (For example, <code>$a = $b = $c</code> is
+evaluated as <code>$a = ($b = $c)</code>).</p>
+<p>Precedence and associativity can be controlled using <em>grouping
+parentheses</em>. (For example, in the expression <code>($a - $b) / $c</code>, the
+subtraction is done before the division. Without the grouping
+parentheses, the division would take place first).</p>
+<p>While precedence, associativity, and grouping parentheses control the
+order in which operators are applied, they do <em>not</em> control the order of
+evaluation of the terms themselves. Unless stated explicitly in this
+specification, the order in which the operands in an expression are
+evaluated relative to each other is unspecified. See the discussion
+above about the operators that contain sequence points. (For example, in
+the full expression <code>$list1[$i] = $list2[$i++]</code>, whether the value
+of <code>$i</code> on the left-hand side is the old or new <code>$i</code>, is unspecified.
+Similarly, in the full expression <code>$j = $i + $i++</code>, whether the value
+of <code>$i</code> is the old or new <code>$i</code>, is unspecified. Finally, in the full
+expression <code>f() + g() * h()</code>, the order in which the three functions are
+called, is unspecified).</p>
+<p><strong>Implementation Notes</strong></p>
+<p>An expression that contains no side effects and whose resulting value is
+not used need not be evaluated. For example, the expression statements
+<code>6;</code>, <code>$i + 6;</code>, and <code>$i/$j</code>; are well formed, but they contain no side
+effects and their results are not used.</p>
+<p>A side effect need not be executed if it can be determined that no other
+program code relies on its having happened. (For example, in the cases
+of <code>return $a++;</code> and <code>return ++$a;</code>, it is obvious what value must be
+returned in each case, but if <code>$a</code> is a variable local to the enclosing
+function, <code>$a</code> need not actually be incremented.</p>
+<h2><a class="header" href="#primary-expressions" id="primary-expressions">Primary Expressions</a></h2>
+<h3><a class="header" href="#general-1" id="general-1">General</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+primary-expression:
+  variable
+  class-constant-access-expression
+  constant-access-expression
+  literal
+  array-creation-expression
+  intrinsic
+  anonymous-function-creation-expression
+  object-creation-expression
+  postfix-increment-expression
+  postfix-decrement-expression
+  prefix-increment-expression
+  prefix-decrement-expression
+  byref-assignment-expression
+  shell-command-expression
+  '(' expression ')'
+-->
+<pre>
+<i id="grammar-primary-expression">primary-expression:</i>
+   <i><a href="#grammar-variable">variable</a></i>
+   <i><a href="#grammar-class-constant-access-expression">class-constant-access-expression</a></i>
+   <i><a href="#grammar-constant-access-expression">constant-access-expression</a></i>
+   <i><a href="#grammar-literal">literal</a></i>
+   <i><a href="#grammar-array-creation-expression">array-creation-expression</a></i>
+   <i><a href="#grammar-intrinsic">intrinsic</a></i>
+   <i><a href="#grammar-anonymous-function-creation-expression">anonymous-function-creation-expression</a></i>
+   <i><a href="#grammar-object-creation-expression">object-creation-expression</a></i>
+   <i><a href="#grammar-postfix-increment-expression">postfix-increment-expression</a></i>
+   <i><a href="#grammar-postfix-decrement-expression">postfix-decrement-expression</a></i>
+   <i><a href="#grammar-prefix-increment-expression">prefix-increment-expression</a></i>
+   <i><a href="#grammar-prefix-decrement-expression">prefix-decrement-expression</a></i>
+   <i><a href="#grammar-byref-assignment-expression">byref-assignment-expression</a></i>
+   <i><a href="#grammar-shell-command-expression">shell-command-expression</a></i>
+   (   <i><a href="#grammar-expression">expression</a></i>   )
+</pre>
+<p><strong>Semantics</strong></p>
+<p>The type and value of parenthesized expression are identical to those of
+the un-parenthesized expression.</p>
+<h3><a class="header" href="#simple-variable" id="simple-variable">Simple Variable</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+simple-variable:
+  variable-name
+  '$' simple-variable
+  '$' '{' expression '}'
+-->
+<pre>
+<i id="grammar-simple-variable">simple-variable:</i>
+   <i><a href="09-lexical-structure.html#grammar-variable-name">variable-name</a></i>
+   $   <i><a href="#grammar-simple-variable">simple-variable</a></i>
+   $   {   <i><a href="#grammar-expression">expression</a></i>   }
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The <em>simple-variable</em> or <em>expression</em> in the last two variants
+must designate a scalar value or object convertible to string.</p>
+<p><strong>Semantics</strong></p>
+<p>A <em>simple-variable</em> expression designates a variable with the name determined by either
+the <em>variable-name</em> or the string representation of the result of the <em>simple-variable</em> or
+<em>expression</em>, depending on which case is applicable. In the latter two cases the variable
+name may contain characters that are not allowed in a lexical
+<a href="09-lexical-structure.html#names">variable-name</a>.</p>
+<p>The behavior of a <em>simple-variable</em> in different contexts and for different types of
+variables is as specified in the <a href="07-variables.html">variables</a> section.</p>
+<p>The variable <code>$this</code> is predefined inside any non-static instance method (including
+constructor) when that method is called from within an object
+context. The value of <code>$this</code> is the calling object or the object being constructed.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$color = &quot;red&quot;;
+$$color = 123;    // equivalent to $red = 123
+// -----------------------------------------
+$x = 'ab'; $ab = 'fg'; $fg = 'xy';
+$$ $ $x = 'Hello';  // equivalent to $xy = Hello
+// -----------------------------------------
+$v1 = 3;
+$$v1 = 22;        // equivalent to ${3} = 22, variable name is &quot;3&quot;
+$v2 = 9.543;
+$$v2 = TRUE;    // equivalent to ${9.543} = TRUE
+$v3 = NULL;
+$$v3 = &quot;abc&quot;;   // equivalent to ${NULL} = &quot;abc&quot;, here we create a variable with empty name
+// -----------------------------------------
+function f1 () { return 2.5; }
+${1 + f1()} = 1000;   // equivalent to ${3.5} = 1000
+</code></pre>
+<h3><a class="header" href="#dereferencable-expression" id="dereferencable-expression">Dereferencable expression</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+dereferencable-expression:
+  variable
+  '(' expression ')'
+  array-creation-expression
+  string-literal
+
+callable-expression:
+  callable-variable
+  '(' expression ')'
+  array-creation-expression
+  string-literal
+-->
+<pre>
+<i id="grammar-dereferencable-expression">dereferencable-expression:</i>
+   <i><a href="#grammar-variable">variable</a></i>
+   (   <i><a href="#grammar-expression">expression</a></i>   )
+   <i><a href="#grammar-array-creation-expression">array-creation-expression</a></i>
+   <i><a href="09-lexical-structure.html#grammar-string-literal">string-literal</a></i>
+
+<i id="grammar-callable-expression">callable-expression:</i>
+   <i><a href="#grammar-callable-variable">callable-variable</a></i>
+   (   <i><a href="#grammar-expression">expression</a></i>   )
+   <i><a href="#grammar-array-creation-expression">array-creation-expression</a></i>
+   <i><a href="09-lexical-structure.html#grammar-string-literal">string-literal</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The <em>string-literal</em> must not use variable interpolation and must not be a heredoc
+or nowdoc string literal.</p>
+<p><strong>Semantics</strong></p>
+<p>A <em>dereferencable-expression</em> can be used as the left hand side of dereferencing operators, such
+as <code>[]</code>, <code>-&gt;</code> and <code>::</code>. A <em>callable-expression</em> can be used as the left hand side of the <a href="#function-call-operator">function
+call operator</a>.</p>
+<h3><a class="header" href="#variables" id="variables">Variables</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+callable-variable:
+  simple-variable
+  subscript-expression
+  member-call-expression
+  scoped-call-expression
+  function-call-expression
+
+variable:
+  callable-variable
+  scoped-property-access-expression
+  member-access-expression
+-->
+<pre>
+<i id="grammar-callable-variable">callable-variable:</i>
+   <i><a href="#grammar-simple-variable">simple-variable</a></i>
+   <i><a href="#grammar-subscript-expression">subscript-expression</a></i>
+   <i><a href="#grammar-member-call-expression">member-call-expression</a></i>
+   <i><a href="#grammar-scoped-call-expression">scoped-call-expression</a></i>
+   <i><a href="#grammar-function-call-expression">function-call-expression</a></i>
+
+<i id="grammar-variable">variable:</i>
+   <i><a href="#grammar-callable-variable">callable-variable</a></i>
+   <i><a href="#grammar-scoped-property-access-expression">scoped-property-access-expression</a></i>
+   <i><a href="#grammar-member-access-expression">member-access-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>A <em>variable</em> is an expression that can <em>in principle</em> be used as an lvalue. However, the
+individual possible expressions may further restrict whether they can behave as lvalues.
+An expression that is not a <em>variable</em> can never act as an lvalue.</p>
+<h3><a class="header" href="#constant-access-expression" id="constant-access-expression">Constant Access Expression</a></h3>
+<!-- GRAMMAR
+constant-access-expression:
+  qualified-name
+-->
+<pre>
+<i id="grammar-constant-access-expression">constant-access-expression:</i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>A <em>constant-access-expression</em> evaluates to the value of the <a href="06-constants.html">constant</a>
+with name <em>qualified-name</em>.</p>
+<h3><a class="header" href="#literals" id="literals">Literals</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+literal:
+  integer-literal
+  floating-literal
+  string-literal
+-->
+<pre>
+<i id="grammar-literal">literal:</i>
+   <i><a href="09-lexical-structure.html#grammar-integer-literal">integer-literal</a></i>
+   <i><a href="09-lexical-structure.html#grammar-floating-literal">floating-literal</a></i>
+   <i><a href="09-lexical-structure.html#grammar-string-literal">string-literal</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>A literal evaluates to its value, as specified in the lexical specification for
+<a href="09-lexical-structure.html#literals">literals</a>.</p>
+<h3><a class="header" href="#intrinsics" id="intrinsics">Intrinsics</a></h3>
+<h4><a class="header" href="#general-2" id="general-2">General</a></h4>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+intrinsic:
+  empty-intrinsic
+  eval-intrinsic
+  exit-intrinsic
+  isset-intrinsic
+-->
+<pre>
+<i id="grammar-intrinsic">intrinsic:</i>
+   <i><a href="#grammar-empty-intrinsic">empty-intrinsic</a></i>
+   <i><a href="#grammar-eval-intrinsic">eval-intrinsic</a></i>
+   <i><a href="#grammar-exit-intrinsic">exit-intrinsic</a></i>
+   <i><a href="#grammar-isset-intrinsic">isset-intrinsic</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>The names in this series of sections have special meaning and are
+called <em>intrinsics</em>, but they are not keywords; nor are they functions, they
+are language constructs that are interpreted by the Engine.</p>
+<h4><a class="header" href="#empty" id="empty">empty</a></h4>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+empty-intrinsic:
+  'empty' '(' expression ')'
+-->
+<pre>
+<i id="grammar-empty-intrinsic">empty-intrinsic:</i>
+   empty   (   <i><a href="#grammar-expression">expression</a></i>   )
+</pre>
+<p><strong>Semantics</strong></p>
+<p>This intrinsic returns <code>TRUE</code> if the variable or value designated by
+<em>expression</em> is empty, where <em>empty</em> means that the variable designated by it does not
+exist, or it exists and its value compares equal to <code>FALSE</code>. Otherwise,
+the intrinsic returns <code>FALSE</code>.</p>
+<p>The following values are considered empty: <code>FALSE</code>, <code>0</code>, <code>0.0</code>, <code>&quot;&quot;</code> (empty string), <code>&quot;0&quot;</code>, <code>NULL</code>,
+an empty array, and any uninitialized variable.</p>
+<p>If this intrinsic is used with an expression that designates a <a href="14-classes.html#dynamic-members">dynamic
+property</a>, then if the class of that property has
+an <a href="14-classes.html#method-__isset"><code>__isset</code></a>, that method is called.
+If that method returns <code>TRUE</code>, the value of the property is retrieved
+(which may call <a href="4-classes.html#method-__get">__get</a> if defined) and compared
+to <code>FALSE</code> as described above. Otherwise, the result is <code>FALSE</code>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">empty(&quot;0&quot;);  // results in TRUE
+empty(&quot;00&quot;); // results in FALSE
+$v = [10, 20];
+empty($v);   // results in FALSE
+</code></pre>
+<h4><a class="header" href="#eval" id="eval">eval</a></h4>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+eval-intrinsic:
+  'eval' '(' expression ')'
+-->
+<pre>
+<i id="grammar-eval-intrinsic">eval-intrinsic:</i>
+   eval   (   <i><a href="#grammar-expression">expression</a></i>   )
+</pre>
+<p><strong>Constraints</strong></p>
+<p><em>expression</em> must designate a string, or be <a href="08-conversions.html#converting-to-string-type">convertable to a string</a>.
+The contents of the string must be valid PHP source code. If the source code is ill formed, an exception of type <code>ParseError</code> is thrown.</p>
+<p>The PHP source code in the string must not be delimited by opening and
+closing <a href="04-basic-concepts.html#program-structure">PHP tags</a>. However, the source code
+itself may contain the tags.</p>
+<p><strong>Semantics</strong></p>
+<p>This intrinsic evaluates the contents of the string designated by
+<em>expression</em>, as PHP script code.</p>
+<p>Execution of a <a href="11-statements.html#the-return-statement"><code>return</code> statement</a> from within the source code
+terminates the execution, and the value returned becomes the value
+returned by <code>eval</code>. If the source code is ill formed, <code>eval</code> returns <code>FALSE</code>;
+otherwise, <code>eval</code> returns <code>NULL</code>.</p>
+<p>The source code is executed in the scope of that from which <code>eval</code> is
+called.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$str = &quot;Hello&quot;;
+eval(&quot;echo \$str . \&quot;\\n\&quot;;&quot;);  // → echo $str . &quot;\n&quot;; → prints Hello
+</code></pre>
+<h4><a class="header" href="#exitdie" id="exitdie">exit/die</a></h4>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+exit-intrinsic:
+  'exit'
+  'exit' '(' expression? ')'
+  'die'
+  'die' '(' expression? ')'
+-->
+<pre>
+<i id="grammar-exit-intrinsic">exit-intrinsic:</i>
+   exit
+   exit   (   <i><a href="#grammar-expression">expression</a></i><sub>opt</sub>   )
+   die
+   die   (   <i><a href="#grammar-expression">expression</a></i><sub>opt</sub>   )
+</pre>
+<p><strong>Constraints</strong></p>
+<p>When <em>expression</em> designates an integer, its value must be in the range
+0–254.</p>
+<p><strong>Semantics</strong></p>
+<p><code>exit</code> and <code>die</code> are equivalent.</p>
+<p>This intrinsic terminates the current script. If <em>expression</em> designates
+a string, that string is written to <a href="06-constants.html#core-predefined-constants"><code>STDOUT</code></a>. If <em>expression</em>
+designates an integer, that represents the script’s <em>exit status code</em>.
+Code 255 is reserved by PHP. Code 0 represents “success”. The exit
+status code is made available to the execution environment. If
+<em>expression</em> is omitted or is a string, the exit status code is zero.
+<code>exit</code> does not have a resulting value.</p>
+<p><code>exit</code> performs the following operations, in order:</p>
+<ul>
+<li>Writes the optional string to <a href="06-constants.html#core-predefined-constants"><code>STDOUT</code></a>.</li>
+<li>Calls any functions registered via the library function
+<a href="http://www.php.net/register_shutdown_function"><code>register_shutdown_function</code></a> in their order of registration.</li>
+<li>Invokes <a href="14-classes.html#destructors">destructors</a> for all remaining instances.</li>
+</ul>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">exit (&quot;Closing down&quot;);
+exit (1);
+exit;
+</code></pre>
+<h4><a class="header" href="#isset" id="isset">isset</a></h4>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+isset-intrinsic:
+  'isset' '(' variable-list ','? ')'
+
+variable-list:
+  variable
+  variable-list ',' variable
+-->
+<pre>
+<i id="grammar-isset-intrinsic">isset-intrinsic:</i>
+   isset   (   <i><a href="#grammar-variable-list">variable-list</a></i>   ,<sub>opt</sub>   )
+
+<i id="grammar-variable-list">variable-list:</i>
+   <i><a href="#grammar-variable">variable</a></i>
+   <i><a href="#grammar-variable-list">variable-list</a></i>   ,   <i><a href="#grammar-variable">variable</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>This intrinsic returns <code>TRUE</code> if all the variables designated by
+<em>variables</em>s are set and their values are not <code>NULL</code>. Otherwise, it
+returns <code>FALSE</code>.</p>
+<p>If this intrinsic is used with an expression that designate a <a href="14-classes.html#dynamic-members">dynamic
+property</a>, then if the class of that property has
+an <a href="14-classes.html#method-__isset"><code>__isset</code></a>, that method is called.
+If that method returns <code>TRUE</code>, the value of the property is retrieved
+(which may call <a href="4-classes.html#method-__get"><code>__get</code></a> if defined) and
+if it is not <code>NULL</code>, the result is <code>TRUE</code>. Otherwise, the result is <code>FALSE</code>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$v = TRUE;
+isset($v);     // results in TRUE
+$v = NULL;
+isset($v);     // results in FALSE
+$v1 = TRUE; $v2 = 12.3; $v3 = NULL;
+isset($v1, $v2, $v3);  // results in FALSE
+</code></pre>
+<h3><a class="header" href="#anonymous-function-creation" id="anonymous-function-creation">Anonymous Function Creation</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+anonymous-function-creation-expression:
+'static'? 'function' '&'? '(' parameter-declaration-list? ')' anonymous-function-use-clause? return-type? compound-statement
+
+anonymous-function-use-clause:
+  'use' '(' use-variable-name-list ')'
+
+use-variable-name-list:
+  '&'? variable-name
+  use-variable-name-list ',' '&'? variable-name
+-->
+<pre>
+<i id="grammar-anonymous-function-creation-expression">anonymous-function-creation-expression:</i>
+   static<sub>opt</sub>   function   &amp;<sub>opt</sub>   (   <i><a href="13-functions.html#grammar-parameter-declaration-list">parameter-declaration-list</a></i><sub>opt</sub>   )   <i><a href="#grammar-anonymous-function-use-clause">anonymous-function-use-clause</a></i><sub>opt</sub>   <i><a href="13-functions.html#grammar-return-type">return-type</a></i><sub>opt</sub>   <i><a href="11-statements.html#grammar-compound-statement">compound-statement</a></i>
+
+<i id="grammar-anonymous-function-use-clause">anonymous-function-use-clause:</i>
+   use   (   <i><a href="#grammar-use-variable-name-list">use-variable-name-list</a></i>   )
+
+<i id="grammar-use-variable-name-list">use-variable-name-list:</i>
+   &amp;<sub>opt</sub>   <i><a href="09-lexical-structure.html#grammar-variable-name">variable-name</a></i>
+   <i><a href="#grammar-use-variable-name-list">use-variable-name-list</a></i>   ,   &amp;<sub>opt</sub>   <i><a href="09-lexical-structure.html#grammar-variable-name">variable-name</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>This operator returns an object of type <a href="14-classes.html#class-closure"><code>Closure</code></a>, or a derived
+type thereof, that encapsulates the <a href="13-functions.html#anonymous-functions">anonymous function</a> defined
+within. An anonymous function is defined like, and behaves like, a <a href="13-functions.html#function-definitions">named
+function</a> except that the former has no name and has an optional
+<em>anonymous-function-use-clause</em>.</p>
+<p>An expression that designates an anonymous function is compatible with
+the pseudo-type <a href="13-functions.html#function-definitions"><code>callable</code></a>.</p>
+<p>The <em>use-variable-name-list</em> is a list of variables from the enclosing
+scope, which are to be made available by name to the body of the
+anonymous function. Each of these may be passed by value or byRef, as
+needed. The values used for these variables are those at the time the
+<code>Closure</code> object is created, not when it is used to call the function it
+encapsulates.</p>
+<p>An anonymous function defined inside an instance or static method has its
+<a href="14-classes.html#class-closure"><em>scope</em></a> set to the class it was defined in. Otherwise,
+an anonymous function is <a href="14-classes.html#class-closure"><em>unscoped</em></a>.</p>
+<p>An anonymous function defined inside an instance method is <a href="14-classes.html#class-closure"><em>bound</em></a>
+to the object on which that method is called, while an
+an anonymous function defined inside a static method, or prefixed with the
+optional <code>static</code> modifier is <a href="14-classes.html#class-closure"><em>static</em></a>, and otherwise
+an anonymous function is <a href="14-classes.html#class-closure"><em>unbound</em></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">function doit($value, callable $process)
+{
+  return $process($value);
+}
+$result = doit(5, function ($p) { return $p * 2; });  // doubles a value
+$result = doit(5, function ($p) { return $p * $p; }); // squares a value
+// -----------------------------------------
+class C
+{
+  public function compute(array $values)
+  {
+    $count = 0;
+    $callback1 = function () use (&amp;$count) // has C as its scope
+    {
+      ++$count;
+      //...
+    };
+    //...
+    $callback2 = function()   // also has C as its scope
+    {
+      //...
+    };
+    //...
+  }
+  //...
+}
+</code></pre>
+<h3><a class="header" href="#the-new-operator" id="the-new-operator">The <code>new</code> Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+object-creation-expression:
+  'new' class-type-designator '(' argument-expression-list? ')'
+  'new' class-type-designator '(' argument-expression-list ','? ')'
+  'new' class-type-designator
+  'new' 'class' '(' argument-expression-list? ')' class-base-clause? class-interface-clause? '{' class-member-declarations? '}'
+  'new' 'class' class-base-clause? class-interface-clause? '{' class-member-declarations? '}'
+
+class-type-designator:
+  qualified-name
+  new-variable
+
+new-variable:
+  simple-variable
+  new-variable '[' expression? ']'
+  new-variable '{' expression '}'
+  new-variable '->' member-name
+  qualified-name '::' simple-variable
+  relative-scope '::' simple-variable
+  new-variable '::' simple-variable
+-->
+<pre>
+<i id="grammar-object-creation-expression">object-creation-expression:</i>
+   new   <i><a href="#grammar-class-type-designator">class-type-designator</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i><sub>opt</sub>   )
+   new   <i><a href="#grammar-class-type-designator">class-type-designator</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i>   ,<sub>opt</sub>   )
+   new   <i><a href="#grammar-class-type-designator">class-type-designator</a></i>
+   new   class   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i><sub>opt</sub>   )   <i><a href="14-classes.html#grammar-class-base-clause">class-base-clause</a></i><sub>opt</sub>   <i><a href="14-classes.html#grammar-class-interface-clause">class-interface-clause</a></i><sub>opt</sub>   {   <i><a href="14-classes.html#grammar-class-member-declarations">class-member-declarations</a></i><sub>opt</sub>   }
+   new   class   <i><a href="14-classes.html#grammar-class-base-clause">class-base-clause</a></i><sub>opt</sub>   <i><a href="14-classes.html#grammar-class-interface-clause">class-interface-clause</a></i><sub>opt</sub>   {   <i><a href="14-classes.html#grammar-class-member-declarations">class-member-declarations</a></i><sub>opt</sub>   }
+
+<i id="grammar-class-type-designator">class-type-designator:</i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+   <i><a href="#grammar-new-variable">new-variable</a></i>
+
+<i id="grammar-new-variable">new-variable:</i>
+   <i><a href="#grammar-simple-variable">simple-variable</a></i>
+   <i><a href="#grammar-new-variable">new-variable</a></i>   [   <i><a href="#grammar-expression">expression</a></i><sub>opt</sub>   ]
+   <i><a href="#grammar-new-variable">new-variable</a></i>   {   <i><a href="#grammar-expression">expression</a></i>   }
+   <i><a href="#grammar-new-variable">new-variable</a></i>   -&gt;   <i><a href="#grammar-member-name">member-name</a></i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>   ::   <i><a href="#grammar-simple-variable">simple-variable</a></i>
+   <i><a href="#grammar-relative-scope">relative-scope</a></i>   ::   <i><a href="#grammar-simple-variable">simple-variable</a></i>
+   <i><a href="#grammar-new-variable">new-variable</a></i>   ::   <i><a href="#grammar-simple-variable">simple-variable</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p><em>qualified-name</em> must name a class.</p>
+<p><em>new-variable</em> must be a value of type <code>string</code> that contains the name of a class, or an object.</p>
+<p><em>class-type-designator</em> must not designate an <a href="14-classes.html#general">abstract class</a>.</p>
+<p>The number of arguments in <em>argument-expression-list</em> must be at least
+as many as the number of non-optional parameters defined for the class’s <a href="14-classes.html#constructors">constructor</a>.</p>
+<p><strong>Semantics</strong></p>
+<p>The <code>new</code> <em>class-type-designator</em> forms create an object of the class type specified by <em>class-type-designator</em>. The <code>new class</code> forms create an object of an <em>anonymous class type</em>, a type that has an unspecified name. In all other respects, however, an anonymous class has the same capabilities as a named class type.</p>
+<p>If the <em>class-type-designator</em> is a <em>new-variable</em> resulting in a string value,
+that string is used as the class name. If the expression results in an object,
+the class of the object is used as the class for the new object. The <em>new-variable</em>
+has the same semantics as a <em>variable</em>, but the grammar is restricted to exclude
+calls.</p>
+<p>The <em>qualified-name</em> is resolved according to the rules described in
+<a href="#scope-resolution-operator">scope resolution operator</a>, including
+support for <code>self</code>, <code>parent</code> and <code>static</code>.</p>
+<p>After the object has been created, each instance property is initialized
+with the values <a href="14-classes.html#properties">specified in property definition</a>,
+or the value <code>NULL</code> if no initializer value is provided.</p>
+<p>The object is then initialized by calling the class’s <a href="14-classes.html#constructors">constructor</a>
+passing it the optional <em>argument-expression-list</em>. If the class has no
+constructor, the constructor that class inherits (if any) is used. The class
+can also specify no constructor definition, in this case the constructor call is omitted.</p>
+<p>The result of a named-type <em>object-creation-expression</em> is an object of the type specified by <em>class-type-designator</em>. The result of an anonymous class <em>object-creation-expression</em> is an object of unspecified type. However, this type will subtype all types
+provided by <em>class-base-clause</em> and <em>class-interface-clause</em> and the <em>class-members</em> definition should follow the same inheritance and implementation rules as the regular <a href="14-classes.html#class-declarations">class declaration</a> does.</p>
+<p>Each distinct source code expression of the form <code>new class</code> results in the class type that is different from that of all other anonymous class types. However, multiple evaluations of the same source code expression of the form <code>new class</code> result in instances of the same class type.</p>
+<p>Because a constructor call is a function call, the relevant parts of
+<a href="#function-call-operator">function call operator</a> section also apply.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">class Point
+{
+  public function __construct($x = 0, $y = 0)
+  {
+    ...
+  }
+  ...
+}
+$p1 = new Point;     // create Point(0, 0)
+$p1 = new Point(12);   // create Point(12, 0)
+$cName = 'Point';
+$p1 = new $cName(-1, 1); // create Point(-1, 1)
+// -----------------------------------------
+$v2 = new class (100) extends C1 implements I1, I2 {
+	public function __construct($p) {
+	    echo &quot;Inside class &quot; . __CLASS__ . &quot; constructor with parameter $p\n&quot;;
+	}
+};
+</code></pre>
+<h3><a class="header" href="#array-creation-operator" id="array-creation-operator">Array Creation Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+array-creation-expression:
+  'array' '(' array-initializer? ')'
+  '[' array-initializer? ']'
+
+array-initializer:
+  array-initializer-list ','?
+
+array-initializer-list:
+  array-element-initializer
+  array-element-initializer ',' array-initializer-list
+
+array-element-initializer:
+  '&'? element-value
+  element-key '=>' '&'? element-value
+
+element-key:
+  expression
+
+element-value:
+  expression
+-->
+<pre>
+<i id="grammar-array-creation-expression">array-creation-expression:</i>
+   array   (   <i><a href="#grammar-array-initializer">array-initializer</a></i><sub>opt</sub>   )
+   [   <i><a href="#grammar-array-initializer">array-initializer</a></i><sub>opt</sub>   ]
+
+<i id="grammar-array-initializer">array-initializer:</i>
+   <i><a href="#grammar-array-initializer-list">array-initializer-list</a></i>   ,<sub>opt</sub>
+
+<i id="grammar-array-initializer-list">array-initializer-list:</i>
+   <i><a href="#grammar-array-element-initializer">array-element-initializer</a></i>
+   <i><a href="#grammar-array-element-initializer">array-element-initializer</a></i>   ,   <i><a href="#grammar-array-initializer-list">array-initializer-list</a></i>
+
+<i id="grammar-array-element-initializer">array-element-initializer:</i>
+   &amp;<sub>opt</sub>   <i><a href="#grammar-element-value">element-value</a></i>
+   <i><a href="#grammar-element-key">element-key</a></i>   =&gt;   &amp;<sub>opt</sub>   <i><a href="#grammar-element-value">element-value</a></i>
+
+<i id="grammar-element-key">element-key:</i>
+   <i><a href="#grammar-expression">expression</a></i>
+
+<i id="grammar-element-value">element-value:</i>
+   <i><a href="#grammar-expression">expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>If <em>array-element-initializer</em> contains &amp;, <em>expression</em> in <em>element-value</em>
+must designate a <a href="09-lexical-structure.html#names">variable</a>.</p>
+<p><strong>Semantics</strong></p>
+<p>If <em>array-initializer</em> is omitted, the array has zero elements. For
+convenience, an <em>array-initializer</em> may have a trailing comma; however,
+this comma is ignored. An <em>array-initializer-list</em> consists of a
+comma-separated list of one or more <em>array-element-initializer</em> items, each
+of which is used to provide an <em>element-value</em> and an optional
+<em>element-key</em>.</p>
+<p>If the type of <em>element-key</em> is neither <code>int</code> nor <code>string</code>, keys with <code>float</code>
+or <code>bool</code> values, or strings whose contents match exactly the pattern of
+<a href="09-lexical-structure.html#integer-literals"><em>decimal-literal</em></a>, are <a href="08-conversions.html#converting-to-integer-type">converted to integer</a>,
+and keys of all other types are <a href="08-conversions.html#converting-to-string-type">converted to string</a>.</p>
+<p>If <em>element-key</em> is omitted from an <em>array-element-initializer</em>, an
+element key of type <code>int</code> is associated with the corresponding
+<em>element-value</em>. The key associated is one more than the largest previously
+assigned non-negative <code>int</code> key for this array, regardless of whether that key was
+provided explicitly or by default. If the array has no non-negative <code>int</code> keys,
+the key <code>0</code> is used.
+If the largest previously assigned <code>int</code> key is the largest integer value that can be represented,
+the new element is not added.</p>
+<p>Once the element keys have been converted to <code>int</code> or <code>string</code>, and omitted
+element keys have each been associated by default, if two or more
+<em>array-element-initializer</em> elements in an <em>array-initializer</em> contain the same
+key, the lexically right-most one is the one whose <em>element-value</em> is used
+to initialize that element.</p>
+<p>The result of this operator is the newly created array value.</p>
+<p>If <em>array-element-initializer</em> contains &amp;, <em>element-value’s</em> value is
+stored using <a href="04-basic-concepts.html#assignment">byRef assignment</a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$v = [];      // array has 0 elements, i.e. empty array
+$v = array(TRUE);   // array has 1 element, the Boolean TRUE
+$v = [123, -56];  // array of two ints, with implicit int keys 0 and 1
+$v = [0 =&gt; 123, 1 =&gt; -56]; // array of two ints, with explicit int keys 0 and 1
+$i = 10;
+$v = [$i - 10 =&gt; 123, $i - 9 =&gt; -56]; // key can be a runtime expression
+$v = [NULL, 1 =&gt; FALSE, 123, 3 =&gt; 34e12, &quot;Hello&quot;];  // implicit &amp; explicit keys
+$i = 6; $j = 12;
+$v = [7 =&gt; 123, 3 =&gt; $i, 6 =&gt; ++$j];  // keys are in arbitrary order
+$v[4] = 99;   // extends array with a new element
+$v = [2 =&gt; 23, 1 =&gt; 10, 2 =&gt; 46, 1.9 =&gt; 6];
+     // array has 2, with keys 2 and 1, values 46 and 6, respectively
+$v = [&quot;red&quot; =&gt; 10, &quot;4&quot; =&gt; 3, 9.2 =&gt; 5, &quot;12.8&quot; =&gt; 111, NULL =&gt; 1];
+     // array has 5 elements, with keys “red”, 4, 9, “12.8”, and “”.
+$c = array(&quot;red&quot;, &quot;white&quot;, &quot;blue&quot;);
+$v = array(10, $c, NULL, array(FALSE, NULL, $c));
+$v = array(2 =&gt; TRUE, 0 =&gt; 123, 1 =&gt; 34.5, -1 =&gt; &quot;red&quot;);
+foreach($v as $e) { /* ... */ } // iterates over keys 2, 0, 1, -1
+for ($i = -1; $i &lt;= 2; ++$i) { echo $v[$i]; } // retrieves via keys -1, 0, 1, 2
+</code></pre>
+<h3><a class="header" href="#subscript-operator" id="subscript-operator">Subscript Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+subscript-expression:
+  dereferencable-expression '[' expression? ']'
+  dereferencable-expression '{' expression '}' "<b>[Deprecated form]</b>"
+-->
+<pre>
+<i id="grammar-subscript-expression">subscript-expression:</i>
+   <i><a href="#grammar-dereferencable-expression">dereferencable-expression</a></i>   [   <i><a href="#grammar-expression">expression</a></i><sub>opt</sub>   ]
+   <i><a href="#grammar-dereferencable-expression">dereferencable-expression</a></i>   {   <i><a href="#grammar-expression">expression</a></i>   }   &lt;b&gt;[Deprecated form]&lt;/b&gt;
+</pre>
+<p><strong>Constraints</strong></p>
+<p>If <em>dereferencable-expression</em> designates a string, <em>expression</em> must not
+designate a string.</p>
+<p><em>expression</em> can be omitted only if <em>subscript-expression</em> is used in a
+modifiable-lvalue context and <em>dereferencable-expression</em> does not designate a string.
+Exception from this is when <em>dereferencable-expression</em> is an empty string - then it is
+converted to an empty array.</p>
+<p>If <em>subscript-expression</em> is used in a non-lvalue context, the element
+being designated must exist.</p>
+<p><strong>Semantics</strong></p>
+<p>A <em>subscript-expression</em> designates a (possibly non-existent) element of
+an array or string. When <em>subscript-expression</em> designates an object of
+a type that implements <a href="15-interfaces.html#interface-arrayaccess"><code>ArrayAccess</code></a>, the minimal semantics are
+defined below; however, they can be augmented by that object’s methods
+<a href="15-interfaces.html#interface-arrayaccess"><code>offsetGet</code></a> and <a href="15-interfaces.html#interface-arrayaccess"><code>offsetSet</code></a>.</p>
+<p>The element key is designated by <em>expression</em>. If the type of <em>element-key</em> is neither <code>int</code> nor <code>string</code>, keys with <code>float</code>
+or <code>bool</code> values, or strings whose contents match exactly the pattern of
+<a href="09-lexical-structure.html#integer-literals"><em>decimal-literal</em></a>, are <a href="08-conversions.html#converting-to-integer-type">converted to integer</a>,
+and key values of all other types are <a href="08-conversions.html#converting-to-string-type">converted to string</a>.</p>
+<p>If both <em>dereferencable-expression</em> and <em>expression</em> designate strings,
+<em>expression</em> is treated as if it specified the <code>int</code> key zero instead
+and a non-fatal error is produces.</p>
+<p>A <em>subscript-expression</em> designates a modifiable lvalue if and only if
+<em>dereferencable-expression</em> designates a modifiable lvalue.</p>
+<p><strong>dereferencable-expression designates an array</strong></p>
+<p>If <em>expression</em> is present, if the designated element exists, the type
+and value of the result is the type and value of that element;
+otherwise, the result is <code>NULL</code>.</p>
+<p>If <em>expression</em> is omitted, a new element is inserted. Its key has type
+<code>int</code> and is one more than the highest, previously assigned <code>int</code> key for
+this array. If this is the first element with an <code>int</code> key, key <code>0</code> is used.
+If the largest previously assigned <code>int</code> key is the largest integer value that can be represented,
+the new element is not added.
+The result is the added new element, or <code>NULL</code> if the element was not added.</p>
+<ul>
+<li>If the usage context is as the left-hand side of a
+<a href="#simple-assignment"><em>simple-assignment-expression</em></a>, the value of the new
+element is the value of the right-hand side of that
+<em>simple-assignment-expression</em>.</li>
+<li>If the usage context is as the left-hand side of a
+<a href="#compound-assignment"><em>compound-assignment-expression</em></a>: the expression
+<code>e1 op= e2</code> is evaluated as <code>e1 = NULL op (e2)</code>.</li>
+<li>If the usage context is as the operand of a
+<a href="#postfix-increment-and-decrement-operators">postfix- or prefix-increment or decrement operator</a>, the value
+of the new element is considered to be <code>NULL</code>.</li>
+</ul>
+<p><strong>dereferencable-expression designates a string</strong></p>
+<p>The <em>expression</em> is converted to <code>int</code> and the result is the character of the
+string at the position corresponding to that integer. If the integer is negative,
+the position is counted backwards from the end of the string. If the position refers
+to a non-existing offset, the result is an empty string.</p>
+<p>If the operator is used as the left-hand side of a <a href="#simple-assignment"><em>simple-assignment-expression</em></a>,</p>
+<ul>
+<li>If the assigned string is empty, or in case of non-existing negative offset (absolute value larger than string length), a warning is raised and no assignment is performed.</li>
+<li>If the offset is larger than the current string length, the string is extended to a length equal to the offset value, using space (0x20) padding characters.</li>
+<li>The value being assigned is converted to string and the character in the specified offset is replaced by the first character of the string.</li>
+</ul>
+<p>The subscript operator can not be used on a string value in a byRef context or as the operand of the
+<a href="#postfix-increment-and-decrement-operators">postfix- or prefix-increment or decrement operators</a> or on the left
+side of <a href="#compound-assignment"><em>compound-assignment-expression</em></a>,
+doing so will result in a fatal error.</p>
+<p><strong>dereferencable-expression designates an object of a type that implements <code>ArrayAccess</code></strong></p>
+<p>If <em>expression</em> is present,</p>
+<ul>
+<li>If <em>subscript-expression</em> is used in a non-lvalue context, the
+object’s method <code>offsetGet</code> is called with an argument of
+<em>expression</em>. The return value of the <code>offsetGet</code> is the result.</li>
+<li>If the usage context is as the left-hand side of a
+<em>simple-assignment-expression</em>, the object’s method <code>offsetSet</code> is
+called with a first argument of <em>expression</em> and a second argument
+that is the value of the right-hand side of that
+<em>simple-assignment-expression</em>. The value of the right-hand side
+is the result.</li>
+<li>If the usage context is as the left-hand side of a
+<em>compound-assignment-expression</em>, the expression <code>e1[e] op= e2</code> is
+evaluated as <code>e1[e] = e1-&gt;offsetGet(e) op (e2)</code>, which is then
+processed according to the rules for simple assignment immediately
+above.</li>
+<li>If the usage context is as the operand of
+the <a href="#postfix-increment-and-decrement-operators">postfix- or prefix-increment or decrement operators</a>,
+the object’s method <code>offsetGet</code> is called with an argument of
+<em>expression</em>. However, this method has no way of knowing if an
+increment or decrement operator was used, or whether it was a prefix
+or postfix operator. In order for the value to be modified by the increment/decrement,
+<code>offsetGet</code> must return byRef.
+The result of the subscript operator value returned by <code>offsetGet</code>.</li>
+</ul>
+<p>If <em>expression</em> is omitted,</p>
+<ul>
+<li>If the usage context is as the left-hand side of a
+<em>simple-assignment-expression</em>, the object’s method
+<a href="15-interfaces.html#interface-arrayaccess"><code>offsetSet</code></a> is called with a first argument of <code>NULL</code> and a second
+argument that is the value of the right-hand side of that
+<em>simple-assignment-expression</em>. The type and value of the result is
+the type and value of the right-hand side of that
+<em>simple-assignment-expression</em>.</li>
+<li>If the usage context is as the left-hand side of a
+<em>compound-assignment-expression</em>: The expression <code>e1[] op= e2</code> is
+evaluated as <code>e1[] = e1-&gt;offsetGet(NULL) op (e2)</code>, which is then processed
+according to the rules for simple assignment immediately above.</li>
+<li>If the usage context is as the operand of
+the <a href="#postfix-increment-and-decrement-operators">postfix- or prefix-increment or decrement operators</a>,
+the object’s method <code>offsetGet</code> is called with an argument of <code>NULL</code>.
+However, this method has no way of knowing if an increment or
+decrement operator was used, or whether it was a prefix or postfix
+operator. In order for the value to be modified by the increment/decrement,
+<code>offsetGet</code> must return byRef.
+The result of the subscript operator value returned by <code>offsetGet</code>.</li>
+</ul>
+<p>Note: The brace (<code>{...}</code>) form of this operator has been deprecated.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$v = array(10, 20, 30);
+$v[1] = 1.234;    // change the value (and type) of element [1]
+$v[-10] = 19;   // insert a new element with int key -10
+$v[&quot;red&quot;] = TRUE; // insert a new element with string key &quot;red&quot;
+[[2,4,6,8], [5,10], [100,200,300]][0][2]  // designates element with value 6
+[&quot;black&quot;, &quot;white&quot;, &quot;yellow&quot;][1][2]  // designates substring &quot;i&quot; in &quot;white&quot;
+function f() { return [1000, 2000, 3000]; }
+f()[2];      // designates element with value 3000
+&quot;red&quot;[1.9];    // designates &quot;e&quot;
+&quot;red&quot;[-2];    // designates &quot;e&quot;
+&quot;red&quot;[0][0][0];    // designates &quot;r&quot;
+// -----------------------------------------
+class MyVector implements ArrayAccess { /* ... */ }
+$vect1 = new MyVector(array(10, 'A' =&gt; 2.3, &quot;up&quot;));
+$vect1[10] = 987; // calls Vector::offsetSet(10, 987)
+$vect1[] = &quot;xxx&quot;; // calls Vector::offsetSet(NULL, &quot;xxx&quot;)
+$x = $vect1[1];   // calls Vector::offsetGet(1)
+</code></pre>
+<h3><a class="header" href="#function-call-operator" id="function-call-operator">Function Call Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+function-call-expression:
+  qualified-name '(' argument-expression-list? ')'
+  qualified-name '(' argument-expression-list ',' ')'
+  callable-expression '(' argument-expression-list? ')'
+  callable-expression '(' argument-expression-list ',' ')'
+
+argument-expression-list:
+  argument-expression
+  argument-expression-list ',' argument-expression
+
+argument-expression:
+  variadic-unpacking
+  expression
+
+variadic-unpacking:
+  '...' expression
+-->
+<pre>
+<i id="grammar-function-call-expression">function-call-expression:</i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i><sub>opt</sub>   )
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i>   ,   )
+   <i><a href="#grammar-callable-expression">callable-expression</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i><sub>opt</sub>   )
+   <i><a href="#grammar-callable-expression">callable-expression</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i>   ,   )
+
+<i id="grammar-argument-expression-list">argument-expression-list:</i>
+   <i><a href="#grammar-argument-expression">argument-expression</a></i>
+   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i>   ,   <i><a href="#grammar-argument-expression">argument-expression</a></i>
+
+<i id="grammar-argument-expression">argument-expression:</i>
+   <i><a href="#grammar-variadic-unpacking">variadic-unpacking</a></i>
+   <i><a href="#grammar-expression">expression</a></i>
+
+<i id="grammar-variadic-unpacking">variadic-unpacking:</i>
+   ...   <i><a href="#grammar-expression">expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p><em>callable-expression</em> must designate a function, by being a value of type string
+that contains the function’s name, or by being an object of a type that implements
+<a href="14-classes.html#method-__invoke"><code>__invoke</code></a> method (including
+<a href="14-classes.html#class-closure"><code>Closure</code></a> objects).</p>
+<p>The number of arguments present in a function call must be at least as
+many as the number of non-optional parameters defined for that function.</p>
+<p>No calls can be made to a <a href="13-functions.html#general">conditionally defined function</a> until
+that function exists.</p>
+<p>Any argument that matches a parameter passed byRef should (but need not)
+designate an lvalue.</p>
+<p>If <em>variadic-unpacking</em> is used, the result of the expression must be an array or <a href="15-interfaces.html#interface-traversable"><code>Traversable</code></a>.
+If incompatible value is supplied, the argument is ignored and a non-fatal error is issued.</p>
+<p><strong>Semantics</strong></p>
+<p>An expression of the form <em>function-call-expression</em> is a <em>function
+call</em>. The expression designates the <em>called function</em>, and
+<em>argument-expression-list</em> specifies the arguments to be passed to that
+function. An argument can be any value. In a function call,
+<em>callable-expression</em> is evaluated first, followed by each
+<em>expression</em> in the order left-to-right. There is
+a <a href="#general">sequence point</a> after each argument is evaluated and right before the function is called.
+For details of the result of a function call see <a href="11-statements.html#the-return-statement"><code>return</code> statement</a>.
+The value of a function call is a modifiable lvalue only if the function returns a modifiable value byRef.</p>
+<p>When a function is called, the value of each argument passed to it is
+assigned to the corresponding parameter in that function’s definition,
+if such a parameter exists. The assignment of argument values to
+parameters is defined in terms of <a href="#simple-assignment">simple</a> or
+<a href="#byref-assignment">byRef assignment</a>, depending on how the parameter was declared.
+There may be more arguments than parameters, in which case, the library functions
+<a href="http://php.net/manual/function.func-num-args.php"><code>func_num_args</code></a>,
+<a href="http://php.net/manual/function.func-get-arg.php"><code>func_get_arg</code></a>
+and <a href="http://php.net/manual/function.func-get-args.php"><code>func_get_args</code></a>
+can be used to get access to the complete argument list that was
+passed. If the number of arguments present in a function call is fewer
+than the number of parameters defined for that function, any parameter
+not having a corresponding argument is considered undefined if it has no
+<a href="13-functions.html#function-definitions">default argument value</a>; otherwise, it is considered defined with
+that default argument value.</p>
+<p>If an undefined variable is passed using byRef, that variable becomes
+defined, with an initial value of <code>NULL</code>.</p>
+<p>Direct and indirect recursive function calls are permitted.</p>
+<p>If <em>callable-expression</em> is a string, this is
+a <a href="13-functions.html#variable-functions">variable function call</a>.</p>
+<p>If <em>variadic-unpacking</em> operation is used, the operand is considered to be a parameter list.
+The values contained in the operand are fetched one by one (in the same manner as <code>foreach</code> would do)
+and used for next arguments of for the call. The keys for in the iteration are ignored.</p>
+<p>Multiple unpacking operations can be used in the same function call, and unpacking and regular
+parameters can be mixed in any order.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">function square($v) { return $v * $v; }
+square(5);     // call square directly; it returns 25
+$funct = square;  // assigns the string &quot;square&quot; to $funct
+$funct(-2.3)    // call square indirectly; it returns 5.29
+strlen($lastName); // returns the # of bytes in the string
+// -----------------------------------------
+function f1() { ... }  function f2() { ... }  function f3() { ... }
+for ($i = 1; $i &lt;= 2; ++$i) { $f = 'f' . $i;  $f(); }
+// -----------------------------------------
+function f($p1, $p2, $p3, $p4, $p5) { ... }
+function g($p1, $p2, $p3, $p4, $p5) { ... }
+function h($p1, $p2, $p3, $p4, $p5) { ... }
+$funcTable = array(f, g, h);  // list of 3 function designators
+$i = 1;
+$funcTable[$i++]($i, ++$i, $i, $i = 12, --$i); // calls g(2,3,3,12,11)
+// -----------------------------------------
+function f4($p1, $p2 = 1.23, $p3 = &quot;abc&quot;) { ... }
+f4(); // inside f4, $p1 is undefined, $p2 is 1.23, $p3 is &quot;abc&quot;
+// -----------------------------------------
+function f(&amp;$p) { ... }
+$a = array(10, 20, 30);
+f($a[5]); // non-existent element going in, but element exists afterwards
+// -----------------------------------------
+function factorial($int)  // contains a recursive call
+{
+  return ($int &gt; 1) ? $int * factorial($int - 1) : $int;
+}
+// -----------------------------------------
+$anon = function () { ... };  // store a Closure in $anon
+$anon();  // call the anonymous function encapsulated by that object
+</code></pre>
+<h3><a class="header" href="#member-access-operator" id="member-access-operator">Member Access Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+member-access-expression:
+  dereferencable-expression '->' member-name
+
+member-name:
+  name
+  simple-variable
+  '{' expression '}'
+-->
+<pre>
+<i id="grammar-member-access-expression">member-access-expression:</i>
+   <i><a href="#grammar-dereferencable-expression">dereferencable-expression</a></i>   -&gt;   <i><a href="#grammar-member-name">member-name</a></i>
+
+<i id="grammar-member-name">member-name:</i>
+   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>
+   <i><a href="#grammar-simple-variable">simple-variable</a></i>
+   {   <i><a href="#grammar-expression">expression</a></i>   }
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The <em>dereferencable-expression</em> must designate an object or be <code>NULL</code>, <code>FALSE</code>,
+or an empty string.</p>
+<p><em>expression</em> must be a value of type <code>string</code> (but not a string literal)
+that contains the name of an instance property (<strong>without</strong> the
+leading <code>$</code>) or an instance or static method of that instance’s class
+type.</p>
+<p><strong>Semantics</strong></p>
+<p>A <em>member-access-expression</em> designates an instance property of the object
+designated by <em>dereferencable-expression</em> with the name given by the string
+representation of <em>member-name</em>. The value is that of the property, and is a
+modifiable lvalue if <em>dereferencable-expression</em> is a modifiable lvalue.</p>
+<p>When the <code>-&gt;</code> operator is used in a modifiable lvalue context and <em>member-name</em>
+designate a property that is not visible, the property is treated as a
+<a href="14-classes.html#dynamic-members">dynamic property</a>. If <em>dereferencable-expression</em>‘s class
+type defines a <a href="14-classes.html#method-__set"><code>__set</code> method</a>, it is called to store the
+property’s value. When the <code>-&gt;</code> operator is used in a non-lvalue context
+and <em>member-name</em> designate a property that is not visible, the property
+is treated as a dynamic property. If <em>dereferencable-expression</em>‘s
+class type defines a <a href="14-classes.html#method-__get"><code>__get</code> method</a>,
+it is called to retrieve the property’s value.</p>
+<p>If <em>dereferencable-expression</em> is <code>NULL</code>, <code>FALSE</code>, or an empty string, an expression
+of the form <code>$p-&gt;x = 10</code> causes an instance of <a href="14-classes.html#class-stdclass"><code>stdClass</code></a>
+to be created with a dynamic property <code>x</code> having a value of 10. <code>$p</code> is then made
+to refer to this instance.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">class Point
+{
+  private $x;
+  private $y;
+  public function move($x, $y)
+  {
+    $this-&gt;x = $x;  // sets private property $x
+    $this-&gt;y = $y;  // sets private property $x
+  }
+  public function __toString()
+  {
+    return '(' . $this-&gt;x . ',' . $this-&gt;y . ')';
+  }
+  // get private properties $x and $y
+  public function __set($name, $value) { ... }
+  public function __get($name) { ... }
+}
+$p1 = new Point;
+$p1-&gt;move(3, 9);  // calls public instance method move by name
+$n = &quot;move&quot;;
+$p1-&gt;$n(-2, 4);   // calls public instance method move by variable
+$p1-&gt;color = &quot;red&quot;; // turned into $p1-&gt;__set(&quot;color&quot;, &quot;red&quot;);
+$c = $p1-&gt;color;  // turned into $c = $p1-&gt;__get(&quot;color&quot;);
+</code></pre>
+<h3><a class="header" href="#member-call-operator" id="member-call-operator">Member Call Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+member-call-expression:
+  dereferencable-expression '->' member-name '(' argument-expression-list? ')'
+  dereferencable-expression '->' member-name '(' argument-expression-list ',' ')'
+-->
+<pre>
+<i id="grammar-member-call-expression">member-call-expression:</i>
+   <i><a href="#grammar-dereferencable-expression">dereferencable-expression</a></i>   -&gt;   <i><a href="#grammar-member-name">member-name</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i><sub>opt</sub>   )
+   <i><a href="#grammar-dereferencable-expression">dereferencable-expression</a></i>   -&gt;   <i><a href="#grammar-member-name">member-name</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i>   ,   )
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The <em>dereferencable-expression</em> must designate an object.</p>
+<p>Additionally the general <a href="#function-call-operator">function call constraints</a>
+apply.</p>
+<p><strong>Semantics</strong></p>
+<p>A <em>member-call-expression</em> calls an instance or static method of the
+object designated by <em>dereferencable-expression</em>, with the method
+name given by the string representation of <em>member-name</em> and the
+arguments given by <em>argument-expression-list</em>. The value of
+<em>dereferencable-expression</em> is used as the value of <code>$this</code> in the
+invoked method.</p>
+<p>The general <a href="#function-call-operator">function call semantics</a> apply.</p>
+<p>If the called method does not exist or is not visible from the current
+scope an exception is thrown, unless a <a href="14-classes.html#method-__call"><code>__call</code> method</a>
+exists, in which case it will be called instead.</p>
+<p><strong>Examples</strong></p>
+<p>See <a href="#member-access-operator">member access examples</a>.</p>
+<h3><a class="header" href="#postfix-increment-and-decrement-operators" id="postfix-increment-and-decrement-operators">Postfix Increment and Decrement Operators</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+postfix-increment-expression:
+  variable '++'
+
+postfix-decrement-expression:
+  variable '--'
+-->
+<pre>
+<i id="grammar-postfix-increment-expression">postfix-increment-expression:</i>
+   <i><a href="#grammar-variable">variable</a></i>   ++
+
+<i id="grammar-postfix-decrement-expression">postfix-decrement-expression:</i>
+   <i><a href="#grammar-variable">variable</a></i>   --
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The operand of the postfix ++ and -- operators must be a modifiable
+lvalue that has scalar-compatible type.</p>
+<p><strong>Semantics</strong></p>
+<p>These operators behave like their <a href="#prefix-increment-and-decrement-operators">prefix counterparts</a> except
+that the value of a postfix ++ or -- expression is the value before any
+increment or decrement takes place.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$i = 10; $j = $i-- + 100;   // old value of $i (10) is added to 100
+$a = array(100, 200); $v = $a[1]++; // old value of $ia[1] (200) is assigned
+</code></pre>
+<h3><a class="header" href="#prefix-increment-and-decrement-operators" id="prefix-increment-and-decrement-operators">Prefix Increment and Decrement Operators</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+prefix-increment-expression:
+  '++' variable
+
+prefix-decrement-expression:
+  '--' variable
+-->
+<pre>
+<i id="grammar-prefix-increment-expression">prefix-increment-expression:</i>
+   ++   <i><a href="#grammar-variable">variable</a></i>
+
+<i id="grammar-prefix-decrement-expression">prefix-decrement-expression:</i>
+   --   <i><a href="#grammar-variable">variable</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The operand of the prefix <code>++</code> or <code>--</code> operator must be a modifiable lvalue
+that has scalar-compatible type.</p>
+<p><strong>Semantics</strong></p>
+<p><em>Arithmetic Operands</em></p>
+<p>For a prefix <code>++</code> operator used with an arithmetic operand, the <a href="#general">side
+effect</a> of the operator is to increment the value of the operand by 1.
+The result is the value of the operand after it
+has been incremented. If an <code>int</code> operand’s value is the largest
+representable for that type, the operand is incremented as if it were <code>float</code>.</p>
+<p>For a prefix <code>--</code> operator used with an arithmetic operand, the side
+effect of the operator is to decrement the value of the operand by 1.
+The result is the value of the operand after it has been
+decremented. If an <code>int</code> operand’s value is the smallest representable for
+that type, the operand is decremented as if it were <code>float</code>.</p>
+<p>For a prefix <code>++</code> or <code>--</code> operator used with an operand having the value
+<code>INF</code>, <code>-INF</code>, or <code>NAN</code>, there is no side effect, and the result is the
+operand’s value.</p>
+<p><em>Boolean Operands</em></p>
+<p>For a prefix <code>++</code> or <code>--</code> operator used with a Boolean-valued operand, there
+is no side effect, and the result is the operand’s value.</p>
+<p><em>NULL-valued Operands</em></p>
+<p>For a prefix -- operator used with a <code>NULL</code>-valued operand, there is no
+side effect, and the result is the operand’s value. For a prefix <code>++</code>
+operator used with a <code>NULL</code>-valued operand, the side effect is that the
+operand’s type is changed to int, the operand’s value is set to zero,
+and that value is incremented by 1. The result is the value of the
+operand after it has been incremented.</p>
+<p><em>String Operands</em></p>
+<p>For a prefix <code>--</code> operator used with an operand whose value is an empty
+string, the side effect is that the operand’s type is changed to <code>int</code>,
+the operand’s value is set to zero, and that value is decremented by 1.
+The result is the value of the operand after it has been incremented.</p>
+<p>For a prefix <code>++</code> operator used with an operand whose value is an empty
+string, the side effect is that the operand’s value is changed to the
+string “1”. The type of the operand is unchanged. The result is the new
+value of the operand.</p>
+<p>For a prefix <code>--</code> or <code>++</code> operator used with a numeric string, the numeric
+string is treated as the corresponding <code>int</code> or <code>float</code> value.</p>
+<p>For a prefix <code>--</code> operator used with a non-numeric string-valued operand,
+there is no side effect, and the result is the operand’s value.</p>
+<p>For a non-numeric string-valued operand that contains only alphanumeric
+characters, for a prefix <code>++</code> operator, the operand is considered to be a
+representation of a base-36 number (i.e., with digits 0–9 followed by A–Z or a–z) in
+which letter case is ignored for value purposes. The right-most digit is
+incremented by 1. For the digits 0–8, that means going to 1–9. For the
+letters “A”–”Y” (or “a”–”y”), that means going to “B”–”Z” (or “b”–”z”).
+For the digit 9, the digit becomes 0, and the carry is added to the next
+left-most digit, and so on. For the digit “Z” (or “z”), the resulting
+string has an extra digit “A” (or “a”) appended. For example, when
+incrementing, “a” -&gt; “b”, “Z” -&gt; “AA”, “AA” -&gt; “AB”, “F29” -&gt; “F30”, “FZ9” -&gt; “GA0”, and “ZZ9” -&gt; “AAA0”. A digit position containing a number wraps
+modulo-10, while a digit position containing a letter wraps modulo-26.</p>
+<p>For a non-numeric string-valued operand that contains any
+non-alphanumeric characters, for a prefix <code>++</code> operator, all characters up
+to and including the right-most non-alphanumeric character is passed
+through to the resulting string, unchanged. Characters to the right of
+that right-most non-alphanumeric character are treated like a
+non-numeric string-valued operand that contains only alphanumeric
+characters, except that the resulting string will not be extended.
+Instead, a digit position containing a number wraps modulo-10, while a
+digit position containing a letter wraps modulo-26.</p>
+<p><em>Object Operands</em></p>
+<p>If the operand has an object type supporting the operation,
+then the object semantics defines the result. Otherwise, the operation has
+no effect and the result is the operand.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$i = 10; $j = --$i + 100;   // new value of $i (9) is added to 100
+$a = array(100, 200); $v = ++$a[1]; // new value of $a[1] (201) is assigned
+$a = &quot;^^Z&quot;; ++$a; // $a is now &quot;^^A&quot;
+$a = &quot;^^Z^^&quot;; ++$a; // $a is now &quot;^^Z^^&quot;
+</code></pre>
+<h3><a class="header" href="#shell-command-operator" id="shell-command-operator">Shell Command Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+shell-command-expression:
+  '`' dq-char-sequence? '`'
+-->
+<pre>
+<i id="grammar-shell-command-expression">shell-command-expression:</i>
+   `   <i><a href="09-lexical-structure.html#grammar-dq-char-sequence">dq-char-sequence</a></i><sub>opt</sub>   `
+</pre>
+<p>where ` is the GRAVE ACCENT character 0x60, commonly referred to as a
+<em>backtick</em>.</p>
+<p><strong>Semantics</strong></p>
+<p>This operator passes <em>dq-char-sequence</em> to the command shell for
+execution, as though it was being passed to the library function
+<a href="http://www.php.net/shell_exec"><code>shell_exec</code></a>. If the output from execution of that command is
+written to <a href="06-constants.html#core-predefined-constants"><code>STDOUT</code></a>, that output is the result of this operator
+as a string. If the output is redirected away from <code>STDOUT</code>, or
+<em>dq-char-sequence</em> is empty or contains only white space, the result of
+the operator is <code>NULL</code>.</p>
+<p>If <a href="http://php.net/manual/function.shell-exec.php"><code>shell_exec</code></a> is disabled, this operator is disabled.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$result = `ls`;           // result is the output of command ls
+$result = `ls &gt;dirlist.txt`;  // result is NULL
+$d = &quot;dir&quot;; $f = &quot;*.*&quot;;
+$result = `$d {$f}`;      // result is the output of command dir *.*
+</code></pre>
+<h3><a class="header" href="#scope-resolution-operator" id="scope-resolution-operator">Scope-Resolution Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+scoped-property-access-expression:
+  scope-resolution-qualifier '::' simple-variable
+
+scoped-call-expression:
+  scope-resolution-qualifier '::' member-name '(' argument-expression-list? ')'
+  scope-resolution-qualifier '::' member-name '(' argument-expression-list ',' ')'
+
+class-constant-access-expression:
+  scope-resolution-qualifier '::' name
+
+scope-resolution-qualifier:
+  relative-scope
+  qualified-name
+  dereferencable-expression
+
+relative-scope:
+  'self'
+  'parent'
+  'static'
+-->
+<pre>
+<i id="grammar-scoped-property-access-expression">scoped-property-access-expression:</i>
+   <i><a href="#grammar-scope-resolution-qualifier">scope-resolution-qualifier</a></i>   ::   <i><a href="#grammar-simple-variable">simple-variable</a></i>
+
+<i id="grammar-scoped-call-expression">scoped-call-expression:</i>
+   <i><a href="#grammar-scope-resolution-qualifier">scope-resolution-qualifier</a></i>   ::   <i><a href="#grammar-member-name">member-name</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i><sub>opt</sub>   )
+   <i><a href="#grammar-scope-resolution-qualifier">scope-resolution-qualifier</a></i>   ::   <i><a href="#grammar-member-name">member-name</a></i>   (   <i><a href="#grammar-argument-expression-list">argument-expression-list</a></i>   ,   )
+
+<i id="grammar-class-constant-access-expression">class-constant-access-expression:</i>
+   <i><a href="#grammar-scope-resolution-qualifier">scope-resolution-qualifier</a></i>   ::   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>
+
+<i id="grammar-scope-resolution-qualifier">scope-resolution-qualifier:</i>
+   <i><a href="#grammar-relative-scope">relative-scope</a></i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+   <i><a href="#grammar-dereferencable-expression">dereferencable-expression</a></i>
+
+<i id="grammar-relative-scope">relative-scope:</i>
+   self
+   parent
+   static
+</pre>
+<p><strong>Constraints</strong></p>
+<p><em>qualified-name</em> must be the name of a class or interface type.</p>
+<p><em>dereferencable-expression</em> must be a value of type string, which contains the name
+of a class or interface type, or an object.</p>
+<p><strong>Semantics</strong></p>
+<p>From inside or outside a class or interface, operator <code>::</code> allows the
+selection of a constant. From inside or outside a class, this operator
+allows the selection of a static property, static method, or instance
+method. From within a class, it also allows the selection of an
+overridden property or method.</p>
+<p>If the <em>scoped-property-access-expression</em> form is used, this operator
+is accessing a static property given by <em>simple-variable</em> and can be
+used as an lvalue.</p>
+<p>If the <em>class-constant-access-expression</em> form is used, this operator is
+is accessing a class constant given by <em>name</em>. This form can not be used
+as an lvalue.</p>
+<p>If the <em>scoped-call-expression</em> form is used, the operator is calling the
+method given by <em>member-anem</em>, which, outside of the object context,
+is treated as static method call.</p>
+<p>Inside of the object context when <code>$this</code> is defined and the called method is not <code>static</code> and
+the called class is the same as a parent of the class of <code>$this</code>, then the method call is
+non-static with the same <code>$this</code>. Otherwise it is a static method call.</p>
+<p><em>relative-scope</em> designates the class with relation to the current class scope.
+From within a class, <code>self</code> refers to the same class, <code>parent</code> refers to the
+class the current class extends from. From within a method, <code>static</code> refers
+to the class corresponds to the class inheritance context in which the method is called.
+This allows <em>late static binding</em>, when class resolution depends on the dynamic
+call context.</p>
+<pre><code class="language-PHP">class Base
+{
+  public function b()
+  {
+    static::f();  // calls the most appropriate f()
+  }
+  public function f() { ... }
+}
+class Derived extends Base
+{
+  public function f() { ... }
+}
+$b1 = new Base;
+$b1-&gt;b(); // as $b1 is an instance of Base, Base::b() calls Base::f()
+$d1 = new Derived;
+$d1-&gt;b(); // as $d1 is an instance of Derived, Base::b() calls Derived::f()
+</code></pre>
+<p>The value of the form of <em>scope-resolution-expression</em> ending in <code>::class</code>
+is a string containing the fully qualified name of the current class,
+which for a <code>static</code> qualifier, means the current class context.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">final class MathLibrary
+{
+  public static function sin() { ... }
+  ...
+}
+$v = MathLibrary::sin(2.34);  // call directly by class name
+$clName = 'MathLibrary';
+$v = $clName::sin(2.34);    // call indirectly via string
+// -----------------------------------------
+class MyRangeException extends Exception
+{
+  public function __construct($message, ...)
+  {
+    parent::__construct($message);
+    ...
+  }
+  ...
+}
+// -----------------------------------------
+class Point
+{
+  private static $pointCount = 0;
+  public static function getPointCount()
+  {
+    return self::$pointCount;
+  }
+  ...
+}
+</code></pre>
+<h2><a class="header" href="#the-clone-operator" id="the-clone-operator">The <code>clone</code> Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+clone-expression:
+  primary-expression
+  'clone' primary-expression
+-->
+<pre>
+<i id="grammar-clone-expression">clone-expression:</i>
+   <i><a href="#grammar-primary-expression">primary-expression</a></i>
+   clone   <i><a href="#grammar-primary-expression">primary-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p><em>primary-expression</em> must designate an object.</p>
+<p><strong>Semantics</strong></p>
+<p>The <code>clone</code> operator creates a new object that is a shallow copy of the object designated
+by <em>primary-expression</em>.
+Then, if the class type of <em>primary-expression</em> has a method called
+<a href="14-classes.html#method-__clone"><code>__clone</code></a>, it is called to perform a deep copy.
+The result is the new object.</p>
+<p><strong>Examples</strong></p>
+<p>Consider a class <code>Employee</code>, from which is derived a class <code>Manager</code>. Let us
+assume that both classes contain properties that are objects. <code>clone</code> is
+used to make a copy of a <code>Manager</code> object, and behind the scenes, the
+<code>Manager</code> object uses clone to copy the properties for the base class,
+<code>Employee</code>.</p>
+<pre><code class="language-PHP">class Employee
+{
+  //...
+  public function __clone()
+  {
+    // make a deep copy of Employee object
+  }
+}
+class Manager extends Employee
+{
+  //...
+  public function __clone()
+  {
+    $v = parent::__clone();
+    // make a deep copy of Manager object
+
+  }
+}
+$obj1 = new Manager(&quot;Smith&quot;, 23);
+$obj2 = clone $obj1;  // creates a new Manager that is a deep copy
+</code></pre>
+<h2><a class="header" href="#exponentiation-operator" id="exponentiation-operator">Exponentiation Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+exponentiation-expression:
+  clone-expression
+  clone-expression '**' exponentiation-expression
+-->
+<pre>
+<i id="grammar-exponentiation-expression">exponentiation-expression:</i>
+   <i><a href="#grammar-clone-expression">clone-expression</a></i>
+   <i><a href="#grammar-clone-expression">clone-expression</a></i>   **   <i><a href="#grammar-exponentiation-expression">exponentiation-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>The <code>**</code> operator produces the result of raising the value of the
+left-hand operand to the power of the right-hand one.</p>
+<p>If either of the operands have an object type supporting <code>**</code> operation,
+then the object semantics defines the result. The left operand is checked first.</p>
+<p>If either or both operands have non-numeric types, their values are converted
+to type <code>int</code> or <code>float</code>, as appropriate. If both operands have non-negative
+integer values and the result can be represented as an <code>int</code>, the result has
+type <code>int</code>; otherwise, the result has type <code>float</code>.  If either or both operands
+were leading-numeric or non-numeric strings, a non-fatal error must be produced
+for each.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">2**3;   // int with value 8
+2**3.0;   // float with value 8.0
+&quot;2.0&quot;**&quot;3&quot;; // float with value 8.0
+</code></pre>
+<h2><a class="header" href="#unary-operators" id="unary-operators">Unary Operators</a></h2>
+<h3><a class="header" href="#general-3" id="general-3">General</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+unary-expression:
+  exponentiation-expression
+  unary-op-expression
+  error-control-expression
+  cast-expression
+-->
+<pre>
+<i id="grammar-unary-expression">unary-expression:</i>
+   <i><a href="#grammar-exponentiation-expression">exponentiation-expression</a></i>
+   <i><a href="#grammar-unary-op-expression">unary-op-expression</a></i>
+   <i><a href="#grammar-error-control-expression">error-control-expression</a></i>
+   <i><a href="#grammar-cast-expression">cast-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>These operators associate right-to-left.</p>
+<h3><a class="header" href="#unary-arithmetic-operators" id="unary-arithmetic-operators">Unary Arithmetic Operators</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+unary-op-expression:
+  unary-operator unary-expression
+
+unary-operator: one of
+  '+' '-' '~'
+-->
+<pre>
+<i id="grammar-unary-op-expression">unary-op-expression:</i>
+   <i><a href="#grammar-unary-operator">unary-operator</a></i>   <i><a href="#grammar-unary-expression">unary-expression</a></i>
+
+<i id="grammar-unary-operator">unary-operator: one of</i>
+   +   -   ~
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The operand of the unary <code>+</code> and unary <code>-</code> must have scalar-compatible type.</p>
+<p>The operand of the unary <code>~</code> operator must have arithmetic or string type, or be
+an object supporting <code>~</code>.</p>
+<p><strong>Semantics</strong></p>
+<p><em>Arithmetic Operands</em></p>
+<p>For a unary <code>+</code> operator used with an arithmetic operand, the type and
+value of the result is the type and value of the operand.</p>
+<p>For a unary <code>-</code> operator used with an arithmetic operand, the value of the
+result is the negated value of the operand. However, if an int operand’s
+original value is the <a href="05-types.html#the-integer-type">smallest representable for that type</a>, the operand is
+treated as if it were <code>float</code> and the result will be <code>float</code>.</p>
+<p>For a unary <code>~</code> operator used with an <code>int</code> operand, the type of the result
+is <code>int</code>. The value of the result is the bitwise complement of the value
+of the operand (that is, each bit in the result is set if and only if
+the corresponding bit in the operand is clear). For a unary <code>~</code> operator
+used with a <code>float</code> operand, the value of the operand is first converted
+to <code>int</code> before the bitwise complement is computed.</p>
+<p><em>Boolean Operands</em></p>
+<p>For a unary <code>+</code> operator used with a <code>TRUE</code>-valued operand, the value of the
+result is 1 and the type is <code>int</code>. When used with a <code>FALSE</code>-valued operand,
+the value of the result is zero and the type is <code>int</code>.</p>
+<p>For a unary <code>-</code> operator used with a <code>TRUE</code>-valued operand, the value of the
+result is -1 and the type is <code>int</code>. When used with a <code>FALSE</code>-valued operand,
+the value of the result is zero and the type is <code>int</code>.</p>
+<p><em>NULL-valued Operands</em></p>
+<p>For a unary <code>+</code> or unary <code>-</code> operator used with a <code>NULL</code>-valued operand, the
+value of the result is zero and the type is <code>int</code>.</p>
+<p><em>String Operands</em></p>
+<p>For a unary <code>+</code> or <code>-</code> operator used with a numeric string or a
+leading-numeric string, the string is first converted to an <code>int</code> or
+<code>float</code>, as appropriate, after which it is handled as an arithmetic
+operand. The trailing non-numeric characters in leading-numeric strings
+are ignored. With a non-numeric string, the result has type <code>int</code> and
+value 0. If the string was leading-numeric or non-numeric, a non-fatal error
+MUST be produced.</p>
+<p>For a unary <code>~</code> operator used with a string, the result is the string with each byte
+being bitwise complement of the corresponding byte of the source string.</p>
+<p><em>Object Operands</em></p>
+<p>If the operand has an object type supporting the operation,
+then the object semantics defines the result. Otherwise, for <code>~</code> the fatal error is issued
+and for <code>+</code> and <code>-</code> the object is <a href="08-conversions.html#converting-to-integer-type">converted to <code>int</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$v = +10;
+if ($v1 &gt; -5) // ...
+$v = ~0b1010101;
+$s = &quot;\x86\x97&quot;; $s = ~$s; // $s is &quot;yh&quot;
+</code></pre>
+<h3><a class="header" href="#error-control-operator" id="error-control-operator">Error Control Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+error-control-expression:
+  '@' unary-expression
+-->
+<pre>
+<i id="grammar-error-control-expression">error-control-expression:</i>
+   @   <i><a href="#grammar-unary-expression">unary-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Operator <code>@</code> suppresses the reporting of any error messages generated by the evaluation of
+<em>unary-expression</em>.</p>
+<p>If a custom error-handler has been established using the library
+function <a href="http://php.net/manual/function.set-error-handler.php"><code>set_error_handler</code></a>, that handler is
+still called.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$infile = @fopen(&quot;NoSuchFile.txt&quot;, 'r');
+</code></pre>
+<p>On open failure, the value returned by <code>fopen</code> is <code>FALSE</code>, which is
+sufficient to know to handle the error. The error message that may have been generated
+by the <code>fopen</code> call is suppressed (not displayed and not logged).</p>
+<p><strong>Implementation Notes</strong></p>
+<p>Given the following example:</p>
+<pre><code class="language-PHP">function f() {
+  $ret = $y;
+  return $ret;
+}
+
+$x = @f();  // without @, get &quot;Undefined variable: y&quot;
+</code></pre>
+<p>The following code shows how this statement is handled:</p>
+<pre><code class="language-PHP">$origER = error_reporting();
+error_reporting(0);
+$tmp = f();
+$curER = error_reporting();
+if ($curER === 0) error_reporting($origER);
+$x = $tmp;
+</code></pre>
+<h3><a class="header" href="#cast-operator" id="cast-operator">Cast Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+cast-expression:
+  '(' cast-type ')' unary-expression
+
+cast-type: one of
+  'array' 'binary' 'bool' 'boolean' 'double' 'int' 'integer' 'float' 'object'
+  'real' 'string' 'unset'
+-->
+<pre>
+<i id="grammar-cast-expression">cast-expression:</i>
+   (   <i><a href="#grammar-cast-type">cast-type</a></i>   )   <i><a href="#grammar-unary-expression">unary-expression</a></i>
+
+<i id="grammar-cast-type">cast-type: one of</i>
+   array   binary   bool   boolean   double   int   integer   float   object
+   real   string   unset
+</pre>
+<p><strong>Constaints</strong></p>
+<p>A <em>cast-type</em> of <code>unset</code> is no longer supported and results in a compile-time error.</p>
+<p><strong>Semantics</strong></p>
+<p>With the exception of the <em>cast-type</em> unset and binary (see below), the
+value of the operand <em>cast-expression</em> is converted to the type
+specified by <em>cast-type</em>, and that is the type and value of the result.
+This construct is referred to as a <em>cast</em> and is used as the verb, “to
+cast”. If no conversion is involved, the type and value of the result
+are the same as those of <em>cast-expression</em>.</p>
+<p>A cast can result in a loss of information.</p>
+<p>A <em>cast-type</em> of <code>array</code> results in a <a href="08-conversions.html#converting-to-array-type">conversion to type array</a>.</p>
+<p>A <em>cast-type</em> of <code>binary</code> is reserved for future use in dealing with
+so-called <em>binary strings</em>. For now, it is fully equivalent to <code>string</code> cast.</p>
+<p>A <em>cast-type</em> of <code>bool</code> or <code>boolean</code> results in a <a href="08-conversions.html#converting-to-boolean-type">conversion to type <code>bool</code></a>.</p>
+<p>A <em>cast-type</em> of <code>int</code> or <code>integer</code> results in a <a href="08-conversions.html#converting-to-integer-type">conversion to type <code>int</code></a>.</p>
+<p>A <em>cast-type</em> of <code>float</code>, <code>double</code>, or <code>real</code> results in a <a href="08-conversions.html#converting-to-floating-point-type">conversion to type <code>float</code></a>.</p>
+<p>A <em>cast-type</em> of <code>object</code> results in a <a href="08-conversions.html#converting-to-object-type">conversion to type <code>object</code></a>.</p>
+<p>A <em>cast-type</em> of <code>string</code> results in a <a href="08-conversions.html#converting-to-string-type">conversion to type <code>string</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">(int)(10/3)          // results in the int 3 rather than the float 3.333...
+(array)(16.5)      // results in an array of 1 float; [0] = 16.5
+(int)(float)&quot;123.87E3&quot; // results in the int 123870
+</code></pre>
+<h2><a class="header" href="#instanceof-operator" id="instanceof-operator"><code>instanceof</code> Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+instanceof-expression:
+  unary-expression
+  instanceof-subject 'instanceof' class-type-designator
+
+instanceof-subject:
+  instanceof-expression
+-->
+<pre>
+<i id="grammar-instanceof-expression">instanceof-expression:</i>
+   <i><a href="#grammar-unary-expression">unary-expression</a></i>
+   <i><a href="#grammar-instanceof-subject">instanceof-subject</a></i>   instanceof   <i><a href="#grammar-class-type-designator">class-type-designator</a></i>
+
+<i id="grammar-instanceof-subject">instanceof-subject:</i>
+   <i><a href="#grammar-instanceof-expression">instanceof-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Operator <code>instanceof</code> returns <code>TRUE</code> if the value designated by
+<em>instanceof-subject</em> is an object having the type specified
+by <em>class-type-designator</em>, is an object whose type is derived from that type,
+or is an object whose type implements the interface specified by <em>class-type-designator</em>.
+Otherwise, it returns <code>FALSE</code>.</p>
+<p>The type can be specified by <em>class-type-designator</em> in one of the three forms:</p>
+<ol>
+<li><em>qualified-name</em> specifies the type name directly.</li>
+<li>When the <em>new-variable</em> form is used, <em>new-variable</em> may have a string value that contains a class or interface name.</li>
+<li>Alternatively, <em>new-variable</em> can designate an object, in which case the type of the object is used as the specified type.
+Note that an interface can not be specified with this form.</li>
+</ol>
+<p>Note that <code>instanceof</code> will not invoke autoloader if the name of the type given does not
+correspond to the existing class or interface, instead it will return <code>FALSE</code>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">class C1 {  }
+$c1 = new C1;
+class C2 {  }
+$c2 = new C2;
+class D extends C1 { };
+$d = new D;
+var_dump($d instanceof C1);      // TRUE
+var_dump($d instanceof C2);      // FALSE
+var_dump($d instanceof D);       // TRUE
+// -----------------------------------------
+interface I1 { }
+interface I2 { }
+class E1 implements I1, I2 { }
+$e1 = new E1;
+var_dump($e1 instanceof I1);       // TRUE
+$iName = &quot;I2&quot;;
+var_dump($e1 instanceof $iName);   // TRUE
+$e2 = new E1;
+var_dump($e2 instanceof $e1);      // TRUE
+</code></pre>
+<h2><a class="header" href="#logical-not-operator" id="logical-not-operator">Logical NOT Operator</a></h2>
+<!-- GRAMMAR
+logical-NOT-expression:
+  instanceof-expression
+  '!' instanceof-expression
+-->
+<pre>
+<i id="grammar-logical-NOT-expression">logical-NOT-expression:</i>
+   <i><a href="#grammar-instanceof-expression">instanceof-expression</a></i>
+   !   <i><a href="#grammar-instanceof-expression">instanceof-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>The value of the operand is <a href="08-conversions.html#converting-to-boolean-type">converted to type <code>bool</code></a>
+and if it is <code>TRUE</code> then the result of the operator is <code>FALSE</code>. The result is <code>TRUE</code> otherwise.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$t = TRUE;
+if (!$t) // ...
+</code></pre>
+<h2><a class="header" href="#multiplicative-operators" id="multiplicative-operators">Multiplicative Operators</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+multiplicative-expression:
+  logical-NOT-expression
+  multiplicative-expression '*' logical-NOT-expression
+  multiplicative-expression '/' logical-NOT-expression
+  multiplicative-expression '%' logical-NOT-expression
+-->
+<pre>
+<i id="grammar-multiplicative-expression">multiplicative-expression:</i>
+   <i><a href="#grammar-logical-NOT-expression">logical-NOT-expression</a></i>
+   <i><a href="#grammar-multiplicative-expression">multiplicative-expression</a></i>   *   <i><a href="#grammar-logical-NOT-expression">logical-NOT-expression</a></i>
+   <i><a href="#grammar-multiplicative-expression">multiplicative-expression</a></i>   /   <i><a href="#grammar-logical-NOT-expression">logical-NOT-expression</a></i>
+   <i><a href="#grammar-multiplicative-expression">multiplicative-expression</a></i>   %   <i><a href="#grammar-logical-NOT-expression">logical-NOT-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The right-hand operand of operator <code>/</code> and operator <code>%</code> must not be zero.</p>
+<p><strong>Semantics</strong></p>
+<p>If either of the operands is an object supporting the operation, the result is
+defined by that object’s semantics, with the left operand checked first.</p>
+<p>The binary <code>*</code> operator produces the product of its operands. If either or both
+operands have non-numeric types, their values are converted to type <code>int</code> or
+<code>float</code>, as appropriate. If either or both operands were leading-numeric or
+non-numeric strings, a non-fatal error MUST be produced for each.  Then if
+either operand has type <code>float</code>, the other is converted to that type, and the
+result has type <code>float</code>. Otherwise, both operands have type <code>int</code>, in which
+case, if the resulting value can be represented in type <code>int</code> that is the
+result type.  Otherwise, the result would have type <code>float</code>.</p>
+<p>Division by zero results in a non-fatal error. If the value of the numerator is positive, the result value is <code>INF</code>. If the value of the numerator is negative, the result value is <code>-INF</code>. If the value of the numerator is zero, the result value is <code>NAN</code>.</p>
+<p>The binary <code>/</code> operator produces the quotient from dividing the left-hand
+operand by the right-hand one. If either or both operands have non-numeric
+types, their values are converted to type <code>int</code> or <code>float</code>, as appropriate. If
+either or both operands were leading-numeric or non-numeric strings, a
+non-fatal error must be produced for each. Then if either operand has type
+<code>float</code>, the other is converted to that type, and the result has type <code>float</code>.
+Otherwise, both operands have type <code>int</code>, in which case, if the mathematical
+value of the computation can be preserved using type <code>int</code>, that is the result
+type; otherwise, the type of the result is <code>float</code>.</p>
+<p>The binary <code>%</code> operator produces the remainder from dividing the left-hand
+operand by the right-hand one. If the type of both operands is not <code>int</code>, their
+values are converted to that type.  If either or both operands were
+leading-numeric or non-numeric strings, a non-fatal error MUST be produced for
+each.  The result has type <code>int</code>. If the right-hand operand has value zero, an
+exception of type <code>DivisionByZeroError</code> is thrown.</p>
+<p>These operators associate left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">-10 * 100;       // int with value -1000
+100 * -3.4e10;   // float with value -3400000000000
+&quot;123&quot; * &quot;2e+5;   // float with value 24600000
+100 / 100;       // int with value 1
+100  / &quot;123&quot;;    // float with value 0.8130081300813
+&quot;123&quot; % 100;     // int with value 23
+100 / 0;         // results in a diagnostic followed by bool with value false
+100 / 0.0;       // results in a diagnostic followed by bool with value false
+1.3 / 0;         // results in a diagnostic followed by bool with value false
+1.3 / 0.0;       // results in a diagnostic followed by bool with value false
+100 / &quot;a&quot;;       // results in a diagnostic followed by bool with value false (a is converted to 0)
+</code></pre>
+<h2><a class="header" href="#additive-operators" id="additive-operators">Additive Operators</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+additive-expression:
+  multiplicative-expression
+  additive-expression '+' multiplicative-expression
+  additive-expression '-' multiplicative-expression
+  additive-expression '.' multiplicative-expression
+-->
+<pre>
+<i id="grammar-additive-expression">additive-expression:</i>
+   <i><a href="#grammar-multiplicative-expression">multiplicative-expression</a></i>
+   <i><a href="#grammar-additive-expression">additive-expression</a></i>   +   <i><a href="#grammar-multiplicative-expression">multiplicative-expression</a></i>
+   <i><a href="#grammar-additive-expression">additive-expression</a></i>   -   <i><a href="#grammar-multiplicative-expression">multiplicative-expression</a></i>
+   <i><a href="#grammar-additive-expression">additive-expression</a></i>   .   <i><a href="#grammar-multiplicative-expression">multiplicative-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>If either operand of <code>+</code> has array type, the other operand must also have array
+type.</p>
+<p>Binary <code>-</code> operator can not be applied to arrays.</p>
+<p><strong>Semantics</strong></p>
+<p>If either of the operands is an object supporting the operation, the result is
+defined by that object’s semantics, with the left operand checked first.</p>
+<p>For non-array operands, the binary <code>+</code> operator produces the sum of those
+operands, while the binary <code>-</code> operator produces the difference of its operands
+when subtracting the right-hand operand from the left-hand one.  If either or
+both operands have non-array, non-numeric types, their values are converted to
+type <code>int</code> or <code>float</code>, as appropriate.  If either or both operands were
+leading-numeric or non-numeric strings, a non-fatal error MUST be produced for
+each.  Then if either operand has type <code>float</code>, the other is converted to that
+type, and the result has type <code>float</code>. Otherwise, both operands have type
+<code>int</code>, in which case, if the resulting value can be represented in type <code>int</code>
+that is the result type.  Otherwise, the result would have type <code>float</code>.</p>
+<p>If both operands have array type, the binary <code>+</code> operator produces a new
+array that is the union of the two operands. The result is a copy of the
+left-hand array with elements inserted at its end, in order, for each
+element in the right-hand array whose key does not already exist in the
+left-hand array. Any element in the right-hand array whose key exists in
+the left-hand array is ignored.</p>
+<p>The binary <code>.</code> operator creates a string that is the concatenation of the
+left-hand operand and the right-hand operand, in that order. If either
+or both operands have types other than <code>string</code>, their values are
+converted to type <code>string</code>. The result has type <code>string</code>.</p>
+<p>These operators associate left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">-10 + 100;        // int with value 90
+100 + -3.4e10;    // float with value -33999999900
+&quot;123&quot; + &quot;2e+5&quot;;   // float with value 200123
+100 - &quot;123&quot;;      // int with value 23
+-3.4e10 - &quot;abc&quot;;  // float with value -34000000000
+// -----------------------------------------
+[1, 5 =&gt; FALSE, &quot;red&quot;] + [4 =&gt; -5, 1.23]; // [1, 5 =&gt; FALSE, &quot;red&quot;, 4 =&gt; -5]
+  // dupe key 5 (value 1.23) is ignored
+[NULL] + [1, 5 =&gt; FALSE, &quot;red&quot;];          // [NULL, 5 =&gt; FALSE, &quot;red&quot;]
+  // dupe key 0 (value 1) is ignored
+[4 =&gt; -5, 1.23] + [NULL];                 // [4 =&gt; -5, 1.23, 0 =&gt; NULL]
+// -----------------------------------------
+-10 . NAN;        // string with value &quot;-10NAN&quot;
+INF . &quot;2e+5&quot;;     // string with value &quot;INF2e+5&quot;
+TRUE . NULL;      // string with value &quot;1&quot;
+10 + 5 . 12 . 100 - 50;  // int with value 1512050; ((((10 + 5).12).100)-50)
+</code></pre>
+<h2><a class="header" href="#bitwise-shift-operators" id="bitwise-shift-operators">Bitwise Shift Operators</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+shift-expression:
+  additive-expression
+  shift-expression '<<' additive-expression
+  shift-expression '>>' additive-expression
+-->
+<pre>
+<i id="grammar-shift-expression">shift-expression:</i>
+   <i><a href="#grammar-additive-expression">additive-expression</a></i>
+   <i><a href="#grammar-shift-expression">shift-expression</a></i>   &lt;&lt;   <i><a href="#grammar-additive-expression">additive-expression</a></i>
+   <i><a href="#grammar-shift-expression">shift-expression</a></i>   &gt;&gt;   <i><a href="#grammar-additive-expression">additive-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Each of the operands must have scalar-compatible type.</p>
+<p><strong>Semantics</strong></p>
+<p>If either of the operands is an object supporting the operation, the result is
+defined by that object’s semantics, with the left operand checked first.</p>
+<p>Given the expression <code>e1 &lt;&lt; e2</code>, the bits in the value of <code>e1</code> are shifted
+left by <code>e2</code> positions. Bits shifted off the left end are discarded, and
+zero bits are shifted on from the right end. Given the expression
+<code>e1 &gt;&gt; e2</code>, the bits in the value of <code>e1</code> are shifted right by
+<code>e2</code> positions. Bits shifted off the right end are discarded, and the sign
+bit is propagated from the left end.</p>
+<p>If either operand does not have type <code>int</code>, its value is first converted to
+that type.  If either or both operands were leading-numeric or non-numeric
+strings, a non-fatal error MUST be produced for each.</p>
+<p>The type of the result is <code>int</code>, and the value of the result is that after
+the shifting is complete. The values of <code>e1</code> and <code>e2</code> are unchanged.</p>
+<p>Left shifts where the shift count is greater than the bit width of the integer
+type (e.g. 32 or 64) must always result in 0, even if there is no native
+processor support for this.</p>
+<p>Right shifts where the shift count is greater than the bit width of the integer
+type (e.g. 32 or 64) must always result in 0 when <code>e1</code> is positive and -1 when
+<code>e1</code> is negative, even if there is no native processor support for this.</p>
+<p>If the shift count is negative, an exception of type <code>ArithmeticError</code> is thrown.</p>
+<p>These operators associate left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">1000 &gt;&gt; 2   // 0x3E8 is shifted right 2 places
+-1000 &lt;&lt; 2  // 0xFFFFFC18 is shifted left 5 places
+123 &gt;&gt; 128  // Shift count larger than bit width =&gt; result 0
+123 &lt;&lt; 33   // For 32-bit integers the result is zero, otherwise
+            // it is 0x7B shifted left 33 places
+</code></pre>
+<h2><a class="header" href="#relational-operators" id="relational-operators">Relational Operators</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+relational-expression:
+  shift-expression
+  relational-expression '<' shift-expression
+  relational-expression '>' shift-expression
+  relational-expression '<=' shift-expression
+  relational-expression '>=' shift-expression
+  relational-expression '<=>' shift-expression
+-->
+<pre>
+<i id="grammar-relational-expression">relational-expression:</i>
+   <i><a href="#grammar-shift-expression">shift-expression</a></i>
+   <i><a href="#grammar-relational-expression">relational-expression</a></i>   &lt;   <i><a href="#grammar-shift-expression">shift-expression</a></i>
+   <i><a href="#grammar-relational-expression">relational-expression</a></i>   &gt;   <i><a href="#grammar-shift-expression">shift-expression</a></i>
+   <i><a href="#grammar-relational-expression">relational-expression</a></i>   &lt;=   <i><a href="#grammar-shift-expression">shift-expression</a></i>
+   <i><a href="#grammar-relational-expression">relational-expression</a></i>   &gt;=   <i><a href="#grammar-shift-expression">shift-expression</a></i>
+   <i><a href="#grammar-relational-expression">relational-expression</a></i>   &lt;=&gt;   <i><a href="#grammar-shift-expression">shift-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Operator <code>&lt;=&gt;</code> represents comparison operator between two expressions, with the
+result being an integer less than <code>0</code> if the expression on the left is less than the expression on the right
+(i.e. if <code>$a &lt; $b</code> would return <code>TRUE</code>), as defined below by the semantics of the operator <code>&lt;</code>,
+integer <code>0</code> if those expressions are equal (as defined by the semantics of the <code>==</code> operator)
+and integer greater than <code>0</code> otherwise.</p>
+<p>Operator <code>&lt;</code> represents <em>less-than</em>, operator <code>&gt;</code> represents
+<em>greater-than</em>, operator <code>&lt;=</code> represents <em>less-than-or-equal-to</em>, and
+operator <code>&gt;=</code> represents <em>greater-than-or-equal-to</em>.</p>
+<p>The type of the result is <code>bool</code>.</p>
+<p>Note that <em>greater-than</em> semantics is implemented as the reverse of <em>less-than</em>, i.e.
+<code>$a &gt; $b</code> is the same as <code>$b &lt; $a</code>. This may lead to confusing results if the operands
+are not well-ordered - such as comparing two objects not having comparison semantics, or
+comparing arrays.</p>
+<p>The following table shows the result for comparison of different types, with the left
+operand displayed vertically and the right displayed horizontally.
+The conversions are performed according to <a href="08-conversions.html">type conversion rules</a>.</p>
+<table><thead><tr><th align="left"></th><th align="center">NULL</th><th align="center">bool</th><th align="right">int</th><th align="center">float</th><th align="center">string</th><th align="center">array</th><th align="center">object</th><th align="center">resource</th></tr></thead><tbody>
+<tr><td align="left">NULL</td><td align="center">=</td><td align="center">-&gt;</td><td align="right">-&gt;</td><td align="center">-&gt;</td><td align="center">-&gt;</td><td align="center">-&gt;</td><td align="center">&lt;</td><td align="center">&lt;</td></tr>
+<tr><td align="left">bool</td><td align="center">&lt;-</td><td align="center">1</td><td align="right">&lt;-</td><td align="center">&lt;-</td><td align="center">&lt;-</td><td align="center">&lt;-</td><td align="center">&lt;-</td><td align="center">&lt;-</td></tr>
+<tr><td align="left">int</td><td align="center">&lt;-</td><td align="center">-&gt;</td><td align="right">2</td><td align="center">2</td><td align="center">&lt;-</td><td align="center">&lt;</td><td align="center">3</td><td align="center">&lt;-</td></tr>
+<tr><td align="left">float</td><td align="center">&lt;-</td><td align="center">-&gt;</td><td align="right">2</td><td align="center">2</td><td align="center">&lt;-</td><td align="center">&lt;</td><td align="center">3</td><td align="center">&lt;-</td></tr>
+<tr><td align="left">string</td><td align="center">&lt;-</td><td align="center">-&gt;</td><td align="right">-&gt;</td><td align="center">-&gt;</td><td align="center">2, 4</td><td align="center">&lt;</td><td align="center">3</td><td align="center">2</td></tr>
+<tr><td align="left">array</td><td align="center">&lt;-</td><td align="center">-&gt;</td><td align="right">&gt;</td><td align="center">&gt;</td><td align="center">&gt;</td><td align="center">5</td><td align="center">3</td><td align="center">&gt;</td></tr>
+<tr><td align="left">object</td><td align="center">&gt;</td><td align="center">-&gt;</td><td align="right">3</td><td align="center">3</td><td align="center">3</td><td align="center">3</td><td align="center">6</td><td align="center">3</td></tr>
+<tr><td align="left">resource</td><td align="center">&gt;</td><td align="center">-&gt;</td><td align="right">-&gt;</td><td align="center">-&gt;</td><td align="center">2</td><td align="center">&lt;</td><td align="center">3</td><td align="center">2</td></tr>
+</tbody></table>
+<ul>
+<li><code>=</code> means the result is always “equals”, i.e. strict comparisons are always <code>FALSE</code> and equality comparisons are always <code>TRUE</code>.</li>
+<li><code>&lt;</code> means that the left operand is always less than the right operand.</li>
+<li><code>&gt;</code> means that the left operand is always greater than the right operand.</li>
+<li><code>-&gt;</code> means that the left operand is converted to the type of the right operand.</li>
+<li><code>&lt;-</code> means that the right operand is converted to the type of the left operand.</li>
+<li>A number means one of the cases below:</li>
+</ul>
+<ol>
+<li>If either operand has type <code>bool</code>, the other operand is converted to
+that type. The result is the logical comparison of the two operands
+after conversion, where <code>FALSE</code> is defined to be less than <code>TRUE</code>.</li>
+<li>If one of the operands has arithmetic type, is a resource, or a numeric string,
+which can be represented as <code>int</code> or <code>float</code> without loss of precision,
+the operands are converted to the corresponding arithmetic type, with <code>float</code> taking precedence over <code>int</code>,
+and resources converting to <code>int</code>.
+The result is the numerical comparison of the two operands after conversion.</li>
+<li>If only one operand has object type, if the object has comparison handler,
+that handler defines the result.
+Otherwise, if the object can be converted to the other operand’s type,
+it is converted and the result is used for the comparison. Otherwise, the object
+compares greater-than any other operand type.</li>
+<li>If both operands are non-numeric strings, the result is the lexical
+comparison of the two operands. Specifically, the strings are
+compared byte-by-byte starting with their first byte. If the two
+bytes compare equal and there are no more bytes in either string,
+the strings are equal and the comparison ends; otherwise, if this is
+the final byte in one string, the shorter string compares less-than
+the longer string and the comparison ends. If the two bytes compare
+unequal, the string having the lower-valued byte compares less-than
+the other string, and the comparison ends. If there are more bytes
+in the strings, the process is repeated for the next pair of bytes.</li>
+<li>If both operands have array type, if the arrays have different
+numbers of elements, the one with the fewer is considered less-than
+the other one, regardless of the keys and values in each, and the
+comparison ends. For arrays having the same numbers of elements, the
+keys from the left operand are considered one by one, if
+the next key in the left-hand operand exists in the right-hand
+operand, the corresponding values are compared. If they are unequal,
+the array containing the lesser value is considered less-than the
+other one, and the comparison ends; otherwise, the process is
+repeated with the next element. If the next key in the left-hand
+operand does not exist in the right-hand operand, the arrays cannot
+be compared and <code>FALSE</code> is returned. If all the values are equal,
+then the arrays are considered equal.</li>
+<li>When comparing two objects, if any of the object types has its own compare
+semantics, that would define the result, with the left operand taking precedence.
+Otherwise, if the objects are of different types, the comparison result is <code>FALSE</code>.
+If the objects are of the same type, the properties of the objects are
+compares using the array comparison described above.</li>
+</ol>
+<p>These operators associate left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">&quot;&quot; &lt; &quot;ab&quot;       // result has value TRUE
+&quot;a&quot; &gt; &quot;A&quot;       // result has value TRUE
+&quot;a0&quot; &lt; &quot;ab&quot;     // result has value TRUE
+&quot;aA &lt;= &quot;abc&quot;    // result has value TRUE
+// -----------------------------------------
+NULL &lt; [10,2.3] // result has value TRUE
+TRUE &gt; -3.4     // result has value FALSE
+TRUE &lt; -3.4     // result has value FALSE
+TRUE &gt;= -3.4    // result has value TRUE
+FALSE &lt; &quot;abc&quot;   // result has value TRUE
+// -----------------------------------------
+10 &lt;= 0         // result has value FALSE
+10 &gt;= &quot;-3.4&quot;    // result has value TRUE
+&quot;-5.1&quot; &gt; 0      // result has value FALSE
+// -----------------------------------------
+[100] &lt; [10,20,30] // result has value TRUE (LHS array is shorter)
+[10,20] &gt;= [&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] // result has value FALSE, (key 10 does not exists in RHS)
+[&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] &gt;= [&quot;green&quot;=&gt;0,&quot;red&quot;=&gt;0] // result has value TRUE (order is irrelevant)
+// ------------------------------------
+function order_func($a, $b) {
+    return ($a-&gt;$x &lt;=&gt; $b-&gt;x) ?: ($a-&gt;y &lt;=&gt; $b-&gt;y) ?: ($a-&gt;z &lt;=&gt; $b-&gt;z);
+}
+</code></pre>
+<h2><a class="header" href="#equality-operators" id="equality-operators">Equality Operators</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+equality-expression:
+  relational-expression
+  equality-expression '==' relational-expression
+  equality-expression '!=' relational-expression
+  equality-expression '<>' relational-expression
+  equality-expression '===' relational-expression
+  equality-expression '!==' relational-expression
+-->
+<pre>
+<i id="grammar-equality-expression">equality-expression:</i>
+   <i><a href="#grammar-relational-expression">relational-expression</a></i>
+   <i><a href="#grammar-equality-expression">equality-expression</a></i>   ==   <i><a href="#grammar-relational-expression">relational-expression</a></i>
+   <i><a href="#grammar-equality-expression">equality-expression</a></i>   !=   <i><a href="#grammar-relational-expression">relational-expression</a></i>
+   <i><a href="#grammar-equality-expression">equality-expression</a></i>   &lt;&gt;   <i><a href="#grammar-relational-expression">relational-expression</a></i>
+   <i><a href="#grammar-equality-expression">equality-expression</a></i>   ===   <i><a href="#grammar-relational-expression">relational-expression</a></i>
+   <i><a href="#grammar-equality-expression">equality-expression</a></i>   !==   <i><a href="#grammar-relational-expression">relational-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Operator <code>==</code> represents <em>value equality</em>, operators <code>!=</code> and <code>&lt;&gt;</code> are
+equivalent and represent <em>value inequality</em>.</p>
+<p>For operators <code>==</code>, <code>!=</code>, and <code>&lt;&gt;</code>, the operands of different types are converted and
+compared according to the same rules as in <a href="#relational-operators">relational operators</a>.
+Two objects of different types are always not equal.</p>
+<p>Operator <code>===</code> represents <em>same type and value equality</em>, or <em>identity</em>, comparison, and operator <code>!==</code> represents
+the opposite of <code>===</code>. The values are considered identical if they have the same type and compare as equal, with the
+additional conditions below:</p>
+<ul>
+<li>When comparing two objects, identity operators check to
+see if the two operands are the exact same object, not two different objects of the same type and value.</li>
+<li>Arrays must have the same elements in the same order to be considered identical.</li>
+<li>Strings are identical if they contain the same characters, unlike value comparison operators no conversions are performed for numeric strings.</li>
+</ul>
+<p>The type of the result is <code>bool</code>.</p>
+<p>These operators associate left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">&quot;a&quot; &lt;&gt; &quot;aa&quot; // result has value TRUE
+// -----------------------------------------
+NULL == 0   // result has value TRUE
+NULL === 0  // result has value FALSE
+TRUE != 100  // result has value FALSE
+TRUE !== 100  // result has value TRUE
+// -----------------------------------------
+&quot;10&quot; != 10  // result has value FALSE
+&quot;10&quot; !== 10 // result has value TRUE
+// -----------------------------------------
+[10,20] == [10,20.0]  // result has value TRUE
+[10,20] === [10,20.0] // result has value FALSE
+[&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] === [&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] // result has value TRUE
+[&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] === [&quot;green&quot;=&gt;0,&quot;red&quot;=&gt;0] // result has value FALSE
+</code></pre>
+<h2><a class="header" href="#bitwise-and-operator" id="bitwise-and-operator">Bitwise AND Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+bitwise-AND-expression:
+  equality-expression
+  bitwise-AND-expression '&' equality-expression
+-->
+<pre>
+<i id="grammar-bitwise-AND-expression">bitwise-AND-expression:</i>
+   <i><a href="#grammar-equality-expression">equality-expression</a></i>
+   <i><a href="#grammar-bitwise-AND-expression">bitwise-AND-expression</a></i>   &amp;   <i><a href="#grammar-equality-expression">equality-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Each of the operands must have scalar-compatible type.</p>
+<p><strong>Semantics</strong></p>
+<p>If either of the operands is an object supporting the operation, the result is
+defined by that object’s semantics, with the left operand checked first.</p>
+<p>If either operand does not have type <code>int</code>, its value is first converted to
+that type.  If either or both operands were leading-numeric or non-numeric
+strings, a non-fatal error MUST be produced for each.</p>
+<p>The result of this operator is the bitwise-AND of the two operands, and
+the type of that result is <code>int</code>.</p>
+<p>However, if both operands are strings, the result is the string composed of the sequence of bytes
+that are the result of bitwise AND operation performed on the bytes of the operand strings
+in the matching positions (<code>result[0] = s1[0] &amp; s2[0]</code>, etc.).
+If one of the strings is longer than the other, it is cut to the length of the shorter one.</p>
+<p>This operator associates left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">0b101111 &amp; 0b101          // 0b101
+$lLetter = 0x73;          // letter 's'
+$uLetter = $lLetter &amp; ~0x20;  // clear the 6th bit to make letter 'S'
+</code></pre>
+<h2><a class="header" href="#bitwise-exclusive-or-operator" id="bitwise-exclusive-or-operator">Bitwise Exclusive OR Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+bitwise-exc-OR-expression:
+  bitwise-AND-expression
+  bitwise-exc-OR-expression '^' bitwise-AND-expression
+-->
+<pre>
+<i id="grammar-bitwise-exc-OR-expression">bitwise-exc-OR-expression:</i>
+   <i><a href="#grammar-bitwise-AND-expression">bitwise-AND-expression</a></i>
+   <i><a href="#grammar-bitwise-exc-OR-expression">bitwise-exc-OR-expression</a></i>   ^   <i><a href="#grammar-bitwise-AND-expression">bitwise-AND-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Each of the operands must have scalar-compatible type.</p>
+<p><strong>Semantics</strong></p>
+<p>If either of the operands is an object supporting the operation, the result is
+defined by that object’s semantics, with the left operand checked first.</p>
+<p>If either operand does not have type <code>int</code>, its value is first converted to
+that type.  If either or both operands were leading-numeric or non-numeric
+strings, a non-fatal error MUST be produced for each.</p>
+<p>The result of this operator is the bitwise exclusive-OR of the two
+operands, and the type of that result is <code>int</code>.</p>
+<p>However, if both operands are strings, the result is the string composed of the sequence of bytes
+that are the result of bitwise XOR operation performed on the bytes of the operand strings
+in the matching positions (<code>result[0] = s1[0] ^ s2[0]</code>, etc.).
+If one of the strings is longer than the other, it is cut to the length of the shorter one.</p>
+<p>This operator associates left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">0b101111 ^ 0b101    // 0b101010
+$v1 = 1234; $v2 = -987; // swap two integers having different values
+$v1 = $v1 ^ $v2;
+$v2 = $v1 ^ $v2;
+$v1 = $v1 ^ $v2;    // $v1 is now -987, and $v2 is now 1234
+</code></pre>
+<h2><a class="header" href="#bitwise-inclusive-or-operator" id="bitwise-inclusive-or-operator">Bitwise Inclusive OR Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+bitwise-inc-OR-expression:
+  bitwise-exc-OR-expression
+  bitwise-inc-OR-expression '|' bitwise-exc-OR-expression
+-->
+<pre>
+<i id="grammar-bitwise-inc-OR-expression">bitwise-inc-OR-expression:</i>
+   <i><a href="#grammar-bitwise-exc-OR-expression">bitwise-exc-OR-expression</a></i>
+   <i><a href="#grammar-bitwise-inc-OR-expression">bitwise-inc-OR-expression</a></i>   |   <i><a href="#grammar-bitwise-exc-OR-expression">bitwise-exc-OR-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Each of the operands must have scalar-compatible type.</p>
+<p><strong>Semantics</strong></p>
+<p>If either of the operands is an object supporting the operation, the result is
+defined by that object’s semantics, with the left operand checked first.</p>
+<p>If either operand does not have type <code>int</code>, its value is first converted to
+that type.  If either or both operands were leading-numeric or non-numeric
+strings, a non-fatal error MUST be produced for each.</p>
+<p>The result of this operator is the bitwise inclusive-OR of the two
+operands, and the type of that result is <code>int</code>.</p>
+<p>However, if both operands are strings, the result is the string composed of the sequence of bytes
+that are the result of bitwise OR operation performed on the bytes of the operand strings
+in the matching positions (<code>result[0] = s1[0] | s2[0]</code>, etc.).
+If one of the strings is shorter than the other, it is extended with zero bytes.</p>
+<p>This operator associates left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">0b101111 | 0b101      // 0b101111
+$uLetter = 0x41;      // letter 'A'
+$lLetter = $upCaseLetter | 0x20;  // set the 6th bit to make letter 'a'
+</code></pre>
+<h2><a class="header" href="#logical-and-operator-form-1" id="logical-and-operator-form-1">Logical AND Operator (form 1)</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+logical-AND-expression-1:
+  bitwise-inc-OR-expression
+  logical-AND-expression-1 '&&' bitwise-inc-OR-expression
+-->
+<pre>
+<i id="grammar-logical-AND-expression-1">logical-AND-expression-1:</i>
+   <i><a href="#grammar-bitwise-inc-OR-expression">bitwise-inc-OR-expression</a></i>
+   <i><a href="#grammar-logical-AND-expression-1">logical-AND-expression-1</a></i>   &amp;&amp;   <i><a href="#grammar-bitwise-inc-OR-expression">bitwise-inc-OR-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Given the expression <code>e1 &amp;&amp; e2</code>, <code>e1</code> is evaluated first. If <code>e1</code> <a href="08-conversions.html#converting-to-boolean-type">converts to <code>bool</code></a> as <code>FALSE</code>, <code>e2</code> is not evaluated, and the result has type <code>bool</code>, value <code>FALSE</code>. Otherwise, <code>e2</code> is evaluated. If <code>e2</code> converts to <code>bool</code> as <code>FALSE</code>, the result has type <code>bool</code>, value <code>FALSE</code>; otherwise, it has type <code>bool</code>, value <code>TRUE</code>. There is a sequence point after the evaluation of <code>e1</code>.</p>
+<p>This operator associates left-to-right.</p>
+<p>Except for the difference in precedence, operator <code>&amp;&amp;</code> has exactly the
+same semantics as operator <a href="#logical-and-operator-form-2"><code>and</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">if ($month &gt; 1 &amp;&amp; $month &lt;= 12) ...
+</code></pre>
+<h2><a class="header" href="#logical-inclusive-or-operator-form-1" id="logical-inclusive-or-operator-form-1">Logical Inclusive OR Operator (form 1)</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+logical-inc-OR-expression-1:
+  logical-AND-expression-1
+  logical-inc-OR-expression-1 '||' logical-AND-expression-1
+-->
+<pre>
+<i id="grammar-logical-inc-OR-expression-1">logical-inc-OR-expression-1:</i>
+   <i><a href="#grammar-logical-AND-expression-1">logical-AND-expression-1</a></i>
+   <i><a href="#grammar-logical-inc-OR-expression-1">logical-inc-OR-expression-1</a></i>   ||   <i><a href="#grammar-logical-AND-expression-1">logical-AND-expression-1</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Given the expression <code>e1 || e2</code>, <code>e1</code> is evaluated first. If <code>e1</code> <a href="08-conversions.html#converting-to-boolean-type">converts to <code>bool</code></a> as <code>TRUE</code>, <code>e2</code> is not evaluated, and the result has type <code>bool</code>, value <code>TRUE</code>. Otherwise, <code>e2</code> is evaluated. If <code>e2</code> converts to <code>bool</code> as <code>TRUE</code>, the result has type <code>bool</code>, value <code>TRUE</code>; otherwise, it has type <code>bool</code>, value <code>FALSE</code>. There is a sequence point after the evaluation of <code>e1</code>.</p>
+<p>This operator associates left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">if ($month &lt; 1 || $month &gt; 12) ...
+</code></pre>
+<h2><a class="header" href="#coalesce-operator" id="coalesce-operator">Coalesce Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+coalesce-expression:
+  logical-inc-OR-expression-1
+  logical-inc-OR-expression-1 '??' coalesce-expression
+-->
+<pre>
+<i id="grammar-coalesce-expression">coalesce-expression:</i>
+   <i><a href="#grammar-logical-inc-OR-expression-1">logical-inc-OR-expression-1</a></i>
+   <i><a href="#grammar-logical-inc-OR-expression-1">logical-inc-OR-expression-1</a></i>   ??   <i><a href="#grammar-coalesce-expression">coalesce-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Given the expression <code>e1 ?? e2</code>, if <code>e1</code> is set and not <code>NULL</code> (i.e. TRUE for
+<a href="#isset">isset</a>), then the result is <code>e1</code>. Otherwise, then and only then is <code>e2</code>
+evaluated, and the result becomes the result of the whole
+expression. There is a sequence point after the evaluation of <code>e1</code>.</p>
+<p>Note that the semantics of <code>??</code> is similar to <code>isset</code> so that uninitialized variables will
+not produce warnings when used in <code>e1</code>.</p>
+<p>This operator associates right-to-left.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$arr = [&quot;foo&quot; =&gt; &quot;bar&quot;, &quot;qux&quot; =&gt; NULL];
+$obj = (object)$arr;
+
+$a = $arr[&quot;foo&quot;] ?? &quot;bang&quot;; // &quot;bar&quot; as $arr[&quot;foo&quot;] is set and not NULL
+$a = $arr[&quot;qux&quot;] ?? &quot;bang&quot;; // &quot;bang&quot; as $arr[&quot;qux&quot;] is NULL
+$a = $arr[&quot;bing&quot;] ?? &quot;bang&quot;; // &quot;bang&quot; as $arr[&quot;bing&quot;] is not set
+
+$a = $obj-&gt;foo ?? &quot;bang&quot;; // &quot;bar&quot; as $obj-&gt;foo is set and not NULL
+$a = $obj-&gt;qux ?? &quot;bang&quot;; // &quot;bang&quot; as $obj-&gt;qux is NULL
+$a = $obj-&gt;bing ?? &quot;bang&quot;; // &quot;bang&quot; as $obj-&gt;bing is not set
+
+$a = NULL ?? $arr[&quot;bing&quot;] ?? 2; // 2 as NULL is NULL, and $arr[&quot;bing&quot;] is not set
+
+function foo() {
+    echo &quot;executed!&quot;, PHP_EOL;
+}
+var_dump(true ?? foo()); // outputs bool(true), &quot;executed!&quot; does not appear as it short-circuits
+</code></pre>
+<h2><a class="header" href="#conditional-operator" id="conditional-operator">Conditional Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+conditional-expression:
+  coalesce-expression
+  conditional-expression '?' expression? ':' coalesce-expression
+-->
+<pre>
+<i id="grammar-conditional-expression">conditional-expression:</i>
+   <i><a href="#grammar-coalesce-expression">coalesce-expression</a></i>
+   <i><a href="#grammar-conditional-expression">conditional-expression</a></i>   ?   <i><a href="#grammar-expression">expression</a></i><sub>opt</sub>   :   <i><a href="#grammar-coalesce-expression">coalesce-expression</a></i>
+</pre>
+<p><strong>Semantics</strong>
+Given the expression <code>e1 ? e2 : e3</code>, <code>e1</code> is evaluated first and <a href="08-conversions.html#converting-to-boolean-type">converted to <code>bool</code></a> if it has another type.
+If the result is <code>TRUE</code>, then and only then is <code>e2</code> evaluated, and the result and its type become the result and type of
+the whole expression. Otherwise, then and only then is <code>e3</code> evaluated, and
+the result and its type become the result and type of the whole
+expression. There is a sequence point after the evaluation of <code>e1</code>. If <code>e2</code>
+is omitted, the result and type of the whole expression is the value and
+type of <code>e1</code> (before the conversion to <code>bool</code>).</p>
+<p>This operator associates left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">for ($i = -5; $i &lt;= 5; ++$i)
+  echo &quot;$i is &quot;.(($i &amp; 1 == TRUE) ? &quot;odd\n&quot; : &quot;even\n&quot;);
+// -----------------------------------------
+$a = 10 ? : &quot;Hello&quot;;  // result is int with value 10
+$a = 0 ? : &quot;Hello&quot;;     // result is string with value &quot;Hello&quot;
+$i = PHP_INT_MAX;
+$a = $i++ ? : &quot;red&quot;;  // result is int with value 2147483647 (on a 32-bit
+                // system) even though $i is now the float 2147483648.0
+// -----------------------------------------
+$i++ ? f($i) : f(++$i); // the sequence point makes this well-defined
+// -----------------------------------------
+function factorial($int)
+{
+  return ($int &gt; 1) ? $int * factorial($int - 1) : $int;
+}
+</code></pre>
+<h2><a class="header" href="#assignment-operators" id="assignment-operators">Assignment Operators</a></h2>
+<h3><a class="header" href="#general-4" id="general-4">General</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+assignment-expression:
+  conditional-expression
+  simple-assignment-expression
+  compound-assignment-expression
+-->
+<pre>
+<i id="grammar-assignment-expression">assignment-expression:</i>
+   <i><a href="#grammar-conditional-expression">conditional-expression</a></i>
+   <i><a href="#grammar-simple-assignment-expression">simple-assignment-expression</a></i>
+   <i><a href="#grammar-compound-assignment-expression">compound-assignment-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The left-hand operand of an assignment operator must be a modifiable
+lvalue.</p>
+<p><strong>Semantics</strong></p>
+<p>These operators associate right-to-left.</p>
+<h3><a class="header" href="#simple-assignment" id="simple-assignment">Simple Assignment</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+simple-assignment-expression:
+  variable '=' assignment-expression
+  list-intrinsic '=' assignment-expression
+-->
+<pre>
+<i id="grammar-simple-assignment-expression">simple-assignment-expression:</i>
+   <i><a href="#grammar-variable">variable</a></i>   =   <i><a href="#grammar-assignment-expression">assignment-expression</a></i>
+   <i><a href="#grammar-list-intrinsic">list-intrinsic</a></i>   =   <i><a href="#grammar-assignment-expression">assignment-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>If the location designated by the left-hand operand is a string element,
+the key must not be a negative-valued <code>int</code>, and the right-hand operand
+must have type <code>string</code>.</p>
+<p><strong>Semantics</strong></p>
+<p>If <em>assignment-expression</em> designates an expression having value type,
+see  <a href="04-basic-concepts.html#byref-assignment-for-scalar-types-with-local-variables">assignment for scalar types</a>
+If <em>assignment-expression</em> designates an expression having handle type, see <a href="04-basic-concepts.html#value-assignment-of-objects-to-a-local-variable">assignment for object and resource types</a>.
+If <em>assignment-expression</em> designates an expression having array type, see
+<a href="04-basic-concepts.html#value-assignment-of-array-types-to-local-variables">assignment of array types</a>.</p>
+<p>The type and value of the result is the type and value of the left-hand
+operand after the store (if any [see below]) has taken place. The result
+is not an lvalue.</p>
+<p>If the location designated by the left-hand operand is a non-existent
+array element, a new element is inserted with the designated key and
+with a value being that of the right-hand operand.</p>
+<p>If the location designated by the left-hand operand is a string element,
+then if the key is a negative-valued <code>int</code>, there is no side effect.
+Otherwise, if the key is a non-negative-valued <code>int</code>, the left-most single
+character from the right-hand operand is stored at the designated
+location; all other characters in the right-hand operand string are
+ignored.  If the designated location is beyond the end of the
+destination string, that string is extended to the new length with
+spaces (0x20) added as padding beyond the old end and before the newly
+added character. If the right-hand operand is an empty string, the null
+character \0 (0x00) is stored.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$a = $b = 10    // equivalent to $a = ($b = 10)
+$v = array(10, 20, 30);
+$v[1] = 1.234;    // change the value (and type) of an existing element
+$v[-10] = 19;   // insert a new element with int key -10
+$v[&quot;red&quot;] = TRUE; // insert a new element with string key &quot;red&quot;
+$s = &quot;red&quot;;
+$s[1] = &quot;X&quot;;    // OK; &quot;e&quot; -&gt; &quot;X&quot;
+$s[-5] = &quot;Y&quot;;   // warning; string unchanged
+$s[5] = &quot;Z&quot;;    // extends string with &quot;Z&quot;, padding with spaces in [3]-[5]
+$s = &quot;red&quot;;
+$s[0] = &quot;DEF&quot;;    // &quot;r&quot; -&gt; &quot;D&quot;; only 1 char changed; &quot;EF&quot; ignored
+$s[0] = &quot;&quot;;       // &quot;D&quot; -&gt; &quot;\0&quot;
+$s[&quot;zz&quot;] = &quot;Q&quot;;   // warning; defaults to [0], and &quot;Q&quot; is stored there
+// -----------------------------------------
+class C { ... }
+$a = new C; // make $a point to the allocated object
+</code></pre>
+<h4><a class="header" href="#list-intrinsic" id="list-intrinsic">list intrinsic</a></h4>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+list-intrinsic:
+  'list' '(' list-expression-list ')'
+
+list-expression-list:
+  unkeyed-list-expression-list
+  keyed-list-expression-list ','?
+
+unkeyed-list-expression-list:
+  list-or-variable
+  ','
+  unkeyed-list-expression-list ',' list-or-variable?
+
+keyed-list-expression-list:
+  expression '=>' list-or-variable
+  keyed-list-expression-list ',' expression '=>' list-or-variable
+
+list-or-variable:
+  list-intrinsic
+  '&'? variable
+-->
+<pre>
+<i id="grammar-list-intrinsic">list-intrinsic:</i>
+   list   (   <i><a href="#grammar-list-expression-list">list-expression-list</a></i>   )
+
+<i id="grammar-list-expression-list">list-expression-list:</i>
+   <i><a href="#grammar-unkeyed-list-expression-list">unkeyed-list-expression-list</a></i>
+   <i><a href="#grammar-keyed-list-expression-list">keyed-list-expression-list</a></i>   ,<sub>opt</sub>
+
+<i id="grammar-unkeyed-list-expression-list">unkeyed-list-expression-list:</i>
+   <i><a href="#grammar-list-or-variable">list-or-variable</a></i>
+   ,
+   <i><a href="#grammar-unkeyed-list-expression-list">unkeyed-list-expression-list</a></i>   ,   <i><a href="#grammar-list-or-variable">list-or-variable</a></i><sub>opt</sub>
+
+<i id="grammar-keyed-list-expression-list">keyed-list-expression-list:</i>
+   <i><a href="#grammar-expression">expression</a></i>   =&gt;   <i><a href="#grammar-list-or-variable">list-or-variable</a></i>
+   <i><a href="#grammar-keyed-list-expression-list">keyed-list-expression-list</a></i>   ,   <i><a href="#grammar-expression">expression</a></i>   =&gt;   <i><a href="#grammar-list-or-variable">list-or-variable</a></i>
+
+<i id="grammar-list-or-variable">list-or-variable:</i>
+   <i><a href="#grammar-list-intrinsic">list-intrinsic</a></i>
+   &amp;<sub>opt</sub>   <i><a href="#grammar-variable">variable</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p><em>list-intrinsic</em> must be used as the left-hand operand in a
+<a href="#simple-assignment"><em>simple-assignment-expression</em></a> of which the right-hand
+operand must be an expression that designates an array or object implementing
+the <code>ArrayAccess</code> interface (called the <em>source array</em>).</p>
+<p>Each <em>variable</em> in <em>list-or-variable</em> must designate a writable variable (called
+the <em>target variable</em>).</p>
+<p>At least one of the elements of the <em>list-expression-list</em> must be non-empty.</p>
+<p><strong>Semantics</strong></p>
+<p>This intrinsic assigns one or more elements of the source array to the
+target variables.  Target variables may be assigned by reference.
+On success, it will return a copy of the source array. If the
+source array is not an array or object implementing <code>ArrayAccess</code> no
+assignments are performed and the return value is <code>NULL</code>.</p>
+<p>For <em>unkeyed-list-expression-list</em>, all elements in the source array having
+keys of type <code>string</code> are ignored.
+The element having an <code>int</code> key of 0 is assigned to the first target
+variable, the element having an <code>int</code> key of 1 is assigned to the second
+target variable, and so on, until all target variables have been
+assigned. Any other array elements are ignored. If there are
+fewer source array elements having int keys than there are target
+variables, the unassigned target variables are set to <code>NULL</code> and
+a non-fatal error is produced.</p>
+<p>For <em>keyed-list-expression-list</em>, each key-variable pair is handled in turn,
+with the key and variable being separated by the <code>=&gt;</code> symbol.
+The element having the first key, with the key having been converted using the
+same rules as the <a href="10-expressions.html#subscript-operator">subscript operator</a>,
+is assigned to the frst target variable. This process is repeated for the
+second <code>=&gt;</code> pair, if any, and so on. Any other array elements are ignored.
+If there is no array element with a given key, the unassigned target variable
+is set to <code>NULL</code> and a non-fatal error is produced.</p>
+<p>The assignments must occur in this order.</p>
+<p>Any target variable may be a list, in which case, the corresponding
+element is expected to be an array.</p>
+<p>If the source array elements and the target variables overlap in any
+way, the behavior is unspecified.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">list($min, $max, $avg) = array(0, 100, 67);
+  // $min is 0, $max is 100, $avg is 67
+list($min, $max, $avg) = array(2 =&gt; 67, 1 =&gt; 100, 0 =&gt; 0);
+  // same as example above
+list($min, , $avg) = array(0, 100, 67);
+  // $min is 0, $avg is 67
+list($min, $max, $avg) = array(0, 2 =&gt; 100, 4 =&gt; 67);
+  // $min is 0, $max is NULL, $avg is 100
+list($min, list($max, $avg)) = [0, [1 =&gt; 67, 99, 0 =&gt; 100], 33];
+  // $min is 0, $max is 100, $avg is 67
+
+list($arr[1], $arr[0]) = [0, 1];
+  // $arr is [1 =&gt; 0, 0 =&gt; 1], in this order
+list($arr2[], $arr2[]) = [0, 1];
+  // $arr2 is [0, 1]
+
+$a = [1, 2];
+list(&amp;$one, $two) = $a;
+  // $a[0] is 1, $a[1] is 2
+$one++;
+  // $a[0] is 2, $a[1] is 2
+
+list(&quot;one&quot; =&gt; $one, &quot;two&quot; =&gt; $two) = [&quot;one&quot; =&gt; 1, &quot;two&quot; =&gt; 2];
+  // $one is 1, $two is 2
+list(
+    &quot;one&quot; =&gt; $one,
+    &quot;two&quot; =&gt; $two,
+) = [
+    &quot;one&quot; =&gt; 1,
+    &quot;two&quot; =&gt; 2,
+];
+  // $one is 1, $two is 2
+
+$a = ['one' =&gt; 1, 'two' =&gt; 2];
+list('one' =&gt; &amp;$one, 'two' =&gt; $two) = $a;
+  // $a['one'] is 1, $a['two'] is 2
+$one++;
+  // $a['one'] is 2, $a['two'] is 2
+
+list(list(&quot;x&quot; =&gt; $x1, &quot;y&quot; =&gt; $y1), list(&quot;x&quot; =&gt; $x2, &quot;y&quot; =&gt; $y2)) = [
+    [&quot;x&quot; =&gt; 1, &quot;y&quot; =&gt; 2],
+    [&quot;x&quot; =&gt; 3, &quot;y&quot; =&gt; 4]
+];
+  // $x1 is 1, $y1 is 2, $x2 is 3, $y2 is 4
+list(0 =&gt; list($x1, $x2), 1 =&gt; list($x2, $y2)) = [[1, 2], [3, 4]];
+  // $x1 is 1, $y1 is 2, $x2 is 3, $y2 is 4
+</code></pre>
+<h3><a class="header" href="#byref-assignment" id="byref-assignment">byRef Assignment</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+byref-assignment-expression:
+  variable '=' '&' variable
+-->
+<pre>
+<i id="grammar-byref-assignment-expression">byref-assignment-expression:</i>
+   <i><a href="#grammar-variable">variable</a></i>   =   &amp;   <i><a href="#grammar-variable">variable</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The right-hand-side <em>variable</em> must be an lvalue or a call to a function
+that returns a value byRef.</p>
+<p><strong>Semantics</strong></p>
+<p><em>unary-expression</em> becomes an alias for <em>assignment-expression</em>.
+If <em>assignment-expression</em> designates an expression having value type,
+see  <a href="04-basic-concepts.html#byref-assignment-for-scalar-types-with-local-variables">byRef assignment for scalar types</a>
+If <em>assignment-expression</em> designates an expression having handle type, see <a href="04-basic-concepts.html#byref-assignment-of-non-scalar-types-with-local-variables">byRef assignment for non-scalar types</a>.
+If <em>assignment-expression</em> designates an expression having array type, see
+<a href="04-basic-concepts.html#deferred-array-copying">deferred array copying</a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$a = 10;
+$b =&amp; $a;   // make $b an alias of $a
+++$a;       // increment $a/$b to 11
+$b = -12;   // sets $a/$b to -12
+$a = &quot;abc&quot;;     // sets $a/$b to &quot;abc&quot;
+unset($b);      // removes $b's alias to $a
+// -----------------------------------------
+function &amp;g2() { $t = &quot;xxx&quot;; return $t; } // return byRef
+$b =&amp; g2();     // make $b an alias to &quot;xxx&quot;
+</code></pre>
+<h2><a class="header" href="#compound-assignment" id="compound-assignment">Compound Assignment</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+compound-assignment-expression:
+  variable compound-assignment-operator assignment-expression
+
+compound-assignment-operator: one of
+  '**=' '*=' '/=' '%=' '+=' '-=' '.=' '<<=' '>>=' '&=' '^=' '|='
+-->
+<pre>
+<i id="grammar-compound-assignment-expression">compound-assignment-expression:</i>
+   <i><a href="#grammar-variable">variable</a></i>   <i><a href="#grammar-compound-assignment-operator">compound-assignment-operator</a></i>   <i><a href="#grammar-assignment-expression">assignment-expression</a></i>
+
+<i id="grammar-compound-assignment-operator">compound-assignment-operator: one of</i>
+   **=   *=   /=   %=   +=   -=   .=   &lt;&lt;=   &gt;&gt;=   &amp;=   ^=   |=
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Any constraints that apply to the corresponding binary operator apply to the compound-assignment form as well.</p>
+<p><strong>Semantics</strong></p>
+<p>The expression <code>e1 op= e2</code> is equivalent to <code>e1 = e1 op (e2)</code>, except
+that <code>e1</code> is evaluated only once.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$v = 10;
+$v += 20;   // $v = 30
+$v -= 5;    // $v = 25
+$v .= 123.45  // $v = &quot;25123.45&quot;
+$a = [100, 200, 300];
+$i = 1;
+$a[$i++] += 50; // $a[1] = 250, $i → 2
+</code></pre>
+<h2><a class="header" href="#yield-operator" id="yield-operator"><code>yield</code> Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+yield-from-expression:
+  'yield from' assignment-expression
+
+yield-expression:
+  yield-from-expression
+  'yield'
+  'yield' yield-expression
+  'yield' yield-from-expression '=>' yield-expression
+-->
+<pre>
+<i id="grammar-yield-from-expression">yield-from-expression:</i>
+   yield from   <i><a href="#grammar-assignment-expression">assignment-expression</a></i>
+
+<i id="grammar-yield-expression">yield-expression:</i>
+   <i><a href="#grammar-yield-from-expression">yield-from-expression</a></i>
+   yield
+   yield   <i><a href="#grammar-yield-expression">yield-expression</a></i>
+   yield   <i><a href="#grammar-yield-from-expression">yield-from-expression</a></i>   =&gt;   <i><a href="#grammar-yield-expression">yield-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Any function containing a <em>yield-expression</em> is a <em>generator function</em>.
+A generator function generates a collection of zero or more key/value
+pairs where each pair represents the next in some series. For example, a
+generator might <em>yield</em> random numbers or the series of Fibonacci
+numbers. When a generator function is called explicitly, it returns an
+object of type <a href="14-classes.html#class-generator"><code>Generator</code></a>, which implements the interface
+<a href="15-interfaces.html#interface-iterator"><code>Iterator</code></a>. As such, this allows that object to be iterated over
+using the <a href="11-statements.html#the-foreach-statement"><code>foreach</code> statement</a>. During each iteration, the Engine
+calls the generator function implicitly to get the next key/value pair.
+Then the Engine saves the state of the generator for subsequent key/value pair requests.</p>
+<p>The <code>yield</code> operator produces the result <code>NULL</code> unless the method
+<a href="14-classes.html#class-generator"><code>Generator-&gt;send</code></a> was called to provide a result value. This
+operator has the side effect of generating the next value in the collection.</p>
+<p>If the key is omitted from an a <em>yield-expression</em>, an
+element key of type <code>int</code> is associated with the corresponding
+value. The key associated is one more than the previously
+assigned int key for this collection. However, if this is the first
+element in this collection with an <code>int</code> key, zero is used.</p>
+<p>If the value is also omitted, <code>NULL</code> will be used instead.</p>
+<p>If the generator function definition declares that it returns byRef,
+each value in a key/value pair is yielded byRef.</p>
+<p>The following applies only to the <code>yield from</code> form:</p>
+<p>A generator function (referred to as a <em>delegating generator</em>) can delegate to another generator function (referred to as a <em>subgenerator</em>), a Traversable object, or an array, each of which is designated by <em>expression</em>.</p>
+<p>Each value yielded by <em>assignment-expression</em> is passed directly to the delegating generator’s caller.</p>
+<p>Each value sent to the delegating generator’s <code>send</code> method is passed to the subgenerator’s <code>send</code> method. If <em>assignment-expression</em> is not a generator function, any sent values are ignored.</p>
+<p>Exceptions thrown by <em>assignment-expression</em> are propagated up to the delegating generator.</p>
+<p>Upon traversable completion, <code>NULL</code> is returned to the delegating generator if the traversable is not a generator. If the traversable is a generator, its return value is sent to the delegating generator as the value of the <code>yield from</code> <em>expression</em>.</p>
+<p>An exception of type <code>Error</code> is thrown if <em>assignment-expression</em> evaluates to a generator that previously terminated with an uncaught exception, or it evaluates to something that is neither Traversable nor an array.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">function getTextFileLines($filename)
+{
+  $infile = fopen($filename, 'r');
+  if ($infile == FALSE) { /* deal with the file-open failure */ }
+
+  try
+  {
+    while ($textLine = fgets($infile))  // while not EOF
+    {
+      $textLine = rtrim($textLine, &quot;\r\n&quot;); // strip off terminator
+      yield $textLine;
+    }
+  }
+  finally
+  {
+    fclose($infile);
+  }
+}
+foreach (getTextFileLines(&quot;Testfile.txt&quot;) as $line) { /* process each line */ }
+// -----------------------------------------
+function series($start, $end, $keyPrefix = &quot;&quot;)
+{
+  for ($i = $start; $i &lt;= $end; ++$i)
+  {
+    yield $keyPrefix . $i =&gt; $i;  // generate a key/value pair
+  }
+}
+foreach (series(1, 5, &quot;X&quot;) as $key =&gt; $val) { /* process each key/val pair */ }
+// -----------------------------------------
+function gen()
+{
+    yield 1;
+    yield from gen2();
+    yield 4;
+}
+function gen2()
+{
+    yield 2;
+    yield 3;
+}
+foreach (gen() as $val)
+{
+    echo $val . &quot;\n&quot;;   // Produces the values 1, 2, 3, and 4
+}
+// -----------------------------------------
+function g() {
+  yield 1;
+  yield from [2, 3];
+  yield 4;
+}
+$g = g();
+foreach ($g as $yielded) {
+    echo $yielded . &quot;\n&quot;;   // Produces the values 1, 2, 3, and 4
+}
+</code></pre>
+<h2><a class="header" href="#print-expression" id="print-expression">Print expression</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+print-expression:
+  yield-expression
+  'print' print-expression
+-->
+<pre>
+<i id="grammar-print-expression">print-expression:</i>
+   <i><a href="#grammar-yield-expression">yield-expression</a></i>
+   print   <i><a href="#grammar-print-expression">print-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p><em>print-expression</em> value must be <a href="08-conversions.html#converting-to-string-type">convertable to a string</a>.
+In particular, it should not be an array and if it is an object, it must implement
+a <a href="14-classes.html#method-__tostring"><code>__toString</code> method</a>.</p>
+<p><strong>Semantics</strong></p>
+<p>After converting <em>print-expression</em>‘s value into a string, if necessary,
+<code>print</code> writes the resulting string to <a href="06-constants.html#core-predefined-constants"><code>STDOUT</code></a>.
+Unlike <a href="11-statements.html#the-echo-statement"><code>echo</code></a>, <code>print</code> can be used in any context
+allowing an expression. It always returns the value 1.</p>
+<p>See also: <a href="09-lexical-structure.html#double-quoted-string-literals">double quoted strings</a> and
+<a href="09-lexical-structure.html#heredoc-string-literals">heredoc documents</a>, <a href="08-conversions.html#converting-to-string-type">conversion to string</a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$v1 = TRUE;
+$v2 = 123;
+print  '&gt;&gt;' . $v1 . '|' . $v2 . &quot;&lt;&lt;\n&quot;;   // outputs &quot;&gt;&gt;1|123&lt;&lt;&quot;
+print ('&gt;&gt;' . $v1 . '|' . $v2 . &quot;&lt;&lt;\n&quot;);  // outputs &quot;&gt;&gt;1|123&lt;&lt;&quot;
+$v3 = &quot;qqq{$v2}zzz&quot;;
+print &quot;$v3\n&quot;;            // outputs &quot;qqq123zzz&quot;
+$a &gt; $b ? print &quot;...&quot; : print &quot;...&quot;;
+</code></pre>
+<h2><a class="header" href="#logical-and-operator-form-2" id="logical-and-operator-form-2">Logical AND Operator (form 2)</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+logical-AND-expression-2:
+  print-expression
+  logical-AND-expression-2 'and' yield-expression
+-->
+<pre>
+<i id="grammar-logical-AND-expression-2">logical-AND-expression-2:</i>
+   <i><a href="#grammar-print-expression">print-expression</a></i>
+   <i><a href="#grammar-logical-AND-expression-2">logical-AND-expression-2</a></i>   and   <i><a href="#grammar-yield-expression">yield-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Except for the difference in precedence, operator and has exactly the
+same semantics as <a href="#logical-and-operator-form-1">operator <code>&amp;&amp;</code></a>.</p>
+<h2><a class="header" href="#logical-exclusive-or-operator" id="logical-exclusive-or-operator">Logical Exclusive OR Operator</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+logical-exc-OR-expression:
+  logical-AND-expression-2
+  logical-exc-OR-expression 'xor' logical-AND-expression-2
+-->
+<pre>
+<i id="grammar-logical-exc-OR-expression">logical-exc-OR-expression:</i>
+   <i><a href="#grammar-logical-AND-expression-2">logical-AND-expression-2</a></i>
+   <i><a href="#grammar-logical-exc-OR-expression">logical-exc-OR-expression</a></i>   xor   <i><a href="#grammar-logical-AND-expression-2">logical-AND-expression-2</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>If either operand does not have type <code>bool</code>, its value is first converted
+to that type.</p>
+<p>Given the expression <code>e1 xor e2</code>, <code>e1</code> is evaluated first, then <code>e2</code>. If
+either <code>e1</code> or <code>e2</code> <a href="08-conversions.html#converting-to-boolean-type">converted to <code>bool</code></a> as <code>TRUE</code>, but not both, the result has type <code>bool</code>, value
+<code>TRUE</code>. Otherwise, the result has type <code>bool</code>, value <code>FALSE</code>. There is a
+sequence point after the evaluation of <code>e1</code>.</p>
+<p>This operator associates left-to-right.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">f($i++) xor g($i) // the sequence point makes this well-defined
+</code></pre>
+<h2><a class="header" href="#logical-inclusive-or-operator-form-2" id="logical-inclusive-or-operator-form-2">Logical Inclusive OR Operator (form 2)</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+logical-inc-OR-expression-2:
+  logical-exc-OR-expression
+  logical-inc-OR-expression-2 'or' logical-exc-OR-expression
+-->
+<pre>
+<i id="grammar-logical-inc-OR-expression-2">logical-inc-OR-expression-2:</i>
+   <i><a href="#grammar-logical-exc-OR-expression">logical-exc-OR-expression</a></i>
+   <i><a href="#grammar-logical-inc-OR-expression-2">logical-inc-OR-expression-2</a></i>   or   <i><a href="#grammar-logical-exc-OR-expression">logical-exc-OR-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Except for the difference in precedence, operator and has exactly the
+same semantics as <a href="#logical-inclusive-or-operator-form-1">operator <code>||</code></a>.</p>
+<h2><a class="header" href="#script-inclusion-operators" id="script-inclusion-operators">Script Inclusion Operators</a></h2>
+<h3><a class="header" href="#general-5" id="general-5">General</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+expression:
+  logical-inc-OR-expression-2
+  include-expression
+  include-once-expression
+  require-expression
+  require-once-expression
+-->
+<pre>
+<i id="grammar-expression">expression:</i>
+   <i><a href="#grammar-logical-inc-OR-expression-2">logical-inc-OR-expression-2</a></i>
+   <i><a href="#grammar-include-expression">include-expression</a></i>
+   <i><a href="#grammar-include-once-expression">include-once-expression</a></i>
+   <i><a href="#grammar-require-expression">require-expression</a></i>
+   <i><a href="#grammar-require-once-expression">require-once-expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>When creating large applications or building component libraries, it is
+useful to be able to break up the source code into small, manageable
+pieces each of which performs some specific task, and which can be
+shared somehow, and tested, maintained, and deployed individually. For
+example, a programmer might define a series of useful constants and use
+them in numerous and possibly unrelated applications. Likewise, a set of
+class definitions can be shared among numerous applications needing to
+create objects of those types.</p>
+<p>An <em>include file</em> is a script that is suitable for <em>inclusion</em> by
+another script. The script doing the including is the <em>including file</em>,
+while the one being included is the <em>included file</em>. A script can be an
+including file and an included file, either, or neither.</p>
+<p>Using the series-of-constants example, an include file called
+<code>Positions.php</code> might define the constants <code>TOP</code>, <code>BOTTOM</code>, <code>LEFT</code>, and <code>RIGHT</code>,
+in their own <a href="18-namespaces.html#general">namespace</a>, Positions. Using the set-of-classes
+example, to support two-dimensional geometry applications, an include
+file called <code>Point.php</code> might define the class <code>Point</code>. An include file
+called <code>Line.php</code> might define the class Line (where a <code>Line</code> is represented
+as a pair of Points).An include file, called <code>Circle.php</code> might define the
+class <code>Circle</code> (where a <code>Circle</code> is represented as a <code>Point</code> for the origin,
+and a radius).</p>
+<p>If a number of the scripts making up an application each use one or more
+of the Position constants, they can each include the corresponding
+include file via the <a href="#the-include-operator"><code>include</code> operator</a>. However, most include
+files behave the same way each time they are included, so it is
+generally a waste of time including the same include file more than once
+into the same scope. In the case of the geometry example, any attempt to
+include the same include file more than once will result in a fatal
+“attempted class type redefinition” error. However, this can be avoided
+by using the <a href="#the-include_once-operator"><code>include_once</code> operator</a> instead.</p>
+<p>The <a href="#the-require-operator"><code>require</code> operator</a> is a variant of the <code>include</code> operator,
+and the <a href="#the-require_once-operator"><code>require_once</code> operator</a> is a variant of the
+<code>include_once</code> operator.</p>
+<p>It is important to understand that unlike the C/C++ (or similar)
+preprocessor, script inclusion in PHP is not a text substitution
+process. That is, the contents of an included file are not treated as if
+they directly replaced the inclusion operation source in the including
+file. See examples below for more information.</p>
+<p>An inclusion expression can be written to look like a function call;
+however, that is not the case, even though an included file can return a
+value to its including file.</p>
+<p>The name used to specify an include file may contain an absolute or
+relative path. In the latter case, an implementation may use the
+configuration directive
+<a href="http://www.php.net/manual/ini.core.php#ini.include-path"><code>include_path</code></a>
+to resolve the include file’s location.</p>
+<p><strong>Examples:</strong></p>
+<p>As mentioned above, script inclusion in PHP is not a text substitution process (unlike C/C++‘s preprocessor and alike). This allows that one can specify namespaces in the included file even though nested namespaces in a single file only are not permitted:</p>
+<p>include.php</p>
+<pre><code>namespace foo;
+$x = 'hello';
+foo();
+</code></pre>
+<p>index.php</p>
+<pre><code>namespace bar {
+  include 'include.php'; // this is fine does not result in a nested namespace
+  echo $x;               // hello
+  \foo\foo();            // function foo is still member of the foo namespace
+
+  //namespace baz{}      // would fail, nesting namespaces are not allowed
+}
+</code></pre>
+<p>Moreover, nested classes in a single file are not permitted whereas classes defined in an included file does not result in a nested class (in a conditionally defined class though) - the same applies for nested interfaces or traits:</p>
+<p>include.php</p>
+<pre><code>namespace foo;
+class Foo{}
+</code></pre>
+<p>index.php</p>
+<pre><code>class Bar{
+  function bar(){
+    include 'include.php'; // this is fine, does not result in a nested class
+  }
+  //class Foo1{}       // would fail, nested classes are not allowed
+  //interface Foo2{}   // would fail as well
+  //trait Foo3{}       // and would fail as well
+}
+new Foo();             // fails, \Foo could not be found
+new \foo\Foo();        // fails, definition for class Foo was not loaded yet
+$bar = new Bar();
+$bar-&gt;bar();
+new Foo();             // still fails, include != use statement
+new \foo\Foo();        // succeeds, definition for class Foo was loaded
+</code></pre>
+<p><a href="06-constants.html#general">c-constants</a> can not be defined within a function or method (in contrast to <a href="06-constants.html#general">d-constants</a>. As in the other examples above, this is perfectly legal when it happens through a file inclusion in which the constant does not lose its scope. Consider the following example:</p>
+<p>include.php</p>
+<pre><code>namespace foo;
+const X = 2;
+</code></pre>
+<p>index.php</p>
+<pre><code>class Bar{
+  function bar(){
+    include 'include.php';
+  }
+}
+echo X;                // emits a warning: Use of undefined constant X ...
+echo \foo\X;           // same as above since the inclusion did not happen yet
+$bar = new Bar();
+$bar-&gt;bar();
+echo X;                // still fails, include != use statement
+echo \foo\X;           // succeeds, X was defined through the inclusion
+</code></pre>
+<p>In contrast to constants, functions, classes, interfaces and traits, variables defined at the top level of a file might change their meaning (being a global variable) when the corresponding file is included by another file. This is the case when the inclusion happens in a local scope. In this case the variables become local variables of the corresponding scope. Following an example as illustration:</p>
+<p>include.php</p>
+<pre><code>namespace foo;
+$x = 'hello';
+</code></pre>
+<p>index.php</p>
+<pre><code>function bar(){
+  include 'include.php';  // introduces the local variable $x
+  $x = 'hi';              // modification is only local
+  return $x;
+}
+echo bar();               // hi
+echo $x;                  // emits a notice: Undefined variable: x ...
+
+include 'include.php';    // introduces the global variable $x
+echo $x;                  // hello
+</code></pre>
+<h3><a class="header" href="#the-include-operator" id="the-include-operator">The <code>include</code> Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+include-expression:
+  'include' expression
+-->
+<pre>
+<i id="grammar-include-expression">include-expression:</i>
+   include   <i><a href="#grammar-expression">expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p><em>expression</em> must be convertable to a string, which designates
+a filename.</p>
+<p><strong>Semantics</strong></p>
+<p>Operator <code>include</code> results in parsing and executing the designated include
+file. If the filename is invalid or does not specify a readable
+file, a non-fatal error is produced.</p>
+<p>When an included file is opened, parsing begins in HTML mode at the beginning of the file.
+After the included file has been parsed, it is immediately executed.</p>
+<p>Variables defined in an included file take on scope of the source line
+on which the inclusion occurs in the including file. However, functions
+and classes defined in the included file are always in global scope.</p>
+<p>If inclusion occurs inside a function definition within the including
+file, the complete contents of the included file are treated as though
+it were defined inside that function.</p>
+<p>The result produced by this operator is one of the following:</p>
+<ol>
+<li>If the included file <a href="11-statements.html#the-return-statement">returned any value</a>, that value is the result.</li>
+<li>If the included file has not returned any value, the result is the integer <code>1</code>.</li>
+<li>If the inclusion failed for any reason, the result is <code>FALSE</code>.</li>
+</ol>
+<p>The library function <a href="http://php.net/manual/function.get-included-files.php"><code>get_included_files</code></a> provides the names of
+all files included by any of the four including operators.</p>
+<p><strong>Examples:</strong></p>
+<pre><code>$fileName = 'limits' . '.php'; include $fileName;
+$inc = include('limits.php');
+If ((include 'Positions.php') == 1) ...
+</code></pre>
+<h3><a class="header" href="#the-include_once-operator" id="the-include_once-operator">The <code>include_once</code> Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+include-once-expression:
+  'include_once' expression
+-->
+<pre>
+<i id="grammar-include-once-expression">include-once-expression:</i>
+   include_once   <i><a href="#grammar-expression">expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>This operator is identical to operator <a href="#the-include-operator"><code>include</code></a> except that in
+the case of <code>include_once</code>, the same include file is included once per
+program execution.</p>
+<p>Once an include file has been included, a subsequent use of
+<code>include_once</code> on that include file results in a return value of <code>TRUE</code> but nothing else
+happens.</p>
+<p>The files are identified by the full pathname, so different forms of the filename (such as full
+and relative path) still are considered the same file.</p>
+<p><strong>Examples:</strong></p>
+<p>Point.php:</p>
+<pre><code>\\ Point.php:
+&lt;?php ...
+class Point { ... }
+
+\\ Circle.php:
+&lt;?php ...
+include_once 'Point.php';
+class Circle { /* uses Point somehow */ }
+
+\\ MyApp.php
+include_once 'Point.php';   // Point.php included directly
+include_once 'Circle.php';    // Point.php now not included indirectly
+$p1 = new Point(10, 20);
+$c1 = new Circle(9, 7, 2.4);
+</code></pre>
+<h3><a class="header" href="#the-require-operator" id="the-require-operator">The <code>require</code> Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+require-expression:
+  'require' expression
+-->
+<pre>
+<i id="grammar-require-expression">require-expression:</i>
+   require   <i><a href="#grammar-expression">expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>This operator is identical to operator <a href="#the-include-operator"><code>include</code></a> except that in
+the case of <code>require</code>, failure to find/open the designated include file
+produces a fatal error.</p>
+<h3><a class="header" href="#the-require_once-operator" id="the-require_once-operator">The <code>require_once</code> Operator</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+require-once-expression:
+  'require_once' expression
+-->
+<pre>
+<i id="grammar-require-once-expression">require-once-expression:</i>
+   require_once   <i><a href="#grammar-expression">expression</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>This operator is identical to operator <a href="#the-require-operator"><code>require</code></a> except that in
+the case of <code>require_once</code>, the include file is included once per
+program execution.</p>
+<p>Once an include file has been included, a subsequent use of
+<code>require_once</code> on that include file results in a return value of <code>TRUE</code> but nothing else
+happens.</p>
+<p>The files are identified by the full pathname, so different forms of the filename (such as full
+and relative path) still are considered the same file.</p>
+<h2><a class="header" href="#constant-expressions" id="constant-expressions">Constant Expressions</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+constant-expression:
+  expression
+-->
+<pre>
+<i id="grammar-constant-expression">constant-expression:</i>
+   <i><a href="#grammar-expression">expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The <em>expression</em> may only use the following syntactic elements:</p>
+<ul>
+<li><a href="#literals">Literals</a>. String literals must not use interpolation.</li>
+<li><a href="#array-creation-operator">Array creation expressions</a>.</li>
+<li>Unary operators <code>+</code>, <code>-</code>, <code>~</code>, <code>!</code>.</li>
+<li>Binary operators <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>.</code>, <code>**</code>, <code>^</code>, <code>|</code>, <code>&amp;</code>,
+<code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;=&gt;</code>, <code>==</code>, <code>!=</code>, <code>===</code>, <code>!==</code>, <code>&amp;&amp;</code>, <code>||</code>, <code>??</code>.</li>
+<li><a href="#conditional-operator">Conditional expressions</a>.</li>
+<li><a href="#subscript-operator">Subscript expressions</a>.</li>
+<li><a href="#constant-access-expression">Constant access expressions</a>.</li>
+<li><a href="#scope-resolution-operator">Class constant access expressions</a>.</li>
+</ul>
+<p><strong>Semantics</strong></p>
+<p>A <em>constant-expression</em> evaluates to the value of the constituent <em>expression</em>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/09-lexical-structure.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/11-statements.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/09-lexical-structure.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/11-statements.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

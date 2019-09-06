@@ -1,0 +1,1362 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Statements - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html" class="active"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#statements" id="statements">Statements</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+statement:
+  compound-statement
+  named-label-statement
+  expression-statement
+  selection-statement
+  iteration-statement
+  jump-statement
+  try-statement
+  declare-statement
+  echo-statement
+  unset-statement
+  const-declaration
+  function-definition
+  class-declaration
+  interface-declaration
+  trait-declaration
+  namespace-definition
+  namespace-use-declaration
+  global-declaration
+  function-static-declaration
+-->
+<pre>
+<i id="grammar-statement">statement:</i>
+   <i><a href="#grammar-compound-statement">compound-statement</a></i>
+   <i><a href="#grammar-named-label-statement">named-label-statement</a></i>
+   <i><a href="#grammar-expression-statement">expression-statement</a></i>
+   <i><a href="#grammar-selection-statement">selection-statement</a></i>
+   <i><a href="#grammar-iteration-statement">iteration-statement</a></i>
+   <i><a href="#grammar-jump-statement">jump-statement</a></i>
+   <i><a href="#grammar-try-statement">try-statement</a></i>
+   <i><a href="#grammar-declare-statement">declare-statement</a></i>
+   <i><a href="#grammar-echo-statement">echo-statement</a></i>
+   <i><a href="#grammar-unset-statement">unset-statement</a></i>
+   <i><a href="14-classes.html#grammar-const-declaration">const-declaration</a></i>
+   <i><a href="13-functions.html#grammar-function-definition">function-definition</a></i>
+   <i><a href="14-classes.html#grammar-class-declaration">class-declaration</a></i>
+   <i><a href="15-interfaces.html#grammar-interface-declaration">interface-declaration</a></i>
+   <i><a href="16-traits.html#grammar-trait-declaration">trait-declaration</a></i>
+   <i><a href="18-namespaces.html#grammar-namespace-definition">namespace-definition</a></i>
+   <i><a href="18-namespaces.html#grammar-namespace-use-declaration">namespace-use-declaration</a></i>
+   <i><a href="07-variables.html#grammar-global-declaration">global-declaration</a></i>
+   <i><a href="07-variables.html#grammar-function-static-declaration">function-static-declaration</a></i>
+</pre>
+<h2><a class="header" href="#compound-statements" id="compound-statements">Compound Statements</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+compound-statement:
+  '{' statement-list? '}'
+
+statement-list:
+  statement
+  statement-list statement
+-->
+<pre>
+<i id="grammar-compound-statement">compound-statement:</i>
+   {   <i><a href="#grammar-statement-list">statement-list</a></i><sub>opt</sub>   }
+
+<i id="grammar-statement-list">statement-list:</i>
+   <i><a href="#grammar-statement">statement</a></i>
+   <i><a href="#grammar-statement-list">statement-list</a></i>   <i><a href="#grammar-statement">statement</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>A <em>compound statement</em> allows a group of zero or more statements to be
+treated syntactically as a single statement. A compound statement is
+often referred to as a <em>block</em>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">if (condition)
+{ // braces are needed as the true path has more than one statement
+  // statement-1
+  // statement-2
+}
+else
+{ // braces are optional as the false path has only one statement
+  // statement-3
+}
+// -----------------------------------------
+while (condition)
+{ // the empty block is equivalent to a null statement
+}
+</code></pre>
+<h2><a class="header" href="#labeled-statements" id="labeled-statements">Labeled Statements</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+named-label-statement:
+  name ':'
+-->
+<pre>
+<i id="grammar-named-label-statement">named-label-statement:</i>
+   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   :
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Named labels must be unique within a function.</p>
+<p><strong>Semantics</strong></p>
+<p>A named label can be used as the target of a <a href="#the-goto-statement"><code>goto</code> statement</a>.
+The presence of a label does not by itself alter the flow of execution.</p>
+<h2><a class="header" href="#expression-statements" id="expression-statements">Expression Statements</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+expression-statement:
+  expression? ';'
+-->
+<pre>
+<i id="grammar-expression-statement">expression-statement:</i>
+   <i><a href="10-expressions.html#grammar-expression">expression</a></i><sub>opt</sub>   ;
+</pre>
+<p><strong>Semantics</strong></p>
+<p>If present, <em>expression</em> is evaluated for its side effects, if any, and
+any resulting value is discarded. If <em>expression</em> is omitted, the
+statement is a <em>null statement</em>, which has no effect on execution.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$i = 10;  // $i is assigned the value 10; result (10) is discarded
+++$i; // $i is incremented; result (11) is discarded
+$i++; // $i is incremented; result (11) is discarded
+DoIt(); // function DoIt is called; result (return value) is discarded
+// -----------------------------------------
+$i;   // no side effects, result is discarded. Vacuous but permitted
+123;  // likewise for this one and the two statements following
+34.5 * 12.6 + 11.987;
+TRUE;
+// -----------------------------------------
+function findValue($table, $value)  // where $table is 2x3 array
+{
+  for ($row = 0; $row &lt;= 1; ++$row)
+  {
+    for ($colm = 0; $colm &lt;= 2; ++$colm)
+    {
+      if ($table[$row][$colm] == $value)
+      {
+        // ...
+        goto done;
+      }
+    }
+  }
+  // ...
+done:
+  ;     // null statement needed as a label must precede a statement
+}
+</code></pre>
+<h2><a class="header" href="#selection-statements" id="selection-statements">Selection Statements</a></h2>
+<h3><a class="header" href="#general-1" id="general-1">General</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+selection-statement:
+  if-statement
+  switch-statement
+-->
+<pre>
+<i id="grammar-selection-statement">selection-statement:</i>
+   <i><a href="#grammar-if-statement">if-statement</a></i>
+   <i><a href="#grammar-switch-statement">switch-statement</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>Based on the value of a controlling expression, a selection statement
+selects among a set of statements.</p>
+<h3><a class="header" href="#the-if-statement" id="the-if-statement">The <code>if</code> Statement</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+if-statement:
+  'if' '(' expression ')' statement elseif-clauses-1? else-clause-1?
+  'if' '(' expression ')' ':' statement-list elseif-clauses-2? else-clause-2? 'endif' ';'
+
+elseif-clauses-1:
+  elseif-clause-1
+  elseif-clauses-1 elseif-clause-1
+
+elseif-clause-1:
+  'elseif' '(' expression ')' statement
+
+else-clause-1:
+  'else' statement
+
+elseif-clauses-2:
+  elseif-clause-2
+  elseif-clauses-2 elseif-clause-2
+
+elseif-clause-2:
+  'elseif' '(' expression ')' ':' statement-list
+
+else-clause-2:
+  'else' ':' statement-list
+-->
+<pre>
+<i id="grammar-if-statement">if-statement:</i>
+   if   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   <i><a href="#grammar-statement">statement</a></i>   <i><a href="#grammar-elseif-clauses-1">elseif-clauses-1</a></i><sub>opt</sub>   <i><a href="#grammar-else-clause-1">else-clause-1</a></i><sub>opt</sub>
+   if   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   :   <i><a href="#grammar-statement-list">statement-list</a></i>   <i><a href="#grammar-elseif-clauses-2">elseif-clauses-2</a></i><sub>opt</sub>   <i><a href="#grammar-else-clause-2">else-clause-2</a></i><sub>opt</sub>   endif   ;
+
+<i id="grammar-elseif-clauses-1">elseif-clauses-1:</i>
+   <i><a href="#grammar-elseif-clause-1">elseif-clause-1</a></i>
+   <i><a href="#grammar-elseif-clauses-1">elseif-clauses-1</a></i>   <i><a href="#grammar-elseif-clause-1">elseif-clause-1</a></i>
+
+<i id="grammar-elseif-clause-1">elseif-clause-1:</i>
+   elseif   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   <i><a href="#grammar-statement">statement</a></i>
+
+<i id="grammar-else-clause-1">else-clause-1:</i>
+   else   <i><a href="#grammar-statement">statement</a></i>
+
+<i id="grammar-elseif-clauses-2">elseif-clauses-2:</i>
+   <i><a href="#grammar-elseif-clause-2">elseif-clause-2</a></i>
+   <i><a href="#grammar-elseif-clauses-2">elseif-clauses-2</a></i>   <i><a href="#grammar-elseif-clause-2">elseif-clause-2</a></i>
+
+<i id="grammar-elseif-clause-2">elseif-clause-2:</i>
+   elseif   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   :   <i><a href="#grammar-statement-list">statement-list</a></i>
+
+<i id="grammar-else-clause-2">else-clause-2:</i>
+   else   :   <i><a href="#grammar-statement-list">statement-list</a></i>
+</pre>
+<p><strong>Semantics</strong></p>
+<p>The two forms of the <code>if</code> statement are equivalent; they simply provide
+alternate styles.</p>
+<p>The result of the controlling expression <em>expression</em> will be <a href="08-conversions.html#converting-to-boolean-type">converted to type <code>bool</code></a>
+if it does not have this type.</p>
+<p>If <em>expression</em> is <code>TRUE</code>, the <em>statement</em> that follows immediately is
+executed. Otherwise, if an <code>elseif</code> clause is present its <em>expression</em> is evaluated
+in turn, and if it is <code>TRUE</code>, the <em>statement</em> immediately following the <code>elseif</code> is executed.
+This repeats for every <code>elseif</code> clause in turn. If none of those tests <code>TRUE</code>, if an
+<code>else</code> clause is present the <em>statement</em> immediately following the <code>else</code> is
+executed.</p>
+<p>An <code>else</code> clause is associated with the lexically nearest preceding <code>if</code> or
+<code>elseif</code> that is permitted by the syntax.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">if ($count &gt; 0)
+{
+  ...
+  ...
+  ...
+}
+// -----------------------------------------
+goto label1;
+echo &quot;Unreachable code\n&quot;;
+
+if ($a)
+{
+label1:
+  ...
+}
+else
+{
+  ...
+}
+// -----------------------------------------
+if (1)
+  ...
+  if (0)
+    ...
+else  // this else does NOT go with the outer if
+  ...
+
+if (1)
+{
+  ...
+  if (0)
+    ...
+}
+else  // this else does go with the outer if
+    ...
+</code></pre>
+<h3><a class="header" href="#the-switch-statement" id="the-switch-statement">The <code>switch</code> Statement</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+switch-statement:
+  'switch' '(' expression ')' '{' case-statements? '}'
+  'switch' '(' expression ')' ':' case-statements? 'endswitch;'
+
+case-statements:
+  case-statement case-statements?
+  default-statement case-statements?
+
+case-statement:
+  'case' expression case-default-label-terminator statement-list?
+
+default-statement:
+  'default' case-default-label-terminator statement-list?
+
+case-default-label-terminator:
+  ':'
+  ';'
+-->
+<pre>
+<i id="grammar-switch-statement">switch-statement:</i>
+   switch   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   {   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>   }
+   switch   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   :   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>   endswitch;
+
+<i id="grammar-case-statements">case-statements:</i>
+   <i><a href="#grammar-case-statement">case-statement</a></i>   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>
+   <i><a href="#grammar-default-statement">default-statement</a></i>   <i><a href="#grammar-case-statements">case-statements</a></i><sub>opt</sub>
+
+<i id="grammar-case-statement">case-statement:</i>
+   case   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   <i><a href="#grammar-case-default-label-terminator">case-default-label-terminator</a></i>   <i><a href="#grammar-statement-list">statement-list</a></i><sub>opt</sub>
+
+<i id="grammar-default-statement">default-statement:</i>
+   default   <i><a href="#grammar-case-default-label-terminator">case-default-label-terminator</a></i>   <i><a href="#grammar-statement-list">statement-list</a></i><sub>opt</sub>
+
+<i id="grammar-case-default-label-terminator">case-default-label-terminator:</i>
+   :
+   ;
+</pre>
+<p><strong>Constraints</strong></p>
+<p>There must be at most one default label.</p>
+<p><strong>Semantics</strong></p>
+<p>The two forms of the <code>switch</code> statement are equivalent; they simply
+provide alternate styles.</p>
+<p>Based on the value of its <em>expression</em>, a <code>switch</code> statement transfers
+control to a <a href="#labeled-statements">case label</a>, to a <a href="#labeled-statements">default label</a>, if one
+exists; or to the statement immediately following the end of the <code>switch</code>
+statement. A case or default label is only reachable directly within its
+closest enclosing <code>switch</code> statement.</p>
+<p>On entry to the <code>switch</code> statement, the controlling expression is
+evaluated and then compared with the value of the case label <em>expression</em>
+values, in lexical order, using the same semantics as <code>==</code>.
+If one matches, control transfers to the
+statement following the corresponding case label. If there is no match,
+then if there is a default label, control transfers to the statement
+following that; otherwise, control transfers to the statement
+immediately following the end of the <code>switch</code> statement. If a <code>switch</code>
+contains more than one case label whose values compare equal to the
+controlling expression, the first in lexical order is considered the
+match.</p>
+<p>An arbitrary number of statements can be associated with any case or
+default label. In the absence of a <a href="#the-break-statement"><code>break</code> statement</a> at the end
+of a set of such statements, the execution continues into any following
+statements, ignoring the associated labels. If all cases and the default end in <code>break</code>
+and there are no duplicate-valued case labels, the order of case and
+default labels is insignificant.</p>
+<p>Case-label values can be runtime expressions, and the types of sibling
+case-label values need not be the same.</p>
+<p>Switches may be nested, in which case, each <code>switch</code> has its own set of
+<code>switch</code> clauses.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$v = 10;
+switch ($v)
+{
+default:
+  echo &quot;default case: \$v is $v\n&quot;;
+  break;    // break ends &quot;group&quot; of default statements
+case 20:
+  echo &quot;case 20\n&quot;;
+  break;    // break ends &quot;group&quot; of case 20 statements
+case 10:
+  echo &quot;case 10\n&quot;; // no break, so execution continues to the next label's &quot;group&quot;
+case 30:
+  echo &quot;case 30\n&quot;; // no break, but then none is really needed either
+}
+// -----------------------------------------
+$v = 30;
+switch ($v)
+{
+case 30.0:  // &lt;===== this case matches with 30
+  echo &quot;case 30.0\n&quot;;
+  break;
+default:
+  echo &quot;default case: \$v is $v\n&quot;;
+  break;
+case 30:    // &lt;===== rather than this case matching with 30
+  echo &quot;case 30\n&quot;;
+  break;
+}
+// -----------------------------------------
+switch ($v)
+{
+case 10 + $b: // non-constant expression
+  // ...
+case $v &lt; $a:   // non-constant expression
+  // ...
+// ...
+}
+</code></pre>
+<h2><a class="header" href="#iteration-statements" id="iteration-statements">Iteration Statements</a></h2>
+<h3><a class="header" href="#general-2" id="general-2">General</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+iteration-statement:
+  while-statement
+  do-statement
+  for-statement
+  foreach-statement
+-->
+<pre>
+<i id="grammar-iteration-statement">iteration-statement:</i>
+   <i><a href="#grammar-while-statement">while-statement</a></i>
+   <i><a href="#grammar-do-statement">do-statement</a></i>
+   <i><a href="#grammar-for-statement">for-statement</a></i>
+   <i><a href="#grammar-foreach-statement">foreach-statement</a></i>
+</pre>
+<h2><a class="header" href="#the-while-statement" id="the-while-statement">The <code>while</code> Statement</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+while-statement:
+  'while' '(' expression ')' statement
+  'while' '(' expression ')' ':' statement-list 'endwhile' ';'
+-->
+<pre>
+<i id="grammar-while-statement">while-statement:</i>
+   while   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   <i><a href="#grammar-statement">statement</a></i>
+   while   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   :   <i><a href="#grammar-statement-list">statement-list</a></i>   endwhile   ;
+</pre>
+<p><strong>Semantics</strong></p>
+<p>The two forms of the <code>while</code> statement are equivalent; they simply provide
+alternate styles.</p>
+<p>The result of the controlling expression <em>expression</em> is <a href="08-conversions.html#converting-to-boolean-type">converted to type <code>bool</code></a>
+if it does not have this type.</p>
+<p>If <em>expression</em> tests <code>TRUE</code>, the <em>statement</em> that follows immediately is
+executed, and the process is repeated. If <em>expression</em> tests <code>FALSE</code>,
+control transfers to the point immediately following the end of the
+<code>while</code> statement. The loop body is executed zero or more
+times.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$i = 1;
+while ($i &lt;= 10):
+  echo &quot;$i\t&quot;.($i * $i).&quot;\n&quot;; // output a table of squares
+  ++$i;
+endwhile;
+// -----------------------------------------
+while (TRUE)
+{
+  // ...
+  if ($done)
+    break;  // break out of the while loop
+  // ...
+}
+</code></pre>
+<h2><a class="header" href="#the-do-statement" id="the-do-statement">The <code>do</code> Statement</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+do-statement:
+  'do' statement 'while' '(' expression ')' ';'
+-->
+<pre>
+<i id="grammar-do-statement">do-statement:</i>
+   do   <i><a href="#grammar-statement">statement</a></i>   while   (   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   )   ;
+</pre>
+<p>(Note: There is no alternate syntax).</p>
+<p><strong>Constraints</strong></p>
+<p>The controlling expression <em>expression</em> must have type <code>bool</code> or be
+implicitly convertible to that type.</p>
+<p><strong>Semantics</strong></p>
+<p>First, <em>statement</em> is executed and then <em>expression</em> is evaluated.</p>
+<p>The result of the controlling expression <em>expression</em> is <a href="08-conversions.html#converting-to-boolean-type">converted to type <code>bool</code></a>
+if it does not have this type.</p>
+<p>If the value tests <code>TRUE</code>, the process is repeated. If <em>expression</em> tests <code>FALSE</code>,
+control transfers to the point immediately following the end of the <code>do</code>
+statement. The loop body, <em>statement</em>, is executed one or more times.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$i = 1;
+do
+{
+  echo &quot;$i\t&quot;.($i * $i).&quot;\n&quot;; // output a table of squares
+  ++$i;
+}
+while ($i &lt;= 10);
+</code></pre>
+<h2><a class="header" href="#the-for-statement" id="the-for-statement">The <code>for</code> Statement</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+for-statement:
+  'for' '(' for-initializer? ';' for-control? ';' for-end-of-loop? ')' statement
+  'for' '(' for-initializer? ';' for-control? ';' for-end-of-loop? ')' ':' statement-list 'endfor' ';'
+
+for-initializer:
+  for-expression-group
+
+for-control:
+  for-expression-group
+
+for-end-of-loop:
+  for-expression-group
+
+for-expression-group:
+  expression
+  for-expression-group ',' expression
+-->
+<pre>
+<i id="grammar-for-statement">for-statement:</i>
+   for   (   <i><a href="#grammar-for-initializer">for-initializer</a></i><sub>opt</sub>   ;   <i><a href="#grammar-for-control">for-control</a></i><sub>opt</sub>   ;   <i><a href="#grammar-for-end-of-loop">for-end-of-loop</a></i><sub>opt</sub>   )   <i><a href="#grammar-statement">statement</a></i>
+   for   (   <i><a href="#grammar-for-initializer">for-initializer</a></i><sub>opt</sub>   ;   <i><a href="#grammar-for-control">for-control</a></i><sub>opt</sub>   ;   <i><a href="#grammar-for-end-of-loop">for-end-of-loop</a></i><sub>opt</sub>   )   :   <i><a href="#grammar-statement-list">statement-list</a></i>   endfor   ;
+
+<i id="grammar-for-initializer">for-initializer:</i>
+   <i><a href="#grammar-for-expression-group">for-expression-group</a></i>
+
+<i id="grammar-for-control">for-control:</i>
+   <i><a href="#grammar-for-expression-group">for-expression-group</a></i>
+
+<i id="grammar-for-end-of-loop">for-end-of-loop:</i>
+   <i><a href="#grammar-for-expression-group">for-expression-group</a></i>
+
+<i id="grammar-for-expression-group">for-expression-group:</i>
+   <i><a href="10-expressions.html#grammar-expression">expression</a></i>
+   <i><a href="#grammar-for-expression-group">for-expression-group</a></i>   ,   <i><a href="10-expressions.html#grammar-expression">expression</a></i>
+</pre>
+<p>Note: Unlike C/C++, PHP does not support a comma operator, per se.
+However, the syntax for the <code>for</code> statement has been extended from that of
+C/C++ to achieve the same results in this context.</p>
+<p><strong>Semantics</strong></p>
+<p>The two forms of the <code>for</code> statement are equivalent; they simply provide
+alternate styles.</p>
+<p>The group of expressions in <em>for-initializer</em> is evaluated once,
+left-to-right, for their side effects. Then the group of expressions in
+<em>for-control</em> is evaluated left-to-right (with all but the right-most
+one for their side effects only), with the right-most expression’s value
+being <a href="08-conversions.html#converting-to-boolean-type">converted to type <code>bool</code></a>.
+If the result is <code>TRUE</code>, <em>statement</em> is executed, and the group
+of expressions in <em>for-end-of-loop</em> is evaluated left-to-right, for
+their side effects only. Then the process is repeated starting with
+<em>for-control</em>. Once the right-most expression in <em>for-control</em> is
+<code>FALSE</code>, control transfers to the point immediately following the end of
+the <code>for</code> statement. The loop body, <em>statement</em>, is executed zero or more
+times.</p>
+<p>If <em>for-initializer</em> is omitted, no action is taken at the start of the
+loop processing. If <em>for-control</em> is omitted, this is treated as if
+<em>for-control</em> was an expression with the value <code>TRUE</code>. If
+<em>for-end-of-loop</em> is omitted, no action is taken at the end of each
+iteration.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">for ($i = 1; $i &lt;= 10; ++$i)
+{
+  echo &quot;$i\t&quot;.($i * $i).&quot;\n&quot;; // output a table of squares
+}
+// -----------------------------------------
+// omit 1st and 3rd expressions
+
+$i = 1;
+for (; $i &lt;= 10;):
+  echo &quot;$i\t&quot;.($i * $i).&quot;\n&quot;; // output a table of squares
+  ++$i;
+endfor;
+// -----------------------------------------
+// omit all 3 expressions
+
+$i = 1;
+for (;;)
+{
+  if ($i &gt; 10)
+    break;
+  echo &quot;$i\t&quot;.($i * $i).&quot;\n&quot;; // output a table of squares
+  ++$i;
+}
+// -----------------------------------------
+//  use groups of expressions
+
+for ($a = 100, $i = 1; ++$i, $i &lt;= 10; ++$i, $a -= 10)
+{
+  echo &quot;$i\t$a\n&quot;;
+}
+</code></pre>
+<h2><a class="header" href="#the-foreach-statement" id="the-foreach-statement">The <code>foreach</code> Statement</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+foreach-statement:
+  'foreach' '(' foreach-collection-name 'as' foreach-key? foreach-value ')' 'statement'
+  'foreach' '(' foreach-collection-name 'as' foreach-key? foreach-value ')' ':' statement-list 'endforeach' ';'
+
+foreach-collection-name:
+  expression
+
+foreach-key:
+  expression '=>'
+
+foreach-value:
+  '&'? expression
+  list-intrinsic
+-->
+<pre>
+<i id="grammar-foreach-statement">foreach-statement:</i>
+   foreach   (   <i><a href="#grammar-foreach-collection-name">foreach-collection-name</a></i>   as   <i><a href="#grammar-foreach-key">foreach-key</a></i><sub>opt</sub>   <i><a href="#grammar-foreach-value">foreach-value</a></i>   )   statement
+   foreach   (   <i><a href="#grammar-foreach-collection-name">foreach-collection-name</a></i>   as   <i><a href="#grammar-foreach-key">foreach-key</a></i><sub>opt</sub>   <i><a href="#grammar-foreach-value">foreach-value</a></i>   )   :   <i><a href="#grammar-statement-list">statement-list</a></i>   endforeach   ;
+
+<i id="grammar-foreach-collection-name">foreach-collection-name:</i>
+   <i><a href="10-expressions.html#grammar-expression">expression</a></i>
+
+<i id="grammar-foreach-key">foreach-key:</i>
+   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   =&gt;
+
+<i id="grammar-foreach-value">foreach-value:</i>
+   &amp;<sub>opt</sub>   <i><a href="10-expressions.html#grammar-expression">expression</a></i>
+   <i><a href="10-expressions.html#grammar-list-intrinsic">list-intrinsic</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The result of the expression <em>foreach-collection-name</em> must be a
+collection, i.e. either array or object implementing <a href="http://php.net/Traversable">Traversable</a>.</p>
+<p><em>expression</em> in <em>foreach-value</em> and <em>foreach-key</em> should designate a variable.</p>
+<p><strong>Semantics</strong></p>
+<p>The two forms of the <code>foreach</code> statement are equivalent; they simply
+provide alternate styles.</p>
+<p>The <em>foreach</em> statement iterates over the set of elements in the
+collection designated by <em>foreach-collection-name</em>, starting at the
+beginning, executing <em>statement</em> each iteration. On each iteration, if
+the <code>&amp;</code> is present in <em>foreach-value</em>, the variable designated by the
+corresponding <em>expression</em> is made an alias to the current element. If
+the <code>&amp;</code> is omitted, the value of the current element is assigned to the
+corresponding variable. The loop body, <em>statement</em>, is executed zero or
+more times. After the loop terminates, the variable designated by <em>expression</em>
+in <em>foreach-value</em> has the same value as it had after the final iteration, if any.</p>
+<p>If <em>foreach-key</em> is present, the variable designated by its <em>expression</em>
+is assigned the current element’s key value.</p>
+<p>In the <em>list-intrinsic</em> case, a value that is an array is split into
+individual elements.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$colors = array(&quot;red&quot;, &quot;white&quot;, &quot;blue&quot;);
+foreach ($colors as $color):
+    // ...
+endforeach;
+// -----------------------------------------
+foreach ($colors as $key =&gt; $color)
+{
+    // ...
+}
+// -----------------------------------------
+// Modify the local copy of an element's value
+
+foreach ($colors as $color)
+{
+  $color = &quot;black&quot;;
+}
+// -----------------------------------------
+// Modify the the actual element itself
+
+foreach ($colors as &amp;$color)  // note the &amp;
+{
+  $color = &quot;black&quot;;
+}
+</code></pre>
+<h2><a class="header" href="#jump-statements" id="jump-statements">Jump Statements</a></h2>
+<h3><a class="header" href="#general-3" id="general-3">General</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+jump-statement:
+  goto-statement
+  continue-statement
+  break-statement
+  return-statement
+  throw-statement
+-->
+<pre>
+<i id="grammar-jump-statement">jump-statement:</i>
+   <i><a href="#grammar-goto-statement">goto-statement</a></i>
+   <i><a href="#grammar-continue-statement">continue-statement</a></i>
+   <i><a href="#grammar-break-statement">break-statement</a></i>
+   <i><a href="#grammar-return-statement">return-statement</a></i>
+   <i><a href="#grammar-throw-statement">throw-statement</a></i>
+</pre>
+<h3><a class="header" href="#the-goto-statement" id="the-goto-statement">The <code>goto</code> Statement</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+goto-statement:
+  'goto' name ';'
+-->
+<pre>
+<i id="grammar-goto-statement">goto-statement:</i>
+   goto   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   ;
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The name in a <code>goto</code> statement must be that of a <a href="#labeled-statements">named label</a> located
+somewhere in the current script. Control must not be transferred into or
+out of a function, or into an <a href="#iteration-statements">iteration statement</a> or a <a href="#the-switch-statement"><code>switch</code>
+statement</a>.</p>
+<p>A <code>goto</code> statement must not attempt to transfer control out of a
+<a href="#the-try-statement">finally-block</a>.</p>
+<p><strong>Semantics</strong></p>
+<p>A <code>goto</code> statement transfers control unconditionally to the <a href="#labeled-statements">named label</a>.</p>
+<p>A <code>goto</code> statement may break out of a construct that is fully contained
+within a <a href="#the-try-statement">finally-block</a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">function findValue($table, $v)  // where $table is 2x3 array
+{
+  for ($row = 0; $row &lt;= 1; ++$row)
+  {
+    for ($colm = 0; $colm &lt;= 2; ++$colm)
+    {
+      if ($table[$row][$colm] == $v)
+      {
+        echo &quot;$v was found at row $row, column $colm\n&quot;;
+        goto done; // not quite the same as break 2!
+      }
+    }
+  }
+  echo &quot;$v was not found\n&quot;;
+done:
+  ; // note that a label must always precede a statement
+}
+</code></pre>
+<h3><a class="header" href="#the-continue-statement" id="the-continue-statement">The <code>continue</code> Statement</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+continue-statement:
+  'continue' breakout-level? ';'
+
+breakout-level:
+  integer-literal
+  '(' breakout-level ')'
+-->
+<pre>
+<i id="grammar-continue-statement">continue-statement:</i>
+   continue   <i><a href="#grammar-breakout-level">breakout-level</a></i><sub>opt</sub>   ;
+
+<i id="grammar-breakout-level">breakout-level:</i>
+   <i><a href="09-lexical-structure.html#grammar-integer-literal">integer-literal</a></i>
+   (   <i><a href="#grammar-breakout-level">breakout-level</a></i>   )
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The breakout level must be greater than zero, and it must not exceed the level of
+actual enclosing iteration and/or <code>switch</code> statements.</p>
+<p>A <code>continue</code> statement must not attempt to break out of a <a href="#the-try-statement">finally-block</a>.</p>
+<p><strong>Semantics</strong></p>
+<p>A <code>continue</code> statement terminates the execution of the innermost enclosing
+<a href="#iteration-statements">iteration</a> or <a href="#the-switch-statement"><code>switch</code></a> statement.
+<em>breakout-level</em> specifies which of these statements is targeted, with innermost being assigned
+number <code>1</code> and containing statements having levels increasing by 1.</p>
+<p>A <code>continue</code> statement terminates the execution of one or more enclosing
+<a href="#iteration-statements">iteration</a> or <a href="#the-switch-statement"><code>switch</code></a> statements,
+up to the specified level. If the statement at the <em>breakout-level</em> is an iteration statement,
+the next iteration (if any) of the iteration statement is started.
+If that statement is a <code>for</code> statement and it has a <em>for-end-of-loop</em>, its
+end-of-loop expression group for the current iteration is evaluated first. If it
+is a <code>switch</code> statement, a warning is emitted and the behavior is the same as a
+<a href="#the-break-statement"><code>break</code> statement</a> at the same <em>breakout-level</em>. If
+<em>breakout-level</em> is omitted, a level of 1 is assumed.</p>
+<p>A <code>continue</code> statement may break out of a construct that is fully
+contained within a finally-block.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">for ($i = 1; $i &lt;= 5; ++$i)
+{
+  if (($i % 2) == 0)
+    continue;
+  echo &quot;$i is odd\n&quot;;
+}
+</code></pre>
+<h3><a class="header" href="#the-break-statement" id="the-break-statement">The <code>break</code> Statement</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+break-statement:
+  'break' breakout-level? ';'
+-->
+<pre>
+<i id="grammar-break-statement">break-statement:</i>
+   break   <i><a href="#grammar-breakout-level">breakout-level</a></i><sub>opt</sub>   ;
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The breakout level must be greater than zero, and it must not exceed the level of
+actual enclosing iteration and/or <code>switch</code> statements.</p>
+<p>A <code>break</code> statement must not attempt to break out of a <a href="#the-try-statement">finally-block</a>.</p>
+<p><strong>Semantics</strong></p>
+<p>A <code>break</code> statement terminates the execution of one or more enclosing
+<a href="#iteration-statements">iteration</a> or []<code>switch</code>](#the-switch-statement) statements. The number of levels
+broken out is specified by <em>breakout-level</em>. If <em>breakout-level</em> is
+omitted, a level of 1 is assumed.</p>
+<p>A <code>break</code> statement may break out of a construct that is fully contained
+within a finally-block.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$i = 1;
+for (;;)
+{
+  if ($i &gt; 10)
+    break;
+  // ...
+  ++$i;
+}
+// -----------------------------------------
+for ($row = 0; $row &lt;= 1; ++$row)
+{
+  for ($colm = 0; $colm &lt;= 2; ++$colm)
+  {
+    if (some-condition-set)
+    {
+      break 2;
+    }
+    // ...
+  }
+}
+// -----------------------------------------
+for ($i = 10; $i &lt;= 40; $i +=10)
+{
+        switch($i)
+        {
+        case 10: /* ... */; break;    // breaks to the end of the switch
+        case 20: /* ... */; break 2;  // breaks to the end of the for
+        case 30: /* ... */; break;    // breaks to the end of the switch
+        }
+}
+</code></pre>
+<h3><a class="header" href="#the-return-statement" id="the-return-statement">The <code>return</code> Statement</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+return-statement:
+  'return' expression? ';'
+-->
+<pre>
+<i id="grammar-return-statement">return-statement:</i>
+   return   <i><a href="10-expressions.html#grammar-expression">expression</a></i><sub>opt</sub>   ;
+</pre>
+<p><strong>Semantics</strong></p>
+<p>A <code>return</code> statement from within a function terminates the execution of
+that function normally, and depending on how the <a href="13-functions.html#function-calls">function was defined</a>,
+it returns the value of <em>expression</em> to the function’s caller
+by value or byRef. If <em>expression</em> is omitted the value <code>NULL</code> is used.</p>
+<p>If execution flows into the closing brace (<code>}</code>) of a function, <code>return NULL;</code> is implied.</p>
+<p>Explicit <code>return</code> statements with <em>expression</em> given are not permitted within a
+function with a <code>void</code> <a href="13-functions.html#return-typing">return type</a> and cause
+a fatal error.</p>
+<p>A function may have any number of <code>return</code> statements, whose returned
+values may have different types.</p>
+<p>If an undefined variable is returned byRef, that variable becomes
+defined, with a value of <code>NULL</code>.</p>
+<p>A <code>return</code> statement is permitted in a <a href="#the-try-statement">try-block</a>
+and a <a href="#the-try-statement">catch-block</a> and in <a href="#the-try-statement">finally-block</a>.</p>
+<p>Using a <code>return</code> statement inside a finally-block will override any other
+<code>return</code> statement or thrown exception from the try-block and all its
+catch-blocks. Code execution in the parent stack will continue as if
+the exception was never thrown.</p>
+<p>If an uncaught exception exists when a finally-block is executed, if
+that finally-block executes a <code>return</code> statement, the uncaught exception
+is discarded.</p>
+<p>A <code>return</code> statement may occur in a script outside any function. In an
+<a href="10-expressions.html#script-inclusion-operators">included file</a>,
+such statement terminates processing of that script file and
+returns control to the including file. If <em>expression</em> is present, that
+is the value returned; otherwise, the value <code>NULL</code> is returned. If
+execution flows to the end of the script, <code>return 1;</code> is implied. However,
+if execution flows to the end of the top level of a script, <code>return 0;</code> is
+implied. Likewise, if <em>expression</em> is omitted at the top level. (See also
+<a href="10-expressions.html#exitdie"><code>exit</code></a>).</p>
+<p>Returning from a constructor or destructor behaves just like returning
+from a function.</p>
+<p>A <code>return</code> statement inside a <a href="10-expressions.html#yield-operator">generator function</a> causes the generator to
+terminate.</p>
+<p>A generator function can contain a statement of the form <code>return</code> <em>expression</em> <code>;</code>. The value this returns
+can be fetched using the method <code>Generator::getReturn</code>, which can only be called once the generator
+has finishing yielding values. The value cannot be returned byRef.</p>
+<p>Return statements can also be used in the body of anonymous functions.</p>
+<p><code>return</code> also terminates the execution of source code given to the intrinsic
+<a href="10-expressions.html#eval"><code>eval</code></a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">function f() { return 100; }  // f explicitly returns a value
+function g() { return; }   // g explicitly returns an implicit NULL
+function h() { }      // h implicitly returns NULL
+// -----------------------------------------
+// j returns one of three dissimilarly-typed values
+function j($x)
+{
+  if ($x &gt; 0)
+  {
+    return &quot;Positive&quot;;
+  }
+  else if ($x &lt; 0)
+  {
+    return -1;
+  }
+  // for zero, implied return NULL
+}
+function &amp;compute() { ...; return $value; } // returns $value byRef
+// -----------------------------------------
+class Point
+{
+  private static $pointCount = 0;
+  public static function getPointCount()
+  {
+    return self::$pointCount;
+  }
+  ...
+}
+</code></pre>
+<p><strong>Implementation Notes</strong></p>
+<p>Although <em>expression</em> is a <a href="10-expressions.html#general">full expression</a>, and there is a
+<a href="10-expressions.html#general">sequence point</a> at the end of that expression,
+a side effect need not be executed if it can be determined that
+no other program code relies on its having happened. (For example, in
+the cases of <code>return $a++;</code> and <code>return ++$a;</code>, it is obvious what value
+must be returned in each case, but if <code>$a</code> is a variable local to the
+enclosing function, <code>$a</code> need not actually be incremented.</p>
+<h3><a class="header" href="#the-throw-statement" id="the-throw-statement">The <code>throw</code> Statement</a></h3>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+throw-statement:
+  'throw' expression ';'
+-->
+<pre>
+<i id="grammar-throw-statement">throw-statement:</i>
+   throw   <i><a href="10-expressions.html#grammar-expression">expression</a></i>   ;
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The type of <em>expression</em> must be <a href="17-exception-handling.html#class-exception">Exception</a> or a subclass of that
+class.</p>
+<p><em>expression</em> must be such that an alias to it can be created.</p>
+<p><strong>Semantics</strong></p>
+<p>A <code>throw</code> statement throws an exception immediately and unconditionally.
+Control never reaches the statement immediately following the throw. See
+<a href="17-exception-handling.html#general">exception handling</a> and <a href="#the-try-statement">try-statement</a>
+for more details of throwing and catching exceptions, and how uncaught exceptions are dealt with.</p>
+<p>Rather than handle an exception, a catch-block may (re-)throw the same
+exception that it caught, or it can throw an exception of a different
+type.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">throw new Exception;
+throw new Exception(&quot;Some message&quot;, 123);
+class MyException extends Exception { ... }
+throw new MyException;
+</code></pre>
+<h2><a class="header" href="#the-try-statement" id="the-try-statement">The <code>try</code> Statement</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+try-statement:
+  'try' compound-statement catch-clauses
+  'try' compound-statement finally-clause
+  'try' compound-statement catch-clauses finally-clause
+
+catch-clauses:
+  catch-clause
+  catch-clauses catch-clause
+
+catch-clause:
+  'catch' '(' catch-name-list variable-name ')' compound-statement
+
+catch-name-list:
+  qualified-name
+  catch-name-list '|' qualified-name
+
+finally-clause:
+  'finally' compound-statement
+-->
+<pre>
+<i id="grammar-try-statement">try-statement:</i>
+   try   <i><a href="#grammar-compound-statement">compound-statement</a></i>   <i><a href="#grammar-catch-clauses">catch-clauses</a></i>
+   try   <i><a href="#grammar-compound-statement">compound-statement</a></i>   <i><a href="#grammar-finally-clause">finally-clause</a></i>
+   try   <i><a href="#grammar-compound-statement">compound-statement</a></i>   <i><a href="#grammar-catch-clauses">catch-clauses</a></i>   <i><a href="#grammar-finally-clause">finally-clause</a></i>
+
+<i id="grammar-catch-clauses">catch-clauses:</i>
+   <i><a href="#grammar-catch-clause">catch-clause</a></i>
+   <i><a href="#grammar-catch-clauses">catch-clauses</a></i>   <i><a href="#grammar-catch-clause">catch-clause</a></i>
+
+<i id="grammar-catch-clause">catch-clause:</i>
+   catch   (   <i><a href="#grammar-catch-name-list">catch-name-list</a></i>   <i><a href="09-lexical-structure.html#grammar-variable-name">variable-name</a></i>   )   <i><a href="#grammar-compound-statement">compound-statement</a></i>
+
+<i id="grammar-catch-name-list">catch-name-list:</i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+   <i><a href="#grammar-catch-name-list">catch-name-list</a></i>   |   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+
+<i id="grammar-finally-clause">finally-clause:</i>
+   finally   <i><a href="#grammar-compound-statement">compound-statement</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Each <em>qualified-name</em> inside a <em>catch-name-list</em> must name a type derivated from
+<a href="17-exception-handling.html#class-exception"><code>Exception</code></a>.</p>
+<p><strong>Semantics</strong></p>
+<p>In a <em>catch-clause</em>, <em>variable-name</em> designates an <em>exception variable</em>
+passed in by value. This variable corresponds to a local variable with a
+scope that extends over the catch-block. During execution of the
+catch-block, the exception variable represents the exception currently
+being handled.</p>
+<p>Once an exception is thrown, the Engine searches for the nearest
+catch-block that can handle the exception. The process begins at the
+current function level with a search for a try-block that lexically
+encloses the throw point. All catch-blocks associated with that
+try-block are considered in lexical order. If no catch-block is found
+that can handle the run-time type of the exception, the function that
+called the current function is searched for a lexically enclosing
+try-block that encloses the call to the current function. This process
+continues until a catch-block is found that can handle the current
+exception.</p>
+<p>The matching is done by considering the classes specified by <em>qualified-name</em>
+in <em>catch-name-list</em> and comparing it to the type of the exception. If the
+exception is an <a href="10-expressions.html#instanceof-operator">instance of</a> one of
+the specified classes then the clause matches.</p>
+<p>If a matching catch-block is located, the Engine prepares to transfer
+control to the first statement of that catch-block. However, before
+execution of that catch-block can start, the Engine first executes, in
+order, any finally-blocks associated with try-blocks nested more deeply
+than the one that caught the exception.</p>
+<p>If no matching catch-block is found, the exception is uncaught and the behavior is
+implementation-defined.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">function getTextLines($filename)
+{
+  $infile = fopen($filename, 'r');
+  if ($infile == FALSE) { /* deal with an file-open failure */ }
+  try
+  {
+    while ($textLine = fgets($infile))  // while not EOF
+    {
+      yield $textLine;  // leave line terminator attached
+    }
+  }
+  finally
+  {
+    fclose($infile);
+  }
+}
+// -----------------------------------------
+class DeviceException extends Exception { ... }
+class DiskException extends DeviceException { ... }
+class RemovableDiskException extends DiskException { ... }
+class FloppyDiskException extends RemovableDiskException { ... }
+
+try
+{
+  process(); // call a function that might generate a disk-related exception
+}
+catch (FloppyDiskException $fde) { ... }
+catch (RemovableDiskException $rde) { ... }
+catch (DiskException $de) { ... }
+catch (DeviceException $dve) { ... }
+finally { ... }
+</code></pre>
+<h2><a class="header" href="#the-declare-statement" id="the-declare-statement">The <code>declare</code> Statement</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+declare-statement:
+  'declare' '(' declare-directive ')' statement
+  'declare' '(' declare-directive ')' ':' statement-list 'enddeclare' ';'
+  'declare' '(' declare-directive ')' ';'
+
+declare-directive:
+  'ticks' '=' literal
+  'encoding' '=' literal
+  'strict_types' '=' literal
+-->
+<pre>
+<i id="grammar-declare-statement">declare-statement:</i>
+   declare   (   <i><a href="#grammar-declare-directive">declare-directive</a></i>   )   <i><a href="#grammar-statement">statement</a></i>
+   declare   (   <i><a href="#grammar-declare-directive">declare-directive</a></i>   )   :   <i><a href="#grammar-statement-list">statement-list</a></i>   enddeclare   ;
+   declare   (   <i><a href="#grammar-declare-directive">declare-directive</a></i>   )   ;
+
+<i id="grammar-declare-directive">declare-directive:</i>
+   ticks   =   <i><a href="10-expressions.html#grammar-literal">literal</a></i>
+   encoding   =   <i><a href="10-expressions.html#grammar-literal">literal</a></i>
+   strict_types   =   <i><a href="10-expressions.html#grammar-literal">literal</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The literal for <em>ticks</em> must designate a value that is, or can be converted, to an
+integer having a non-negative value.</p>
+<p>The literal for <em>encoding</em> must designate a string whose value names an
+8-bit-<a href="http://en.wikipedia.org/wiki/Character_encoding">character
+encoding</a>.</p>
+<p>Except for white space, a <em>declare-statement</em> in a script that specifies
+<em>character-encoding</em> must be the first thing in that script.</p>
+<p>The literal for <em>strict_types</em> should be either <code>0</code> or <code>1</code>. Only the statement-less
+form can be used for <em>strict_types</em> declare. The <em>strict_types</em> declare should be the first statement
+in the script, excepting other declare statements.</p>
+<p><strong>Semantics</strong></p>
+<p>The first two forms of the <code>declare</code> statement are equivalent; they simply
+provide alternate styles.</p>
+<p>The <code>declare</code> statement sets an <em>execution directive</em> for its <em>statement</em>
+body, or for the <code>;</code>-form, for the remainder of the script or until the
+statement is overridden by another <em>declare-statement</em>, whichever comes
+first.</p>
+<p><em>ticks</em>: as the parser is executing, certain statements are considered
+<em>tickable</em>. For every <em>tick-count</em> ticks, an event occurs, which can be
+serviced by the function previously registered by the library function
+<a href="http://php.net/manual/function.register-tick-function.php"><code>register_tick_function</code></a>.
+Tick event monitoring can be disabled by calling the library function
+<a href="http://php.net/manual/function.unregister-tick-function.php"><code>unregister_tick_function</code></a>.
+This facility allows a profiling mechanism to be developed.</p>
+<p><em>encoding</em>: character encoding can be specified on a script-by-script basis using
+the encoding directive. The joint ISO and IEC standard <a href="http://en.wikipedia.org/wiki/ISO/IEC_8859">ISO/IEC
+8859 standard series</a>
+specifies a number of 8-bit-<a href="http://en.wikipedia.org/wiki/Character_encoding">character
+encodings</a> whose names
+can be used with this directive.
+This directive applies only to the file it appears in, and does not affect the included files.</p>
+<p><em>strict_types</em>: if set to <code>1</code>, scalar type checking for function calls will be
+checked using <a href="13-functions.html#type-check-modes">strict mode</a>. If set to <code>0</code>, the coercive mode (default) is used.
+This directive applies only to the file it appears in, and does not affect the included files.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">declare(ticks = 1) { ... }
+declare(encoding = 'ISO-8859-1'); // Latin-1 Western European
+declare(encoding = 'ISO-8859-5'); // Latin/Cyrillic
+</code></pre>
+<h2><a class="header" href="#the-echo-statement" id="the-echo-statement">The <code>echo</code> Statement</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+echo-statement:
+  'echo' expression-list ';'
+
+expression-list:
+  expression
+  expression-list ',' expression
+-->
+<pre>
+<i id="grammar-echo-statement">echo-statement:</i>
+   echo   <i><a href="#grammar-expression-list">expression-list</a></i>   ;
+
+<i id="grammar-expression-list">expression-list:</i>
+   <i><a href="10-expressions.html#grammar-expression">expression</a></i>
+   <i><a href="#grammar-expression-list">expression-list</a></i>   ,   <i><a href="10-expressions.html#grammar-expression">expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>The <em>expression</em> value must be
+<a href="08-conversions.html#converting-to-string-type">convertable to a string</a>.
+In particular, it should not be an array and if it is an object, it must implement
+a <a href="14-classes.html#method-__tostring"><code>__toString</code> method</a>.</p>
+<p><strong>Semantics</strong></p>
+<p>After converting each of its <em>expression</em>s’ values to strings, if
+necessary, <code>echo</code> concatenates them in order given, and writes the
+resulting string to <a href="06-constants.html#core-predefined-constants"><code>STDOUT</code></a>. Unlike <a href="10-expressions.html#print"><code>print</code></a>, it does
+not produce a result.</p>
+<p>See also: <a href="09-lexical-structure.html#double-quoted-string-literals">double quoted strings</a> and
+<a href="09-lexical-structure.html#heredoc-string-literals">heredoc documents</a>, <a href="08-conversions.html#converting-to-string-type">conversion to string</a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">$v1 = TRUE;
+$v2 = 123;
+echo  '&gt;&gt;' . $v1 . '|' . $v2 . &quot;&lt;&lt;\n&quot;;    // outputs &quot;&gt;&gt;1|123&lt;&lt;&quot;
+echo  '&gt;&gt;' , $v1 , '|' , $v2 , &quot;&lt;&lt;\n&quot;;    // outputs &quot;&gt;&gt;1|123&lt;&lt;&quot;
+echo ('&gt;&gt;' . $v1 . '|' . $v2 . &quot;&lt;&lt;\n&quot;);   // outputs &quot;&gt;&gt;1|123&lt;&lt;&quot;
+$v3 = &quot;qqq{$v2}zzz&quot;;
+echo &quot;$v3\n&quot;;
+</code></pre>
+<h2><a class="header" href="#the-unset-statement" id="the-unset-statement">The <code>unset</code> Statement</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+unset-statement:
+  'unset' '(' variable-list ','? ')' ';'
+-->
+<pre>
+<i id="grammar-unset-statement">unset-statement:</i>
+   unset   (   <i><a href="10-expressions.html#grammar-variable-list">variable-list</a></i>   ,<sub>opt</sub>   )   ;
+</pre>
+<p><strong>Semantics</strong></p>
+<p>This statement <a href="07-variables.html#general">unsets</a> the variables designated by each
+<em>variable</em> in <em>variable-list</em>. No value is returned. An
+attempt to unset a non-existent variable (such as a non-existent element
+in an array) is ignored.</p>
+<p>When called from inside a function, this statement behaves, as follows:</p>
+<ul>
+<li>For a variable declared <code>global</code> in that function, <code>unset</code> removes the
+alias to that variable from the scope of the current call to that
+function. The global variable remains set.
+(To unset the global variable, use unset on the corresponding
+<a href="07-variables.html#predefined-variables"><code>$GLOBALS</code></a> array entry.</li>
+<li>For a variable passed byRef to that function, <code>unset</code> removes the
+alias to that variable from the scope of the current call to that
+function. Once the function returns, the passed-in argument variable
+is still set.</li>
+<li>For a variable declared static in that function, <code>unset</code> removes the
+alias to that variable from the scope of the current call to that
+function. In subsequent calls to that function, the static variable
+is still set and retains its value from call to call.</li>
+</ul>
+<p>Any visible instance property may be unset, in which case, the property
+is removed from that instance.</p>
+<p>If this statement is used with an expression that designates a <a href="14-classes.html#dynamic-members">dynamic
+property</a>, then if the class of that property has an <a href="14-classes.html#method-__unset"><code>__unset</code>
+method</a>, that method is called.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">unset($v);
+unset($v1, $v2, $v3);
+unset($x-&gt;m); // if m is a dynamic property, $x-&gt;__unset(&quot;m&quot;) is called
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/10-expressions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/12-arrays.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/10-expressions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/12-arrays.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

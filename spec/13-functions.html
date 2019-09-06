@@ -1,0 +1,487 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Functions - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html" class="active"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#functions" id="functions">Functions</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>When a function is called, information may be passed to it by the caller
+via an <em>argument list</em>, which contains one or more <em>argument
+expressions</em>, or more simply, <em>arguments</em>. These correspond by position
+to the <em>parameters</em> in a <em>parameter list</em> in the called <a href="#function-definitions">function’s
+definition</a>.</p>
+<p>An <em>unconditionally defined function</em> is a function whose definition is
+at the top level of a script. A <em>conditionally defined function</em> is a
+function whose definition occurs inside a compound statement,
+such as the body of another function (a <em>nested function</em>), conditional statement, etc.
+There is no limit on the depth of levels of function nesting. Consider the
+case of an <em>outer function</em>, and an <em>inner function</em> defined within it.
+Until the outer function is called at least once, its inner function
+does not exist. Even if the outer function is called, if its runtime logic
+bypasses the definition of the inner function, that inner function still
+does not exist. The conditionally defined function comes into existence when
+the execution flow reaches the point where the function is defined.</p>
+<p>Any function containing <a href="10-expressions.html#yield-operator"><code>yield</code></a> is a <em>generator function</em>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">ucf1(); // can call ucf1 before its definition is seen
+function ucf1() { ... }
+ucf1(); // can call ucf1 after its definition is seen
+cf1(); // Error; call to non-existent function
+$flag = TRUE;
+if ($flag) { function cf1() { ... } } // cf1 now exists
+if ($flag) { cf1(); } // can call cf1 now
+// -----------------------------------------
+function ucf2() { function cf2() { ... } }
+cf2(); // Error; call to non-existent function
+ucf2(); // now cf2 exists
+cf2(); // so we can call it
+</code></pre>
+<h2><a class="header" href="#function-calls" id="function-calls">Function Calls</a></h2>
+<p>A function is called via the function-call operator <a href="10-expressions.html#function-call-operator"><code>()</code></a>.</p>
+<h2><a class="header" href="#function-definitions" id="function-definitions">Function Definitions</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+function-definition:
+  function-definition-header compound-statement
+
+function-definition-header:
+  'function' '&'? name '(' parameter-declaration-list? ')' return-type?
+
+parameter-declaration-list:
+  simple-parameter-declaration-list
+  variadic-declaration-list
+
+simple-parameter-declaration-list:
+  parameter-declaration
+  parameter-declaration-list ',' parameter-declaration
+
+variadic-declaration-list:
+  simple-parameter-declaration-list ',' variadic-parameter
+  variadic-parameter
+
+parameter-declaration:
+  type-declaration? '&'? variable-name default-argument-specifier?
+
+variadic-parameter:
+	type-declaration? '&'? '...' variable-name
+
+return-type:
+  ':' type-declaration
+  ':' 'void'
+
+type-declaration:
+  '?'? base-type-declaration
+
+base-type-declaration:
+  'array'
+  'callable'
+  'iterable'
+  scalar-type
+  qualified-name
+
+scalar-type:
+  'bool'
+  'float'
+  'int'
+  'string'
+
+default-argument-specifier:
+  '=' constant-expression
+-->
+<pre>
+<i id="grammar-function-definition">function-definition:</i>
+   <i><a href="#grammar-function-definition-header">function-definition-header</a></i>   <i><a href="11-statements.html#grammar-compound-statement">compound-statement</a></i>
+
+<i id="grammar-function-definition-header">function-definition-header:</i>
+   function   &amp;<sub>opt</sub>   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   (   <i><a href="#grammar-parameter-declaration-list">parameter-declaration-list</a></i><sub>opt</sub>   )   <i><a href="#grammar-return-type">return-type</a></i><sub>opt</sub>
+
+<i id="grammar-parameter-declaration-list">parameter-declaration-list:</i>
+   <i><a href="#grammar-simple-parameter-declaration-list">simple-parameter-declaration-list</a></i>
+   <i><a href="#grammar-variadic-declaration-list">variadic-declaration-list</a></i>
+
+<i id="grammar-simple-parameter-declaration-list">simple-parameter-declaration-list:</i>
+   <i><a href="#grammar-parameter-declaration">parameter-declaration</a></i>
+   <i><a href="#grammar-parameter-declaration-list">parameter-declaration-list</a></i>   ,   <i><a href="#grammar-parameter-declaration">parameter-declaration</a></i>
+
+<i id="grammar-variadic-declaration-list">variadic-declaration-list:</i>
+   <i><a href="#grammar-simple-parameter-declaration-list">simple-parameter-declaration-list</a></i>   ,   <i><a href="#grammar-variadic-parameter">variadic-parameter</a></i>
+   <i><a href="#grammar-variadic-parameter">variadic-parameter</a></i>
+
+<i id="grammar-parameter-declaration">parameter-declaration:</i>
+   <i><a href="#grammar-type-declaration">type-declaration</a></i><sub>opt</sub>   &amp;<sub>opt</sub>   <i><a href="09-lexical-structure.html#grammar-variable-name">variable-name</a></i>   <i><a href="#grammar-default-argument-specifier">default-argument-specifier</a></i><sub>opt</sub>
+
+<i id="grammar-variadic-parameter">variadic-parameter:</i>
+   <i><a href="#grammar-type-declaration">type-declaration</a></i><sub>opt</sub>   &amp;<sub>opt</sub>   ...   <i><a href="09-lexical-structure.html#grammar-variable-name">variable-name</a></i>
+
+<i id="grammar-return-type">return-type:</i>
+   :   <i><a href="#grammar-type-declaration">type-declaration</a></i>
+   :   void
+
+<i id="grammar-type-declaration">type-declaration:</i>
+   ?<sub>opt</sub>   <i><a href="#grammar-base-type-declaration">base-type-declaration</a></i>
+
+<i id="grammar-base-type-declaration">base-type-declaration:</i>
+   array
+   callable
+   iterable
+   <i><a href="#grammar-scalar-type">scalar-type</a></i>
+   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+
+<i id="grammar-scalar-type">scalar-type:</i>
+   bool
+   float
+   int
+   string
+
+<i id="grammar-default-argument-specifier">default-argument-specifier:</i>
+   =   <i><a href="10-expressions.html#grammar-constant-expression">constant-expression</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>Each parameter name in a <em>function-definition</em> must be distinct.</p>
+<p>A <a href="#general">conditionally defined function</a> must exist before any calls are
+made to that function.</p>
+<p>The <em>function-definition</em> for constructors, destructors, and clone methods must not contain <em>return-type</em>.</p>
+<p>For generator functions, if the the return type is specified, it can only be one of:
+<code>Generator</code>, <code>Iterator</code> or <code>Traversable</code>.</p>
+<p><strong>Semantics</strong></p>
+<p>A <em>function-definition</em> defines a function called <em>name</em>. Function names
+are <strong>not</strong> case-sensitive. A function can be defined with zero or more
+parameters, each of which is specified in its own
+<em>parameter-declaration</em> in a <em>parameter-declaration-list</em>. Each
+parameter has a name, <em>variable-name</em>, and optionally, a
+<em>default-argument-specifier</em>. An <code>&amp;</code> in <em>parameter-declaration</em> indicates
+that parameter is passed <a href="04-basic-concepts.html#assignment">byRef</a> rather than by value. An <code>&amp;</code>
+before <em>name</em> indicates that the value returned from this function is to
+be returned byRef. Returning values is described in <a href="11-statements.html#the-return-statement"><code>return</code> statement description</a>.</p>
+<p>When the function is called, if there exists a parameter for which there
+is a corresponding argument, the argument is assigned to the parameter
+variable using value assignment, while for passing byRef, the argument is
+<a href="04-basic-concepts.html#argument-passing">assigned</a> to the parameter variable using <a href="04-basic-concepts.html#assignment">byRef assignment</a>.
+If that parameter has no corresponding argument, but the parameter has a
+default argument value, for passing by value or byRef, the default
+value is assigned to the parameter variable using value assignment.
+Otherwise, if the parameter has no corresponding argument and the parameter
+does not have a default value, the parameter variable is non-existent and no corresponding
+<a href="04-basic-concepts.html#the-memory-model">VSlot</a> exists.  After all possible parameters have been
+assigned initial values or aliased to arguments, the body of the function,
+<em>compound-statement</em>, is executed. This execution may terminate <a href="04-basic-concepts.html#program-termination">normally</a>,
+with <a href="11-statements.html#the-return-statement"><code>return</code> statement</a> or <a href="04-basic-concepts.html#program-termination">abnormally</a>.</p>
+<p>Each parameter is a variable local to the parent function, and is a
+modifiable lvalue.</p>
+<p>A <em>function-definition</em> may exist at the top level of a script, inside
+any <em>compound-statement</em>, in which case, the function is <a href="#general">conditionally
+defined</a>, or inside a <a href="14-classes.html#methods"><em>method-declaration</em> section of a class</a>.</p>
+<p>If <em>variadic-parameter</em> is defined, every parameter that is supplied to function and is not matched
+by the preceding parameters is stored in this parameter, as an array element.
+The first such parameter gets index 0, the next one 1, etc. If no extra parameters is supplied,
+the value of the parameter is an empty array.
+Note that if type and/or byRef specifications are supplied to variadic parameter, they apply
+to every extra parameter captured by it.</p>
+<p>By default, a parameter will accept an argument of any type. However, by
+specifying a <em>type-declaration</em>, the types of argument accepted can be
+restricted. By specifying <code>array</code>, only an argument of the <code>array</code>
+type is accepted. By specifying <code>callable</code>, only an argument designating a
+function (see below) is accepted. By specifying <code>iterable</code>, only an argument that
+is of type <code>array</code> or an object implementing the <code>Traversable</code> interface is accepted.
+By specifying <em>qualified-name</em>, only an instance of a class having that type,
+or being derived from that type, are accepted, or only an instance of a class that
+implements that interface type directly or indirectly is accepted. The check is the
+same as for <a href="10-expressions.html#instanceof-operator"><code>instanceof</code> operator</a>.</p>
+<p><code>callable</code> pseudo-type accepts the following:</p>
+<ul>
+<li>A string value containing the name of a function defined at the moment of the call.</li>
+<li>An array value having two elements under indexes <code>0</code> and <code>1</code>. First element can be either string or object.
+If the first element is a string, the second element must be a string naming a method in a class designated by the first element.
+If the first element is an object, the second element must be a string naming a method
+that can be called on an object designated by the first element, from the context of the function being called.</li>
+<li>An instance of the <a href="14-classes.html#class-closure"><code>Closure</code></a> class.</li>
+<li>An instance of a class implementing <a href="14-classes.html#method-__invoke"><code>__invoke</code></a>.</li>
+</ul>
+<p>The library function <a href="http://php.net/is_callable"><code>is_callable</code></a> reports whether the contents of
+a variable can be called as a function.</p>
+<p>Parameters typed with <em>scalar-type</em> are accepted if they pass the type check for this <a href="05-types.html#scalar-types">scalar type</a>,
+as <a href="#type-check-modes">described below</a>. Once the checks have been passed, the parameter types are always of the scalar type
+specified (or <code>NULL</code> if <code>NULL</code> is allowed).</p>
+<p>If a parameter has a type declaration, <code>NULL</code> is not accepted unless the
+type is nullable. A type is nullable if it is prefixed with <code>?</code> or if the
+parameter has a default value that evaluates to <code>NULL</code>.</p>
+<p>The default value for a typed parameter must be of the type specified, or <code>NULL</code>,
+and conversion is not be performed for defaults, regardless of the mode.</p>
+<h2><a class="header" href="#return-typing" id="return-typing">Return typing</a></h2>
+<p>If the function is defined with <em>return-type</em> declaration, the value returned by the function should
+be compatible with the defined type, using the same rules as for parameter type checks. <code>NULL</code> values
+are not allowed for typed returns. If the value of the <a href="11-statements.html#the-return-statement"><code>return</code> statement</a>
+does not pass the type check, a fatal error is produced.</p>
+<p>The <code>void</code> type is a special type that can only be used as a return type, and
+not in other contexts. It has no effect at runtime, see the <a href="11-statements.html#the-return-statement"><code>return</code> statement</a>.</p>
+<h2><a class="header" href="#type-check-modes" id="type-check-modes">Type check modes</a></h2>
+<p>The type checking can be performed in two modes, strict and coercive (default).
+The difference between modes exists only for scalar typed parameters (<code>int</code>, <code>float</code>, <code>string</code> and <code>bool</code>).</p>
+<p>For coercive mode, if the value passed is of the same type as the parameter, it is accepted.
+If not, the <a href="08-conversions.html#general">conversion</a> is attempted. If the conversion succeeds,
+the converted value is the value assigned to the parameter. If the conversion fails, a fatal error
+is produced.</p>
+<p>For strict mode, the parameter must be exactly of the type that is declared (e.g., string <code>&quot;1&quot;</code> is not
+accepted as a value for parameter typed as <code>int</code>). The only exception is that <code>int</code> values will be accepted
+for <code>float</code> typed parameter and <a href="08-conversions.html#converting-to-floating-point-type">converted to <code>float</code></a>.
+Note that the strict mode applies not only to user-defined but also to internal functions,
+please consult <a href="http://php.net/manual/">the manual</a> for appropriate parameter types. If the types do not match,
+an exception of type <code>TypeError</code> is thrown.</p>
+<p>Note that if the parameter is passed byRef, and conversion happened,
+then the value will be re-assigned with the newly converted value.</p>
+<p>The mode is set by the <a href="11-statements.html#the-declare-statement"><code>declare</code> statement</a>.</p>
+<p>Note that the type check mode is for the function call controleed by the caller, not the callee.
+While the check is performed in the function being called, the caller defines whether the check is strict.
+Same function can be called with both strict and coercive mode checks from different contexts.</p>
+<p>The check for the return type is always defined by the script that the function was defined in.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">// coercive mode by default
+function accept_int(int $a) { return $a+1; }
+accept_int(1); // ok
+accept_int(&quot;123&quot;); // ok
+accept_int(&quot;123.34&quot;); // ok
+accept_int(&quot;123.34 and some&quot;); // ok + notice
+accept_int(&quot;not 123&quot;); // fatal error!
+accept_int(null); // fatal error
+
+function accept_int_or_not(int $a = null) { return $a+1; }
+accept_int_or_not(null); // ok
+
+function convert_int(int &amp;$a) { return $a+1; }
+$a = &quot;12&quot;;
+convert_int($a);
+var_dump($a); // $a is now int
+
+// Now in strict mode
+declare(strict_types=1);
+function accept_int(int $a) { return $a+1; }
+function accept_float(float $a) { return $a+1; }
+accept_int(1); // ok
+accept_float(1); // ok
+accept_int(1.5); // fatal error
+accept_int(&quot;123&quot;); // fatal error
+echo substr(&quot;123&quot;, &quot;1&quot;); // fatal error
+
+</code></pre>
+<h2><a class="header" href="#variable-functions" id="variable-functions">Variable Functions</a></h2>
+<p>If a variable name is followed by the function-call operator <a href="10-expressions.html#function-call-operator"><code>()</code></a>,
+and the value of that variable designates the function currently defined and visible (see description above),
+that function will be executed. If the variable does not designate a function or this function can not be called,
+a fatal error is produced.</p>
+<h2><a class="header" href="#anonymous-functions" id="anonymous-functions">Anonymous Functions</a></h2>
+<p>An <em>anonymous function</em>, also known as a <em>closure</em>, is a function
+defined with no name. As such, it must be defined in the context of an
+expression whose value is used immediately to call that function, or
+that is saved in a variable for later execution. An anonymous function
+is defined via the <a href="10-expressions.html#anonymous-function-creation">anonymous function creation operator</a>.</p>
+<p>For both <a href="06-constants.html#context-dependent-constants"><code>__FUNCTION__</code> and <code>__METHOD__</code></a>, an anonymous
+function’s name is reported as <code>{closure}</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/12-arrays.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/14-classes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/12-arrays.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/14-classes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

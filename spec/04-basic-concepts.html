@@ -1,0 +1,1388 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Basic Concepts - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html" class="active"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#basic-concepts" id="basic-concepts">Basic Concepts</a></h1>
+<h2><a class="header" href="#program-structure" id="program-structure">Program Structure</a></h2>
+<p>A PHP <em>program</em> consists of one or more source files, known formally as
+<em>scripts</em>.</p>
+<!-- GRAMMAR
+script:
+  script-section
+  script script-section
+
+script-section:
+  text? start-tag statement-list? end-tag? text?
+
+start-tag:
+  '<?php'
+  '<?='
+
+end-tag:
+  '?>'
+
+text:
+  "arbitrary text not containing any of" start-tag "sequences"
+-->
+<pre>
+<i id="grammar-script">script:</i>
+   <i><a href="#grammar-script-section">script-section</a></i>
+   <i><a href="#grammar-script">script</a></i>   <i><a href="#grammar-script-section">script-section</a></i>
+
+<i id="grammar-script-section">script-section:</i>
+   <i><a href="#grammar-text">text</a></i><sub>opt</sub>   <i><a href="#grammar-start-tag">start-tag</a></i>   <i><a href="11-statements.html#grammar-statement-list">statement-list</a></i><sub>opt</sub>   <i><a href="#grammar-end-tag">end-tag</a></i><sub>opt</sub>   <i><a href="#grammar-text">text</a></i><sub>opt</sub>
+
+<i id="grammar-start-tag">start-tag:</i>
+   &lt;?php
+   &lt;?=
+
+<i id="grammar-end-tag">end-tag:</i>
+   ?&gt;
+
+<i id="grammar-text">text:</i>
+   arbitrary text not containing any of   <i><a href="#grammar-start-tag">start-tag</a></i>   sequences
+</pre>
+<p>All of the sections in a script are treated as though they belonged to
+one continuous section, except that any intervening text is treated as
+though it were a string literal given to the
+<a href="11-statements.html#the-echo-statement"><code>echo</code> statement</a>.</p>
+<p>A script can import another script via a <a href="10-expressions.html#script-inclusion-operators">script inclusion operator</a>.</p>
+<p><em>statement-list</em> is defined in <a href="11-statements.html#compound-statements">statements section</a>.</p>
+<p>The top level of a script is simply referred to as the <em>top level</em>.</p>
+<p>If <code>&lt;?=</code> is used as the <em>start-tag</em>, the Engine proceeds as if the <em>statement-list</em> started with an
+<a href="11-statements.html#the-echo-statement">echo</a> statement.</p>
+<h2><a class="header" href="#program-start-up" id="program-start-up">Program Start-Up</a></h2>
+<p>A program begins execution at the start of a <a href="#program-structure">script</a> designated in
+some unspecified manner. This script is called the <em>start-up script</em>.</p>
+<p>Once a program is executing, it has access to certain <a href="07-variables.html#predefined-variables">environmental
+information</a>, which may include:</p>
+<ul>
+<li>The number of <em>command-line arguments</em>, via the predefined variable
+<code>$argc</code>.</li>
+<li>A series of one or more command-line arguments as strings, via the
+predefined variable <code>$argv</code>.</li>
+<li>A series of <em>environment variable</em> names and their definitions.</li>
+</ul>
+<p>The exact set of the environment variables available is implementation-defined
+and can vary depending on the type and build of the Engine and the environment
+in which it executes.</p>
+<p>When a <a href="#program-structure">top level</a> is the main entry point for a script, it gets
+the global variable <a href="#scope">scope</a>. When a top level is invoked via
+<a href="10-expressions.html#script-inclusion-operators"><code>include/require</code></a>,
+it inherits the variable scope of its caller. Thus,
+when looking at one script’s top level in isolation, it’s not
+possible to tell statically whether it will have the global
+variable scope or some local variable scope. It depends on how the
+script is invoked and it depends on the runtime state of the program
+when it’s invoked.</p>
+<p>The implementation may accept more than one start-up script, in which case they
+are executed in implementation-defined order and share the global environment.</p>
+<h2><a class="header" href="#program-termination" id="program-termination">Program Termination</a></h2>
+<p>A program may terminate normally in the following ways:</p>
+<ul>
+<li>Execution reaches the end of the <a href="#program-start-up">start-up script</a>.
+In case of the multiple start-up scripts, the execution reaches the end
+of the last of them.</li>
+<li>A <a href="11-statements.html#the-return-statement"><code>return</code> statement</a> in the top level of the
+last start-up script is executed.</li>
+<li>The intrinsic <a href="10-expressions.html#exitdie"><code>exit</code></a> is called explicitly.</li>
+</ul>
+<p>The behavior of the first two cases is equivalent to corresponding calls
+to exit.</p>
+<p>A program may terminate abnormally under various circumstances, such as
+the detection of an uncaught exception, or the lack of memory or other
+critical resource. If execution reaches the end of the start-up script
+via a fatal error, or via an uncaught exception and there is no uncaught
+exception handler registered by <code>set_exception_handler</code>, that is
+equivalent to <code>exit(255)</code>. If execution reaches the end of the start-up
+script via an uncaught exception and an uncaught exception handler was
+registered by <code>set_exception_handler</code>, that is equivalent to exit(0). It
+is unspecified whether <a href="14-classes.html#destructors">object destructors</a> are run.
+In all other cases, the behavior is unspecified.</p>
+<h2><a class="header" href="#__halt_compiler" id="__halt_compiler">__halt_compiler</a></h2>
+<p>PHP script files can incorporate data which is to be ignored by the Engine when
+compiling the script. An example of such files are <a href="http://www.php.net/phar">PHAR</a> files.</p>
+<p>In order to make the Engine ignore all the data in the script file starting
+from certain point, <code>__halt_compiler();</code> construct is used. This construct
+is not case-sensitive.</p>
+<p>The <code>__halt_compiler();</code> construct can only appear on the <a href="#program-structure">top level</a>
+of the script. The Engine will ignore all text following this construct.</p>
+<p>The value of the <code>__COMPILER_HALT_OFFSET__</code> <a href="06-constants.html#context-dependent-constants">constant</a> is set to the byte offset
+immediately following the <code>;</code> character in the construct.</p>
+<p><strong>Example</strong></p>
+<pre><code class="language-PHP">// open this file
+$fp = fopen(__FILE__, 'r');
+
+// seek file pointer to data
+fseek($fp, __COMPILER_HALT_OFFSET__);
+
+// and output it
+var_dump(stream_get_contents($fp));
+
+// the end of the script execution
+__halt_compiler(); the file data which will be ignored by the Engine
+</code></pre>
+<h2><a class="header" href="#the-memory-model" id="the-memory-model">The Memory Model</a></h2>
+<h3><a class="header" href="#general" id="general">General</a></h3>
+<p>This section and those immediately following it describe the abstract
+memory model used by PHP for storing variables. A conforming
+implementation may use whatever approach is desired as long as from any
+testable viewpoint it appears to behave as if it follows this abstract
+model. The abstract model makes no explicit or implied restrictions or
+claims about performance, memory consumption, and machine resource
+usage.</p>
+<p>The abstract model presented here defines three kinds of abstract memory
+locations:</p>
+<ul>
+<li>A <em>variable slot</em> (VSlot) is used to represent a variable named by
+the programmer in the source code, such as a local variable, an
+array element, an instance property of an object, or a static
+property of a class. A VSlot comes into being based on explicit
+usage of a variable in the source code. A VSlot contains a pointer
+to a VStore.</li>
+<li>A <em>value storage location</em> (VStore) is used to represent a program
+value, and is created by the Engine as needed. A VStore can contain
+a scalar value such as an integer or a Boolean, or it can contain a
+handle pointing to an HStore.</li>
+<li>A <em>heap storage location</em> (HStore) is used to represent the contents
+of a <a href="05-types.html#types">composite value</a>, and is created by the Engine as needed.
+HStore is a container which contains VSlots.</li>
+</ul>
+<p>Each existing variable has its own VSlot, which at any time points to a VStore.
+A VSlot can be changed to point to different VStores over time.
+Multiple VSlots may simultaneously point to the same VStore.
+When a new VSlot is created, a new VStore is also created and the VSlot is
+initially set to point to the new VStore.</p>
+<p>A VStore can be changed to contain different values over time.
+Multiple VStores may simultaneously contain handles that point to the same HStore.
+When a VStore is created it initially contains
+the value <code>NULL</code> unless specified otherwise. In addition to
+containing a value, VStores also carry a <em>type tag</em> that indicates the
+<a href="05-types.html#types">type</a> of the VStore’s value.
+A VStore’s type tag can be changed over time. The tags for the values include
+types matching the Engine types, and may include other tags defined by
+the implementation, provided that these tags are not exposed to the user.</p>
+<p>An HStore represents the contents of a composite value, and it may
+contain zero or more VSlots. At run time, the Engine may add new VSlots
+and it may remove and destroy existing VSlots as needed to support
+adding/removing array elements (for arrays) and to support
+adding/removing instance properties (for objects). HStores support access
+to VSlots contained in them by integer or case-sensitive string keys.
+The exact manner of how VSlots are stored and managed within
+the HStore is unspecified.</p>
+<p>HStore may contain other information besides VSlots. For example, HStore
+for objects also contains information about object’s class. The implementation
+may also add other information to HStore as needed.</p>
+<p>An HStore’s VSlots (i.e., the VSlots contained within the HStore) point
+to VStores, and each VStore contains a scalar value or a handle to an
+HStore, and so on through arbitrary levels, allowing arbitrarily complex
+data structures to be represented. For example, a singly linked list
+might consist of a variable called <code>$root</code>, which is represented by a
+VSlot pointing to a VStore containing a handle to the first node. Each
+node is represented by an HStore that contains the data for that node in
+one or more VSlots, as well as a VSlot pointing to VStore containing a
+handle to the next node. Similarly, a binary tree might consist of a
+variable called <code>$root</code>, which is represented by a VSlot pointing to a
+VStore containing a handle to the root node. Each node is represented by
+an HStore that contains the data for that node in one or more VSlots, as
+well as a pair of VSlots pointing to VStores containing the handles to
+the left and right branch nodes. The leaves of the tree would be VStores
+or HStores, as needed.</p>
+<p>VSlots cannot contain pointers to VSlots or handles to HStores. VStores
+cannot contain pointers to VSlots or VStores. HStores cannot directly
+contain any pointers or handles to any abstract memory location; HStores
+can only directly contain VSlots.</p>
+<p>Here is an example demonstrating one possible arrangement of VSlots,
+VStores, and HStores:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
+                                                           |            |
+                                                           V            V
+                                                      [VStore int 1]  [VStore int 3]
+</code></pre>
+<p>In this picture the VSlot in the upper left corner represents the
+variable <code>$a</code>, and it points to a VStore that represents <code>$a</code>‘s current
+value, which is a object. This VStore contains a handle pointing to an
+HStore which represents the contents of an object of type Point with two
+instance properties <code>$x</code> and <code>$y</code>. The HStore contains two VSlots representing instance
+properties <code>$x</code> and <code>$y</code>, and each of these VSlots points to a distinct
+VStore which contains an integer value.</p>
+<p>Even though <a href="05-types.html#resources">resources</a> are not classified as scalar values, for the purposes
+of the memory model they are assumed to behave like scalar values, while the scalar value
+is assumed to be the the resource descriptor.</p>
+<p><em><strong>Implementation Notes:</strong></em> php.net’s implementation can be mapped roughly
+onto the abstract memory model as follows: <code>zval pointer =&gt; VSlot, zval =&gt; VStore, HashTable =&gt; HStore</code>, and
+<code>zend_object/zend_object_handlers =&gt; HStore</code>. Note, however, that the
+abstract memory model is not intended to exactly match the php.net
+implementation’s model, and for generality and simplicity there are some
+superficial differences between the two models.</p>
+<p>For most operations, the mapping between VSlots and VStores remains the
+same. Only the following program constructs can change a VSlot to point
+to different VStore, all of which are <em>byRef-aware</em> operations and all
+of which (except <code>unset</code>) use the &amp; punctuator:</p>
+<ul>
+<li><a href="10-expressions.html#byref-assignment">byRef assignment</a>.</li>
+<li><a href="13-functions.html#function-definitions">byRef parameter declaration</a>.</li>
+<li><a href="11-statements.html#the-return-statement">byRef function return</a>.</li>
+<li><a href="11-statements.html#the-foreach-statement">byRef value in a foreach statement</a>.</li>
+<li><a href="10-expressions.html#array-creation-operator">byRef initializer for an array element</a>.</li>
+<li><a href="10-expressions.html#anonymous-function-creation">byRef variable-use list in an anonymous function</a>.</li>
+<li><a href="11-statements.html#the-unset-statement">unset</a>.</li>
+</ul>
+<h3><a class="header" href="#reclamation-and-automatic-memory-management" id="reclamation-and-automatic-memory-management">Reclamation and Automatic Memory Management</a></h3>
+<p>The Engine is required to manage the lifetimes of VStores and HStores
+using some form of automatic memory management.
+In particular, when a VStore or HStore is created, memory is allocated for it.</p>
+<p>Later, if a VStore or HStore becomes unreachable through any existing
+VSlot, they become eligible for reclamation to release the memory
+they occupy. The engine may reclaim a VStore or HStore at any time
+between when it becomes eligible for reclamation and the end of the script execution.</p>
+<p>Before reclaiming an HStore that represents an <a href="05-types.html#objects">object</a>,
+the Engine should invoke the object’s <a href="14-classes.html#constructors">destructor</a> if one is defined.</p>
+<p>The Engine must reclaim each VSlot when the <a href="#storage-duration">storage duration</a> of its
+corresponding variable ends, when the variable is explicitly <a href="11-statements.html#the-unset-statement">unset</a> by the
+programmer, or when the script exits, whichever comes first. In the case where
+a VSlot is contained within an HStore, the engine must immediately reclaim the VSlot when it is
+explicitly unset by the programmer, when the containing HStore is reclaimed,
+or when the script exits, whichever comes first.</p>
+<p>The precise form of automatic memory management used by the Engine is
+unspecified, which means that the time and order of the reclamation of
+VStores and HStores is unspecified.</p>
+<p>A VStore’s <em>refcount</em> is defined as the number of unreclaimed VSlots that point
+to that VStore. Because the precise form of automatic memory management is not
+specified, a VStore’s refcount at a given time may differ between
+conforming implementations due to VSlots, VStores, and HStores being
+reclaimed at different times. Despite the use of the term refcount,
+conforming implementations are not required to use a reference
+counting-based implementation for automatic memory management.</p>
+<p>In some pictures below, storage-location boxes are shown as <strong>(dead)</strong>.
+For a VStore or an HStore this indicates that the VStore or HStore is no
+longer reachable through any variable and is eligible for reclamation. For
+a VSlot, this indicates that the VSlot has been reclaimed or, in the case
+of a VSlot contained with an HStore, that the containing HStore has been
+reclaimed or is eligible for reclamation.</p>
+<h3><a class="header" href="#assignment" id="assignment">Assignment</a></h3>
+<h4><a class="header" href="#general-1" id="general-1">General</a></h4>
+<p>This section and those immediately following it describe the abstract
+model’s implementation of <em>value assignment</em> and <em>byRef assignment</em>.
+Value assignment of non-array types to local variables is described
+first, followed by byRef assignment with local variables, followed by
+value assignment of array types to local variables, and ending with
+value assignment with complex left-hand side expressions, and byRef
+assignment with complex expressions on the left- or right-hand side.</p>
+<p>Value assignment and byRef assignment are core to the PHP language, and
+many other operations in this specification are described in terms of
+value assignment and byRef assignment.</p>
+<h4><a class="header" href="#value-assignment-of-scalar-types-to-a-local-variable" id="value-assignment-of-scalar-types-to-a-local-variable">Value Assignment of Scalar Types to a Local Variable</a></h4>
+<p>Value assignment is the primary means by which the programmer can create
+local variables. If a local variable that appears on the left-hand side
+of value assignment does not exist, the engine will bring a new local
+variable into existence and create a VSlot and initial VStore for
+storing the local variable’s value.</p>
+<p>Consider the following example of value <a href="10-expressions.html#simple-assignment">assignment</a> of scalar
+values to local variables:</p>
+<pre><code class="language-PHP">$a = 123;
+
+$b = false;
+</code></pre>
+<pre><code>[VSlot $a *]--&gt;[VStore int 123]
+
+[VSlot $b *]--&gt;[VStore bool false]
+</code></pre>
+<p>Variable <code>$a</code> comes into existence and is represented by a newly created
+VSlot pointing to a newly created VStore. Then the integer value 123 is
+written to the VStore. Next, <code>$b</code> comes into existence represented by a
+VSlot and corresponding VStore, and the Boolean value false is written
+to the VStore.</p>
+<p>Next consider the value assignment <code>$b = $a</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 123]
+
+[VSlot $b *]--&gt;[VStore int 123]
+</code></pre>
+<p>The integer value 123 is read from <code>$a</code>‘s VStore and is written into
+<code>$b</code>‘s VStore, overwriting its previous contents. As we can see, the two
+variables are completely independent, each has its own VStore
+containing the integer value 123. Value assignment
+reads the contents of one VStore and overwrites the contents of the
+other VStore, but the relationship of VSlots to VStores remains
+unchanged. Changing the value of <code>$b</code> has no effect on <code>$a</code>, and vice
+versa.</p>
+<p>Using literals or arbitrarily complex expressions on the right hand side
+of value assignment value works the same as it does for variables,
+except that the literals or expressions don’t have their own VSlots or
+VStores. The scalar value or handle produced by the literal or
+expression is written into the VStore of the left hand side, overwriting
+its previous contents.</p>
+<p><em><strong>Implementation Notes:</strong></em> For simplicity, the abstract model’s
+definition of value assignment never changes the mapping from VSlots to
+VStores. However, the conforming implementation is not required to actually
+keep separate memory allocations for both variables, it is only required
+to behave as if they were independent, e.g. writes to one VStore should
+not change the content of another.</p>
+<p>For example, the php.net implementation’s model, which in some cases will set
+two variable slots to point to the same zval when performing value
+assignment, produces the same observable behavior as the abstract
+model presented here.</p>
+<p>To illustrate the semantics of value assignment further, consider <code>++$b</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 123]
+
+[VSlot $b *]--&gt;[VStore int 124 (123 was overwritten)]
+</code></pre>
+<p>Now consider <code>$a = 99</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 99 (123 was overwritten)]
+
+[VSlot $b *]--&gt;[VStore int 124]
+</code></pre>
+<p>In both of these examples, one variable’s value is changed without
+affecting the other variable’s value. While the above examples only
+demonstrate value assignment for integer and Boolean values, the same
+mechanics apply for all scalar types.</p>
+<p>Note that as string values are scalar values, the model assumes the whole string
+representation, including string characters and its length, is contained within the VStore.
+This means that the model assumes whole string data is copied when the string is assigned.</p>
+<pre><code class="language-PHP">$a = 'gg';
+
+$b = $a;
+</code></pre>
+<pre><code>[VSlot $a *]--&gt;[VStore string 'gg']
+
+[VSlot $b *]--&gt;[VStore string 'gg']
+</code></pre>
+<p><code>$a</code>‘s string value and <code>$b</code>‘s string values are distinct from each other,
+and mutating <code>$a</code>‘s string will not affect <code>$b</code>. Consider <code>++$b</code>, for
+example:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore string 'gg']
+
+[VSlot $b *]--&gt;[VStore string 'gh']
+</code></pre>
+<p><em><strong>Implementation Notes:</strong></em>
+The conforming implementation may use an actual representation where string
+characters are stored outside the structure representing the VStore and
+are not copied immediately on assignment, for performance reasons.
+Applications in PHP are often written to assume that value assignment of strings
+is a rather inexpensive operation.
+Thus, it is common for an implementation to use a deferred copy
+mechanism to reduce the cost of value assignment for strings. Deferred
+copy mechanisms work by not copying a string during value assignment and
+instead allowing multiple variables to share the string’s contents
+indefinitely until a mutating operation (such as the increment operator)
+is about to be executed on the string, at which time some or all of the
+string’s contents are copied. A conforming implementation may choose to
+defer copying a string’s contents for value assignment so long as it has
+no observable effect on behavior from any testable viewpoint (excluding
+performance and resource consumption).</p>
+<h4><a class="header" href="#value-assignment-of-objects-to-a-local-variable" id="value-assignment-of-objects-to-a-local-variable">Value Assignment of Objects to a Local Variable</a></h4>
+<p>To demonstrate value assignment of objects to local variables, consider
+the case in which we have a Point class that supports a two-dimensional
+Cartesian system. An instance of Point contains two instance properties,
+<code>$x</code> and <code>$y</code>, that store the x- and y-coordinates, respectively. A
+<a href="14-classes.html#constructors">constructor call</a> of the form <code>Point(x, y)</code>
+used with operator <a href="10-expressions.html#the-new-operator"><code>new</code></a>
+creates a new point at the given location, and a method call
+of the form <code>move(newX, newY)</code> moves a <code>Point</code> to the new location.</p>
+<p>With the <code>Point</code> class, let us consider the value assignment <code>$a = new Point(1, 3)</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
+                                                           |            |
+                                                           V            V
+                                                      [VStore int 1]  [VStore int 3]
+</code></pre>
+<p>Variable <code>$a</code> is given its own VSlot, which points to a VStore that
+contains a handle pointing to an HStore allocated by <a href="10-expressions.html#the-new-operator"><code>new</code></a> and
+that is initialized by <code>Point</code>‘s constructor.</p>
+<p>Now consider the value assignment <code>$b = $a</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
+                                     ^                     |            |
+                                     |                     V            V
+[VSlot $b *]--&gt;[VStore object *]-----+             [VStore int 1] [VStore int 3]
+</code></pre>
+<p><code>$b</code>‘s VStore contains a handle that points to the same object as does
+<code>$a</code>‘s VStore’s handle. Note that the Point object itself was not copied,
+and note that <code>$a</code>‘s and <code>$b</code>‘s VSlots point to distinct VStores.</p>
+<p>Let’s modify the value of the Point whose handle is stored in <code>$b</code> using
+<code>$b-&gt;move(4, 6)</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
+                                     ^                     |            |
+                                     |                     V            V
+[VSlot $b *]--&gt;[VStore object *]-----+            [VStore int 4] [VStore int 6]
+                                       (1 was overwritten) (3 was overwritten)
+</code></pre>
+<p>As we can see, changing <code>$b</code>‘s Point changes <code>$a</code>‘s as well.</p>
+<p>Now, let’s make <code>$a</code> point to a different object using <code>$a = new Point(2, 1)</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
+                                                           |            |
+[VSlot $b *]--&gt;[VStore object *]-----+                     V            V
+                                     |             [VStore int 2] [VStore int 1]
+                                     V
+                                   [HStore Point [VSlot $x *] [VSlot $y *]]
+                                                           |            |
+                                                           V            V
+                                                   [VStore int 4] [VStore int 6]
+</code></pre>
+<p>Before <code>$a</code> can take on the handle of the new <code>Point</code>, its handle to the
+old <code>Point</code> must be removed, which leaves the handles of <code>$a</code> and <code>$b</code>
+pointing to different Points.</p>
+<p>We can remove all these handles using <code>$a = NULL</code> and <code>$b = NULL</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore null]    [HStore Point [VSlot $x *] [VSlot $y *] (dead)]
+                                                        |            |
+[VSlot $b *]--&gt;[VStore null]    [VStore int 2 (dead)]&amp;lt;--+            V
+                                                          [VStore int 1 (dead)]
+
+                                [HStore Point [VSlot $x *] [VSlot $y *] (dead)]
+                                                        |            |
+                                [VStore int 4 (dead)]&amp;lt;--+            V
+                                                        [VStore int 6 (dead)]
+</code></pre>
+<p>By assigning null to <code>$a</code>, we remove the only handle to <code>Point(2,1)</code> which makes
+that object eligible for destruction. A similar thing happens with <code>$b</code>,
+as it too is the only handle to its Point.</p>
+<p>Although the examples above only show with only two instance properties,
+the same mechanics apply for value assignment of all object types, even
+though they can have an arbitrarily large number of instance properties
+of arbitrary type. Likewise, the same mechanics apply to value
+assignment of all resource types.</p>
+<h4><a class="header" href="#byref-assignment-for-scalar-types-with-local-variables" id="byref-assignment-for-scalar-types-with-local-variables">ByRef Assignment for Scalar Types with Local Variables</a></h4>
+<p>Let’s begin with the same value <a href="10-expressions.html#simple-assignment">assignment</a> as in the previous
+section, <code>$a = 123</code> and <code>$b = false</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 123]
+
+[VSlot $b *]--&gt;[VStore bool false]
+</code></pre>
+<p>Now consider the <a href="10-expressions.html#byref-assignment">byRef assignment</a> <code>$b =&amp; $a</code>, which has byRef
+semantics:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 123]
+                 ^
+                 |
+[VSlot $b *]-----+     [VStore bool false (dead)]
+</code></pre>
+<p>In this example, byRef assignment changes <code>$b</code>‘s VSlot point to the same
+VStore that <code>$a</code>‘s VSlot points to. The old VStore that <code>$b</code>‘s VSlot used
+to point to is now unreachable.</p>
+<p>When multiple variables’ VSlots point to the same VStore,
+the variables are said to be <em>aliases</em> of each other or they are said to
+have an <em>alias relationship</em>. In the example above, after the byRef
+assignment executes the variables <code>$a</code> and <code>$b</code> will be aliases of each
+other.</p>
+<p>Note that even though in the assignment <code>$b =&amp; $a</code> the variable <code>$b</code> is on the left and <code>$a</code> is on the right,
+after becoming aliases they are absolutely symmetrical and equal in their relation to the VStore.</p>
+<p>When we change the value of <code>$b</code> using <code>++$b</code> the result is:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 124 (123 was overwritten)]
+                 ^
+                 |
+[VSlot $b *]-----+
+</code></pre>
+<p><code>$b</code>‘s value, which is stored in the VStore that <code>$b</code>‘s VSlot points, is
+changed to 124. And as that VStore is also aliased by <code>$a</code>‘s VSlot, the
+value of <code>$a</code> is also 124. Indeed, any variable’s VSlot that is aliased
+to that VStore will have the value 124.</p>
+<p>Now consider the value assignment <code>$a = 99</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 99 (124 was overwritten)]
+                 ^
+                 |
+[VSlot $b *]-----+
+</code></pre>
+<p>The alias relationship between <code>$a</code> and <code>$b</code> can be broken explicitly by
+using <code>unset</code> on variable <code>$a</code> or variable <code>$b</code>. For example, consider
+<code>unset($a)</code>:</p>
+<pre><code>[VSlot $a (dead)]      [VStore int 99]
+                         ^
+                         |
+[VSlot $b *]-------------+
+</code></pre>
+<p>Unsetting <code>$a</code> causes variable <code>$a</code> to be destroyed and its link
+to the VStore to be removed, leaving <code>$b</code>‘s VSlot as the only
+pointer remaining to the VStore.</p>
+<p>Other operations can also break an alias relationship between two or
+more variables. For example, <code>$a = 123</code> and <code>$b =&amp; $a</code>, and <code>$c = 'hi'</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 123]
+                 ^
+                 |
+[VSlot $b *]-----+
+
+[VSlot $c *]--&gt;[VStore string 'hi']
+</code></pre>
+<p>After the byRef assignment, <code>$a</code> and <code>$b</code> now have an alias relationship.
+Next, let’s observe what happens for <code>$b =&amp; $c</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore int 123]
+
+[VSlot $b *]-----+
+                 |
+                 V
+[VSlot $c *]--&gt;[VStore string 'hi']
+</code></pre>
+<p>As we can see, the byRef assignment above breaks the alias relationship
+between <code>$a</code> and <code>$b</code>, and now <code>$b</code> and <code>$c</code> are aliases of each other. When
+byRef assignment changes a VSlot to point to a different VStore, it
+breaks any existing alias relationship the left hand side variable had
+before the assignment operation.</p>
+<p>It is also possible to use byRef assignment to make three or more VSlots
+point to the same VStore. Consider the following example:</p>
+<pre><code class="language-PHP">$b =&amp; $a;
+$c =&amp; $b;
+$a = 123;
+</code></pre>
+<pre><code>[VSlot $a *]--&gt;[VStore int 123]
+                 ^   ^
+                 |   |
+[VSlot $b *]-----+   |
+                     |
+[VSlot $c *]---------+
+</code></pre>
+<p>Like value assignment, byRef assignment provides a means for the
+programmer to create variables. If the local variables that appear on
+the left- or right-hand side of byRef assignment do not exist, the
+engine will bring new local variables into existence and create a VSlot
+and initial VStore for storing the local variable’s value.</p>
+<p>Note that literals, constants, and other expressions that don’t
+designate a modifiable lvalue cannot be used on the left- or right-hand
+side of byRef assignment.</p>
+<h4><a class="header" href="#byref-assignment-of-non-scalar-types-with-local-variables" id="byref-assignment-of-non-scalar-types-with-local-variables">ByRef Assignment of Non-Scalar Types with Local Variables</a></h4>
+<p>ByRef assignment of non-scalar types works using the same mechanism as
+byRef assignment for scalar types. Nevertheless, it is worthwhile to
+describe a few examples to clarify the semantics of byRef assignment.
+Recall the <a href="#value-assignment-of-objects-to-a-local-variable">example using the <code>Point</code> class</a>:</p>
+<p><code>$a = new Point(1, 3);</code></p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
+                                                           |            |
+                                                           V            V
+                                                  [VStore int 1]  [VStore int 3]
+</code></pre>
+<p>Now consider the <a href="10-expressions.html#byref-assignment">byRef assignment</a> <code>$b =&amp; $a</code>, which has byRef
+semantics:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *][VSlot $y *]]
+                 ^                                         |           |
+                 |                                         V           V
+[VSlot $b *]-----+                                  [VStore int 1] [VStore int 3]
+</code></pre>
+<p><code>$a</code> and <code>$b</code> now aliases of each other. Note that byRef assignment
+produces a different result than <code>$b = $a</code> where <code>$a</code> and <code>$b</code> would point
+to distinct VStores pointing to the same HStore.</p>
+<p>Let’s modify the value of the <code>Point</code> aliased by <code>$a</code> using <code>$a-&gt;move(4, 6)</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] VSlot $y *]]
+                 ^                                         |           |
+                 |                                         V           V
+[VSlot $b *]-----+                              [VStore int 4] [VStore int 6]
+                                        (1 was overwritten) (3 was overwritten)
+</code></pre>
+<p>Now, let’s change <code>$a</code> itself using the value assignment <code>$a = new Point(2, 1)</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *][VSlot $y *]]
+                 ^                                         |           |
+                 |                                         V           V
+[VSlot $b *]-----+                                [VStore int 2] [VStore int 1]
+
+                               [HStore Point [VSlot $x *]   [VSlot $y *] (dead)]
+                                                       |              |
+                                                       V              V
+                                     [VStore int 4 (dead)] [VStore int 6 (dead)]
+</code></pre>
+<p>As we can see, <code>$b</code> continues to have an alias relationship with <code>$a</code>.
+Here’s what’s involved in that assignment: <code>$a</code> and <code>$b</code>‘s VStore’s handle
+pointing to <code>Point(4,6)</code> is removed, <code>Point(2,1)</code> is created, and <code>$a</code> and
+<code>$b</code>‘s VStore is overwritten to contain a handle pointing to that new
+<code>Point</code>. As there are now no VStores pointing to <code>Point(4,6)</code>, it can be destroyed.</p>
+<p>We can remove these aliases using <code>unset($a, $b)</code>:</p>
+<pre><code>[VSlot $a (dead)]       [HStore Point [VSlot $x *] [VSlot $y *] (dead)]
+                                                |            |
+                                                V            V
+[VSlot $b (dead)]             [VStore int 2 (dead)]  [VStore int 1 (dead)]
+</code></pre>
+<p>Once all the aliases to the VStores are gone, the VStores can be
+destroyed, in which case, there are no more pointers to the HStore, and
+it can be destoyed too.</p>
+<h4><a class="header" href="#value-assignment-of-array-types-to-local-variables" id="value-assignment-of-array-types-to-local-variables">Value Assignment of Array Types to Local Variables</a></h4>
+<p>The semantics of value assignment of array types is different from value
+assignment of other types. Recall the <code>Point</code> class from <a href="#value-assignment-of-objects-to-a-local-variable">the examples</a>, and consider the following <a href="10-expressions.html#simple-assignment">value assignments</a> and their abstract implementation:</p>
+<p><code>$a = array(10, 'B' =&gt; new Point(1, 3));</code></p>
+<pre><code>[VSlot $a *]--&gt;[VStore array *]--&gt;[HStore Array [VSlot 0 *] [VSlot 'B' *]]
+                                                         |             |
+                                                         V             V
+                                               [VStore int 10]   [VStore Obj *]
+                                                                             |
+                                [HStore Point [VSlot $x *] [VSlot $y *]]&amp;lt;----+
+                                                        |            |
+                                                        V            V
+                                            [VStore int 1]  [VStore int 3]
+</code></pre>
+<p>In the example above, <code>$a</code>‘s VStore is initialized to contain a handle to
+an HStore for an array containing two elements, where one element is an
+integer and the other is a handle to an HStore for an object.</p>
+<p>Now consider the following value assignment <code>$b = $a</code>. A conforming
+implementation must implement value assignment of arrays in one of the
+following ways: (1) eager copying, where the implementation makes a copy
+of <code>$a</code>‘s array during value assignment and changes <code>$b</code>‘s VSlot to point
+to the copy; or (2) deferred copying, where the implementation uses a
+deferred copy mechanism that meets certain requirements. This section
+describes eager copying, and the section that immediately follows
+describes <a href="#deferred-array-copying">deferred copying</a>.</p>
+<p>To describe the semantics of eager copying, let’s begin by considering
+the value assignment <code>$b = $a</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore array *]--&gt;[HStore Array [VSlot 0 *] [VSlot 'B' *]]
+                                                         |             |
+[VSlot $b *]--&gt;[VStore array *]                          V             V
+                             |                  [VStore int 10]  [VStore object *]
+                             V                                                  |
+[HStore Array [VSlot 0 *] [VSlot 'B' *]]                                        |
+                       |             |                                          |
+             +---------+   +---------+                                          |
+             V             V                                                    |
+[VStore int 10] [VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]&amp;lt;---+
+                                                            |            |
+                                                            V            V
+                                                 [VStore int 1]  [VStore int 3]
+</code></pre>
+<p>The value assignment <code>$b = $a</code> made a copy of <code>$a</code>‘s array. Note how
+<code>$b</code>‘s VSlot points to a different VStore than <code>$a</code>‘s VSlot, and <code>$b</code>‘s
+VStore points to a different HStore than <code>$a</code>‘s VStore. Each source array
+element is copied using <em>member-copy assignment</em> <code>=*</code>, which is defined
+as follows:</p>
+<pre><code>   $destination =* $source
+</code></pre>
+<ul>
+<li>If <code>$source</code>‘s VStore has a refcount equal to 1, the Engine copies the
+array element using  value assignment (<code>destination = $source</code>).</li>
+<li>If <code>$source</code>‘s VStore has a refcount that is greater than 1, the Engine
+uses an implementation-defined algorithm to decide whether to copy the element
+using value assignment (<code>$destination = $source</code>) or byRef
+assignment (<code>$destination =&amp; $source</code>).</li>
+</ul>
+<p>Note the member-copy assignment <code>=*</code> is <strong>not</strong> an operator or a language
+construct in the PHP language, but instead it is used in this text to
+describe behavior for the engine for array copying and other operations.</p>
+<p>For the particular example above, member-copy assignment exhibits the
+same semantics as value assignment for all conforming implementations
+because all of the array elements’ VStores have a refcount equal to 1.
+The first element VSlots in <code>$a</code>‘s array and <code>$b</code>‘s array point
+to distinct VStores, each of which contain a distinct copy of the
+integer value 10. The second element VSlots in <code>$a</code>‘s array and <code>$b</code>‘s
+array point to distinct VStores, each of which contain a handle to the
+same object HStore.</p>
+<p>Let’s consider another example:</p>
+<pre><code class="language-PHP">$x = 123;
+$a = array(array(&amp;$x, 'hi'));
+$b = $a;
+</code></pre>
+<p>Eager copying can produce two possible outcomes depending on the
+implementation. Here is the first possible outcome:</p>
+<pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
+                                                             |
+[VSlot $x *]-------------------------+   [VStore array *]&amp;lt;---+
+                                     |                 |
+[VSlot $b *]--&gt;[VStore array *]      |                 V
+                             |       |  [HStore Array [VSlot 0 *][VSlot 1 *]]
+                             V       |                         |          |
+         [HStore Array [VSlot 0 *]]  |                         V          |
+                                |    +----------------&gt;[VStore int 123]   |
+                                V                          ^              V
+                     [VStore array *]                      |   [VStore string 'hi']
+                                   |        +--------------+
+                                   V        |
+                     [HStore Array [VSlot 0 *] [VSlot 1 *]]
+                                                        |
+                                                        V
+                                                     [VStore string 'hi']
+</code></pre>
+<p>Here is the second possible outcome:</p>
+<pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
+                                                             |
+[VSlot $x *]-------------------------+  [VStore array *]&amp;lt;----+
+                                     |                |
+[VSlot $b *]--&gt;[VStore array *]      |                V
+                             |       |  [HStore Array [VSlot 0 *] [VSlot 1 *]]
+                             V       |                         |           |
+         [HStore Array [VSlot 0 *]]  |                         V           |
+                                |    +----------------&gt;[VStore int 123]    |
+                                V                                          V
+                     [VStore array *]                            [VStore string 'hi']
+                                   |
+                                   V
+                    [HStore Array [VSlot 0 *] [VSlot 1 *]]
+                                           |           |
+                                           V           V
+                                  [VStore int 123]  [VStore string 'hi']
+</code></pre>
+<p>In both possible outcomes, value assignment with eager copying makes a
+copy of <code>$a</code>‘s array, copying the array’s single element using
+member-copy assignment (which in this case will exhibit the same
+semantics of value assignment for all implementations), which in turn
+makes a copy of the inner array inside <code>$a</code>‘s array, copying the inner
+array’s elements using member-copy assignment. The inner array’s first
+element VSlot points to a VStore that has a refcount that is greater than 1,
+so an implementation-defined algorithm is used to decide whether to use value
+assignment or byRef assignment. The first possible outcome shown above
+demonstrates what happens if the implementation chooses to do byRef
+assignment, and the second possible outcome shown above demonstrates
+what happens if the implementation chooses to do value assignment. The
+inner array’s second element VSlot points to a VStore that has a refcount
+equal to 1, so value assignment is used to copy the inner array’s second
+element for all conforming implementations that use eager copying.</p>
+<p>Although the examples in this section only use arrays with one
+element or two elements, the model works equally well for all
+arrays even though they can have an arbitrarily large number
+of elements. As to how an HStore accommodates all of them, is
+unspecified and unimportant to the abstract model.</p>
+<h4><a class="header" href="#deferred-array-copying" id="deferred-array-copying">Deferred Array Copying</a></h4>
+<p>As mentioned in the <a href="#value-assignment-of-array-types-to-local-variables">previous section</a>, an implementation may
+choose to use a deferred copy mechanism instead of eagerly making a copy
+for value assignment of arrays. An implementation may use any deferred
+copy mechanism desired so long as it conforms to the abstract model’s
+description of deferred array copy mechanisms presented in this
+section.</p>
+<p>Because an array’s contents can be arbitrarily large, eagerly copying an
+array’s entire contents for value assignment can be expensive. In
+practice an application written in PHP may rely on value assignment of
+arrays being relatively inexpensive for the common case (in order to deliver
+acceptable performance), and as such it is common for an implementation
+to use a deferred array copy mechanism in order to reduce the cost of
+value assignment for arrays.</p>
+<p>Unlike conforming deferred string copy mechanisms discussed <a href="#value-assignment-of-scalar-types-to-a-local-variable">before</a>
+that must produce the same observable behavior as eager string copying,
+deferred array copy mechanisms are allowed in some cases to exhibit
+observably different behavior than eager array copying. Thus, for
+completeness this section describes how deferred array copies can be
+modeled in the abstract memory model and how conforming deferred array
+copy mechanisms must behave.</p>
+<p>Conforming deferred array copy mechanisms work by not making an array
+copy during value assignment, by allowing the destination VStore to
+share an array HStore with the source VStore, and by making a copy of
+the array HStore at a later time if or when it is necessary. The
+abstract model represents a deferred array copy relationship by marking
+the destination VStore with a special “Arr-D” type tag and by sharing
+the same array HStore between the source and destination VStores. Note
+that the source VStore’s type tag remains unchanged. For the purposes of
+this abstract model, the “Arr-D” type tag is considered identical to the
+<code>array</code> type in all respects except when specified otherwise.</p>
+<p>To illustrate this, let’s see how the previous example would be
+represented under the abstract model assuming the implementation defers
+the copying the array:</p>
+<pre><code class="language-PHP">$x = 123;
+$a = array(array(&amp;$x, 'hi'));
+$b = $a;
+</code></pre>
+<pre><code>[VSlot $a *]---&gt;[VStore array *]---&gt;[HStore Array [VSlot 0 *]]
+                                      ^                    |
+                                      | [VStore array *]&amp;lt;--+
+[VSlot $b *]---&gt;[VStore Arr-D *]------+               |
+                                                      V
+                                        [HStore Array [VSlot 0 *] [VSlot 1 *]]
+                                                               |           |
+                                                               V           |
+[VSlot $x *]------------------------------------------&gt;[VStore int 123]    |
+                                                                           V
+                                                               [VStore string 'hi']
+</code></pre>
+<p>As we can see, both <code>$a</code>‘s VStore (the source VStore) and <code>$b</code>‘s VStore
+(the destination VStore) point to the same array HStore. Note the
+asymmetric nature of how deferred array copies are represented in the
+abstract model. In the above example the source VStore’s type tag
+remains unchanged after value assignment, whereas the destination
+VStore’s type tag was changed to “Arr-D”.</p>
+<p>When the engine is about to perform an array-mutating operation on a
+VStore tagged “Arr” that participates in a deferred array copy
+relationship or on a VStore tagged “Arr-D”, the engine must first take
+certain actions that involve making a copy of the array (described in
+the next paragraph) before performing the array-mutating operation. An
+array-mutating operation is any operation can add or remove array
+elements, overwrite existing array elements, change the state of the
+array’s internal cursor, or cause the refcount of one or more of the
+array’s element VStores or subelement VStores to increase from 1 to
+a value greater than 1. This requirement to take certain actions before
+performing an array-mutation operation on a VStore participating in a
+deferred array copy relationship is commonly referred to as the
+copy-on-write requirement.</p>
+<p>When an array-mutating operation is about to be performed on a given
+VStore X with an “array” type tag that participates in a deferred array
+copy relationship, the engine must find all of the VStores tagged
+“Arr-D” that point to the same array HStore that VStore X points to,
+make a copy of the array (using <a href="#value-assignment-of-array-types-to-local-variables">member-copy assignment to copy the
+array’s elements</a>, and update all of these
+VStores tagged “Arr-D” to point to the newly created copy (note that
+VStore X remains unchanged). When an array-mutation operation is about
+to be performed on a given VStore X with an “Arr-D” type tag, the engine
+must <a href="#value-assignment-of-array-types-to-local-variables">make a copy of the array</a>, update VStore
+X to point to the newly created copy, and change VStore X’s type tag to
+“array”. These specific actions that the engine must perform on VStore at
+certain times to satisfy the copy-on-write requirement are collectively
+referred to as <em>array-separation</em> or <em>array-separating the VStore</em>. An
+array-mutation operation is said to <em>trigger</em> an array-separation.</p>
+<p>Note that for any VStore with an “array” type tag that participates in a
+deferred array copy relationship, or for any VStore with an “Arr-D” type
+tag, a conforming implementation may choose to array-separate the VStore
+at any time for any reason as long as the copy-on-write requirement is
+upheld.</p>
+<p>Continuing with the previous example, consider the array-mutating
+operation <code>$b[1]++</code>. Depending on the implementation, this can produce
+one of three possible outcomes. Here is the one of the possible
+outcomes:</p>
+<pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
+                                                             |
+[VSlot $b *]--&gt;[VStore array *]            [VStore Arr *]&amp;lt;---+
+                             |                         |
+      +----------------------+              +----------+
+      V                                     V
+  [HStore Array [VSlot 0 *] [VSlot 1 *]]  [HStore Array [VSlot 0 *] [VSlot 1 *]]
+                         |           |       ^                   |           |
+                         |           V       |                   V           |
+                         |   [VStore int 1]  |            [VStore int 123]   |
+                         V                   |             ^                 V
+                       [VStore Arr-D *]------+             |   [VStore string 'hi']
+                                                           |
+ [VSlot $x *]----------------------------------------------+
+</code></pre>
+<p>As we can see in the outcome shown above, <code>$b</code>‘s VStore was
+array-separated and now <code>$a</code>‘s VStore and <code>$b</code>‘s VStore point to distinct
+array HStores. Performing array-separation on <code>$b</code>‘s VStore was necessary
+to satisfy the copy-on-write requirement. <code>$a</code>‘s array remains unchanged
+and that <code>$x</code> and <code>$a[0][0]</code> still have an alias relationship with each
+other. For this particular example, conforming implementations are
+required to preserve <code>$a</code>‘s array’s contents and to preserve the alias
+relationship between <code>$x</code> and <code>$a[0][0]</code>. Finally, note that <code>$a[0]</code> and
+<code>$b[0]</code> have a deferred copy relationship with each other in the outcome
+shown above. For this particular example, a conforming implementation is
+not required to array-separate <code>$b[0]</code>‘s VStore, and the outcome shown
+above demonstrates what happens when <code>$b[0]</code>‘s VStore is not
+array-separated. However, an implementation can choose to array-separate
+<code>$b[0]</code>‘s VStore at any time if desired. The other two possible outcomes
+shown below demonstrate what can possibly happen if the implementation
+choose to array-separate <code>$b[0]</code>‘s VStore as well. Here is the second
+possible outcome:</p>
+<pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
+                                                             |
+[VSlot $b *]--&gt;[VStore array *]          [VStore array *]&amp;lt;---+
+                             |                         |
+                             V                         V
+  [HStore Array [VSlot 0 *] [VSlot 1 *]]  [HStore Array [VSlot 0 *] [VSlot 1 *]]
+                         |           |                           |           |
+       +-----------------+           V                           |           |
+       |                     [VStore int 1]                 +----+           |
+       V                                                    |                V
+  [VStore Arr-D *]--&gt;[HStore Array [VSlot 0 *] [VSlot 1 *]] | [VStore string 'hi']
+                                            |           |   |
+                                    +-------+           |   |
+                                    |                   V   |
+                                    | [VStore string 'hi']  |
+                                    V                       |
+ [VSlot $x *]---------------------&gt;[VStore int 123]&amp;lt;--------+
+</code></pre>
+<p>Here is the third possible outcome:</p>
+<pre><code>[VSlot $a *]----&gt;[VStore array *-]----&gt;[HStore Array [VSlot 0 *]]
+                                                            |
+[VSlot $b *]--&gt;[VStore array *]           [VStore array *]&amp;lt;---+
+                             |                          |
+                             V                          V
+ [HStore Array [VSlot 0 *] [VSlot 1 *]]  [HStore Array [VSlot 0 *] [VSlot 1 *]]
+                        |           |                           |           |
+       +----------------+           V                           |           |
+       |                     [VStore int 1]                  +--+           |
+       V                                                     |              V
+   [VStore Arr-D *]--&gt;[HStore Array [VSlot 0 *] [VSlot 1 *]] | [VStore string 'hi']
+                                             |           |   |
+                     [VStore int 123]&amp;lt;-------+           |   |
+                                                         V   |
+                                       [VStore string 'hi']  |
+                                                             |
+ [VSlot $x *]---------------------&gt;[VStore int 123]&amp;lt;---------+
+</code></pre>
+<p>The second and third possible outcomes show what can possibly happen if
+the implementation chooses to array-separate <code>$b[0]</code>‘s VStore. In the
+second outcome, <code>$b[0][0]</code> has an alias relationship with <code>$x</code> and
+<code>$a[0][0]</code>. In the third outcome, <code>$b[0][0]</code> does not have an alias
+relationship, though <code>$x</code> and <code>$a[0][0]</code> still have an alias relationship
+with each other. The differences between the second and third outcome
+are reflect that different possibilities when the engine uses
+member-copy assignment to copy <code>$a[0]</code>‘s arrays’s elements into <code>$b[0]</code>‘s
+array.</p>
+<p>Finally, let’s briefly consider one more example:</p>
+<pre><code class="language-PHP">$x = 0;
+$a = array(&amp;$x);
+$b = $a;
+$x = 2;
+unset($x);
+$b[1]++;
+$b[0]++;
+echo $a[0], ' ', $b[0];
+</code></pre>
+<p>For the example above, a conforming implementation could output “2 1”,
+“2 3”, or “3 3” depending on how it implements value assignment for
+arrays.</p>
+<p>For portability, it is generally recommended that programs written in
+PHP should avoid performing value assignment with a right-hand side that
+is an array with one or more elements or sub-elements that have an alias
+relationship.</p>
+<p><em><strong>Implementation Notes:</strong></em> For generality and for simplicity, the
+abstract model represents deferred array copy mechanisms in a manner
+that is more open-ended and superficially different than the php.net
+implementation’s model, which uses a symmetric deferred copy mechanism
+where a single zval contains the sole pointer to a given Hashtable and
+deferred array copies are represented as multiple slots pointing to the
+same single zval that holds the array. Despite this superficial
+difference, php.net’s implementation produces behavior that is
+compatible with the abstract model’s definition of deferred array copy
+mechanisms.</p>
+<h4><a class="header" href="#general-value-assignment" id="general-value-assignment">General Value Assignment</a></h4>
+<p>The sections above thus far have described the mechanics of value assignment
+to a local variable. The assignment to a modifiable lvalue that is not a variable, such as array element or
+object property, works like the local variable assignment, except that the VSlot which represented
+a variable is replaced by a VSlot that represents the target lvalue.
+If necessary, such VSlot is created.</p>
+<p>For example, assuming <code>Point</code> definition as in previous sections and further assuming all
+instance properties are public, this code:</p>
+<pre><code class="language-PHP">$a = new Point(1, 3);
+$b = 123;
+$a-&gt;x = $b;
+</code></pre>
+<p>Will result in:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
+                                                           |            |
+                                                           V            V
+                                                  [VStore int 123] [VStore int 3]
+[VSlot $b *]--&gt;[VStore int 123]
+</code></pre>
+<p>If needed, new VSlots are created as part of the containing VStore, for example:</p>
+<pre><code class="language-PHP">$a = new Point(1, 3);
+$b = 123;
+$a-&gt;z = $b;
+</code></pre>
+<p>Will result in:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *] [VSlot $z *]]
+                                                           |            |            |
+                                                           V            V            V
+                                                  [VStore int 1] [VStore int 3] [VStore int 123]
+[VSlot $b *]--&gt;[VStore int 123]
+</code></pre>
+<p>The same holds for array elements:</p>
+<pre><code class="language-PHP">$a = array('hello', 'world');
+$b = 'php';
+$a[1] = $b;
+$a[2] = 'World!';
+</code></pre>
+<p>Will result in:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore array *]--&gt;[HStore Array [VSlot 0 *]  [VSlot 1 *]  [VSlot 2 *]]
+                                                         |            |            |
+                                                         V            V            V
+                                    [VStore string 'hello'] [VStore string 'php'] [VStore string 'World!']
+[VSlot $b *]--&gt;[VStore string 'php']
+</code></pre>
+<p>Where the third VSlot with index 2 was created by the assignment.</p>
+<p>Note that any array element and instance property, including a designation of non-existing ones,
+is considered a modifiable lvalue, and the VSlot will be created by the engine and added
+to the appropriate HStore automatically. Static class properties are considered modifiable lvalues too,
+though new ones would not be created automatically.</p>
+<h4><a class="header" href="#general-byref-assignment" id="general-byref-assignment">General ByRef Assignment</a></h4>
+<p>The sections above thus far have described the mechanics of byref assignment
+with local variables. The byRef assignment to a modifiable lvalue that is not a variable,
+such as array element or object property, works like the local variable assignment,
+except that the VSlot which represented a variable is replaced by a VSlot
+that represents the target lvalue.  If necessary, such VSlot is created and added to
+the corresponding HStore.</p>
+<p>For example:</p>
+<pre><code class="language-PHP">$a = new Point(1, 3);
+$b = 123;
+$a-&gt;z =&amp; $b;
+</code></pre>
+<p>Will result in:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *] [VSlot $z *]]
+                                                           |            |            |
+                                                           V            V            |
+                                                  [VStore int 1] [VStore int 3]      |
+[VSlot $b *]----------------&gt;[VStore int 123]&amp;lt;---------------------------------------+
+</code></pre>
+<h3><a class="header" href="#argument-passing" id="argument-passing">Argument Passing</a></h3>
+<p>Argument passing is defined in terms of <a href="#assignment">simple assignment</a> or <a href="#byref-assignment-for-scalar-types-with-local-variables">byRef assignment</a>, depending on how the parameter is declared.
+That is, passing an argument to a function having a corresponding
+parameter is like assigning that argument to that parameter. The
+function call situations involving missing arguments or
+undefined variable arguments are discussed in section describing
+<a href="10-expressions.html#function-call-operator">the function call operator</a>.</p>
+<h3><a class="header" href="#value-returning" id="value-returning">Value Returning</a></h3>
+<p>Returning a value from a function is defined in terms of <a href="#assignment">simple assignment</a> or <a href="#byref-assignment-for-scalar-types-with-local-variables">byRef assignment</a>, depending on how the function is declared.
+That is, returning a value from a function to its
+caller is like assigning that value to the user of the caller’s return
+value. The function-return situations involving a missing return value
+are discussed in section describing <a href="10-expressions.html#function-call-operator">the function call operator</a>.</p>
+<p>Note that to achieve byRef assignment semantics, both function return and
+assignment of the return value should be byRef. For example:</p>
+<pre><code class="language-PHP">function &amp;counter()
+{
+  static $c = 0;
+  $c++;
+  echo $c.&quot; &quot;;
+  return $c;
+}
+
+$cnt1 = counter();
+$cnt1++; // this does not influence counter
+$cnt2 =&amp; counter();
+$cnt2++; // this does influence counter
+counter();
+</code></pre>
+<p>This example prints <code>1 2 4 </code>, since the first assignment does not produce
+byRef semantics even though the function return is declared byRef.
+If the function is not declared to return byRef, its return never produces
+byRef semantics, regardles of how it is assigned.</p>
+<p>Passing function’s return to another function is considered the same as assigning
+the value to the corresponding function’s parameter, with byRef parameters
+treated as byRef assignments.</p>
+<h3><a class="header" href="#cloning-objects" id="cloning-objects">Cloning objects</a></h3>
+<p>When an object instance is allocated, operator <a href="10-expressions.html#the-new-operator"><code>new</code></a> returns a handle
+that points to that object. As described <a href="#value-assignment-of-objects-to-a-local-variable">above</a>,
+value assignment of a handle to an object does not copy the object HStore itself. Instead, it creates a copy of the handle.
+The copying of the HStore itself is performed via <a href="10-expressions.html#the-clone-operator">operator <code>clone</code></a>.</p>
+<p>To demonstrate how the <code>clone</code> operator works, consider the case in which
+an instance of class <code>Widget</code> contains two instance properties: <code>$p1</code> has
+the integer value 10, and <code>$p2</code> is a handle to an array of elements of
+some type(s) or to an instance of some other type.</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Widget [VSlot $p1 *][VSlot $p2 *]]
+                                                             |            |
+                                                             V            V
+                                               [VStore int 10] [VStore object *]
+                                                                              |
+                                                        [HStore ...]&amp;lt;---------+
+</code></pre>
+<p>Let us consider the result of <code>$b = clone $a</code>:</p>
+<pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Widget [VSlot $p1 *][VSlot $p2 *]]
+                                                             |            |
+[VSlot $b *]--&gt;[VStore object *]                             V            V
+                             |                  [VStore int 10] [VStore object *]
+     +-----------------------+                                                 |
+     V                                                                         |
+   [HStore Widget [VSlot $p1 *] [VSlot $p2 *]]              +---&gt;[HStore ...]&amp;lt;-+
+                             |             |                |
+                             V             V                |
+                 [VStore int 10] [VStore object *]----------+
+</code></pre>
+<p>The clone operator will create another object HStore of the same class
+as the original and copy <code>$a</code>‘s object’s instance properties using
+<a href="#value-assignment-of-array-types-to-local-variables">member-copy assignment</a>. For the example shown above, the
+handle to the newly created HStore stored into <code>$b</code> using value
+assignment. Note that the clone operator will not recursively clone
+objects held in <code>$a</code>‘s instance properties; hence the object copying
+performed by the clone operator is often referred to as a <em>shallow
+copy</em>. If a <em>deep copy</em> of an object is desired, the programmer must
+achieve this manually by using the <a href="14-classes.html#method-__clone">method <code>__clone</code></a> which
+is called after the initial shallow copy has been performed.</p>
+<h2><a class="header" href="#scope" id="scope">Scope</a></h2>
+<p>The same name can designate different things at different places in a
+program. For each different thing that a name designates, that name is
+visible only within a part of the program called that name’s <em>scope</em>.</p>
+<p>There are a number of scope types that exist in PHP:</p>
+<ul>
+<li>Variable scope - the scope which defined what unqualified variables (like <code>$foo</code>) are referring to.
+Variables defined in one variable scope are not visible in another variable scope.</li>
+<li>Class scope - the scope that defines visibility of the methods and properties, and resolution of keywords like
+<code>self</code>, <code>parent</code>, etc. Class scope encompasses <a href="14-classes.html#class-declarations">the body of that class</a> and any classes derived
+from it.</li>
+<li>Namespace scope - the scope that defines what unqualified and not-fully-qualified class and function names (e.g. <code>foo()</code> or <code>new Bar()</code>)
+refer to. Namespace scoping rules are defined in the <a href="18-namespaces.html#namespaces">Namespaces chapter</a>.</li>
+</ul>
+<p>For variable scopes, the following scopes can be distinguished:</p>
+<ul>
+<li><em>Global scope</em> is the topmost scope of the script, which contains global variables, including pre-defined ones
+and ones defined outside of any other scope.</li>
+<li><em>Function scope</em>, which means from the point of declaration/first
+initialization through to the end of that <a href="13-functions.html#function-definitions">function’s body</a>.</li>
+</ul>
+<p><a href="#program-start-up">Start-up scripts</a> have the global variable scope.
+<a href="10-expressions.html#script-inclusion-operators">Included</a> scripts have the variable scope matching the scope in
+the place where the inclusion operator was executed.</p>
+<p>A variable declared or first initialized inside a function, has function scope;
+otherwise, the variable has the same variable scope as the enclosing script.</p>
+<p><a href="07-variables.html#global-variables">Global variables</a> can be brought into the current scope by using <code>global</code> keyword.
+<a href="07-variables.html#general">Superglobals</a> exist in the global variable scope, however they can be also accessed in any scope;
+they never need explicit declaration.</p>
+<p>Each function has its own function scope. An <a href="13-functions.html#anonymous-functions">anonymous function</a>
+has its own scope separate from that of any function inside which that anonymous function is defined.</p>
+<p>The variable scope of a parameter is the body of the function in which the parameter is declared.</p>
+<p>The scope of a <a href="11-statements.html#labeled-statements"><em>named-label</em></a> is the body of the function in
+which the label is defined.</p>
+<p>The class scope of a <a href="14-classes.html#class-members">class member m</a> that is declared in, or inherited by, a
+class type C is the body of C.</p>
+<p>The class scope of an <a href="14-classes.html#class-members">interface member m</a> that is declared in, or inherited by,
+an interface type I is the body of I.</p>
+<p>When a <a href="16-traits.html#general">trait</a> is used by a class or an interface, the <a href="16-traits.html#trait-declarations">trait’s
+members</a> take on the class scope of a member of that class or
+interface.</p>
+<h2><a class="header" href="#storage-duration" id="storage-duration">Storage Duration</a></h2>
+<p>The lifetime of a variable is the time during program execution that
+storage for that variable is guaranteed to exist. This lifetime is
+referred to as the variable’s <em>storage duration</em>, of which there are
+three kinds: automatic, static, and allocated.</p>
+<p>A variable having <em>automatic storage duration</em> comes into being and is
+initialized at its declaration or on its first use, if it has no
+declaration. Its lifetime is delimited by an enclosing <a href="#scope">scope</a>. The
+automatic variable’s lifetime ends at the end of that scope. Automatic
+variables lend themselves to being stored on a stack where they can help
+support argument passing and recursion. <a href="07-variables.html#local-variables">Local variables</a>, which
+include <a href="13-functions.html#function-definitions">function parameters</a>, have automatic storage duration.</p>
+<p>A variable having <em>static storage duration</em> comes into being and is
+initialized before its first use, and lives until program shutdown. The
+following kinds of variables have static storage duration: <a href="07-variables.html#constants">constants</a>,
+<a href="07-variables.html#function-statics">function statics</a>, <a href="07-variables.html#global-variables">global variables</a>,
+<a href="07-variables.html#static-properties">static properties</a>,
+and class and interface <a href="07-variables.html#class-and-interface-constants">constants</a>.</p>
+<p>A variable having <em>allocated storage duration</em> comes into being based on
+program logic by use of the <a href="10-expressions.html#the-new-operator">new operator</a> or a factory function.
+Ordinarily, once such storage is no longer needed, it is reclaimed automatically by the
+Engine via its garbage-collection process and the use of
+<a href="14-classes.html#destructors">destructors</a>. The following kinds of variables have allocated
+storage duration: <a href="07-variables.html#array-elements">array elements</a> and <a href="07-variables.html#instance-properties">instance properties</a>.</p>
+<p>Although all three storage durations have default ends-of-life, their
+lives can be shortened by using the <a href="11-statements.html#the-unset-statement"><code>unset</code> statement</a>,
+which destroys any given set of variables.</p>
+<p>The following example demonstrates the three storage durations:</p>
+<pre><code class="language-PHP">class Point { ... }
+
+$av1 = new Point(0, 1);       // auto variable $av1 created and initialized
+static $sv1 = ...;          // static variable $sv1 created and initialized
+
+function doit($p1)
+{
+  $av2 = ...;           // auto variable $av2 created and initialized
+  static $sv2 = ...;        // static variable $sv2 created and initialized
+  if ($p1)
+  {
+    $av3 = ...;         // auto variable $av3 created and initialized
+    static $sv3 = ...;    // static variable $sv3 created and initialized
+    ...
+  }
+  global $av1;
+  $av1 = new Point(2, 3);   // Point(0,1) is eligible for destruction
+  ...
+}                   // $av2 and $av3 are eligible for destruction
+
+doit(TRUE);
+
+// At end of script, $av1, $sv1, $sv2, and $sv3 are eligible for destruction
+</code></pre>
+<p>The comments indicate the beginning and end of lifetimes for each
+variable. In the case of the initial allocated Point variable whose
+handle is stored in <code>$av1</code>, its life ends when <code>$av1</code> is made to point to
+a different Point.</p>
+<p>If function <code>doit</code> is called multiple times, each time it is called, its
+automatic variables are created and initialized, whereas its static
+variables retain their values from previous calls.</p>
+<p>Consider the following recursive function:</p>
+<pre><code class="language-PHP">function factorial($i)
+{
+  if ($i &gt; 1) return $i * factorial($i - 1);
+  else if ($i == 1) return $i;
+  else return 0;
+}
+</code></pre>
+<p>When <code>factorial</code> is first called, the local variable parameter <code>$i</code> is
+created and initialized with the value of the argument in the call.
+Then, if this function calls itself, the same process is repeated each
+call. Specifically, each time <code>factorial</code> calls itself, a new local
+variable parameter <code>$i</code> is created and initialized with the value of the
+argument in the call.</p>
+<p>The lifetime of any VStore or HStore can be extended by
+the Engine as long as needed. Conceptually, the lifetime of a VStore ends
+when it is no longer pointed to by any VSlots. Conceptually, the
+lifetime of an HStore ends when no VStores have a handle to it.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/03-terms-and-definitions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/05-types.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/03-terms-and-definitions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/05-types.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

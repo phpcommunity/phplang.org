@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Interfaces - PHP Language Specification</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../src/css/style.css">
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="../welcome.html">Welcome</a></li><li><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="../spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="../spec/15-interfaces.html" class="active"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">PHP Language Specification</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#interfaces" id="interfaces">Interfaces</a></h1>
+<h2><a class="header" href="#general" id="general">General</a></h2>
+<p>A class can implement a set of capabilities — herein called a
+<em>contract</em> — through what is called an interface. An <em>interface</em> is a set
+of method declarations and constants.  Note that the methods are only
+declared, not defined; that is, an interface defines a type consisting
+of abstract methods, where those methods are implemented by client
+classes as they see fit. An interface allows unrelated classes to
+implement the same facilities with the same names and types without
+requiring those classes to share a common base class.</p>
+<p>An interface can extend one or more other interfaces, in which case, it
+inherits all members from its <em>base interface(s)</em>.</p>
+<h2><a class="header" href="#interface-declarations" id="interface-declarations">Interface Declarations</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+interface-declaration:
+  'interface' name interface-base-clause? '{' interface-member-declarations? '}'
+
+interface-base-clause:
+  'extends' qualified-name
+  interface-base-clause ',' qualified-name
+-->
+<pre>
+<i id="grammar-interface-declaration">interface-declaration:</i>
+   interface   <i><a href="09-lexical-structure.html#grammar-name">name</a></i>   <i><a href="#grammar-interface-base-clause">interface-base-clause</a></i><sub>opt</sub>   {   <i><a href="#grammar-interface-member-declarations">interface-member-declarations</a></i><sub>opt</sub>   }
+
+<i id="grammar-interface-base-clause">interface-base-clause:</i>
+   extends   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+   <i><a href="#grammar-interface-base-clause">interface-base-clause</a></i>   ,   <i><a href="09-lexical-structure.html#grammar-qualified-name">qualified-name</a></i>
+</pre>
+<p><strong>Constraints</strong></p>
+<p>An interface must not be derived directly or indirectly from itself.</p>
+<p>Every <em>qualified-name</em> must name an interface type.</p>
+<p><strong>Semantics</strong></p>
+<p>An interface-declaration defines a contract that one or more classes can
+implement.</p>
+<p>Interface names are case-insensitive.</p>
+<p>The optional <em>interface-base-clause</em> specifies the base interfaces from
+which the interface being defined is derived. In such a case, the
+derived interface inherits all the members from the base interfaces.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">interface MyCollection
+{
+  const MAX_NUMBER_ITEMS = 1000;
+  function put($item);
+  function get();
+}
+class MyList implements MyCollection
+{
+  public function put($item)  { /* implement method */ }
+  public function get()   { /* implement method */ }
+  ...
+}
+class MyQueue implements MyCollection
+{
+  public function put($item)  { /* implement method */ }
+  public function get()   { /* implement method */ }
+  ...
+}
+function processCollection(MyCollection $p1)
+{
+  ... /* can process any object whose class implements MyCollection */
+}
+processCollection(new MyList(...));
+processCollection(new MyQueue(...));
+</code></pre>
+<h2><a class="header" href="#interface-members" id="interface-members">Interface Members</a></h2>
+<p><strong>Syntax</strong></p>
+<!-- GRAMMAR
+interface-member-declarations:
+  interface-member-declaration
+  interface-member-declarations interface-member-declaration
+
+interface-member-declaration:
+  class-const-declaration
+  method-declaration
+-->
+<pre>
+<i id="grammar-interface-member-declarations">interface-member-declarations:</i>
+   <i><a href="#grammar-interface-member-declaration">interface-member-declaration</a></i>
+   <i><a href="#grammar-interface-member-declarations">interface-member-declarations</a></i>   <i><a href="#grammar-interface-member-declaration">interface-member-declaration</a></i>
+
+<i id="grammar-interface-member-declaration">interface-member-declaration:</i>
+   <i><a href="14-classes.html#grammar-class-const-declaration">class-const-declaration</a></i>
+   <i><a href="14-classes.html#grammar-method-declaration">method-declaration</a></i>
+</pre>
+<ul>
+<li><a href="14-classes.html#constants"><em>const-declaration</em></a></li>
+<li><a href="14-classes.html#methods"><em>method-declaration</em></a></li>
+</ul>
+<p><strong>Semantics</strong></p>
+<p>The members of an interface are those specified by its
+<em>interface-member-declaration</em>, and the members inherited from its base
+interfaces.</p>
+<p>An interface may contain the following members:</p>
+<ul>
+<li><a href="#constants">Constants</a> – the constant values associated with the interface.</li>
+<li><a href="#methods">Methods</a> – placeholders for the computations and actions that can be
+performed by implementers of the interface.</li>
+</ul>
+<h2><a class="header" href="#constants" id="constants">Constants</a></h2>
+<p><strong>Constraints</strong></p>
+<p>All constants declared in an interface must be implicitly or explicitly public.</p>
+<p><strong>Semantics</strong></p>
+<p>An interface constant is just like a class <a href="14-classes.html#constants">constant</a>, except that
+an interface constant cannot be overridden by a class that implements it
+nor by an interface that extends it.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">interface MyCollection
+{
+  const MAX_NUMBER_ITEMS = 1000;
+  function put($item);
+  function get();
+}
+</code></pre>
+<h2><a class="header" href="#methods" id="methods">Methods</a></h2>
+<p><strong>Constraints</strong></p>
+<p>All methods declared in an interface must be implicitly or explicitly
+public, and they must not be declared <code>abstract</code>.</p>
+<p><strong>Semantics</strong></p>
+<p>An interface method is just like an <a href="14-classes.html#methods">abstract method</a>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="language-PHP">interface MyCollection
+{
+  const MAX_NUMBER_ITEMS = 1000;
+  function put($item);
+  function get();
+}
+</code></pre>
+<h2><a class="header" href="#predefined-interfaces" id="predefined-interfaces">Predefined Interfaces</a></h2>
+<h3><a class="header" href="#interface-arrayaccess" id="interface-arrayaccess">Interface <code>ArrayAccess</code></a></h3>
+<p>This interface allows an instance of an implementing class to be
+accessed using array-like notation. This interface is defined, as
+follows:</p>
+<pre><code class="language-PHP">interface ArrayAccess
+{
+  function offsetExists($offset);
+  function offsetGet($offset);
+  function offsetSet($offset, $value);
+  function offsetUnset($offset);
+}
+</code></pre>
+<p>The interface members are defined below:</p>
+<table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>offsetExists</code></td><td>This instance method returns <code>TRUE</code> if the instance contains an element with key <code>$offset</code>, otherwise, <code>FALSE</code>.</td></tr>
+<tr><td><code>offsetGet</code></td><td>This instance method gets the value having key <code>$offset</code>. It may return by value or byRef. (Ordinarily, this wouldn’t be allowed because a class implementing an interface needs to match the interface’s method signatures; however, the Engine gives special treatment to <code>ArrayAccess</code> and allows this). This method is called when an instance of a class that implements this interface is <a href="10-expressions.html#subscript-operator">subscripted</a> in a non-lvalue context.</td></tr>
+<tr><td><code>offsetSet</code></td><td>This instance method sets the value having key <code>$offset</code> to $value. It returns no value. This method is called when an instance of a class that implements this interface is <a href="10-expressions.html#subscript-operator">subscripted</a> in a modifiable-lvalue context.</td></tr>
+<tr><td><code>offsetUnset</code></td><td>This instance method unsets the value having key <code>$offset</code>. It returns no value.</td></tr>
+</tbody></table>
+<h3><a class="header" href="#interface-iterator" id="interface-iterator">Interface <code>Iterator</code></a></h3>
+<p>This interface allows instances of an implementing class to be treated
+as a collection. This interface is defined, as follows:</p>
+<pre><code class="language-PHP">interface Iterator extends Traversable
+{
+  function current();
+  function key();
+  function next();
+  function rewind();
+  function valid();
+}
+
+</code></pre>
+<p>The interface members are defined below:</p>
+<table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>current</code></td><td>This instance method returns the element at the current position.</td></tr>
+<tr><td><code>key</code></td><td>This instance method returns the key of the current element. On failure, it returns <code>NULL</code>; otherwise, it returns the scalar value of the key.</td></tr>
+<tr><td><code>next</code></td><td>This instance method moves the current position forward to the next element. It returns no value. From within a <code>foreach</code> statement, this method is called after each loop.</td></tr>
+<tr><td><code>rewind</code></td><td>This instance method resets the current position to the first element. It returns no value. From within a <code>foreach</code> statement, this method is called once, at the beginning.</td></tr>
+<tr><td><code>valid</code></td><td>This instance method checks if the current position is valid. It takes no arguments. It returns a bool value of <code>TRUE</code> to indicate the current position is valid; <code>FALSE</code>, otherwise. This method is called after each call to <a href="http://php.net/manual/iterator.rewind.php"><code>Iterator::rewind()</code></a> and <a href="http://php.net/manual/iterator.next.php"><code>Iterator::next()</code></a>.</td></tr>
+</tbody></table>
+<h3><a class="header" href="#interface-iteratoraggregate" id="interface-iteratoraggregate">Interface <code>IteratorAggregate</code></a></h3>
+<p>This interface allows the creation of an external iterator. This
+interface is defined, as follows:</p>
+<pre><code class="language-PHP">interface IteratorAggregate extends Traversable
+{
+  function getIterator();
+}
+</code></pre>
+<p>The interface members are defined below:</p>
+<table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>getIterator</code></td><td>This instance method retrieves an iterator, which implements <code>Iterator</code> or <code>Traversable</code>. It throws an <code>Exception</code> on failure.</td></tr>
+</tbody></table>
+<h3><a class="header" href="#interface-throwable" id="interface-throwable">Interface <code>Throwable</code></a></h3>
+<p>This type is the base interface for the type of any object that can be thrown via a
+<a href="11-statements.html#the-throw-statement">throw statement</a>. A user-written class cannot
+implement <code>Throwable</code> directly. Instead, it must extend <code>Error</code> or <code>Exception</code>.</p>
+<p>This type is defined, as follows:</p>
+<pre><code class="language-PHP">interface Throwable {
+  function __toString(): string;
+  function getCode(): int;
+  function getFile(): string;
+  function getLine(): int;
+  function getMessage(): string;
+  function getPrevious(): Throwable;
+  function getTrace(): array;
+  function getTraceAsString(): string;
+}
+</code></pre>
+<p>The interface members are defined below:</p>
+<table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>__toString</code></td><td><code>string</code>; retrieves a string representation of the exception in some unspecified format</td></tr>
+<tr><td><code>getCode</code></td><td><code>int</code>; retrieves the exception code</td></tr>
+<tr><td><code>getFile</code></td><td><code>string</code>; retrieves the name of the script where the exception was generated</td></tr>
+<tr><td><code>getLine</code></td><td><code>int</code>; retrieves the source line number in the script where the exception was generated</td></tr>
+<tr><td><code>getMessage</code></td><td><code>string</code>; retrieves the exception message</td></tr>
+<tr><td><code>getPrevious</code></td><td><code>Throwable</code>; retrieves the previous exception, if one exists; otherwise returns <code>NULL</code></td></tr>
+<tr><td><code>getTrace</code></td><td><code>array</code>; retrieves the function stack <a href="17-exception-handling.html#tracing-exceptions">trace information</a> as an array</td></tr>
+<tr><td><code>getTraceAsString</code></td><td><code>string</code>; retrieves the function stack trace information formatted as a single string in some unspecified format</td></tr>
+</tbody></table>
+<h3><a class="header" href="#interface-traversable" id="interface-traversable">Interface <code>Traversable</code></a></h3>
+<p>This interface is intended as the base interface for all traversable
+classes. This interface is defined, as follows:</p>
+<pre><code class="language-PHP">interface Traversable
+{
+}
+</code></pre>
+<p>This interface has no members.</p>
+<h3><a class="header" href="#interface--serializable" id="interface--serializable">Interface  <code>Serializable</code></a></h3>
+<p>This interface provides support for custom serialization. It is defined,
+as follows:</p>
+<pre><code class="language-PHP">interface Serializable
+{
+  function serialize();
+  function unserialize ($serialized);
+
+}
+</code></pre>
+<p>The interface members are defined below:</p>
+<table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>serialize</code></td><td>This instance method returns a string representation of the current instance. On failure, it returns <code>NULL</code>.</td></tr>
+<tr><td><code>unserialize</code></td><td>This instance method constructs an object from its string form designated by <code>$serialized</code>. It does not return a value.</td></tr>
+</tbody></table>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../spec/14-classes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../spec/16-traits.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../spec/14-classes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../spec/16-traits.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

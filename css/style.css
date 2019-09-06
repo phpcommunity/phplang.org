@@ -1,0 +1,10 @@
+:target:before {
+    content: "";
+    display: block;
+    padding-top: 70px;
+    margin-top: -70px;
+}
+
+:target:focus {
+    outline: none;
+}
