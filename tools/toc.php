@@ -27,4 +27,4 @@ $summary = preg_replace($tocPattern, $toc, $summary);
 
 file_put_contents($summaryFile, $summary);
 
-echo "Done!\n";
+echo "TOC generated!\n";
