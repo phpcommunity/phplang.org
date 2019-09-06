@@ -26,6 +26,7 @@ before_script:
 
 script:
   - php tools/toc.php
+  - php tools/colophon.php
   - mdbook build
 
 deploy:
