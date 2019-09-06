@@ -8,3 +8,17 @@
 :target:focus {
     outline: none;
 }
+
+#content dl dt {
+    font-weight: bold;
+    padding-bottom: 0.25em;
+    margin-inline-start: 20px;
+}
+
+#content dl dt:after {
+    content: " :";
+}
+
+#content dl dd {
+    padding-bottom: 1.25em;
+}
