@@ -10,5 +10,6 @@ build-dir = "book"
 create-missing = false
 
 [output.html]
+additional-css = ["src/css/style.css"]
 curly-quotes = true
 git-repository-url = "https://github.com/php/php-langspec"
