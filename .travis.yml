@@ -28,6 +28,7 @@ script:
   - php tools/toc.php
   - php tools/colophon.php
   - mdbook build
+  - cp CNAME book/CNAME
 
 deploy:
   provider: pages
