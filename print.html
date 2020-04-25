@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -36,11 +36,11 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -64,8 +64,11 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -81,8 +84,8 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="welcome.html">Welcome</a></li><li><a href="spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li><a href="spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li><a href="spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li><a href="spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li><a href="spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li><a href="spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li><a href="spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li><a href="spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li><a href="spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li><a href="spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li><a href="spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li><a href="spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li><a href="spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li><a href="spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li><a href="spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li><a href="spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li><a href="spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li><a href="spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li><a href="spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded affix "><a href="welcome.html">Welcome</a></li><li class="expanded "><a href="spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li class="expanded "><a href="spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li class="expanded "><a href="spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li class="expanded "><a href="spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li class="expanded "><a href="spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li class="expanded "><a href="spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li class="expanded "><a href="spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li class="expanded "><a href="spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li class="expanded "><a href="spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li class="expanded "><a href="spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li class="expanded "><a href="spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li class="expanded "><a href="spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li class="expanded "><a href="spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li class="expanded "><a href="spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li class="expanded "><a href="spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li class="expanded "><a href="spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li class="expanded "><a href="spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li class="expanded "><a href="spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li class="expanded "><a href="spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -174,9 +177,9 @@ Original content on phplang.org is licensed under the
 <a href="https://github.com/phpcommunity/phplang.org">https://github.com/phpcommunity/phplang.org</a>.</p>
 <!-- Begin Colophon -->
 <!-- This is autogenerated. Do not remove the lines "Begin Colophon" or "End Colophon". -->
-<p>This documentation was generated on 6 September 2019 at 01:12 UTC from
-<a href="https://github.com/php/php-langspec/tree/ab19cb01fd935c7d40a7250b551156cf273b61d5">php/php-langspec@ab19cb0</a>
-and <a href="https://github.com/phpcommunity/phplang.org/tree/9cef2abd04d0188eeb51a71ad57f6c3de3f40e70">phpcommunity/phplang.org@9cef2ab</a>.</p>
+<p>This documentation was generated on 25 April 2020 at 22:29 UTC from
+<a href="https://github.com/php/php-langspec/tree/8a7e96736ac18cdd159b7af2e7d1e4c666c9c822">php/php-langspec@8a7e967</a>
+and <a href="https://github.com/phpcommunity/phplang.org/tree/cb9aef6b95a7941fface2e9b5faa14d3d9b62786">phpcommunity/phplang.org@cb9aef6</a>.</p>
 <!-- End Colophon -->
 <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
 <p>This specification is intended to provide a complete and concise
@@ -705,12 +708,12 @@ pointing to different Points.</p>
 <p>We can remove all these handles using <code>$a = NULL</code> and <code>$b = NULL</code>:</p>
 <pre><code>[VSlot $a *]--&gt;[VStore null]    [HStore Point [VSlot $x *] [VSlot $y *] (dead)]
                                                         |            |
-[VSlot $b *]--&gt;[VStore null]    [VStore int 2 (dead)]&amp;lt;--+            V
+[VSlot $b *]--&gt;[VStore null]    [VStore int 2 (dead)]&lt;--+            V
                                                           [VStore int 1 (dead)]
 
                                 [HStore Point [VSlot $x *] [VSlot $y *] (dead)]
                                                         |            |
-                                [VStore int 4 (dead)]&amp;lt;--+            V
+                                [VStore int 4 (dead)]&lt;--+            V
                                                         [VStore int 6 (dead)]
 </code></pre>
 <p>By assigning null to <code>$a</code>, we remove the only handle to <code>Point(2,1)</code> which makes
@@ -878,7 +881,7 @@ assignment of other types. Recall the <code>Point</code> class from <a href="spe
                                                          V             V
                                                [VStore int 10]   [VStore Obj *]
                                                                              |
-                                [HStore Point [VSlot $x *] [VSlot $y *]]&amp;lt;----+
+                                [HStore Point [VSlot $x *] [VSlot $y *]]&lt;----+
                                                         |            |
                                                         V            V
                                             [VStore int 1]  [VStore int 3]
@@ -905,7 +908,7 @@ the value assignment <code>$b = $a</code>:</p>
                        |             |                                          |
              +---------+   +---------+                                          |
              V             V                                                    |
-[VStore int 10] [VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]&amp;lt;---+
+[VStore int 10] [VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]&lt;---+
                                                             |            |
                                                             V            V
                                                  [VStore int 1]  [VStore int 3]
@@ -945,7 +948,7 @@ $b = $a;
 implementation. Here is the first possible outcome:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
                                                              |
-[VSlot $x *]-------------------------+   [VStore array *]&amp;lt;---+
+[VSlot $x *]-------------------------+   [VStore array *]&lt;---+
                                      |                 |
 [VSlot $b *]--&gt;[VStore array *]      |                 V
                              |       |  [HStore Array [VSlot 0 *][VSlot 1 *]]
@@ -964,7 +967,7 @@ implementation. Here is the first possible outcome:</p>
 <p>Here is the second possible outcome:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
                                                              |
-[VSlot $x *]-------------------------+  [VStore array *]&amp;lt;----+
+[VSlot $x *]-------------------------+  [VStore array *]&lt;----+
                                      |                |
 [VSlot $b *]--&gt;[VStore array *]      |                V
                              |       |  [HStore Array [VSlot 0 *] [VSlot 1 *]]
@@ -1040,7 +1043,7 @@ $b = $a;
 </code></pre>
 <pre><code>[VSlot $a *]---&gt;[VStore array *]---&gt;[HStore Array [VSlot 0 *]]
                                       ^                    |
-                                      | [VStore array *]&amp;lt;--+
+                                      | [VStore array *]&lt;--+
 [VSlot $b *]---&gt;[VStore Arr-D *]------+               |
                                                       V
                                         [HStore Array [VSlot 0 *] [VSlot 1 *]]
@@ -1127,7 +1130,7 @@ choose to array-separate <code>$b[0]</code>‘s VStore as well. Here is the seco
 possible outcome:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
                                                              |
-[VSlot $b *]--&gt;[VStore array *]          [VStore array *]&amp;lt;---+
+[VSlot $b *]--&gt;[VStore array *]          [VStore array *]&lt;---+
                              |                         |
                              V                         V
   [HStore Array [VSlot 0 *] [VSlot 1 *]]  [HStore Array [VSlot 0 *] [VSlot 1 *]]
@@ -1145,8 +1148,8 @@ possible outcome:</p>
 </code></pre>
 <p>Here is the third possible outcome:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *-]----&gt;[HStore Array [VSlot 0 *]]
-                                                            |
-[VSlot $b *]--&gt;[VStore array *]           [VStore array *]&amp;lt;---+
+                                                              |
+[VSlot $b *]--&gt;[VStore array *]           [VStore array *]&lt;---+
                              |                          |
                              V                          V
  [HStore Array [VSlot 0 *] [VSlot 1 *]]  [HStore Array [VSlot 0 *] [VSlot 1 *]]
@@ -1264,7 +1267,7 @@ $a-&gt;z =&amp; $b;
                                                            |            |            |
                                                            V            V            |
                                                   [VStore int 1] [VStore int 3]      |
-[VSlot $b *]----------------&gt;[VStore int 123]&amp;lt;---------------------------------------+
+[VSlot $b *]----------------&gt;[VStore int 123]&lt;---------------------------------------+
 </code></pre>
 <h3><a class="header" href="#argument-passing" id="argument-passing">Argument Passing</a></h3>
 <p>Argument passing is defined in terms of <a href="spec/04-basic-concepts.html#assignment">simple assignment</a> or <a href="spec/04-basic-concepts.html#byref-assignment-for-scalar-types-with-local-variables">byRef assignment</a>, depending on how the parameter is declared.
@@ -1316,7 +1319,7 @@ some type(s) or to an instance of some other type.</p>
                                                              V            V
                                                [VStore int 10] [VStore object *]
                                                                               |
-                                                        [HStore ...]&amp;lt;---------+
+                                                        [HStore ...]&lt;---------+
 </code></pre>
 <p>Let us consider the result of <code>$b = clone $a</code>:</p>
 <pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Widget [VSlot $p1 *][VSlot $p2 *]]
@@ -1325,7 +1328,7 @@ some type(s) or to an instance of some other type.</p>
                              |                  [VStore int 10] [VStore object *]
      +-----------------------+                                                 |
      V                                                                         |
-   [HStore Widget [VSlot $p1 *] [VSlot $p2 *]]              +---&gt;[HStore ...]&amp;lt;-+
+   [HStore Widget [VSlot $p1 *] [VSlot $p2 *]]              +---&gt;[HStore ...]&lt;-+
                              |             |                |
                              V             V                |
                  [VStore int 10] [VStore object *]----------+
@@ -1944,7 +1947,7 @@ echo $colors[100];      // element with offset 100 is still undefined and NULL
                         // is used as substitution value instead. Another
                         // notice is emitted.
 
-$b = &amp;colors[100];      // a VSlot for $b is created which points to the array
+$b = &amp;$colors[100];     // a VSlot for $b is created which points to the array
                         // element with the offset 100. An array element with
                         // offset 100 was undefined but implicitly defined
                         // because the assignment is byRef. Thus a VSlot for
@@ -11220,6 +11223,14 @@ IEEE Standard for Binary Floating-Point Arithmetic).</p>
 
         
 
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
         
 
         
