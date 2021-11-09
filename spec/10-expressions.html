@@ -4,13 +4,16 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Expressions - PHP Language Specification</title>
-        
+
+
+        <!-- Custom HTML head -->
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
@@ -19,8 +22,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -28,17 +30,14 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="../src/css/style.css">
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -91,7 +90,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -108,11 +106,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">PHP Language Specification</h1>
@@ -121,18 +117,16 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -140,7 +134,6 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -153,8 +146,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#expressions" id="expressions">Expressions</a></h1>
-<h2><a class="header" href="#general" id="general">General</a></h2>
+                        <h1 id="expressions"><a class="header" href="#expressions">Expressions</a></h1>
+<h2 id="general"><a class="header" href="#general">General</a></h2>
 <p>An <em>expression</em> involves one or more terms and zero or more operators.</p>
 <p>A <em>full expression</em> is an expression that is not part of another
 expression.</p>
@@ -224,8 +217,8 @@ program code relies on its having happened. (For example, in the cases
 of <code>return $a++;</code> and <code>return ++$a;</code>, it is obvious what value must be
 returned in each case, but if <code>$a</code> is a variable local to the enclosing
 function, <code>$a</code> need not actually be incremented.</p>
-<h2><a class="header" href="#primary-expressions" id="primary-expressions">Primary Expressions</a></h2>
-<h3><a class="header" href="#general-1" id="general-1">General</a></h3>
+<h2 id="primary-expressions"><a class="header" href="#primary-expressions">Primary Expressions</a></h2>
+<h3 id="general-1"><a class="header" href="#general-1">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 primary-expression:
@@ -266,7 +259,7 @@ primary-expression:
 <p><strong>Semantics</strong></p>
 <p>The type and value of parenthesized expression are identical to those of
 the un-parenthesized expression.</p>
-<h3><a class="header" href="#simple-variable" id="simple-variable">Simple Variable</a></h3>
+<h3 id="simple-variable"><a class="header" href="#simple-variable">Simple Variable</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 simple-variable:
@@ -311,7 +304,7 @@ $$v3 = &quot;abc&quot;;   // equivalent to ${NULL} = &quot;abc&quot;, here we cr
 function f1 () { return 2.5; }
 ${1 + f1()} = 1000;   // equivalent to ${3.5} = 1000
 </code></pre>
-<h3><a class="header" href="#dereferencable-expression" id="dereferencable-expression">Dereferencable expression</a></h3>
+<h3 id="dereferencable-expression"><a class="header" href="#dereferencable-expression">Dereferencable expression</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 dereferencable-expression:
@@ -346,7 +339,7 @@ or nowdoc string literal.</p>
 <p>A <em>dereferencable-expression</em> can be used as the left hand side of dereferencing operators, such
 as <code>[]</code>, <code>-&gt;</code> and <code>::</code>. A <em>callable-expression</em> can be used as the left hand side of the <a href="#function-call-operator">function
 call operator</a>.</p>
-<h3><a class="header" href="#variables" id="variables">Variables</a></h3>
+<h3 id="variables"><a class="header" href="#variables">Variables</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 callable-variable:
@@ -378,7 +371,7 @@ variable:
 <p>A <em>variable</em> is an expression that can <em>in principle</em> be used as an lvalue. However, the
 individual possible expressions may further restrict whether they can behave as lvalues.
 An expression that is not a <em>variable</em> can never act as an lvalue.</p>
-<h3><a class="header" href="#constant-access-expression" id="constant-access-expression">Constant Access Expression</a></h3>
+<h3 id="constant-access-expression"><a class="header" href="#constant-access-expression">Constant Access Expression</a></h3>
 <!-- GRAMMAR
 constant-access-expression:
   qualified-name
@@ -390,7 +383,7 @@ constant-access-expression:
 <p><strong>Semantics</strong></p>
 <p>A <em>constant-access-expression</em> evaluates to the value of the <a href="06-constants.html">constant</a>
 with name <em>qualified-name</em>.</p>
-<h3><a class="header" href="#literals" id="literals">Literals</a></h3>
+<h3 id="literals"><a class="header" href="#literals">Literals</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 literal:
@@ -407,8 +400,8 @@ literal:
 <p><strong>Semantics</strong></p>
 <p>A literal evaluates to its value, as specified in the lexical specification for
 <a href="09-lexical-structure.html#literals">literals</a>.</p>
-<h3><a class="header" href="#intrinsics" id="intrinsics">Intrinsics</a></h3>
-<h4><a class="header" href="#general-2" id="general-2">General</a></h4>
+<h3 id="intrinsics"><a class="header" href="#intrinsics">Intrinsics</a></h3>
+<h4 id="general-2"><a class="header" href="#general-2">General</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 intrinsic:
@@ -428,7 +421,7 @@ intrinsic:
 <p>The names in this series of sections have special meaning and are
 called <em>intrinsics</em>, but they are not keywords; nor are they functions, they
 are language constructs that are interpreted by the Engine.</p>
-<h4><a class="header" href="#empty" id="empty">empty</a></h4>
+<h4 id="empty"><a class="header" href="#empty">empty</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 empty-intrinsic:
@@ -457,7 +450,7 @@ empty(&quot;00&quot;); // results in FALSE
 $v = [10, 20];
 empty($v);   // results in FALSE
 </code></pre>
-<h4><a class="header" href="#eval" id="eval">eval</a></h4>
+<h4 id="eval"><a class="header" href="#eval">eval</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 eval-intrinsic:
@@ -486,7 +479,7 @@ called.</p>
 <pre><code class="language-PHP">$str = &quot;Hello&quot;;
 eval(&quot;echo \$str . \&quot;\\n\&quot;;&quot;);  // → echo $str . &quot;\n&quot;; → prints Hello
 </code></pre>
-<h4><a class="header" href="#exitdie" id="exitdie">exit/die</a></h4>
+<h4 id="exitdie"><a class="header" href="#exitdie">exit/die</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 exit-intrinsic:
@@ -526,7 +519,7 @@ status code is made available to the execution environment. If
 exit (1);
 exit;
 </code></pre>
-<h4><a class="header" href="#isset" id="isset">isset</a></h4>
+<h4 id="isset"><a class="header" href="#isset">isset</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 isset-intrinsic:
@@ -562,7 +555,7 @@ isset($v);     // results in FALSE
 $v1 = TRUE; $v2 = 12.3; $v3 = NULL;
 isset($v1, $v2, $v3);  // results in FALSE
 </code></pre>
-<h3><a class="header" href="#anonymous-function-creation" id="anonymous-function-creation">Anonymous Function Creation</a></h3>
+<h3 id="anonymous-function-creation"><a class="header" href="#anonymous-function-creation">Anonymous Function Creation</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 anonymous-function-creation-expression:
@@ -636,7 +629,7 @@ class C
   //...
 }
 </code></pre>
-<h3><a class="header" href="#the-new-operator" id="the-new-operator">The <code>new</code> Operator</a></h3>
+<h3 id="the-new-operator"><a class="header" href="#the-new-operator">The <code>new</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 object-creation-expression:
@@ -728,7 +721,7 @@ $v2 = new class (100) extends C1 implements I1, I2 {
 	}
 };
 </code></pre>
-<h3><a class="header" href="#array-creation-operator" id="array-creation-operator">Array Creation Operator</a></h3>
+<h3 id="array-creation-operator"><a class="header" href="#array-creation-operator">Array Creation Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 array-creation-expression:
@@ -825,7 +818,7 @@ $v = array(2 =&gt; TRUE, 0 =&gt; 123, 1 =&gt; 34.5, -1 =&gt; &quot;red&quot;);
 foreach($v as $e) { /* ... */ } // iterates over keys 2, 0, 1, -1
 for ($i = -1; $i &lt;= 2; ++$i) { echo $v[$i]; } // retrieves via keys -1, 0, 1, 2
 </code></pre>
-<h3><a class="header" href="#subscript-operator" id="subscript-operator">Subscript Operator</a></h3>
+<h3 id="subscript-operator"><a class="header" href="#subscript-operator">Subscript Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 subscript-expression:
@@ -966,7 +959,7 @@ $vect1[10] = 987; // calls Vector::offsetSet(10, 987)
 $vect1[] = &quot;xxx&quot;; // calls Vector::offsetSet(NULL, &quot;xxx&quot;)
 $x = $vect1[1];   // calls Vector::offsetGet(1)
 </code></pre>
-<h3><a class="header" href="#function-call-operator" id="function-call-operator">Function Call Operator</a></h3>
+<h3 id="function-call-operator"><a class="header" href="#function-call-operator">Function Call Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 function-call-expression:
@@ -1084,7 +1077,7 @@ function factorial($int)  // contains a recursive call
 $anon = function () { ... };  // store a Closure in $anon
 $anon();  // call the anonymous function encapsulated by that object
 </code></pre>
-<h3><a class="header" href="#member-access-operator" id="member-access-operator">Member Access Operator</a></h3>
+<h3 id="member-access-operator"><a class="header" href="#member-access-operator">Member Access Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 member-access-expression:
@@ -1154,7 +1147,7 @@ $p1-&gt;$n(-2, 4);   // calls public instance method move by variable
 $p1-&gt;color = &quot;red&quot;; // turned into $p1-&gt;__set(&quot;color&quot;, &quot;red&quot;);
 $c = $p1-&gt;color;  // turned into $c = $p1-&gt;__get(&quot;color&quot;);
 </code></pre>
-<h3><a class="header" href="#member-call-operator" id="member-call-operator">Member Call Operator</a></h3>
+<h3 id="member-call-operator"><a class="header" href="#member-call-operator">Member Call Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 member-call-expression:
@@ -1183,7 +1176,7 @@ scope an exception is thrown, unless a <a href="14-classes.html#method-__call"><
 exists, in which case it will be called instead.</p>
 <p><strong>Examples</strong></p>
 <p>See <a href="#member-access-operator">member access examples</a>.</p>
-<h3><a class="header" href="#postfix-increment-and-decrement-operators" id="postfix-increment-and-decrement-operators">Postfix Increment and Decrement Operators</a></h3>
+<h3 id="postfix-increment-and-decrement-operators"><a class="header" href="#postfix-increment-and-decrement-operators">Postfix Increment and Decrement Operators</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 postfix-increment-expression:
@@ -1210,7 +1203,7 @@ increment or decrement takes place.</p>
 <pre><code class="language-PHP">$i = 10; $j = $i-- + 100;   // old value of $i (10) is added to 100
 $a = array(100, 200); $v = $a[1]++; // old value of $ia[1] (200) is assigned
 </code></pre>
-<h3><a class="header" href="#prefix-increment-and-decrement-operators" id="prefix-increment-and-decrement-operators">Prefix Increment and Decrement Operators</a></h3>
+<h3 id="prefix-increment-and-decrement-operators"><a class="header" href="#prefix-increment-and-decrement-operators">Prefix Increment and Decrement Operators</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 prefix-increment-expression:
@@ -1297,7 +1290,7 @@ $a = array(100, 200); $v = ++$a[1]; // new value of $a[1] (201) is assigned
 $a = &quot;^^Z&quot;; ++$a; // $a is now &quot;^^A&quot;
 $a = &quot;^^Z^^&quot;; ++$a; // $a is now &quot;^^Z^^&quot;
 </code></pre>
-<h3><a class="header" href="#shell-command-operator" id="shell-command-operator">Shell Command Operator</a></h3>
+<h3 id="shell-command-operator"><a class="header" href="#shell-command-operator">Shell Command Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 shell-command-expression:
@@ -1324,7 +1317,7 @@ $result = `ls &gt;dirlist.txt`;  // result is NULL
 $d = &quot;dir&quot;; $f = &quot;*.*&quot;;
 $result = `$d {$f}`;      // result is the output of command dir *.*
 </code></pre>
-<h3><a class="header" href="#scope-resolution-operator" id="scope-resolution-operator">Scope-Resolution Operator</a></h3>
+<h3 id="scope-resolution-operator"><a class="header" href="#scope-resolution-operator">Scope-Resolution Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 scoped-property-access-expression:
@@ -1446,7 +1439,7 @@ class Point
   ...
 }
 </code></pre>
-<h2><a class="header" href="#the-clone-operator" id="the-clone-operator">The <code>clone</code> Operator</a></h2>
+<h2 id="the-clone-operator"><a class="header" href="#the-clone-operator">The <code>clone</code> Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 clone-expression:
@@ -1493,7 +1486,7 @@ class Manager extends Employee
 $obj1 = new Manager(&quot;Smith&quot;, 23);
 $obj2 = clone $obj1;  // creates a new Manager that is a deep copy
 </code></pre>
-<h2><a class="header" href="#exponentiation-operator" id="exponentiation-operator">Exponentiation Operator</a></h2>
+<h2 id="exponentiation-operator"><a class="header" href="#exponentiation-operator">Exponentiation Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 exponentiation-expression:
@@ -1521,8 +1514,8 @@ for each.</p>
 2**3.0;   // float with value 8.0
 &quot;2.0&quot;**&quot;3&quot;; // float with value 8.0
 </code></pre>
-<h2><a class="header" href="#unary-operators" id="unary-operators">Unary Operators</a></h2>
-<h3><a class="header" href="#general-3" id="general-3">General</a></h3>
+<h2 id="unary-operators"><a class="header" href="#unary-operators">Unary Operators</a></h2>
+<h3 id="general-3"><a class="header" href="#general-3">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 unary-expression:
@@ -1540,7 +1533,7 @@ unary-expression:
 </pre>
 <p><strong>Semantics</strong></p>
 <p>These operators associate right-to-left.</p>
-<h3><a class="header" href="#unary-arithmetic-operators" id="unary-arithmetic-operators">Unary Arithmetic Operators</a></h3>
+<h3 id="unary-arithmetic-operators"><a class="header" href="#unary-arithmetic-operators">Unary Arithmetic Operators</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 unary-op-expression:
@@ -1604,7 +1597,7 @@ if ($v1 &gt; -5) // ...
 $v = ~0b1010101;
 $s = &quot;\x86\x97&quot;; $s = ~$s; // $s is &quot;yh&quot;
 </code></pre>
-<h3><a class="header" href="#error-control-operator" id="error-control-operator">Error Control Operator</a></h3>
+<h3 id="error-control-operator"><a class="header" href="#error-control-operator">Error Control Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 error-control-expression:
@@ -1643,7 +1636,7 @@ $curER = error_reporting();
 if ($curER === 0) error_reporting($origER);
 $x = $tmp;
 </code></pre>
-<h3><a class="header" href="#cast-operator" id="cast-operator">Cast Operator</a></h3>
+<h3 id="cast-operator"><a class="header" href="#cast-operator">Cast Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 cast-expression:
@@ -1684,7 +1677,7 @@ so-called <em>binary strings</em>. For now, it is fully equivalent to <code>stri
 (array)(16.5)      // results in an array of 1 float; [0] = 16.5
 (int)(float)&quot;123.87E3&quot; // results in the int 123870
 </code></pre>
-<h2><a class="header" href="#instanceof-operator" id="instanceof-operator"><code>instanceof</code> Operator</a></h2>
+<h2 id="instanceof-operator"><a class="header" href="#instanceof-operator"><code>instanceof</code> Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 instanceof-expression:
@@ -1738,7 +1731,7 @@ var_dump($e1 instanceof $iName);   // TRUE
 $e2 = new E1;
 var_dump($e2 instanceof $e1);      // TRUE
 </code></pre>
-<h2><a class="header" href="#logical-not-operator" id="logical-not-operator">Logical NOT Operator</a></h2>
+<h2 id="logical-not-operator"><a class="header" href="#logical-not-operator">Logical NOT Operator</a></h2>
 <!-- GRAMMAR
 logical-NOT-expression:
   instanceof-expression
@@ -1756,7 +1749,7 @@ and if it is <code>TRUE</code> then the result of the operator is <code>FALSE</c
 <pre><code class="language-PHP">$t = TRUE;
 if (!$t) // ...
 </code></pre>
-<h2><a class="header" href="#multiplicative-operators" id="multiplicative-operators">Multiplicative Operators</a></h2>
+<h2 id="multiplicative-operators"><a class="header" href="#multiplicative-operators">Multiplicative Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 multiplicative-expression:
@@ -1815,7 +1808,7 @@ exception of type <code>DivisionByZeroError</code> is thrown.</p>
 1.3 / 0.0;       // results in a diagnostic followed by bool with value false
 100 / &quot;a&quot;;       // results in a diagnostic followed by bool with value false (a is converted to 0)
 </code></pre>
-<h2><a class="header" href="#additive-operators" id="additive-operators">Additive Operators</a></h2>
+<h2 id="additive-operators"><a class="header" href="#additive-operators">Additive Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 additive-expression:
@@ -1877,7 +1870,7 @@ INF . &quot;2e+5&quot;;     // string with value &quot;INF2e+5&quot;
 TRUE . NULL;      // string with value &quot;1&quot;
 10 + 5 . 12 . 100 - 50;  // int with value 1512050; ((((10 + 5).12).100)-50)
 </code></pre>
-<h2><a class="header" href="#bitwise-shift-operators" id="bitwise-shift-operators">Bitwise Shift Operators</a></h2>
+<h2 id="bitwise-shift-operators"><a class="header" href="#bitwise-shift-operators">Bitwise Shift Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 shift-expression:
@@ -1922,7 +1915,7 @@ type (e.g. 32 or 64) must always result in 0 when <code>e1</code> is positive an
 123 &lt;&lt; 33   // For 32-bit integers the result is zero, otherwise
             // it is 0x7B shifted left 33 places
 </code></pre>
-<h2><a class="header" href="#relational-operators" id="relational-operators">Relational Operators</a></h2>
+<h2 id="relational-operators"><a class="header" href="#relational-operators">Relational Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 relational-expression:
@@ -2045,7 +2038,7 @@ function order_func($a, $b) {
     return ($a-&gt;$x &lt;=&gt; $b-&gt;x) ?: ($a-&gt;y &lt;=&gt; $b-&gt;y) ?: ($a-&gt;z &lt;=&gt; $b-&gt;z);
 }
 </code></pre>
-<h2><a class="header" href="#equality-operators" id="equality-operators">Equality Operators</a></h2>
+<h2 id="equality-operators"><a class="header" href="#equality-operators">Equality Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 equality-expression:
@@ -2098,7 +2091,7 @@ TRUE !== 100  // result has value TRUE
 [&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] === [&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] // result has value TRUE
 [&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] === [&quot;green&quot;=&gt;0,&quot;red&quot;=&gt;0] // result has value FALSE
 </code></pre>
-<h2><a class="header" href="#bitwise-and-operator" id="bitwise-and-operator">Bitwise AND Operator</a></h2>
+<h2 id="bitwise-and-operator"><a class="header" href="#bitwise-and-operator">Bitwise AND Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 bitwise-AND-expression:
@@ -2130,7 +2123,7 @@ If one of the strings is longer than the other, it is cut to the length of the s
 $lLetter = 0x73;          // letter 's'
 $uLetter = $lLetter &amp; ~0x20;  // clear the 6th bit to make letter 'S'
 </code></pre>
-<h2><a class="header" href="#bitwise-exclusive-or-operator" id="bitwise-exclusive-or-operator">Bitwise Exclusive OR Operator</a></h2>
+<h2 id="bitwise-exclusive-or-operator"><a class="header" href="#bitwise-exclusive-or-operator">Bitwise Exclusive OR Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 bitwise-exc-OR-expression:
@@ -2164,7 +2157,7 @@ $v1 = $v1 ^ $v2;
 $v2 = $v1 ^ $v2;
 $v1 = $v1 ^ $v2;    // $v1 is now -987, and $v2 is now 1234
 </code></pre>
-<h2><a class="header" href="#bitwise-inclusive-or-operator" id="bitwise-inclusive-or-operator">Bitwise Inclusive OR Operator</a></h2>
+<h2 id="bitwise-inclusive-or-operator"><a class="header" href="#bitwise-inclusive-or-operator">Bitwise Inclusive OR Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 bitwise-inc-OR-expression:
@@ -2196,7 +2189,7 @@ If one of the strings is shorter than the other, it is extended with zero bytes.
 $uLetter = 0x41;      // letter 'A'
 $lLetter = $upCaseLetter | 0x20;  // set the 6th bit to make letter 'a'
 </code></pre>
-<h2><a class="header" href="#logical-and-operator-form-1" id="logical-and-operator-form-1">Logical AND Operator (form 1)</a></h2>
+<h2 id="logical-and-operator-form-1"><a class="header" href="#logical-and-operator-form-1">Logical AND Operator (form 1)</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-AND-expression-1:
@@ -2216,7 +2209,7 @@ same semantics as operator <a href="#logical-and-operator-form-2"><code>and</cod
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">if ($month &gt; 1 &amp;&amp; $month &lt;= 12) ...
 </code></pre>
-<h2><a class="header" href="#logical-inclusive-or-operator-form-1" id="logical-inclusive-or-operator-form-1">Logical Inclusive OR Operator (form 1)</a></h2>
+<h2 id="logical-inclusive-or-operator-form-1"><a class="header" href="#logical-inclusive-or-operator-form-1">Logical Inclusive OR Operator (form 1)</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-inc-OR-expression-1:
@@ -2234,7 +2227,7 @@ logical-inc-OR-expression-1:
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">if ($month &lt; 1 || $month &gt; 12) ...
 </code></pre>
-<h2><a class="header" href="#coalesce-operator" id="coalesce-operator">Coalesce Operator</a></h2>
+<h2 id="coalesce-operator"><a class="header" href="#coalesce-operator">Coalesce Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 coalesce-expression:
@@ -2273,7 +2266,7 @@ function foo() {
 }
 var_dump(true ?? foo()); // outputs bool(true), &quot;executed!&quot; does not appear as it short-circuits
 </code></pre>
-<h2><a class="header" href="#conditional-operator" id="conditional-operator">Conditional Operator</a></h2>
+<h2 id="conditional-operator"><a class="header" href="#conditional-operator">Conditional Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 conditional-expression:
@@ -2311,8 +2304,8 @@ function factorial($int)
   return ($int &gt; 1) ? $int * factorial($int - 1) : $int;
 }
 </code></pre>
-<h2><a class="header" href="#assignment-operators" id="assignment-operators">Assignment Operators</a></h2>
-<h3><a class="header" href="#general-4" id="general-4">General</a></h3>
+<h2 id="assignment-operators"><a class="header" href="#assignment-operators">Assignment Operators</a></h2>
+<h3 id="general-4"><a class="header" href="#general-4">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 assignment-expression:
@@ -2331,7 +2324,7 @@ assignment-expression:
 lvalue.</p>
 <p><strong>Semantics</strong></p>
 <p>These operators associate right-to-left.</p>
-<h3><a class="header" href="#simple-assignment" id="simple-assignment">Simple Assignment</a></h3>
+<h3 id="simple-assignment"><a class="header" href="#simple-assignment">Simple Assignment</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 simple-assignment-expression:
@@ -2387,7 +2380,7 @@ $s[&quot;zz&quot;] = &quot;Q&quot;;   // warning; defaults to [0], and &quot;Q&q
 class C { ... }
 $a = new C; // make $a point to the allocated object
 </code></pre>
-<h4><a class="header" href="#list-intrinsic" id="list-intrinsic">list intrinsic</a></h4>
+<h4 id="list-intrinsic"><a class="header" href="#list-intrinsic">list intrinsic</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 list-intrinsic:
@@ -2515,7 +2508,7 @@ list(list(&quot;x&quot; =&gt; $x1, &quot;y&quot; =&gt; $y1), list(&quot;x&quot; 
 list(0 =&gt; list($x1, $x2), 1 =&gt; list($x2, $y2)) = [[1, 2], [3, 4]];
   // $x1 is 1, $y1 is 2, $x2 is 3, $y2 is 4
 </code></pre>
-<h3><a class="header" href="#byref-assignment" id="byref-assignment">byRef Assignment</a></h3>
+<h3 id="byref-assignment"><a class="header" href="#byref-assignment">byRef Assignment</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 byref-assignment-expression:
@@ -2546,7 +2539,7 @@ unset($b);      // removes $b's alias to $a
 function &amp;g2() { $t = &quot;xxx&quot;; return $t; } // return byRef
 $b =&amp; g2();     // make $b an alias to &quot;xxx&quot;
 </code></pre>
-<h2><a class="header" href="#compound-assignment" id="compound-assignment">Compound Assignment</a></h2>
+<h2 id="compound-assignment"><a class="header" href="#compound-assignment">Compound Assignment</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 compound-assignment-expression:
@@ -2576,7 +2569,7 @@ $a = [100, 200, 300];
 $i = 1;
 $a[$i++] += 50; // $a[1] = 250, $i → 2
 </code></pre>
-<h2><a class="header" href="#yield-operator" id="yield-operator"><code>yield</code> Operator</a></h2>
+<h2 id="yield-operator"><a class="header" href="#yield-operator"><code>yield</code> Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 yield-from-expression:
@@ -2683,7 +2676,7 @@ foreach ($g as $yielded) {
     echo $yielded . &quot;\n&quot;;   // Produces the values 1, 2, 3, and 4
 }
 </code></pre>
-<h2><a class="header" href="#print-expression" id="print-expression">Print expression</a></h2>
+<h2 id="print-expression"><a class="header" href="#print-expression">Print expression</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 print-expression:
@@ -2715,7 +2708,7 @@ $v3 = &quot;qqq{$v2}zzz&quot;;
 print &quot;$v3\n&quot;;            // outputs &quot;qqq123zzz&quot;
 $a &gt; $b ? print &quot;...&quot; : print &quot;...&quot;;
 </code></pre>
-<h2><a class="header" href="#logical-and-operator-form-2" id="logical-and-operator-form-2">Logical AND Operator (form 2)</a></h2>
+<h2 id="logical-and-operator-form-2"><a class="header" href="#logical-and-operator-form-2">Logical AND Operator (form 2)</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-AND-expression-2:
@@ -2730,7 +2723,7 @@ logical-AND-expression-2:
 <p><strong>Semantics</strong></p>
 <p>Except for the difference in precedence, operator and has exactly the
 same semantics as <a href="#logical-and-operator-form-1">operator <code>&amp;&amp;</code></a>.</p>
-<h2><a class="header" href="#logical-exclusive-or-operator" id="logical-exclusive-or-operator">Logical Exclusive OR Operator</a></h2>
+<h2 id="logical-exclusive-or-operator"><a class="header" href="#logical-exclusive-or-operator">Logical Exclusive OR Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-exc-OR-expression:
@@ -2753,7 +2746,7 @@ sequence point after the evaluation of <code>e1</code>.</p>
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">f($i++) xor g($i) // the sequence point makes this well-defined
 </code></pre>
-<h2><a class="header" href="#logical-inclusive-or-operator-form-2" id="logical-inclusive-or-operator-form-2">Logical Inclusive OR Operator (form 2)</a></h2>
+<h2 id="logical-inclusive-or-operator-form-2"><a class="header" href="#logical-inclusive-or-operator-form-2">Logical Inclusive OR Operator (form 2)</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-inc-OR-expression-2:
@@ -2768,8 +2761,8 @@ logical-inc-OR-expression-2:
 <p><strong>Semantics</strong></p>
 <p>Except for the difference in precedence, operator and has exactly the
 same semantics as <a href="#logical-inclusive-or-operator-form-1">operator <code>||</code></a>.</p>
-<h2><a class="header" href="#script-inclusion-operators" id="script-inclusion-operators">Script Inclusion Operators</a></h2>
-<h3><a class="header" href="#general-5" id="general-5">General</a></h3>
+<h2 id="script-inclusion-operators"><a class="header" href="#script-inclusion-operators">Script Inclusion Operators</a></h2>
+<h3 id="general-5"><a class="header" href="#general-5">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 expression:
@@ -2906,7 +2899,7 @@ echo $x;                  // emits a notice: Undefined variable: x ...
 include 'include.php';    // introduces the global variable $x
 echo $x;                  // hello
 </code></pre>
-<h3><a class="header" href="#the-include-operator" id="the-include-operator">The <code>include</code> Operator</a></h3>
+<h3 id="the-include-operator"><a class="header" href="#the-include-operator">The <code>include</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 include-expression:
@@ -2944,7 +2937,7 @@ all files included by any of the four including operators.</p>
 $inc = include('limits.php');
 If ((include 'Positions.php') == 1) ...
 </code></pre>
-<h3><a class="header" href="#the-include_once-operator" id="the-include_once-operator">The <code>include_once</code> Operator</a></h3>
+<h3 id="the-include_once-operator"><a class="header" href="#the-include_once-operator">The <code>include_once</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 include-once-expression:
@@ -2980,7 +2973,7 @@ include_once 'Circle.php';    // Point.php now not included indirectly
 $p1 = new Point(10, 20);
 $c1 = new Circle(9, 7, 2.4);
 </code></pre>
-<h3><a class="header" href="#the-require-operator" id="the-require-operator">The <code>require</code> Operator</a></h3>
+<h3 id="the-require-operator"><a class="header" href="#the-require-operator">The <code>require</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 require-expression:
@@ -2994,7 +2987,7 @@ require-expression:
 <p>This operator is identical to operator <a href="#the-include-operator"><code>include</code></a> except that in
 the case of <code>require</code>, failure to find/open the designated include file
 produces a fatal error.</p>
-<h3><a class="header" href="#the-require_once-operator" id="the-require_once-operator">The <code>require_once</code> Operator</a></h3>
+<h3 id="the-require_once-operator"><a class="header" href="#the-require_once-operator">The <code>require_once</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 require-once-expression:
@@ -3013,7 +3006,7 @@ program execution.</p>
 happens.</p>
 <p>The files are identified by the full pathname, so different forms of the filename (such as full
 and relative path) still are considered the same file.</p>
-<h2><a class="header" href="#constant-expressions" id="constant-expressions">Constant Expressions</a></h2>
+<h2 id="constant-expressions"><a class="header" href="#constant-expressions">Constant Expressions</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 constant-expression:
@@ -3043,17 +3036,13 @@ constant-expression:
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../spec/09-lexical-structure.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../spec/11-statements.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -3061,49 +3050,35 @@ constant-expression:
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../spec/09-lexical-structure.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../spec/11-statements.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
-        
-        
+
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

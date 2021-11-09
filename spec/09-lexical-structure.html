@@ -4,13 +4,16 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Lexical Structure - PHP Language Specification</title>
-        
+
+
+        <!-- Custom HTML head -->
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
@@ -19,8 +22,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -28,17 +30,14 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="../src/css/style.css">
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -91,7 +90,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -108,11 +106,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">PHP Language Specification</h1>
@@ -121,18 +117,16 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -140,7 +134,6 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -153,8 +146,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#lexical-structure" id="lexical-structure">Lexical Structure</a></h1>
-<h2><a class="header" href="#scripts" id="scripts">Scripts</a></h2>
+                        <h1 id="lexical-structure"><a class="header" href="#lexical-structure">Lexical Structure</a></h1>
+<h2 id="scripts"><a class="header" href="#scripts">Scripts</a></h2>
 <p>A <a href="04-basic-concepts.html#program-structure">script</a> is an ordered sequence of characters. Typically, a
 script has a one-to-one correspondence with a file in a file system, but
 this correspondence is not required.
@@ -175,7 +168,7 @@ executable code.</p>
 encoding form (as defined by the Unicode standard), and transform them
 into a sequence of characters. Implementations can choose to accept and
 transform additional character encoding schemes.</p>
-<h2><a class="header" href="#grammars" id="grammars">Grammars</a></h2>
+<h2 id="grammars"><a class="header" href="#grammars">Grammars</a></h2>
 <p>This specification shows the syntax of the PHP programming language
 using two grammars. The <em>lexical grammar</em> defines how source
 characters are combined to form white space, comments, and tokens. The
@@ -220,8 +213,8 @@ hexadecimal-digit-example:: one of
    a   b   c   d   e   f
    A   B   C   D   E   F
 </pre>
-<h2><a class="header" href="#lexical-analysis" id="lexical-analysis">Lexical analysis</a></h2>
-<h3><a class="header" href="#general" id="general">General</a></h3>
+<h2 id="lexical-analysis"><a class="header" href="#lexical-analysis">Lexical analysis</a></h2>
+<h3 id="general"><a class="header" href="#general">General</a></h3>
 <p>The production <em>input-file</em> is the root of the lexical structure for a
 script. Each script must conform to this production.</p>
 <p><strong>Syntax</strong></p>
@@ -254,7 +247,7 @@ delimited <a href="#comments">comments</a>.</p>
 <p>Lexical processing always results in the creation of the longest
 possible lexical element. (For example, <code>$a+++++$b</code> must be parsed as
 <code>$a++ ++ +$b</code>, which syntactically is invalid).</p>
-<h3><a class="header" href="#comments" id="comments">Comments</a></h3>
+<h3 id="comments"><a class="header" href="#comments">Comments</a></h3>
 <p>Two forms of comments are supported: <em>delimited comments</em> and
 <em>single-line comments</em>.</p>
 <p><strong>Syntax</strong></p>
@@ -321,7 +314,7 @@ space</a> can occur. (For example;
 <p><strong>Implementation Notes</strong></p>
 <p>During tokenizing, an implementation can treat a delimited comment as
 though it was white space.</p>
-<h3><a class="header" href="#white-space" id="white-space">White Space</a></h3>
+<h3 id="white-space"><a class="header" href="#white-space">White Space</a></h3>
 <p>White space consists of an arbitrary combination of one or more
 new-line, space and horizontal tab characters.</p>
 <p><strong>Syntax</strong></p>
@@ -348,8 +341,8 @@ white-space-character::
 <p><strong>Semantics</strong></p>
 <p>The space and horizontal tab characters are considered <em>horizontal
 white-space characters</em>.</p>
-<h3><a class="header" href="#tokens" id="tokens">Tokens</a></h3>
-<h4><a class="header" href="#general-1" id="general-1">General</a></h4>
+<h3 id="tokens"><a class="header" href="#tokens">Tokens</a></h3>
+<h4 id="general-1"><a class="header" href="#general-1">General</a></h4>
 <p>There are several kinds of source <em>tokens</em>:</p>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
@@ -372,7 +365,7 @@ token::
    <i><a href="#grammar-string-literal">string-literal</a></i>
    <i><a href="#grammar-operator-or-punctuator">operator-or-punctuator</a></i>
 </pre>
-<h4><a class="header" href="#names" id="names">Names</a></h4>
+<h4 id="names"><a class="header" href="#names">Names</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 variable-name::
@@ -474,7 +467,7 @@ interface ICollection { /*...*/ }
 <p><strong>Implementation Notes</strong></p>
 <p>An implementation is discouraged from placing arbitrary restrictions on
 name lengths.</p>
-<h4><a class="header" href="#keywords" id="keywords">Keywords</a></h4>
+<h4 id="keywords"><a class="header" href="#keywords">Keywords</a></h4>
 <p>A <em>keyword</em> is a name-like sequence of characters that is reserved, and
 cannot be used as a name.</p>
 <p><strong>Syntax</strong></p>
@@ -504,9 +497,9 @@ keyword:: one of
 <p>Keywords are not case-sensitive.</p>
 <p>Note carefully that <code>yield from</code> is a single token that contains whitespace. However, <a href="#comments">comments</a> are not permitted in that whitespace.</p>
 <p>Also, all <a href="06-constants.html#context-dependent-constants"><em>magic constants</em></a> are also treated as keywords.</p>
-<h4><a class="header" href="#literals" id="literals">Literals</a></h4>
+<h4 id="literals"><a class="header" href="#literals">Literals</a></h4>
 <p>The source code representation of a value is called a <em>literal</em>.</p>
-<h5><a class="header" href="#integer-literals" id="integer-literals">Integer Literals</a></h5>
+<h5 id="integer-literals"><a class="header" href="#integer-literals">Integer Literals</a></h5>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 integer-literal::
@@ -631,7 +624,7 @@ considered to have non-negative values.</p>
 
 0x80000000 -&gt; 2147483648 (too big for int, so is a float)
 </code></pre>
-<h5><a class="header" href="#floating-point-literals" id="floating-point-literals">Floating-Point Literals</a></h5>
+<h5 id="floating-point-literals"><a class="header" href="#floating-point-literals">Floating-Point Literals</a></h5>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 floating-literal::
@@ -684,7 +677,7 @@ floating-point values for infinity and Not-a-Number, respectively.</p>
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">$values = array(1.23, 3e12, 543.678E-23);
 </code></pre>
-<h5><a class="header" href="#string-literals" id="string-literals">String Literals</a></h5>
+<h5 id="string-literals"><a class="header" href="#string-literals">String Literals</a></h5>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 string-literal::
@@ -704,7 +697,7 @@ string-literal::
 <p>A string literal is a sequence of zero or more characters delimited in
 some fashion. The delimiters are not part of the literal’s content.</p>
 <p>The type of a string literal is <code>string</code>.</p>
-<h6><a class="header" href="#single-quoted-string-literals" id="single-quoted-string-literals">Single-Quoted String Literals</a></h6>
+<h6 id="single-quoted-string-literals"><a class="header" href="#single-quoted-string-literals">Single-Quoted String Literals</a></h6>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 single-quoted-string-literal::
@@ -756,7 +749,7 @@ with a <em>b-prefix</em> is equivalent to one without.</p>
 
 'Can embed a single quote (\') and a backslash (\\) like this'
 </code></pre>
-<h6><a class="header" href="#double-quoted-string-literals" id="double-quoted-string-literals">Double-Quoted String Literals</a></h6>
+<h6 id="double-quoted-string-literals"><a class="header" href="#double-quoted-string-literals">Double-Quoted String Literals</a></h6>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 double-quoted-string-literal::
@@ -954,7 +947,7 @@ class C {
 $myC = new C();
 echo &quot;\$myC-&gt;p1 = &gt;$myC-&gt;p1&lt;\n&quot;;  // → $myC-&gt;p1 = &gt;2&lt;
 </code></pre>
-<h6><a class="header" href="#heredoc-string-literals" id="heredoc-string-literals">Heredoc String Literals</a></h6>
+<h6 id="heredoc-string-literals"><a class="header" href="#heredoc-string-literals">Heredoc String Literals</a></h6>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 heredoc-string-literal::
@@ -1048,7 +1041,7 @@ echo &quot;&gt;$s&lt;&quot;;
 // → &gt;S'o'me &quot;\&quot;t e  xt; $v = 123&quot;
 // Some more text&lt;
 </code></pre>
-<h6><a class="header" href="#nowdoc-string-literals" id="nowdoc-string-literals">Nowdoc String Literals</a></h6>
+<h6 id="nowdoc-string-literals"><a class="header" href="#nowdoc-string-literals">Nowdoc String Literals</a></h6>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 nowdoc-string-literal::
@@ -1080,7 +1073,7 @@ echo &quot;&gt;$s&lt;\n\n&quot;;
 // → &gt;S'o'me &quot;\&quot;t e\txt; \$v = $v&quot;
 // Some more text&lt;
 </code></pre>
-<h4><a class="header" href="#operators-and-punctuators" id="operators-and-punctuators">Operators and Punctuators</a></h4>
+<h4 id="operators-and-punctuators"><a class="header" href="#operators-and-punctuators">Operators and Punctuators</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 operator-or-punctuator:: one of
@@ -1107,17 +1100,13 @@ resulting value, produce a side effect, or some combination thereof.
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../spec/08-conversions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../spec/10-expressions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -1125,49 +1114,35 @@ resulting value, produce a side effect, or some combination thereof.
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../spec/08-conversions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../spec/10-expressions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
-        
-        
+
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

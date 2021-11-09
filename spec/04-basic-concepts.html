@@ -4,13 +4,16 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Basic Concepts - PHP Language Specification</title>
-        
+
+
+        <!-- Custom HTML head -->
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
@@ -19,8 +22,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -28,17 +30,14 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="../src/css/style.css">
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -91,7 +90,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -108,11 +106,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">PHP Language Specification</h1>
@@ -121,18 +117,16 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -140,7 +134,6 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -153,8 +146,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#basic-concepts" id="basic-concepts">Basic Concepts</a></h1>
-<h2><a class="header" href="#program-structure" id="program-structure">Program Structure</a></h2>
+                        <h1 id="basic-concepts"><a class="header" href="#basic-concepts">Basic Concepts</a></h1>
+<h2 id="program-structure"><a class="header" href="#program-structure">Program Structure</a></h2>
 <p>A PHP <em>program</em> consists of one or more source files, known formally as
 <em>scripts</em>.</p>
 <!-- GRAMMAR
@@ -202,7 +195,7 @@ though it were a string literal given to the
 <p>The top level of a script is simply referred to as the <em>top level</em>.</p>
 <p>If <code>&lt;?=</code> is used as the <em>start-tag</em>, the Engine proceeds as if the <em>statement-list</em> started with an
 <a href="11-statements.html#the-echo-statement">echo</a> statement.</p>
-<h2><a class="header" href="#program-start-up" id="program-start-up">Program Start-Up</a></h2>
+<h2 id="program-start-up"><a class="header" href="#program-start-up">Program Start-Up</a></h2>
 <p>A program begins execution at the start of a <a href="#program-structure">script</a> designated in
 some unspecified manner. This script is called the <em>start-up script</em>.</p>
 <p>Once a program is executing, it has access to certain <a href="07-variables.html#predefined-variables">environmental
@@ -228,7 +221,7 @@ script is invoked and it depends on the runtime state of the program
 when it’s invoked.</p>
 <p>The implementation may accept more than one start-up script, in which case they
 are executed in implementation-defined order and share the global environment.</p>
-<h2><a class="header" href="#program-termination" id="program-termination">Program Termination</a></h2>
+<h2 id="program-termination"><a class="header" href="#program-termination">Program Termination</a></h2>
 <p>A program may terminate normally in the following ways:</p>
 <ul>
 <li>Execution reaches the end of the <a href="#program-start-up">start-up script</a>.
@@ -250,7 +243,7 @@ script via an uncaught exception and an uncaught exception handler was
 registered by <code>set_exception_handler</code>, that is equivalent to exit(0). It
 is unspecified whether <a href="14-classes.html#destructors">object destructors</a> are run.
 In all other cases, the behavior is unspecified.</p>
-<h2><a class="header" href="#__halt_compiler" id="__halt_compiler">__halt_compiler</a></h2>
+<h2 id="__halt_compiler"><a class="header" href="#__halt_compiler">__halt_compiler</a></h2>
 <p>PHP script files can incorporate data which is to be ignored by the Engine when
 compiling the script. An example of such files are <a href="http://www.php.net/phar">PHAR</a> files.</p>
 <p>In order to make the Engine ignore all the data in the script file starting
@@ -273,8 +266,8 @@ var_dump(stream_get_contents($fp));
 // the end of the script execution
 __halt_compiler(); the file data which will be ignored by the Engine
 </code></pre>
-<h2><a class="header" href="#the-memory-model" id="the-memory-model">The Memory Model</a></h2>
-<h3><a class="header" href="#general" id="general">General</a></h3>
+<h2 id="the-memory-model"><a class="header" href="#the-memory-model">The Memory Model</a></h2>
+<h3 id="general"><a class="header" href="#general">General</a></h3>
 <p>This section and those immediately following it describe the abstract
 memory model used by PHP for storing variables. A conforming
 implementation may use whatever approach is desired as long as from any
@@ -379,7 +372,7 @@ of which (except <code>unset</code>) use the &amp; punctuator:</p>
 <li><a href="10-expressions.html#anonymous-function-creation">byRef variable-use list in an anonymous function</a>.</li>
 <li><a href="11-statements.html#the-unset-statement">unset</a>.</li>
 </ul>
-<h3><a class="header" href="#reclamation-and-automatic-memory-management" id="reclamation-and-automatic-memory-management">Reclamation and Automatic Memory Management</a></h3>
+<h3 id="reclamation-and-automatic-memory-management"><a class="header" href="#reclamation-and-automatic-memory-management">Reclamation and Automatic Memory Management</a></h3>
 <p>The Engine is required to manage the lifetimes of VStores and HStores
 using some form of automatic memory management.
 In particular, when a VStore or HStore is created, memory is allocated for it.</p>
@@ -411,8 +404,8 @@ longer reachable through any variable and is eligible for reclamation. For
 a VSlot, this indicates that the VSlot has been reclaimed or, in the case
 of a VSlot contained with an HStore, that the containing HStore has been
 reclaimed or is eligible for reclamation.</p>
-<h3><a class="header" href="#assignment" id="assignment">Assignment</a></h3>
-<h4><a class="header" href="#general-1" id="general-1">General</a></h4>
+<h3 id="assignment"><a class="header" href="#assignment">Assignment</a></h3>
+<h4 id="general-1"><a class="header" href="#general-1">General</a></h4>
 <p>This section and those immediately following it describe the abstract
 model’s implementation of <em>value assignment</em> and <em>byRef assignment</em>.
 Value assignment of non-array types to local variables is described
@@ -423,7 +416,7 @@ assignment with complex expressions on the left- or right-hand side.</p>
 <p>Value assignment and byRef assignment are core to the PHP language, and
 many other operations in this specification are described in terms of
 value assignment and byRef assignment.</p>
-<h4><a class="header" href="#value-assignment-of-scalar-types-to-a-local-variable" id="value-assignment-of-scalar-types-to-a-local-variable">Value Assignment of Scalar Types to a Local Variable</a></h4>
+<h4 id="value-assignment-of-scalar-types-to-a-local-variable"><a class="header" href="#value-assignment-of-scalar-types-to-a-local-variable">Value Assignment of Scalar Types to a Local Variable</a></h4>
 <p>Value assignment is the primary means by which the programmer can create
 local variables. If a local variable that appears on the left-hand side
 of value assignment does not exist, the engine will bring a new local
@@ -521,7 +514,7 @@ string’s contents are copied. A conforming implementation may choose to
 defer copying a string’s contents for value assignment so long as it has
 no observable effect on behavior from any testable viewpoint (excluding
 performance and resource consumption).</p>
-<h4><a class="header" href="#value-assignment-of-objects-to-a-local-variable" id="value-assignment-of-objects-to-a-local-variable">Value Assignment of Objects to a Local Variable</a></h4>
+<h4 id="value-assignment-of-objects-to-a-local-variable"><a class="header" href="#value-assignment-of-objects-to-a-local-variable">Value Assignment of Objects to a Local Variable</a></h4>
 <p>To demonstrate value assignment of objects to local variables, consider
 the case in which we have a Point class that supports a two-dimensional
 Cartesian system. An instance of Point contains two instance properties,
@@ -590,7 +583,7 @@ the same mechanics apply for value assignment of all object types, even
 though they can have an arbitrarily large number of instance properties
 of arbitrary type. Likewise, the same mechanics apply to value
 assignment of all resource types.</p>
-<h4><a class="header" href="#byref-assignment-for-scalar-types-with-local-variables" id="byref-assignment-for-scalar-types-with-local-variables">ByRef Assignment for Scalar Types with Local Variables</a></h4>
+<h4 id="byref-assignment-for-scalar-types-with-local-variables"><a class="header" href="#byref-assignment-for-scalar-types-with-local-variables">ByRef Assignment for Scalar Types with Local Variables</a></h4>
 <p>Let’s begin with the same value <a href="10-expressions.html#simple-assignment">assignment</a> as in the previous
 section, <code>$a = 123</code> and <code>$b = false</code>:</p>
 <pre><code>[VSlot $a *]--&gt;[VStore int 123]
@@ -685,7 +678,7 @@ and initial VStore for storing the local variable’s value.</p>
 <p>Note that literals, constants, and other expressions that don’t
 designate a modifiable lvalue cannot be used on the left- or right-hand
 side of byRef assignment.</p>
-<h4><a class="header" href="#byref-assignment-of-non-scalar-types-with-local-variables" id="byref-assignment-of-non-scalar-types-with-local-variables">ByRef Assignment of Non-Scalar Types with Local Variables</a></h4>
+<h4 id="byref-assignment-of-non-scalar-types-with-local-variables"><a class="header" href="#byref-assignment-of-non-scalar-types-with-local-variables">ByRef Assignment of Non-Scalar Types with Local Variables</a></h4>
 <p>ByRef assignment of non-scalar types works using the same mechanism as
 byRef assignment for scalar types. Nevertheless, it is worthwhile to
 describe a few examples to clarify the semantics of byRef assignment.
@@ -738,7 +731,7 @@ pointing to <code>Point(4,6)</code> is removed, <code>Point(2,1)</code> is creat
 <p>Once all the aliases to the VStores are gone, the VStores can be
 destroyed, in which case, there are no more pointers to the HStore, and
 it can be destoyed too.</p>
-<h4><a class="header" href="#value-assignment-of-array-types-to-local-variables" id="value-assignment-of-array-types-to-local-variables">Value Assignment of Array Types to Local Variables</a></h4>
+<h4 id="value-assignment-of-array-types-to-local-variables"><a class="header" href="#value-assignment-of-array-types-to-local-variables">Value Assignment of Array Types to Local Variables</a></h4>
 <p>The semantics of value assignment of array types is different from value
 assignment of other types. Recall the <code>Point</code> class from <a href="#value-assignment-of-objects-to-a-local-variable">the examples</a>, and consider the following <a href="10-expressions.html#simple-assignment">value assignments</a> and their abstract implementation:</p>
 <p><code>$a = array(10, 'B' =&gt; new Point(1, 3));</code></p>
@@ -869,7 +862,7 @@ element or two elements, the model works equally well for all
 arrays even though they can have an arbitrarily large number
 of elements. As to how an HStore accommodates all of them, is
 unspecified and unimportant to the abstract model.</p>
-<h4><a class="header" href="#deferred-array-copying" id="deferred-array-copying">Deferred Array Copying</a></h4>
+<h4 id="deferred-array-copying"><a class="header" href="#deferred-array-copying">Deferred Array Copying</a></h4>
 <p>As mentioned in the <a href="#value-assignment-of-array-types-to-local-variables">previous section</a>, an implementation may
 choose to use a deferred copy mechanism instead of eagerly making a copy
 for value assignment of arrays. An implementation may use any deferred
@@ -964,7 +957,7 @@ one of three possible outcomes. Here is the one of the possible
 outcomes:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
                                                              |
-[VSlot $b *]--&gt;[VStore array *]            [VStore Arr *]&amp;lt;---+
+[VSlot $b *]--&gt;[VStore array *]            [VStore Arr *]&lt;---+
                              |                         |
       +----------------------+              +----------+
       V                                     V
@@ -1010,7 +1003,7 @@ possible outcome:</p>
                                     |                   V   |
                                     | [VStore string 'hi']  |
                                     V                       |
- [VSlot $x *]---------------------&gt;[VStore int 123]&amp;lt;--------+
+ [VSlot $x *]---------------------&gt;[VStore int 123]&lt;--------+
 </code></pre>
 <p>Here is the third possible outcome:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *-]----&gt;[HStore Array [VSlot 0 *]]
@@ -1025,11 +1018,11 @@ possible outcome:</p>
        V                                                     |              V
    [VStore Arr-D *]--&gt;[HStore Array [VSlot 0 *] [VSlot 1 *]] | [VStore string 'hi']
                                              |           |   |
-                     [VStore int 123]&amp;lt;-------+           |   |
+                     [VStore int 123]&lt;-------+           |   |
                                                          V   |
                                        [VStore string 'hi']  |
                                                              |
- [VSlot $x *]---------------------&gt;[VStore int 123]&amp;lt;---------+
+ [VSlot $x *]---------------------&gt;[VStore int 123]&lt;---------+
 </code></pre>
 <p>The second and third possible outcomes show what can possibly happen if
 the implementation chooses to array-separate <code>$b[0]</code>‘s VStore. In the
@@ -1067,7 +1060,7 @@ same single zval that holds the array. Despite this superficial
 difference, php.net’s implementation produces behavior that is
 compatible with the abstract model’s definition of deferred array copy
 mechanisms.</p>
-<h4><a class="header" href="#general-value-assignment" id="general-value-assignment">General Value Assignment</a></h4>
+<h4 id="general-value-assignment"><a class="header" href="#general-value-assignment">General Value Assignment</a></h4>
 <p>The sections above thus far have described the mechanics of value assignment
 to a local variable. The assignment to a modifiable lvalue that is not a variable, such as array element or
 object property, works like the local variable assignment, except that the VSlot which represented
@@ -1116,7 +1109,7 @@ $a[2] = 'World!';
 is considered a modifiable lvalue, and the VSlot will be created by the engine and added
 to the appropriate HStore automatically. Static class properties are considered modifiable lvalues too,
 though new ones would not be created automatically.</p>
-<h4><a class="header" href="#general-byref-assignment" id="general-byref-assignment">General ByRef Assignment</a></h4>
+<h4 id="general-byref-assignment"><a class="header" href="#general-byref-assignment">General ByRef Assignment</a></h4>
 <p>The sections above thus far have described the mechanics of byref assignment
 with local variables. The byRef assignment to a modifiable lvalue that is not a variable,
 such as array element or object property, works like the local variable assignment,
@@ -1135,14 +1128,14 @@ $a-&gt;z =&amp; $b;
                                                   [VStore int 1] [VStore int 3]      |
 [VSlot $b *]----------------&gt;[VStore int 123]&lt;---------------------------------------+
 </code></pre>
-<h3><a class="header" href="#argument-passing" id="argument-passing">Argument Passing</a></h3>
+<h3 id="argument-passing"><a class="header" href="#argument-passing">Argument Passing</a></h3>
 <p>Argument passing is defined in terms of <a href="#assignment">simple assignment</a> or <a href="#byref-assignment-for-scalar-types-with-local-variables">byRef assignment</a>, depending on how the parameter is declared.
 That is, passing an argument to a function having a corresponding
 parameter is like assigning that argument to that parameter. The
 function call situations involving missing arguments or
 undefined variable arguments are discussed in section describing
 <a href="10-expressions.html#function-call-operator">the function call operator</a>.</p>
-<h3><a class="header" href="#value-returning" id="value-returning">Value Returning</a></h3>
+<h3 id="value-returning"><a class="header" href="#value-returning">Value Returning</a></h3>
 <p>Returning a value from a function is defined in terms of <a href="#assignment">simple assignment</a> or <a href="#byref-assignment-for-scalar-types-with-local-variables">byRef assignment</a>, depending on how the function is declared.
 That is, returning a value from a function to its
 caller is like assigning that value to the user of the caller’s return
@@ -1171,7 +1164,7 @@ byRef semantics, regardles of how it is assigned.</p>
 <p>Passing function’s return to another function is considered the same as assigning
 the value to the corresponding function’s parameter, with byRef parameters
 treated as byRef assignments.</p>
-<h3><a class="header" href="#cloning-objects" id="cloning-objects">Cloning objects</a></h3>
+<h3 id="cloning-objects"><a class="header" href="#cloning-objects">Cloning objects</a></h3>
 <p>When an object instance is allocated, operator <a href="10-expressions.html#the-new-operator"><code>new</code></a> returns a handle
 that points to that object. As described <a href="#value-assignment-of-objects-to-a-local-variable">above</a>,
 value assignment of a handle to an object does not copy the object HStore itself. Instead, it creates a copy of the handle.
@@ -1209,7 +1202,7 @@ performed by the clone operator is often referred to as a <em>shallow
 copy</em>. If a <em>deep copy</em> of an object is desired, the programmer must
 achieve this manually by using the <a href="14-classes.html#method-__clone">method <code>__clone</code></a> which
 is called after the initial shallow copy has been performed.</p>
-<h2><a class="header" href="#scope" id="scope">Scope</a></h2>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
 <p>The same name can designate different things at different places in a
 program. For each different thing that a name designates, that name is
 visible only within a part of the program called that name’s <em>scope</em>.</p>
@@ -1250,7 +1243,7 @@ an interface type I is the body of I.</p>
 <p>When a <a href="16-traits.html#general">trait</a> is used by a class or an interface, the <a href="16-traits.html#trait-declarations">trait’s
 members</a> take on the class scope of a member of that class or
 interface.</p>
-<h2><a class="header" href="#storage-duration" id="storage-duration">Storage Duration</a></h2>
+<h2 id="storage-duration"><a class="header" href="#storage-duration">Storage Duration</a></h2>
 <p>The lifetime of a variable is the time during program execution that
 storage for that variable is guaranteed to exist. This lifetime is
 referred to as the variable’s <em>storage duration</em>, of which there are
@@ -1332,17 +1325,13 @@ lifetime of an HStore ends when no VStores have a handle to it.</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../spec/03-terms-and-definitions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../spec/05-types.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -1350,49 +1339,35 @@ lifetime of an HStore ends when no VStores have a handle to it.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../spec/03-terms-and-definitions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../spec/05-types.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
-        
-        
+
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

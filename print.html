@@ -4,15 +4,17 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>PHP Language Specification</title>
-        
         <meta name="robots" content="noindex" />
-        
+
+
+        <!-- Custom HTML head -->
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
@@ -21,8 +23,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -30,17 +31,14 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="src/css/style.css">
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -93,7 +91,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -110,11 +107,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">PHP Language Specification</h1>
@@ -123,18 +118,16 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -142,7 +135,6 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -155,10 +147,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#php-language-specification" id="php-language-specification">PHP Language Specification</a></h1>
+                        <h1 id="php-language-specification"><a class="header" href="#php-language-specification">PHP Language Specification</a></h1>
 <p>The PHP Language Specification intends to provide a complete and concise
 definition of the syntax and semantics of the <a href="https://php.net">PHP programming language</a>.</p>
-<h2><a class="header" href="#colophon" id="colophon">Colophon</a></h2>
+<h2 id="colophon"><a class="header" href="#colophon">Colophon</a></h2>
 <p>The PHP Language Specification was initially written in July 2014 by
 Facebook, Inc.</p>
 <p>Facebook has dedicated all copyright to this specification to the public
@@ -176,11 +168,11 @@ Original content on phplang.org is licensed under the
 <a href="https://github.com/phpcommunity/phplang.org">https://github.com/phpcommunity/phplang.org</a>.</p>
 <!-- Begin Colophon -->
 <!-- This is autogenerated. Do not remove the lines "Begin Colophon" or "End Colophon". -->
-<p>This documentation was generated on 25 April 2020 at 22:46 UTC from
-<a href="https://github.com/php/php-langspec/tree/8a7e96736ac18cdd159b7af2e7d1e4c666c9c822">php/php-langspec@8a7e967</a>
-and <a href="https://github.com/phpcommunity/phplang.org/tree/20448b598f0f0c391fc4a86619f32a53350f9cdc">phpcommunity/phplang.org@20448b5</a>.</p>
+<p>This documentation was generated on 9 November 2021 at 21:15 UTC from
+<a href="https://github.com/php/php-langspec/tree/d06f3e00dc0d5cf9d90fc08d495fa6ec86704db8">php/php-langspec@d06f3e0</a>
+and <a href="https://github.com/phpcommunity/phplang.org/tree/58b47ed8bb303d51666c648caf9794c11e86828c">phpcommunity/phplang.org@58b47ed</a>.</p>
 <!-- End Colophon -->
-<h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>This specification is intended to provide a complete and concise
 definition of the syntax and semantics of the PHP language, suitable for
 use by the following:</p>
@@ -192,7 +184,7 @@ use by the following:</p>
 <p>For now, the runtime library has been excluded, as that is documented at
 <a href="http://www.php.net">www.php.net</a>. However, the document can contain references
 to the library functions, usually in the form of links to http://www.php.net.</p>
-<h1><a class="header" href="#conformance" id="conformance">Conformance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="conformance"><a class="header" href="#conformance">Conformance</a></h1>
 <p>In this specification, “must” is to be interpreted as a requirement on
 an implementation or on a program; conversely, “must not” is to be
 interpreted as a prohibition.</p>
@@ -237,7 +229,7 @@ to exist in future revisions. Usually, they are old approaches that have
 been superseded by new ones, and use of the old approach is discouraged.
 (Examples of this include the use of braces ({ }) for subscripting, and
 the use of old-style constructor names).</p>
-<h1><a class="header" href="#terms-and-definitions" id="terms-and-definitions">Terms and Definitions</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="terms-and-definitions"><a class="header" href="#terms-and-definitions">Terms and Definitions</a></h1>
 <p>For the purposes of this document, the following terms and definitions
 apply:</p>
 <dl>
@@ -286,8 +278,8 @@ apply:</p>
 </dl>
 <p>Other terms are defined throughout this specification, as needed, with
 the first usage being typeset <em>like this</em>.</p>
-<h1><a class="header" href="#basic-concepts" id="basic-concepts">Basic Concepts</a></h1>
-<h2><a class="header" href="#program-structure" id="program-structure">Program Structure</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basic-concepts"><a class="header" href="#basic-concepts">Basic Concepts</a></h1>
+<h2 id="program-structure"><a class="header" href="#program-structure">Program Structure</a></h2>
 <p>A PHP <em>program</em> consists of one or more source files, known formally as
 <em>scripts</em>.</p>
 <!-- GRAMMAR
@@ -335,7 +327,7 @@ though it were a string literal given to the
 <p>The top level of a script is simply referred to as the <em>top level</em>.</p>
 <p>If <code>&lt;?=</code> is used as the <em>start-tag</em>, the Engine proceeds as if the <em>statement-list</em> started with an
 <a href="spec/11-statements.html#the-echo-statement">echo</a> statement.</p>
-<h2><a class="header" href="#program-start-up" id="program-start-up">Program Start-Up</a></h2>
+<h2 id="program-start-up"><a class="header" href="#program-start-up">Program Start-Up</a></h2>
 <p>A program begins execution at the start of a <a href="spec/04-basic-concepts.html#program-structure">script</a> designated in
 some unspecified manner. This script is called the <em>start-up script</em>.</p>
 <p>Once a program is executing, it has access to certain <a href="spec/07-variables.html#predefined-variables">environmental
@@ -361,7 +353,7 @@ script is invoked and it depends on the runtime state of the program
 when it’s invoked.</p>
 <p>The implementation may accept more than one start-up script, in which case they
 are executed in implementation-defined order and share the global environment.</p>
-<h2><a class="header" href="#program-termination" id="program-termination">Program Termination</a></h2>
+<h2 id="program-termination"><a class="header" href="#program-termination">Program Termination</a></h2>
 <p>A program may terminate normally in the following ways:</p>
 <ul>
 <li>Execution reaches the end of the <a href="spec/04-basic-concepts.html#program-start-up">start-up script</a>.
@@ -383,7 +375,7 @@ script via an uncaught exception and an uncaught exception handler was
 registered by <code>set_exception_handler</code>, that is equivalent to exit(0). It
 is unspecified whether <a href="spec/14-classes.html#destructors">object destructors</a> are run.
 In all other cases, the behavior is unspecified.</p>
-<h2><a class="header" href="#__halt_compiler" id="__halt_compiler">__halt_compiler</a></h2>
+<h2 id="__halt_compiler"><a class="header" href="#__halt_compiler">__halt_compiler</a></h2>
 <p>PHP script files can incorporate data which is to be ignored by the Engine when
 compiling the script. An example of such files are <a href="http://www.php.net/phar">PHAR</a> files.</p>
 <p>In order to make the Engine ignore all the data in the script file starting
@@ -406,8 +398,8 @@ var_dump(stream_get_contents($fp));
 // the end of the script execution
 __halt_compiler(); the file data which will be ignored by the Engine
 </code></pre>
-<h2><a class="header" href="#the-memory-model" id="the-memory-model">The Memory Model</a></h2>
-<h3><a class="header" href="#general" id="general">General</a></h3>
+<h2 id="the-memory-model"><a class="header" href="#the-memory-model">The Memory Model</a></h2>
+<h3 id="general"><a class="header" href="#general">General</a></h3>
 <p>This section and those immediately following it describe the abstract
 memory model used by PHP for storing variables. A conforming
 implementation may use whatever approach is desired as long as from any
@@ -512,7 +504,7 @@ of which (except <code>unset</code>) use the &amp; punctuator:</p>
 <li><a href="spec/10-expressions.html#anonymous-function-creation">byRef variable-use list in an anonymous function</a>.</li>
 <li><a href="spec/11-statements.html#the-unset-statement">unset</a>.</li>
 </ul>
-<h3><a class="header" href="#reclamation-and-automatic-memory-management" id="reclamation-and-automatic-memory-management">Reclamation and Automatic Memory Management</a></h3>
+<h3 id="reclamation-and-automatic-memory-management"><a class="header" href="#reclamation-and-automatic-memory-management">Reclamation and Automatic Memory Management</a></h3>
 <p>The Engine is required to manage the lifetimes of VStores and HStores
 using some form of automatic memory management.
 In particular, when a VStore or HStore is created, memory is allocated for it.</p>
@@ -544,8 +536,8 @@ longer reachable through any variable and is eligible for reclamation. For
 a VSlot, this indicates that the VSlot has been reclaimed or, in the case
 of a VSlot contained with an HStore, that the containing HStore has been
 reclaimed or is eligible for reclamation.</p>
-<h3><a class="header" href="#assignment" id="assignment">Assignment</a></h3>
-<h4><a class="header" href="#general-1" id="general-1">General</a></h4>
+<h3 id="assignment"><a class="header" href="#assignment">Assignment</a></h3>
+<h4 id="general-1"><a class="header" href="#general-1">General</a></h4>
 <p>This section and those immediately following it describe the abstract
 model’s implementation of <em>value assignment</em> and <em>byRef assignment</em>.
 Value assignment of non-array types to local variables is described
@@ -556,7 +548,7 @@ assignment with complex expressions on the left- or right-hand side.</p>
 <p>Value assignment and byRef assignment are core to the PHP language, and
 many other operations in this specification are described in terms of
 value assignment and byRef assignment.</p>
-<h4><a class="header" href="#value-assignment-of-scalar-types-to-a-local-variable" id="value-assignment-of-scalar-types-to-a-local-variable">Value Assignment of Scalar Types to a Local Variable</a></h4>
+<h4 id="value-assignment-of-scalar-types-to-a-local-variable"><a class="header" href="#value-assignment-of-scalar-types-to-a-local-variable">Value Assignment of Scalar Types to a Local Variable</a></h4>
 <p>Value assignment is the primary means by which the programmer can create
 local variables. If a local variable that appears on the left-hand side
 of value assignment does not exist, the engine will bring a new local
@@ -654,7 +646,7 @@ string’s contents are copied. A conforming implementation may choose to
 defer copying a string’s contents for value assignment so long as it has
 no observable effect on behavior from any testable viewpoint (excluding
 performance and resource consumption).</p>
-<h4><a class="header" href="#value-assignment-of-objects-to-a-local-variable" id="value-assignment-of-objects-to-a-local-variable">Value Assignment of Objects to a Local Variable</a></h4>
+<h4 id="value-assignment-of-objects-to-a-local-variable"><a class="header" href="#value-assignment-of-objects-to-a-local-variable">Value Assignment of Objects to a Local Variable</a></h4>
 <p>To demonstrate value assignment of objects to local variables, consider
 the case in which we have a Point class that supports a two-dimensional
 Cartesian system. An instance of Point contains two instance properties,
@@ -723,7 +715,7 @@ the same mechanics apply for value assignment of all object types, even
 though they can have an arbitrarily large number of instance properties
 of arbitrary type. Likewise, the same mechanics apply to value
 assignment of all resource types.</p>
-<h4><a class="header" href="#byref-assignment-for-scalar-types-with-local-variables" id="byref-assignment-for-scalar-types-with-local-variables">ByRef Assignment for Scalar Types with Local Variables</a></h4>
+<h4 id="byref-assignment-for-scalar-types-with-local-variables"><a class="header" href="#byref-assignment-for-scalar-types-with-local-variables">ByRef Assignment for Scalar Types with Local Variables</a></h4>
 <p>Let’s begin with the same value <a href="spec/10-expressions.html#simple-assignment">assignment</a> as in the previous
 section, <code>$a = 123</code> and <code>$b = false</code>:</p>
 <pre><code>[VSlot $a *]--&gt;[VStore int 123]
@@ -818,7 +810,7 @@ and initial VStore for storing the local variable’s value.</p>
 <p>Note that literals, constants, and other expressions that don’t
 designate a modifiable lvalue cannot be used on the left- or right-hand
 side of byRef assignment.</p>
-<h4><a class="header" href="#byref-assignment-of-non-scalar-types-with-local-variables" id="byref-assignment-of-non-scalar-types-with-local-variables">ByRef Assignment of Non-Scalar Types with Local Variables</a></h4>
+<h4 id="byref-assignment-of-non-scalar-types-with-local-variables"><a class="header" href="#byref-assignment-of-non-scalar-types-with-local-variables">ByRef Assignment of Non-Scalar Types with Local Variables</a></h4>
 <p>ByRef assignment of non-scalar types works using the same mechanism as
 byRef assignment for scalar types. Nevertheless, it is worthwhile to
 describe a few examples to clarify the semantics of byRef assignment.
@@ -871,7 +863,7 @@ pointing to <code>Point(4,6)</code> is removed, <code>Point(2,1)</code> is creat
 <p>Once all the aliases to the VStores are gone, the VStores can be
 destroyed, in which case, there are no more pointers to the HStore, and
 it can be destoyed too.</p>
-<h4><a class="header" href="#value-assignment-of-array-types-to-local-variables" id="value-assignment-of-array-types-to-local-variables">Value Assignment of Array Types to Local Variables</a></h4>
+<h4 id="value-assignment-of-array-types-to-local-variables"><a class="header" href="#value-assignment-of-array-types-to-local-variables">Value Assignment of Array Types to Local Variables</a></h4>
 <p>The semantics of value assignment of array types is different from value
 assignment of other types. Recall the <code>Point</code> class from <a href="spec/04-basic-concepts.html#value-assignment-of-objects-to-a-local-variable">the examples</a>, and consider the following <a href="spec/10-expressions.html#simple-assignment">value assignments</a> and their abstract implementation:</p>
 <p><code>$a = array(10, 'B' =&gt; new Point(1, 3));</code></p>
@@ -1002,7 +994,7 @@ element or two elements, the model works equally well for all
 arrays even though they can have an arbitrarily large number
 of elements. As to how an HStore accommodates all of them, is
 unspecified and unimportant to the abstract model.</p>
-<h4><a class="header" href="#deferred-array-copying" id="deferred-array-copying">Deferred Array Copying</a></h4>
+<h4 id="deferred-array-copying"><a class="header" href="#deferred-array-copying">Deferred Array Copying</a></h4>
 <p>As mentioned in the <a href="spec/04-basic-concepts.html#value-assignment-of-array-types-to-local-variables">previous section</a>, an implementation may
 choose to use a deferred copy mechanism instead of eagerly making a copy
 for value assignment of arrays. An implementation may use any deferred
@@ -1097,7 +1089,7 @@ one of three possible outcomes. Here is the one of the possible
 outcomes:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
                                                              |
-[VSlot $b *]--&gt;[VStore array *]            [VStore Arr *]&amp;lt;---+
+[VSlot $b *]--&gt;[VStore array *]            [VStore Arr *]&lt;---+
                              |                         |
       +----------------------+              +----------+
       V                                     V
@@ -1143,7 +1135,7 @@ possible outcome:</p>
                                     |                   V   |
                                     | [VStore string 'hi']  |
                                     V                       |
- [VSlot $x *]---------------------&gt;[VStore int 123]&amp;lt;--------+
+ [VSlot $x *]---------------------&gt;[VStore int 123]&lt;--------+
 </code></pre>
 <p>Here is the third possible outcome:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *-]----&gt;[HStore Array [VSlot 0 *]]
@@ -1158,11 +1150,11 @@ possible outcome:</p>
        V                                                     |              V
    [VStore Arr-D *]--&gt;[HStore Array [VSlot 0 *] [VSlot 1 *]] | [VStore string 'hi']
                                              |           |   |
-                     [VStore int 123]&amp;lt;-------+           |   |
+                     [VStore int 123]&lt;-------+           |   |
                                                          V   |
                                        [VStore string 'hi']  |
                                                              |
- [VSlot $x *]---------------------&gt;[VStore int 123]&amp;lt;---------+
+ [VSlot $x *]---------------------&gt;[VStore int 123]&lt;---------+
 </code></pre>
 <p>The second and third possible outcomes show what can possibly happen if
 the implementation chooses to array-separate <code>$b[0]</code>‘s VStore. In the
@@ -1200,7 +1192,7 @@ same single zval that holds the array. Despite this superficial
 difference, php.net’s implementation produces behavior that is
 compatible with the abstract model’s definition of deferred array copy
 mechanisms.</p>
-<h4><a class="header" href="#general-value-assignment" id="general-value-assignment">General Value Assignment</a></h4>
+<h4 id="general-value-assignment"><a class="header" href="#general-value-assignment">General Value Assignment</a></h4>
 <p>The sections above thus far have described the mechanics of value assignment
 to a local variable. The assignment to a modifiable lvalue that is not a variable, such as array element or
 object property, works like the local variable assignment, except that the VSlot which represented
@@ -1249,7 +1241,7 @@ $a[2] = 'World!';
 is considered a modifiable lvalue, and the VSlot will be created by the engine and added
 to the appropriate HStore automatically. Static class properties are considered modifiable lvalues too,
 though new ones would not be created automatically.</p>
-<h4><a class="header" href="#general-byref-assignment" id="general-byref-assignment">General ByRef Assignment</a></h4>
+<h4 id="general-byref-assignment"><a class="header" href="#general-byref-assignment">General ByRef Assignment</a></h4>
 <p>The sections above thus far have described the mechanics of byref assignment
 with local variables. The byRef assignment to a modifiable lvalue that is not a variable,
 such as array element or object property, works like the local variable assignment,
@@ -1268,14 +1260,14 @@ $a-&gt;z =&amp; $b;
                                                   [VStore int 1] [VStore int 3]      |
 [VSlot $b *]----------------&gt;[VStore int 123]&lt;---------------------------------------+
 </code></pre>
-<h3><a class="header" href="#argument-passing" id="argument-passing">Argument Passing</a></h3>
+<h3 id="argument-passing"><a class="header" href="#argument-passing">Argument Passing</a></h3>
 <p>Argument passing is defined in terms of <a href="spec/04-basic-concepts.html#assignment">simple assignment</a> or <a href="spec/04-basic-concepts.html#byref-assignment-for-scalar-types-with-local-variables">byRef assignment</a>, depending on how the parameter is declared.
 That is, passing an argument to a function having a corresponding
 parameter is like assigning that argument to that parameter. The
 function call situations involving missing arguments or
 undefined variable arguments are discussed in section describing
 <a href="spec/10-expressions.html#function-call-operator">the function call operator</a>.</p>
-<h3><a class="header" href="#value-returning" id="value-returning">Value Returning</a></h3>
+<h3 id="value-returning"><a class="header" href="#value-returning">Value Returning</a></h3>
 <p>Returning a value from a function is defined in terms of <a href="spec/04-basic-concepts.html#assignment">simple assignment</a> or <a href="spec/04-basic-concepts.html#byref-assignment-for-scalar-types-with-local-variables">byRef assignment</a>, depending on how the function is declared.
 That is, returning a value from a function to its
 caller is like assigning that value to the user of the caller’s return
@@ -1304,7 +1296,7 @@ byRef semantics, regardles of how it is assigned.</p>
 <p>Passing function’s return to another function is considered the same as assigning
 the value to the corresponding function’s parameter, with byRef parameters
 treated as byRef assignments.</p>
-<h3><a class="header" href="#cloning-objects" id="cloning-objects">Cloning objects</a></h3>
+<h3 id="cloning-objects"><a class="header" href="#cloning-objects">Cloning objects</a></h3>
 <p>When an object instance is allocated, operator <a href="spec/10-expressions.html#the-new-operator"><code>new</code></a> returns a handle
 that points to that object. As described <a href="spec/04-basic-concepts.html#value-assignment-of-objects-to-a-local-variable">above</a>,
 value assignment of a handle to an object does not copy the object HStore itself. Instead, it creates a copy of the handle.
@@ -1342,7 +1334,7 @@ performed by the clone operator is often referred to as a <em>shallow
 copy</em>. If a <em>deep copy</em> of an object is desired, the programmer must
 achieve this manually by using the <a href="spec/14-classes.html#method-__clone">method <code>__clone</code></a> which
 is called after the initial shallow copy has been performed.</p>
-<h2><a class="header" href="#scope" id="scope">Scope</a></h2>
+<h2 id="scope"><a class="header" href="#scope">Scope</a></h2>
 <p>The same name can designate different things at different places in a
 program. For each different thing that a name designates, that name is
 visible only within a part of the program called that name’s <em>scope</em>.</p>
@@ -1383,7 +1375,7 @@ an interface type I is the body of I.</p>
 <p>When a <a href="spec/16-traits.html#general">trait</a> is used by a class or an interface, the <a href="spec/16-traits.html#trait-declarations">trait’s
 members</a> take on the class scope of a member of that class or
 interface.</p>
-<h2><a class="header" href="#storage-duration" id="storage-duration">Storage Duration</a></h2>
+<h2 id="storage-duration"><a class="header" href="#storage-duration">Storage Duration</a></h2>
 <p>The lifetime of a variable is the time during program execution that
 storage for that variable is guaranteed to exist. This lifetime is
 referred to as the variable’s <em>storage duration</em>, of which there are
@@ -1460,8 +1452,8 @@ argument in the call.</p>
 the Engine as long as needed. Conceptually, the lifetime of a VStore ends
 when it is no longer pointed to by any VSlots. Conceptually, the
 lifetime of an HStore ends when no VStores have a handle to it.</p>
-<h1><a class="header" href="#types" id="types">Types</a></h1>
-<h2><a class="header" href="#general-2" id="general-2">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="types"><a class="header" href="#types">Types</a></h1>
+<h2 id="general-2"><a class="header" href="#general-2">General</a></h2>
 <p>The meaning of a value is determined by its <em>type</em>. PHP’s types are
 categorized as <em>scalar types</em> and <em>composite types</em>. The scalar types
 are <a href="spec/05-types.html#the-boolean-type">Boolean</a>, <a href="spec/05-types.html#the-integer-type">integer</a>, <a href="spec/05-types.html#the-floating-point-type">floating point</a>, <a href="spec/05-types.html#the-string-type">string</a>, and <a href="spec/05-types.html#the-null-type">null</a>. The composite types are <a href="spec/05-types.html#the-array-type">array</a>,
@@ -1480,8 +1472,8 @@ variable’s type is determined at runtime by the value it contains.
 The same variable can contain values of different types at different times.</p>
 <p>Useful library functions for interrogating and using type information
 include <a href="http://www.php.net/gettype"><code>gettype</code></a>, <a href="http://www.php.net/is_type"><code>is_type</code></a>, <a href="http://www.php.net/settype"><code>settype</code></a>, and <a href="http://www.php.net/var_dump"><code>var_dump</code></a>.</p>
-<h2><a class="header" href="#scalar-types" id="scalar-types">Scalar Types</a></h2>
-<h3><a class="header" href="#general-3" id="general-3">General</a></h3>
+<h2 id="scalar-types"><a class="header" href="#scalar-types">Scalar Types</a></h2>
+<h3 id="general-3"><a class="header" href="#general-3">General</a></h3>
 <p>The integer and floating-point types are collectively known as
 <em>arithmetic types</em>. The library function <a href="http://www.php.net/is_numeric"><code>is_numeric</code></a> indicates if
 a given value is a number or a numeric <a href="spec/05-types.html#the-string-type">string</a>.</p>
@@ -1492,14 +1484,14 @@ To test for <code>NULL</code>, use <a href="http://www.php.net/is_null"><code>is
 convertible to scalar types (this is currently available only to internal classes).
 Such object types together with scalar types are called <em>scalar-compatible types</em>.
 Note that the same object type may be scalar-compatible for one operation but not for another.</p>
-<h3><a class="header" href="#the-boolean-type" id="the-boolean-type">The Boolean Type</a></h3>
+<h3 id="the-boolean-type"><a class="header" href="#the-boolean-type">The Boolean Type</a></h3>
 <p>The Boolean type is <code>bool</code>, for which the name <code>boolean</code> is a synonym. This
 type is capable of storing two distinct values, which correspond to the
 Boolean values <a href="spec/06-constants.html#core-predefined-constants"><code>true</code> and <code>false</code></a>, respectively.
 The internal representation of this type and its values is unspecified.</p>
 <p>The library function <a href="http://www.php.net/is_bool"><code>is_bool</code></a> indicates if a given value has type
 <code>bool</code>.</p>
-<h3><a class="header" href="#the-integer-type" id="the-integer-type">The Integer Type</a></h3>
+<h3 id="the-integer-type"><a class="header" href="#the-integer-type">The Integer Type</a></h3>
 <p>There is one integer type, <code>int</code>, for which the name <code>integer</code> is a synonym.
 This type is binary, signed, and uses twos-complement representation for
 negative values. The range of values that can be stored is
@@ -1518,7 +1510,7 @@ cannot be represented as an integer. Examples include the following:</p>
 characteristics about type <code>int</code>.</p>
 <p>The library function <a href="http://www.php.net/is_int"><code>is_int</code></a> indicates if a given value has type
 <code>int</code>.</p>
-<h3><a class="header" href="#the-floating-point-type" id="the-floating-point-type">The Floating-Point Type</a></h3>
+<h3 id="the-floating-point-type"><a class="header" href="#the-floating-point-type">The Floating-Point Type</a></h3>
 <p>There is one floating-point type, <code>float</code>, for which the names <code>double</code> and
 <code>real</code> are synonyms. The <code>float</code> type must support at least the range and
 precision of IEEE 754 64-bit double-precision representation.</p>
@@ -1528,7 +1520,7 @@ floating-point value is finite. The library function <a href="http://www.php.net
 indicates if a given floating-point value is infinite. The library
 function <a href="http://www.php.net/is_nan"><code>is_nan</code></a> indicates if a given floating-point value is a
 <code>NaN</code>.</p>
-<h3><a class="header" href="#the-string-type" id="the-string-type">The String Type</a></h3>
+<h3 id="the-string-type"><a class="header" href="#the-string-type">The String Type</a></h3>
 <p>A string is a set of contiguous bytes that represents a sequence of zero
 or more characters.</p>
 <p>Conceptually, a string can be considered as an <a href="spec/05-types.html#the-array-type">array</a> of
@@ -1592,25 +1584,25 @@ leading zero, rather than as octal 377).</p>
 assignment, which involves the simple assignment <a href="spec/10-expressions.html#simple-assignment">operator =</a>.</p>
 <p>The library function <a href="http://www.php.net/is_string"><code>is_string</code></a> indicates if a given value has
 type string.</p>
-<h3><a class="header" href="#the-null-type" id="the-null-type">The Null Type</a></h3>
+<h3 id="the-null-type"><a class="header" href="#the-null-type">The Null Type</a></h3>
 <p>The null type has only one possible value, <a href="spec/06-constants.html#core-predefined-constants"><code>NULL</code></a>. The representation
 of this type and its value is unspecified.</p>
 <p>The library function <a href="http://www.php.net/is_null"><code>is_null</code></a> indicates if a given value is <code>NULL</code>.</p>
-<h2><a class="header" href="#composite-types" id="composite-types">Composite Types</a></h2>
-<h3><a class="header" href="#the-array-type" id="the-array-type">The Array Type</a></h3>
+<h2 id="composite-types"><a class="header" href="#composite-types">Composite Types</a></h2>
+<h3 id="the-array-type"><a class="header" href="#the-array-type">The Array Type</a></h3>
 <p>An array is a data structure that contains a collection of zero or more
 elements whose values are accessed through keys that are of type <code>int</code> or
 <code>string</code>. See more details in <a href="spec/12-arrays.html#arrays">arrays chapter</a>.</p>
 <p>The library function <a href="http://www.php.net/is_array"><code>is_array</code></a> indicates if a given value is an
 array.</p>
-<h3><a class="header" href="#objects" id="objects">Objects</a></h3>
+<h3 id="objects"><a class="header" href="#objects">Objects</a></h3>
 <p>An <em>object</em> is an instance of a <a href="spec/14-classes.html#classes">class</a>. Each distinct
 <a href="spec/14-classes.html#class-declarations"><em>class-declaration</em></a> defines a new class type, and each class
 type is an object type. The representation of object types is unspecified.</p>
 <p>The library function <a href="http://www.php.net/is_object"><code>is_object</code></a> indicates if a given value is an
 object, and the library function
 <a href="http://php.net/manual/function.get-class.php"><code>get_class</code></a> indicates the name of an object’s class.</p>
-<h3><a class="header" href="#resources" id="resources">Resources</a></h3>
+<h3 id="resources"><a class="header" href="#resources">Resources</a></h3>
 <p>A <a href="http://php.net/manual/language.types.resource.php"><em>resource</em></a>
 is a descriptor to some sort of external entity. Examples include
 files, databases, and network sockets.</p>
@@ -1621,8 +1613,8 @@ never created or consumed by PHP code.</p>
 <p>The library function <a href="http://www.php.net/is_resource"><code>is_resource</code></a> indicates if a given value is a
 resource, and the library function
 <a href="http://php.net/manual/function.get-resource-type.php"><code>get_resource_type</code></a> indicates the type of a resource.</p>
-<h1><a class="header" href="#constants" id="constants">Constants</a></h1>
-<h2><a class="header" href="#general-4" id="general-4">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="constants"><a class="header" href="#constants">Constants</a></h1>
+<h2 id="general-4"><a class="header" href="#general-4">General</a></h2>
 <p>A <em>constant</em> is a <a href="spec/09-lexical-structure.html#names">named</a> value. Once defined, the value
 of the constant can not be changed.</p>
 <p>A constant can be defined in one of two ways: as a <em>c-constant</em> using a
@@ -1646,7 +1638,7 @@ const UPPER_LIMIT = MAX_HEIGHT;
 define('COEFFICIENT_1', 2.345, TRUE); // define a case-insensitive d-constant (deprecated)
 define('FAILURE', FALSE, FALSE);      // define a case-sensitive d-constant
 </code></pre>
-<h2><a class="header" href="#context-dependent-constants" id="context-dependent-constants">Context-Dependent Constants</a></h2>
+<h2 id="context-dependent-constants"><a class="header" href="#context-dependent-constants">Context-Dependent Constants</a></h2>
 <p>The following constants—sometimes referred to as <em>magic constants</em>—are
 automatically available to all scripts; their values are not fixed and they are case-insensitive:</p>
 <table><thead><tr><th>Constant Name</th><th>Description</th></tr></thead><tbody>
@@ -1661,7 +1653,7 @@ automatically available to all scripts; their values are not fixed and they are 
 <tr><td><code>__TRAIT__</code></td><td><code>string</code>; The name of the current trait. From within a trait method, the name of the current trait. If used outside all traits, the result is the empty string.</td></tr>
 </tbody></table>
 <p>Constant names beginning with __ are reserved for future use by the Engine.</p>
-<h2><a class="header" href="#core-predefined-constants" id="core-predefined-constants">Core Predefined Constants</a></h2>
+<h2 id="core-predefined-constants"><a class="header" href="#core-predefined-constants">Core Predefined Constants</a></h2>
 <p>The following constants are automatically available to all scripts; they are case-sensitive with the exception of <code>NULL</code>, <code>TRUE</code> and <code>FALSE</code>:</p>
 <table><thead><tr><th>Constant Name</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>DEFAULT_INCLUDE_PATH</code></td><td><code>string</code>; the <a href="http://www.php.net/fopen"><code>fopen</code></a> library function include path is used if it is not overridden by the <code>php.ini</code> setting <code>include_path</code>.</td></tr>
@@ -1743,11 +1735,11 @@ automatically available to all scripts; their values are not fixed and they are 
 </tbody></table>
 <p>The members of the <code>E_*</code> family have values that are powers of 2, so
 they can be combined meaningfully using bitwise operators.</p>
-<h2><a class="header" href="#user-defined-constants" id="user-defined-constants">User-Defined Constants</a></h2>
+<h2 id="user-defined-constants"><a class="header" href="#user-defined-constants">User-Defined Constants</a></h2>
 <p>A constant may be defined inside or outside of functions, inside
 a <a href="spec/14-classes.html#constants">class</a>, or inside an <a href="spec/15-interfaces.html#constants">interface</a>.</p>
-<h1><a class="header" href="#variables" id="variables">Variables</a></h1>
-<h2><a class="header" href="#general-5" id="general-5">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
+<h2 id="general-5"><a class="header" href="#general-5">General</a></h2>
 <p>A <em>variable</em> is a named area of data storage that contains a PHP value. A variable is represented by a <a href="spec/04-basic-concepts.html#general">VSlot</a>. A variable is created by <a href="spec/04-basic-concepts.html#assignment">assigning a value</a> to it.
 A variable is destroyed by <em>unsetting</em> it, either by an explicit call to the <a href="spec/11-statements.html#the-unset-statement"><code>unset</code> statement</a>, or by the Engine. The intrinsic <a href="spec/10-expressions.html#isset"><code>isset</code></a> tests if a given variable exists and is not set to <code>NULL</code>.
 If a variable, which is not defined so far, is used in an expression, then different strategies are applied which determine whether the variable is defined implicitly or a substitution value is used instead and whether a notice is emitted or not. The strategies depend on the kind of the variable as well as on the context where the undefined variable is being used. The strategies are elaborated in the sub-sections of the different <a href="spec/07-variables.html#kinds-of-variables">kinds of variables</a> below.</p>
@@ -1769,8 +1761,8 @@ the need for a <a href="spec/07-variables.html#global-variables"><em>global-decl
 <li><a href="spec/07-variables.html#static-properties">Static class property</a>.</li>
 <li><a href="spec/07-variables.html#class-and-interface-constants">Class and interface constant</a>.</li>
 </ul>
-<h2><a class="header" href="#kinds-of-variables" id="kinds-of-variables">Kinds of Variables</a></h2>
-<h3><a class="header" href="#constants-1" id="constants-1">Constants</a></h3>
+<h2 id="kinds-of-variables"><a class="header" href="#kinds-of-variables">Kinds of Variables</a></h2>
+<h3 id="constants-1"><a class="header" href="#constants-1">Constants</a></h3>
 <p><strong>Syntax</strong></p>
 <p>See <a href="spec/06-constants.html#general">constants section</a>.</p>
 <p><strong>Constraints</strong></p>
@@ -1814,7 +1806,7 @@ echo Exception::MESSAGE;        // undefined class constant. Throws an exception
                                 // of type Error.
 
 </code></pre>
-<h3><a class="header" href="#local-variables" id="local-variables">Local Variables</a></h3>
+<h3 id="local-variables"><a class="header" href="#local-variables">Local Variables</a></h3>
 <p><strong>Syntax</strong></p>
 <p>See Semantics below.</p>
 <p><strong>Semantics</strong></p>
@@ -1918,7 +1910,7 @@ $l = $k;   // a VSlot for $l was created and the value of $k (which is NULL)
            // was assigned to it.
 
 </code></pre>
-<h3><a class="header" href="#array-elements" id="array-elements">Array Elements</a></h3>
+<h3 id="array-elements"><a class="header" href="#array-elements">Array Elements</a></h3>
 <p><strong>Syntax</strong></p>
 <p><a href="spec/12-arrays.html#arrays">Arrays</a> are created using the <a href="spec/10-expressions.html#array-creation-operator">array-creation operator</a>. At the same time, one or more elements
 may be created for that array. New elements are inserted into an
@@ -1953,7 +1945,7 @@ $b = &amp;$colors[100];     // a VSlot for $b is created which points to the arr
                         // the array element with offset 100 is created and
                         // NULL is assigned to it. A notice is *not* emitted.
 </code></pre>
-<h3><a class="header" href="#function-statics" id="function-statics">Function Statics</a></h3>
+<h3 id="function-statics"><a class="header" href="#function-statics">Function Statics</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 function-static-declaration:
@@ -2027,7 +2019,7 @@ Be also aware that declaring a function static can hide a local variable and/or 
 f();
 echo &quot;\$fs = $fs\n&quot;;    // $fs = 3
 </code></pre>
-<h3><a class="header" href="#global-variables" id="global-variables">Global Variables</a></h3>
+<h3 id="global-variables"><a class="header" href="#global-variables">Global Variables</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 global-declaration:
@@ -2099,20 +2091,20 @@ function f()
 }
 </code></pre>
 <p>Be also aware that declaring a variable global can hide a local variable and/or a function static with the same name. See <a href="spec/07-variables.html#hidingNotice">static variables section</a> for an example.</p>
-<h3><a class="header" href="#instance-properties" id="instance-properties">Instance Properties</a></h3>
+<h3 id="instance-properties"><a class="header" href="#instance-properties">Instance Properties</a></h3>
 <p>These are described in <a href="spec/14-classes.html#properties">class instance properties section</a>.
 They have class <a href="spec/04-basic-concepts.html#scope">scope</a> of the defining class and
 allocated <a href="spec/04-basic-concepts.html#storage-duration">storage duration</a>.
 Access to the instance properties is governed by <a href="spec/14-classes.html#general">visibility rules</a>.</p>
-<h3><a class="header" href="#static-properties" id="static-properties">Static Properties</a></h3>
+<h3 id="static-properties"><a class="header" href="#static-properties">Static Properties</a></h3>
 <p>These are described in <a href="spec/14-classes.html#properties">class static properties section</a>.
 They have class <a href="spec/04-basic-concepts.html#scope">scope</a> of the defining class
 and static <a href="spec/04-basic-concepts.html#storage-duration">storage duration</a>.
 Access to the static properties is governed by <a href="spec/14-classes.html#general">visibility rules</a>.</p>
-<h3><a class="header" href="#class-and-interface-constants" id="class-and-interface-constants">Class and Interface Constants</a></h3>
+<h3 id="class-and-interface-constants"><a class="header" href="#class-and-interface-constants">Class and Interface Constants</a></h3>
 <p>These are described in <a href="spec/14-classes.html#constants">class constants section</a> and <a href="spec/15-interfaces.html#constants">interface constants section</a>. They have class <a href="spec/04-basic-concepts.html#scope">scope</a> of the defining class or interface
 and static <a href="spec/04-basic-concepts.html#storage-duration">storage duration</a>.</p>
-<h2><a class="header" href="#predefined-variables" id="predefined-variables">Predefined Variables</a></h2>
+<h2 id="predefined-variables"><a class="header" href="#predefined-variables">Predefined Variables</a></h2>
 <p>The following global variables are available to all scripts:</p>
 <table><thead><tr><th>Variable Name</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>$argc</code></td><td><code>int</code>; The number of command-line arguments passed to the script. This is at least 1. (See <code>$argv</code> below). This may not be available in non-command-line builds of the Engine.</td></tr>
@@ -2128,8 +2120,8 @@ and static <a href="spec/04-basic-concepts.html#storage-duration">storage durati
 <tr><td><code>$_SESSION</code></td><td><code>array</code>; The session variables available to the current script. This global is defined only if a <a href="http://php.net/manual/en/book.session.php">session</a> is active.</td></tr>
 </tbody></table>
 <p>All <code>$_*</code> variables above are superglobals. The exact set of the variables available may depend on the implementation, the Engine build and the environment.</p>
-<h1><a class="header" href="#conversions" id="conversions">Conversions</a></h1>
-<h2><a class="header" href="#general-6" id="general-6">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="conversions"><a class="header" href="#conversions">Conversions</a></h1>
+<h2 id="general-6"><a class="header" href="#general-6">General</a></h2>
 <p>Explicit type conversion is performed using the <a href="spec/10-expressions.html#cast-operator">cast operator</a>.
 If an operation or language construct expects operand of one type and a value of another type is given,
 implicit (automatic) conversion will be performed. Same will happen with most internal functions, though some
@@ -2137,7 +2129,7 @@ functions may do different things depending on argument type and thus would not 
 <p>If an expression is converted to its own type, the type and value of the
 result are the same as the type and value of the expression.</p>
 <p>Conversions to <code>resource</code> and <code>null</code> types can not be performed.</p>
-<h2><a class="header" href="#converting-to-boolean-type" id="converting-to-boolean-type">Converting to Boolean Type</a></h2>
+<h2 id="converting-to-boolean-type"><a class="header" href="#converting-to-boolean-type">Converting to Boolean Type</a></h2>
 <p>The [result type] (http://www.php.net/manual/en/language.types.boolean.php#language.types.boolean.casting) is <a href="spec/05-types.html#the-boolean-type"><code>bool</code></a>.</p>
 <p>If the source type is <code>int</code> or <code>float</code>, then if the source value tests equal
 to 0, the result value is <code>FALSE</code>; otherwise, the result value is <code>TRUE</code>.</p>
@@ -2150,7 +2142,7 @@ otherwise, the result value is <code>TRUE</code>.</p>
 <p>If the source is a resource, the result value is <code>TRUE</code>.</p>
 <p>The library function <a href="http://www.php.net/boolval"><code>boolval</code></a> allows values to be converted to
 <code>bool</code>.</p>
-<h2><a class="header" href="#converting-to-integer-type" id="converting-to-integer-type">Converting to Integer Type</a></h2>
+<h2 id="converting-to-integer-type"><a class="header" href="#converting-to-integer-type">Converting to Integer Type</a></h2>
 <p>The <a href="http://www.php.net/manual/en/language.types.integer.php#language.types.integer.casting">result type</a>  is <a href="spec/05-types.html#the-integer-type"><code>int</code></a>.</p>
 <p>If the source type is <code>bool</code>, then if the source value is <code>FALSE</code>, the
 result value is 0; otherwise, the result value is 1.</p>
@@ -2190,7 +2182,7 @@ If not, the conversion is invalid, the result is assumed to be 1 and a non-fatal
 <p>If the source is a resource, the result is the resource’s unique ID.</p>
 <p>The library function <a href="http://php.net/manual/function.intval.php"><code>intval</code></a> allows values
 to be converted to <code>int</code>.</p>
-<h2><a class="header" href="#converting-to-floating-point-type" id="converting-to-floating-point-type">Converting to Floating-Point Type</a></h2>
+<h2 id="converting-to-floating-point-type"><a class="header" href="#converting-to-floating-point-type">Converting to Floating-Point Type</a></h2>
 <p>The <a href="http://www.php.net/manual/en/language.types.float.php#language.types.float.casting">result type</a> is <a href="spec/05-types.html#the-floating-point-type"><code>float</code></a>.</p>
 <p>If the source type is <code>int</code>, if the precision can be preserved the result
 value is the closest approximation to the source value; otherwise, the
@@ -2209,7 +2201,7 @@ If not, the conversion is invalid, the result is assumed to be 1.0 and a non-fat
 <a href="spec/08-conversions.html#converting-to-integer-type">converting the source value to <code>int</code></a> and then to <code>float</code>.</p>
 <p>The library function <a href="http://www.php.net/floatval"><code>floatval</code></a> allows values to be converted to
 float.</p>
-<h2><a class="header" href="#converting-to-string-type" id="converting-to-string-type">Converting to String Type</a></h2>
+<h2 id="converting-to-string-type"><a class="header" href="#converting-to-string-type">Converting to String Type</a></h2>
 <p>The <a href="http://www.php.net/manual/en/language.types.string.php#language.types.string.casting">result type</a> is <a href="spec/05-types.html#the-string-type"><code>string</code></a>.</p>
 <p>If the source type is <code>bool</code>, then if the source value is <code>FALSE</code>, the
 result value is the empty string; otherwise, the result value is “1”.</p>
@@ -2226,7 +2218,7 @@ by that method; otherwise, the conversion is invalid and a fatal error is produc
 implementation-defined string.</p>
 <p>The library function <a href="http://www.php.net/strval"><code>strval</code></a> allows values to be converted to
 string.</p>
-<h2><a class="header" href="#converting-to-array-type" id="converting-to-array-type">Converting to Array Type</a></h2>
+<h2 id="converting-to-array-type"><a class="header" href="#converting-to-array-type">Converting to Array Type</a></h2>
 <p>The <a href="http://www.php.net/manual/en/language.types.array.php#language.types.array.casting">result type</a> is <a href="spec/05-types.html#the-array-type"><code>array</code></a>.</p>
 <p>If the source value is <code>NULL</code>, the result value is an array of zero
 elements.</p>
@@ -2248,7 +2240,7 @@ where the <em>class</em> is the class name, and the <em>name</em> is the propert
 where <em>name</em> is that of the property.</p>
 <p>The value for each key is that from the corresponding property, or <code>NULL</code> if
 the property was not initialized.</p>
-<h2><a class="header" href="#converting-to-object-type" id="converting-to-object-type">Converting to Object Type</a></h2>
+<h2 id="converting-to-object-type"><a class="header" href="#converting-to-object-type">Converting to Object Type</a></h2>
 <p>The <a href="http://www.php.net/manual/en/language.types.object.php#language.types.object.casting">result type</a> is <a href="spec/05-types.html#objects"><code>object</code></a>.</p>
 <p>If the source has any type other than object, the result is an instance
 of the predefined class <a href="spec/14-classes.html#class-stdclass"><code>stdClass</code></a>. If the value of the source
@@ -2259,8 +2251,8 @@ an array, the instance contains a set of public properties whose names
 and values are those of the corresponding key/value pairs in the source.
 The order of the properties is the order of insertion of the source’s
 elements.</p>
-<h1><a class="header" href="#lexical-structure" id="lexical-structure">Lexical Structure</a></h1>
-<h2><a class="header" href="#scripts" id="scripts">Scripts</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lexical-structure"><a class="header" href="#lexical-structure">Lexical Structure</a></h1>
+<h2 id="scripts"><a class="header" href="#scripts">Scripts</a></h2>
 <p>A <a href="spec/04-basic-concepts.html#program-structure">script</a> is an ordered sequence of characters. Typically, a
 script has a one-to-one correspondence with a file in a file system, but
 this correspondence is not required.
@@ -2281,7 +2273,7 @@ executable code.</p>
 encoding form (as defined by the Unicode standard), and transform them
 into a sequence of characters. Implementations can choose to accept and
 transform additional character encoding schemes.</p>
-<h2><a class="header" href="#grammars" id="grammars">Grammars</a></h2>
+<h2 id="grammars"><a class="header" href="#grammars">Grammars</a></h2>
 <p>This specification shows the syntax of the PHP programming language
 using two grammars. The <em>lexical grammar</em> defines how source
 characters are combined to form white space, comments, and tokens. The
@@ -2326,8 +2318,8 @@ hexadecimal-digit-example:: one of
    a   b   c   d   e   f
    A   B   C   D   E   F
 </pre>
-<h2><a class="header" href="#lexical-analysis" id="lexical-analysis">Lexical analysis</a></h2>
-<h3><a class="header" href="#general-7" id="general-7">General</a></h3>
+<h2 id="lexical-analysis"><a class="header" href="#lexical-analysis">Lexical analysis</a></h2>
+<h3 id="general-7"><a class="header" href="#general-7">General</a></h3>
 <p>The production <em>input-file</em> is the root of the lexical structure for a
 script. Each script must conform to this production.</p>
 <p><strong>Syntax</strong></p>
@@ -2360,7 +2352,7 @@ delimited <a href="spec/09-lexical-structure.html#comments">comments</a>.</p>
 <p>Lexical processing always results in the creation of the longest
 possible lexical element. (For example, <code>$a+++++$b</code> must be parsed as
 <code>$a++ ++ +$b</code>, which syntactically is invalid).</p>
-<h3><a class="header" href="#comments" id="comments">Comments</a></h3>
+<h3 id="comments"><a class="header" href="#comments">Comments</a></h3>
 <p>Two forms of comments are supported: <em>delimited comments</em> and
 <em>single-line comments</em>.</p>
 <p><strong>Syntax</strong></p>
@@ -2427,7 +2419,7 @@ space</a> can occur. (For example;
 <p><strong>Implementation Notes</strong></p>
 <p>During tokenizing, an implementation can treat a delimited comment as
 though it was white space.</p>
-<h3><a class="header" href="#white-space" id="white-space">White Space</a></h3>
+<h3 id="white-space"><a class="header" href="#white-space">White Space</a></h3>
 <p>White space consists of an arbitrary combination of one or more
 new-line, space and horizontal tab characters.</p>
 <p><strong>Syntax</strong></p>
@@ -2454,8 +2446,8 @@ white-space-character::
 <p><strong>Semantics</strong></p>
 <p>The space and horizontal tab characters are considered <em>horizontal
 white-space characters</em>.</p>
-<h3><a class="header" href="#tokens" id="tokens">Tokens</a></h3>
-<h4><a class="header" href="#general-8" id="general-8">General</a></h4>
+<h3 id="tokens"><a class="header" href="#tokens">Tokens</a></h3>
+<h4 id="general-8"><a class="header" href="#general-8">General</a></h4>
 <p>There are several kinds of source <em>tokens</em>:</p>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
@@ -2478,7 +2470,7 @@ token::
    <i><a href="spec/09-lexical-structure.html#grammar-string-literal">string-literal</a></i>
    <i><a href="spec/09-lexical-structure.html#grammar-operator-or-punctuator">operator-or-punctuator</a></i>
 </pre>
-<h4><a class="header" href="#names" id="names">Names</a></h4>
+<h4 id="names"><a class="header" href="#names">Names</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 variable-name::
@@ -2580,7 +2572,7 @@ interface ICollection { /*...*/ }
 <p><strong>Implementation Notes</strong></p>
 <p>An implementation is discouraged from placing arbitrary restrictions on
 name lengths.</p>
-<h4><a class="header" href="#keywords" id="keywords">Keywords</a></h4>
+<h4 id="keywords"><a class="header" href="#keywords">Keywords</a></h4>
 <p>A <em>keyword</em> is a name-like sequence of characters that is reserved, and
 cannot be used as a name.</p>
 <p><strong>Syntax</strong></p>
@@ -2610,9 +2602,9 @@ keyword:: one of
 <p>Keywords are not case-sensitive.</p>
 <p>Note carefully that <code>yield from</code> is a single token that contains whitespace. However, <a href="spec/09-lexical-structure.html#comments">comments</a> are not permitted in that whitespace.</p>
 <p>Also, all <a href="spec/06-constants.html#context-dependent-constants"><em>magic constants</em></a> are also treated as keywords.</p>
-<h4><a class="header" href="#literals" id="literals">Literals</a></h4>
+<h4 id="literals"><a class="header" href="#literals">Literals</a></h4>
 <p>The source code representation of a value is called a <em>literal</em>.</p>
-<h5><a class="header" href="#integer-literals" id="integer-literals">Integer Literals</a></h5>
+<h5 id="integer-literals"><a class="header" href="#integer-literals">Integer Literals</a></h5>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 integer-literal::
@@ -2737,7 +2729,7 @@ considered to have non-negative values.</p>
 
 0x80000000 -&gt; 2147483648 (too big for int, so is a float)
 </code></pre>
-<h5><a class="header" href="#floating-point-literals" id="floating-point-literals">Floating-Point Literals</a></h5>
+<h5 id="floating-point-literals"><a class="header" href="#floating-point-literals">Floating-Point Literals</a></h5>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 floating-literal::
@@ -2790,7 +2782,7 @@ floating-point values for infinity and Not-a-Number, respectively.</p>
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">$values = array(1.23, 3e12, 543.678E-23);
 </code></pre>
-<h5><a class="header" href="#string-literals" id="string-literals">String Literals</a></h5>
+<h5 id="string-literals"><a class="header" href="#string-literals">String Literals</a></h5>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 string-literal::
@@ -2810,7 +2802,7 @@ string-literal::
 <p>A string literal is a sequence of zero or more characters delimited in
 some fashion. The delimiters are not part of the literal’s content.</p>
 <p>The type of a string literal is <code>string</code>.</p>
-<h6><a class="header" href="#single-quoted-string-literals" id="single-quoted-string-literals">Single-Quoted String Literals</a></h6>
+<h6 id="single-quoted-string-literals"><a class="header" href="#single-quoted-string-literals">Single-Quoted String Literals</a></h6>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 single-quoted-string-literal::
@@ -2862,7 +2854,7 @@ with a <em>b-prefix</em> is equivalent to one without.</p>
 
 'Can embed a single quote (\') and a backslash (\\) like this'
 </code></pre>
-<h6><a class="header" href="#double-quoted-string-literals" id="double-quoted-string-literals">Double-Quoted String Literals</a></h6>
+<h6 id="double-quoted-string-literals"><a class="header" href="#double-quoted-string-literals">Double-Quoted String Literals</a></h6>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 double-quoted-string-literal::
@@ -3060,7 +3052,7 @@ class C {
 $myC = new C();
 echo &quot;\$myC-&gt;p1 = &gt;$myC-&gt;p1&lt;\n&quot;;  // → $myC-&gt;p1 = &gt;2&lt;
 </code></pre>
-<h6><a class="header" href="#heredoc-string-literals" id="heredoc-string-literals">Heredoc String Literals</a></h6>
+<h6 id="heredoc-string-literals"><a class="header" href="#heredoc-string-literals">Heredoc String Literals</a></h6>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 heredoc-string-literal::
@@ -3154,7 +3146,7 @@ echo &quot;&gt;$s&lt;&quot;;
 // → &gt;S'o'me &quot;\&quot;t e  xt; $v = 123&quot;
 // Some more text&lt;
 </code></pre>
-<h6><a class="header" href="#nowdoc-string-literals" id="nowdoc-string-literals">Nowdoc String Literals</a></h6>
+<h6 id="nowdoc-string-literals"><a class="header" href="#nowdoc-string-literals">Nowdoc String Literals</a></h6>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 nowdoc-string-literal::
@@ -3186,7 +3178,7 @@ echo &quot;&gt;$s&lt;\n\n&quot;;
 // → &gt;S'o'me &quot;\&quot;t e\txt; \$v = $v&quot;
 // Some more text&lt;
 </code></pre>
-<h4><a class="header" href="#operators-and-punctuators" id="operators-and-punctuators">Operators and Punctuators</a></h4>
+<h4 id="operators-and-punctuators"><a class="header" href="#operators-and-punctuators">Operators and Punctuators</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 operator-or-punctuator:: one of
@@ -3208,8 +3200,8 @@ and semantic significance. <em>Operators</em> are used in expressions to
 describe operations involving one or more <em>operands</em>, and that yield a
 resulting value, produce a side effect, or some combination thereof.
 <em>Punctuators</em> are used for grouping and separating.</p>
-<h1><a class="header" href="#expressions" id="expressions">Expressions</a></h1>
-<h2><a class="header" href="#general-9" id="general-9">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="expressions"><a class="header" href="#expressions">Expressions</a></h1>
+<h2 id="general-9"><a class="header" href="#general-9">General</a></h2>
 <p>An <em>expression</em> involves one or more terms and zero or more operators.</p>
 <p>A <em>full expression</em> is an expression that is not part of another
 expression.</p>
@@ -3279,8 +3271,8 @@ program code relies on its having happened. (For example, in the cases
 of <code>return $a++;</code> and <code>return ++$a;</code>, it is obvious what value must be
 returned in each case, but if <code>$a</code> is a variable local to the enclosing
 function, <code>$a</code> need not actually be incremented.</p>
-<h2><a class="header" href="#primary-expressions" id="primary-expressions">Primary Expressions</a></h2>
-<h3><a class="header" href="#general-10" id="general-10">General</a></h3>
+<h2 id="primary-expressions"><a class="header" href="#primary-expressions">Primary Expressions</a></h2>
+<h3 id="general-10"><a class="header" href="#general-10">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 primary-expression:
@@ -3321,7 +3313,7 @@ primary-expression:
 <p><strong>Semantics</strong></p>
 <p>The type and value of parenthesized expression are identical to those of
 the un-parenthesized expression.</p>
-<h3><a class="header" href="#simple-variable" id="simple-variable">Simple Variable</a></h3>
+<h3 id="simple-variable"><a class="header" href="#simple-variable">Simple Variable</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 simple-variable:
@@ -3366,7 +3358,7 @@ $$v3 = &quot;abc&quot;;   // equivalent to ${NULL} = &quot;abc&quot;, here we cr
 function f1 () { return 2.5; }
 ${1 + f1()} = 1000;   // equivalent to ${3.5} = 1000
 </code></pre>
-<h3><a class="header" href="#dereferencable-expression" id="dereferencable-expression">Dereferencable expression</a></h3>
+<h3 id="dereferencable-expression"><a class="header" href="#dereferencable-expression">Dereferencable expression</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 dereferencable-expression:
@@ -3401,7 +3393,7 @@ or nowdoc string literal.</p>
 <p>A <em>dereferencable-expression</em> can be used as the left hand side of dereferencing operators, such
 as <code>[]</code>, <code>-&gt;</code> and <code>::</code>. A <em>callable-expression</em> can be used as the left hand side of the <a href="spec/10-expressions.html#function-call-operator">function
 call operator</a>.</p>
-<h3><a class="header" href="#variables-1" id="variables-1">Variables</a></h3>
+<h3 id="variables-1"><a class="header" href="#variables-1">Variables</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 callable-variable:
@@ -3433,7 +3425,7 @@ variable:
 <p>A <em>variable</em> is an expression that can <em>in principle</em> be used as an lvalue. However, the
 individual possible expressions may further restrict whether they can behave as lvalues.
 An expression that is not a <em>variable</em> can never act as an lvalue.</p>
-<h3><a class="header" href="#constant-access-expression" id="constant-access-expression">Constant Access Expression</a></h3>
+<h3 id="constant-access-expression"><a class="header" href="#constant-access-expression">Constant Access Expression</a></h3>
 <!-- GRAMMAR
 constant-access-expression:
   qualified-name
@@ -3445,7 +3437,7 @@ constant-access-expression:
 <p><strong>Semantics</strong></p>
 <p>A <em>constant-access-expression</em> evaluates to the value of the <a href="spec/06-constants.html">constant</a>
 with name <em>qualified-name</em>.</p>
-<h3><a class="header" href="#literals-1" id="literals-1">Literals</a></h3>
+<h3 id="literals-1"><a class="header" href="#literals-1">Literals</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 literal:
@@ -3462,8 +3454,8 @@ literal:
 <p><strong>Semantics</strong></p>
 <p>A literal evaluates to its value, as specified in the lexical specification for
 <a href="spec/09-lexical-structure.html#literals">literals</a>.</p>
-<h3><a class="header" href="#intrinsics" id="intrinsics">Intrinsics</a></h3>
-<h4><a class="header" href="#general-11" id="general-11">General</a></h4>
+<h3 id="intrinsics"><a class="header" href="#intrinsics">Intrinsics</a></h3>
+<h4 id="general-11"><a class="header" href="#general-11">General</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 intrinsic:
@@ -3483,7 +3475,7 @@ intrinsic:
 <p>The names in this series of sections have special meaning and are
 called <em>intrinsics</em>, but they are not keywords; nor are they functions, they
 are language constructs that are interpreted by the Engine.</p>
-<h4><a class="header" href="#empty" id="empty">empty</a></h4>
+<h4 id="empty"><a class="header" href="#empty">empty</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 empty-intrinsic:
@@ -3512,7 +3504,7 @@ empty(&quot;00&quot;); // results in FALSE
 $v = [10, 20];
 empty($v);   // results in FALSE
 </code></pre>
-<h4><a class="header" href="#eval" id="eval">eval</a></h4>
+<h4 id="eval"><a class="header" href="#eval">eval</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 eval-intrinsic:
@@ -3541,7 +3533,7 @@ called.</p>
 <pre><code class="language-PHP">$str = &quot;Hello&quot;;
 eval(&quot;echo \$str . \&quot;\\n\&quot;;&quot;);  // → echo $str . &quot;\n&quot;; → prints Hello
 </code></pre>
-<h4><a class="header" href="#exitdie" id="exitdie">exit/die</a></h4>
+<h4 id="exitdie"><a class="header" href="#exitdie">exit/die</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 exit-intrinsic:
@@ -3581,7 +3573,7 @@ status code is made available to the execution environment. If
 exit (1);
 exit;
 </code></pre>
-<h4><a class="header" href="#isset" id="isset">isset</a></h4>
+<h4 id="isset"><a class="header" href="#isset">isset</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 isset-intrinsic:
@@ -3617,7 +3609,7 @@ isset($v);     // results in FALSE
 $v1 = TRUE; $v2 = 12.3; $v3 = NULL;
 isset($v1, $v2, $v3);  // results in FALSE
 </code></pre>
-<h3><a class="header" href="#anonymous-function-creation" id="anonymous-function-creation">Anonymous Function Creation</a></h3>
+<h3 id="anonymous-function-creation"><a class="header" href="#anonymous-function-creation">Anonymous Function Creation</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 anonymous-function-creation-expression:
@@ -3691,7 +3683,7 @@ class C
   //...
 }
 </code></pre>
-<h3><a class="header" href="#the-new-operator" id="the-new-operator">The <code>new</code> Operator</a></h3>
+<h3 id="the-new-operator"><a class="header" href="#the-new-operator">The <code>new</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 object-creation-expression:
@@ -3783,7 +3775,7 @@ $v2 = new class (100) extends C1 implements I1, I2 {
 	}
 };
 </code></pre>
-<h3><a class="header" href="#array-creation-operator" id="array-creation-operator">Array Creation Operator</a></h3>
+<h3 id="array-creation-operator"><a class="header" href="#array-creation-operator">Array Creation Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 array-creation-expression:
@@ -3880,7 +3872,7 @@ $v = array(2 =&gt; TRUE, 0 =&gt; 123, 1 =&gt; 34.5, -1 =&gt; &quot;red&quot;);
 foreach($v as $e) { /* ... */ } // iterates over keys 2, 0, 1, -1
 for ($i = -1; $i &lt;= 2; ++$i) { echo $v[$i]; } // retrieves via keys -1, 0, 1, 2
 </code></pre>
-<h3><a class="header" href="#subscript-operator" id="subscript-operator">Subscript Operator</a></h3>
+<h3 id="subscript-operator"><a class="header" href="#subscript-operator">Subscript Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 subscript-expression:
@@ -4021,7 +4013,7 @@ $vect1[10] = 987; // calls Vector::offsetSet(10, 987)
 $vect1[] = &quot;xxx&quot;; // calls Vector::offsetSet(NULL, &quot;xxx&quot;)
 $x = $vect1[1];   // calls Vector::offsetGet(1)
 </code></pre>
-<h3><a class="header" href="#function-call-operator" id="function-call-operator">Function Call Operator</a></h3>
+<h3 id="function-call-operator"><a class="header" href="#function-call-operator">Function Call Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 function-call-expression:
@@ -4139,7 +4131,7 @@ function factorial($int)  // contains a recursive call
 $anon = function () { ... };  // store a Closure in $anon
 $anon();  // call the anonymous function encapsulated by that object
 </code></pre>
-<h3><a class="header" href="#member-access-operator" id="member-access-operator">Member Access Operator</a></h3>
+<h3 id="member-access-operator"><a class="header" href="#member-access-operator">Member Access Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 member-access-expression:
@@ -4209,7 +4201,7 @@ $p1-&gt;$n(-2, 4);   // calls public instance method move by variable
 $p1-&gt;color = &quot;red&quot;; // turned into $p1-&gt;__set(&quot;color&quot;, &quot;red&quot;);
 $c = $p1-&gt;color;  // turned into $c = $p1-&gt;__get(&quot;color&quot;);
 </code></pre>
-<h3><a class="header" href="#member-call-operator" id="member-call-operator">Member Call Operator</a></h3>
+<h3 id="member-call-operator"><a class="header" href="#member-call-operator">Member Call Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 member-call-expression:
@@ -4238,7 +4230,7 @@ scope an exception is thrown, unless a <a href="spec/14-classes.html#method-__ca
 exists, in which case it will be called instead.</p>
 <p><strong>Examples</strong></p>
 <p>See <a href="spec/10-expressions.html#member-access-operator">member access examples</a>.</p>
-<h3><a class="header" href="#postfix-increment-and-decrement-operators" id="postfix-increment-and-decrement-operators">Postfix Increment and Decrement Operators</a></h3>
+<h3 id="postfix-increment-and-decrement-operators"><a class="header" href="#postfix-increment-and-decrement-operators">Postfix Increment and Decrement Operators</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 postfix-increment-expression:
@@ -4265,7 +4257,7 @@ increment or decrement takes place.</p>
 <pre><code class="language-PHP">$i = 10; $j = $i-- + 100;   // old value of $i (10) is added to 100
 $a = array(100, 200); $v = $a[1]++; // old value of $ia[1] (200) is assigned
 </code></pre>
-<h3><a class="header" href="#prefix-increment-and-decrement-operators" id="prefix-increment-and-decrement-operators">Prefix Increment and Decrement Operators</a></h3>
+<h3 id="prefix-increment-and-decrement-operators"><a class="header" href="#prefix-increment-and-decrement-operators">Prefix Increment and Decrement Operators</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 prefix-increment-expression:
@@ -4352,7 +4344,7 @@ $a = array(100, 200); $v = ++$a[1]; // new value of $a[1] (201) is assigned
 $a = &quot;^^Z&quot;; ++$a; // $a is now &quot;^^A&quot;
 $a = &quot;^^Z^^&quot;; ++$a; // $a is now &quot;^^Z^^&quot;
 </code></pre>
-<h3><a class="header" href="#shell-command-operator" id="shell-command-operator">Shell Command Operator</a></h3>
+<h3 id="shell-command-operator"><a class="header" href="#shell-command-operator">Shell Command Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 shell-command-expression:
@@ -4379,7 +4371,7 @@ $result = `ls &gt;dirlist.txt`;  // result is NULL
 $d = &quot;dir&quot;; $f = &quot;*.*&quot;;
 $result = `$d {$f}`;      // result is the output of command dir *.*
 </code></pre>
-<h3><a class="header" href="#scope-resolution-operator" id="scope-resolution-operator">Scope-Resolution Operator</a></h3>
+<h3 id="scope-resolution-operator"><a class="header" href="#scope-resolution-operator">Scope-Resolution Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 scoped-property-access-expression:
@@ -4501,7 +4493,7 @@ class Point
   ...
 }
 </code></pre>
-<h2><a class="header" href="#the-clone-operator" id="the-clone-operator">The <code>clone</code> Operator</a></h2>
+<h2 id="the-clone-operator"><a class="header" href="#the-clone-operator">The <code>clone</code> Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 clone-expression:
@@ -4548,7 +4540,7 @@ class Manager extends Employee
 $obj1 = new Manager(&quot;Smith&quot;, 23);
 $obj2 = clone $obj1;  // creates a new Manager that is a deep copy
 </code></pre>
-<h2><a class="header" href="#exponentiation-operator" id="exponentiation-operator">Exponentiation Operator</a></h2>
+<h2 id="exponentiation-operator"><a class="header" href="#exponentiation-operator">Exponentiation Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 exponentiation-expression:
@@ -4576,8 +4568,8 @@ for each.</p>
 2**3.0;   // float with value 8.0
 &quot;2.0&quot;**&quot;3&quot;; // float with value 8.0
 </code></pre>
-<h2><a class="header" href="#unary-operators" id="unary-operators">Unary Operators</a></h2>
-<h3><a class="header" href="#general-12" id="general-12">General</a></h3>
+<h2 id="unary-operators"><a class="header" href="#unary-operators">Unary Operators</a></h2>
+<h3 id="general-12"><a class="header" href="#general-12">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 unary-expression:
@@ -4595,7 +4587,7 @@ unary-expression:
 </pre>
 <p><strong>Semantics</strong></p>
 <p>These operators associate right-to-left.</p>
-<h3><a class="header" href="#unary-arithmetic-operators" id="unary-arithmetic-operators">Unary Arithmetic Operators</a></h3>
+<h3 id="unary-arithmetic-operators"><a class="header" href="#unary-arithmetic-operators">Unary Arithmetic Operators</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 unary-op-expression:
@@ -4659,7 +4651,7 @@ if ($v1 &gt; -5) // ...
 $v = ~0b1010101;
 $s = &quot;\x86\x97&quot;; $s = ~$s; // $s is &quot;yh&quot;
 </code></pre>
-<h3><a class="header" href="#error-control-operator" id="error-control-operator">Error Control Operator</a></h3>
+<h3 id="error-control-operator"><a class="header" href="#error-control-operator">Error Control Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 error-control-expression:
@@ -4698,7 +4690,7 @@ $curER = error_reporting();
 if ($curER === 0) error_reporting($origER);
 $x = $tmp;
 </code></pre>
-<h3><a class="header" href="#cast-operator" id="cast-operator">Cast Operator</a></h3>
+<h3 id="cast-operator"><a class="header" href="#cast-operator">Cast Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 cast-expression:
@@ -4739,7 +4731,7 @@ so-called <em>binary strings</em>. For now, it is fully equivalent to <code>stri
 (array)(16.5)      // results in an array of 1 float; [0] = 16.5
 (int)(float)&quot;123.87E3&quot; // results in the int 123870
 </code></pre>
-<h2><a class="header" href="#instanceof-operator" id="instanceof-operator"><code>instanceof</code> Operator</a></h2>
+<h2 id="instanceof-operator"><a class="header" href="#instanceof-operator"><code>instanceof</code> Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 instanceof-expression:
@@ -4793,7 +4785,7 @@ var_dump($e1 instanceof $iName);   // TRUE
 $e2 = new E1;
 var_dump($e2 instanceof $e1);      // TRUE
 </code></pre>
-<h2><a class="header" href="#logical-not-operator" id="logical-not-operator">Logical NOT Operator</a></h2>
+<h2 id="logical-not-operator"><a class="header" href="#logical-not-operator">Logical NOT Operator</a></h2>
 <!-- GRAMMAR
 logical-NOT-expression:
   instanceof-expression
@@ -4811,7 +4803,7 @@ and if it is <code>TRUE</code> then the result of the operator is <code>FALSE</c
 <pre><code class="language-PHP">$t = TRUE;
 if (!$t) // ...
 </code></pre>
-<h2><a class="header" href="#multiplicative-operators" id="multiplicative-operators">Multiplicative Operators</a></h2>
+<h2 id="multiplicative-operators"><a class="header" href="#multiplicative-operators">Multiplicative Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 multiplicative-expression:
@@ -4870,7 +4862,7 @@ exception of type <code>DivisionByZeroError</code> is thrown.</p>
 1.3 / 0.0;       // results in a diagnostic followed by bool with value false
 100 / &quot;a&quot;;       // results in a diagnostic followed by bool with value false (a is converted to 0)
 </code></pre>
-<h2><a class="header" href="#additive-operators" id="additive-operators">Additive Operators</a></h2>
+<h2 id="additive-operators"><a class="header" href="#additive-operators">Additive Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 additive-expression:
@@ -4932,7 +4924,7 @@ INF . &quot;2e+5&quot;;     // string with value &quot;INF2e+5&quot;
 TRUE . NULL;      // string with value &quot;1&quot;
 10 + 5 . 12 . 100 - 50;  // int with value 1512050; ((((10 + 5).12).100)-50)
 </code></pre>
-<h2><a class="header" href="#bitwise-shift-operators" id="bitwise-shift-operators">Bitwise Shift Operators</a></h2>
+<h2 id="bitwise-shift-operators"><a class="header" href="#bitwise-shift-operators">Bitwise Shift Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 shift-expression:
@@ -4977,7 +4969,7 @@ type (e.g. 32 or 64) must always result in 0 when <code>e1</code> is positive an
 123 &lt;&lt; 33   // For 32-bit integers the result is zero, otherwise
             // it is 0x7B shifted left 33 places
 </code></pre>
-<h2><a class="header" href="#relational-operators" id="relational-operators">Relational Operators</a></h2>
+<h2 id="relational-operators"><a class="header" href="#relational-operators">Relational Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 relational-expression:
@@ -5100,7 +5092,7 @@ function order_func($a, $b) {
     return ($a-&gt;$x &lt;=&gt; $b-&gt;x) ?: ($a-&gt;y &lt;=&gt; $b-&gt;y) ?: ($a-&gt;z &lt;=&gt; $b-&gt;z);
 }
 </code></pre>
-<h2><a class="header" href="#equality-operators" id="equality-operators">Equality Operators</a></h2>
+<h2 id="equality-operators"><a class="header" href="#equality-operators">Equality Operators</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 equality-expression:
@@ -5153,7 +5145,7 @@ TRUE !== 100  // result has value TRUE
 [&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] === [&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] // result has value TRUE
 [&quot;red&quot;=&gt;0,&quot;green&quot;=&gt;0] === [&quot;green&quot;=&gt;0,&quot;red&quot;=&gt;0] // result has value FALSE
 </code></pre>
-<h2><a class="header" href="#bitwise-and-operator" id="bitwise-and-operator">Bitwise AND Operator</a></h2>
+<h2 id="bitwise-and-operator"><a class="header" href="#bitwise-and-operator">Bitwise AND Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 bitwise-AND-expression:
@@ -5185,7 +5177,7 @@ If one of the strings is longer than the other, it is cut to the length of the s
 $lLetter = 0x73;          // letter 's'
 $uLetter = $lLetter &amp; ~0x20;  // clear the 6th bit to make letter 'S'
 </code></pre>
-<h2><a class="header" href="#bitwise-exclusive-or-operator" id="bitwise-exclusive-or-operator">Bitwise Exclusive OR Operator</a></h2>
+<h2 id="bitwise-exclusive-or-operator"><a class="header" href="#bitwise-exclusive-or-operator">Bitwise Exclusive OR Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 bitwise-exc-OR-expression:
@@ -5219,7 +5211,7 @@ $v1 = $v1 ^ $v2;
 $v2 = $v1 ^ $v2;
 $v1 = $v1 ^ $v2;    // $v1 is now -987, and $v2 is now 1234
 </code></pre>
-<h2><a class="header" href="#bitwise-inclusive-or-operator" id="bitwise-inclusive-or-operator">Bitwise Inclusive OR Operator</a></h2>
+<h2 id="bitwise-inclusive-or-operator"><a class="header" href="#bitwise-inclusive-or-operator">Bitwise Inclusive OR Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 bitwise-inc-OR-expression:
@@ -5251,7 +5243,7 @@ If one of the strings is shorter than the other, it is extended with zero bytes.
 $uLetter = 0x41;      // letter 'A'
 $lLetter = $upCaseLetter | 0x20;  // set the 6th bit to make letter 'a'
 </code></pre>
-<h2><a class="header" href="#logical-and-operator-form-1" id="logical-and-operator-form-1">Logical AND Operator (form 1)</a></h2>
+<h2 id="logical-and-operator-form-1"><a class="header" href="#logical-and-operator-form-1">Logical AND Operator (form 1)</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-AND-expression-1:
@@ -5271,7 +5263,7 @@ same semantics as operator <a href="spec/10-expressions.html#logical-and-operato
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">if ($month &gt; 1 &amp;&amp; $month &lt;= 12) ...
 </code></pre>
-<h2><a class="header" href="#logical-inclusive-or-operator-form-1" id="logical-inclusive-or-operator-form-1">Logical Inclusive OR Operator (form 1)</a></h2>
+<h2 id="logical-inclusive-or-operator-form-1"><a class="header" href="#logical-inclusive-or-operator-form-1">Logical Inclusive OR Operator (form 1)</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-inc-OR-expression-1:
@@ -5289,7 +5281,7 @@ logical-inc-OR-expression-1:
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">if ($month &lt; 1 || $month &gt; 12) ...
 </code></pre>
-<h2><a class="header" href="#coalesce-operator" id="coalesce-operator">Coalesce Operator</a></h2>
+<h2 id="coalesce-operator"><a class="header" href="#coalesce-operator">Coalesce Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 coalesce-expression:
@@ -5328,7 +5320,7 @@ function foo() {
 }
 var_dump(true ?? foo()); // outputs bool(true), &quot;executed!&quot; does not appear as it short-circuits
 </code></pre>
-<h2><a class="header" href="#conditional-operator" id="conditional-operator">Conditional Operator</a></h2>
+<h2 id="conditional-operator"><a class="header" href="#conditional-operator">Conditional Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 conditional-expression:
@@ -5366,8 +5358,8 @@ function factorial($int)
   return ($int &gt; 1) ? $int * factorial($int - 1) : $int;
 }
 </code></pre>
-<h2><a class="header" href="#assignment-operators" id="assignment-operators">Assignment Operators</a></h2>
-<h3><a class="header" href="#general-13" id="general-13">General</a></h3>
+<h2 id="assignment-operators"><a class="header" href="#assignment-operators">Assignment Operators</a></h2>
+<h3 id="general-13"><a class="header" href="#general-13">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 assignment-expression:
@@ -5386,7 +5378,7 @@ assignment-expression:
 lvalue.</p>
 <p><strong>Semantics</strong></p>
 <p>These operators associate right-to-left.</p>
-<h3><a class="header" href="#simple-assignment" id="simple-assignment">Simple Assignment</a></h3>
+<h3 id="simple-assignment"><a class="header" href="#simple-assignment">Simple Assignment</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 simple-assignment-expression:
@@ -5442,7 +5434,7 @@ $s[&quot;zz&quot;] = &quot;Q&quot;;   // warning; defaults to [0], and &quot;Q&q
 class C { ... }
 $a = new C; // make $a point to the allocated object
 </code></pre>
-<h4><a class="header" href="#list-intrinsic" id="list-intrinsic">list intrinsic</a></h4>
+<h4 id="list-intrinsic"><a class="header" href="#list-intrinsic">list intrinsic</a></h4>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 list-intrinsic:
@@ -5570,7 +5562,7 @@ list(list(&quot;x&quot; =&gt; $x1, &quot;y&quot; =&gt; $y1), list(&quot;x&quot; 
 list(0 =&gt; list($x1, $x2), 1 =&gt; list($x2, $y2)) = [[1, 2], [3, 4]];
   // $x1 is 1, $y1 is 2, $x2 is 3, $y2 is 4
 </code></pre>
-<h3><a class="header" href="#byref-assignment" id="byref-assignment">byRef Assignment</a></h3>
+<h3 id="byref-assignment"><a class="header" href="#byref-assignment">byRef Assignment</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 byref-assignment-expression:
@@ -5601,7 +5593,7 @@ unset($b);      // removes $b's alias to $a
 function &amp;g2() { $t = &quot;xxx&quot;; return $t; } // return byRef
 $b =&amp; g2();     // make $b an alias to &quot;xxx&quot;
 </code></pre>
-<h2><a class="header" href="#compound-assignment" id="compound-assignment">Compound Assignment</a></h2>
+<h2 id="compound-assignment"><a class="header" href="#compound-assignment">Compound Assignment</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 compound-assignment-expression:
@@ -5631,7 +5623,7 @@ $a = [100, 200, 300];
 $i = 1;
 $a[$i++] += 50; // $a[1] = 250, $i → 2
 </code></pre>
-<h2><a class="header" href="#yield-operator" id="yield-operator"><code>yield</code> Operator</a></h2>
+<h2 id="yield-operator"><a class="header" href="#yield-operator"><code>yield</code> Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 yield-from-expression:
@@ -5738,7 +5730,7 @@ foreach ($g as $yielded) {
     echo $yielded . &quot;\n&quot;;   // Produces the values 1, 2, 3, and 4
 }
 </code></pre>
-<h2><a class="header" href="#print-expression" id="print-expression">Print expression</a></h2>
+<h2 id="print-expression"><a class="header" href="#print-expression">Print expression</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 print-expression:
@@ -5770,7 +5762,7 @@ $v3 = &quot;qqq{$v2}zzz&quot;;
 print &quot;$v3\n&quot;;            // outputs &quot;qqq123zzz&quot;
 $a &gt; $b ? print &quot;...&quot; : print &quot;...&quot;;
 </code></pre>
-<h2><a class="header" href="#logical-and-operator-form-2" id="logical-and-operator-form-2">Logical AND Operator (form 2)</a></h2>
+<h2 id="logical-and-operator-form-2"><a class="header" href="#logical-and-operator-form-2">Logical AND Operator (form 2)</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-AND-expression-2:
@@ -5785,7 +5777,7 @@ logical-AND-expression-2:
 <p><strong>Semantics</strong></p>
 <p>Except for the difference in precedence, operator and has exactly the
 same semantics as <a href="spec/10-expressions.html#logical-and-operator-form-1">operator <code>&amp;&amp;</code></a>.</p>
-<h2><a class="header" href="#logical-exclusive-or-operator" id="logical-exclusive-or-operator">Logical Exclusive OR Operator</a></h2>
+<h2 id="logical-exclusive-or-operator"><a class="header" href="#logical-exclusive-or-operator">Logical Exclusive OR Operator</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-exc-OR-expression:
@@ -5808,7 +5800,7 @@ sequence point after the evaluation of <code>e1</code>.</p>
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">f($i++) xor g($i) // the sequence point makes this well-defined
 </code></pre>
-<h2><a class="header" href="#logical-inclusive-or-operator-form-2" id="logical-inclusive-or-operator-form-2">Logical Inclusive OR Operator (form 2)</a></h2>
+<h2 id="logical-inclusive-or-operator-form-2"><a class="header" href="#logical-inclusive-or-operator-form-2">Logical Inclusive OR Operator (form 2)</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 logical-inc-OR-expression-2:
@@ -5823,8 +5815,8 @@ logical-inc-OR-expression-2:
 <p><strong>Semantics</strong></p>
 <p>Except for the difference in precedence, operator and has exactly the
 same semantics as <a href="spec/10-expressions.html#logical-inclusive-or-operator-form-1">operator <code>||</code></a>.</p>
-<h2><a class="header" href="#script-inclusion-operators" id="script-inclusion-operators">Script Inclusion Operators</a></h2>
-<h3><a class="header" href="#general-14" id="general-14">General</a></h3>
+<h2 id="script-inclusion-operators"><a class="header" href="#script-inclusion-operators">Script Inclusion Operators</a></h2>
+<h3 id="general-14"><a class="header" href="#general-14">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 expression:
@@ -5961,7 +5953,7 @@ echo $x;                  // emits a notice: Undefined variable: x ...
 include 'include.php';    // introduces the global variable $x
 echo $x;                  // hello
 </code></pre>
-<h3><a class="header" href="#the-include-operator" id="the-include-operator">The <code>include</code> Operator</a></h3>
+<h3 id="the-include-operator"><a class="header" href="#the-include-operator">The <code>include</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 include-expression:
@@ -5999,7 +5991,7 @@ all files included by any of the four including operators.</p>
 $inc = include('limits.php');
 If ((include 'Positions.php') == 1) ...
 </code></pre>
-<h3><a class="header" href="#the-include_once-operator" id="the-include_once-operator">The <code>include_once</code> Operator</a></h3>
+<h3 id="the-include_once-operator"><a class="header" href="#the-include_once-operator">The <code>include_once</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 include-once-expression:
@@ -6035,7 +6027,7 @@ include_once 'Circle.php';    // Point.php now not included indirectly
 $p1 = new Point(10, 20);
 $c1 = new Circle(9, 7, 2.4);
 </code></pre>
-<h3><a class="header" href="#the-require-operator" id="the-require-operator">The <code>require</code> Operator</a></h3>
+<h3 id="the-require-operator"><a class="header" href="#the-require-operator">The <code>require</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 require-expression:
@@ -6049,7 +6041,7 @@ require-expression:
 <p>This operator is identical to operator <a href="spec/10-expressions.html#the-include-operator"><code>include</code></a> except that in
 the case of <code>require</code>, failure to find/open the designated include file
 produces a fatal error.</p>
-<h3><a class="header" href="#the-require_once-operator" id="the-require_once-operator">The <code>require_once</code> Operator</a></h3>
+<h3 id="the-require_once-operator"><a class="header" href="#the-require_once-operator">The <code>require_once</code> Operator</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 require-once-expression:
@@ -6068,7 +6060,7 @@ program execution.</p>
 happens.</p>
 <p>The files are identified by the full pathname, so different forms of the filename (such as full
 and relative path) still are considered the same file.</p>
-<h2><a class="header" href="#constant-expressions" id="constant-expressions">Constant Expressions</a></h2>
+<h2 id="constant-expressions"><a class="header" href="#constant-expressions">Constant Expressions</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 constant-expression:
@@ -6093,8 +6085,8 @@ constant-expression:
 </ul>
 <p><strong>Semantics</strong></p>
 <p>A <em>constant-expression</em> evaluates to the value of the constituent <em>expression</em>.</p>
-<h1><a class="header" href="#statements" id="statements">Statements</a></h1>
-<h2><a class="header" href="#general-15" id="general-15">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="statements"><a class="header" href="#statements">Statements</a></h1>
+<h2 id="general-15"><a class="header" href="#general-15">General</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 statement:
@@ -6140,7 +6132,7 @@ statement:
    <i><a href="spec/07-variables.html#grammar-global-declaration">global-declaration</a></i>
    <i><a href="spec/07-variables.html#grammar-function-static-declaration">function-static-declaration</a></i>
 </pre>
-<h2><a class="header" href="#compound-statements" id="compound-statements">Compound Statements</a></h2>
+<h2 id="compound-statements"><a class="header" href="#compound-statements">Compound Statements</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 compound-statement:
@@ -6177,7 +6169,7 @@ while (condition)
 { // the empty block is equivalent to a null statement
 }
 </code></pre>
-<h2><a class="header" href="#labeled-statements" id="labeled-statements">Labeled Statements</a></h2>
+<h2 id="labeled-statements"><a class="header" href="#labeled-statements">Labeled Statements</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 named-label-statement:
@@ -6192,7 +6184,7 @@ named-label-statement:
 <p><strong>Semantics</strong></p>
 <p>A named label can be used as the target of a <a href="spec/11-statements.html#the-goto-statement"><code>goto</code> statement</a>.
 The presence of a label does not by itself alter the flow of execution.</p>
-<h2><a class="header" href="#expression-statements" id="expression-statements">Expression Statements</a></h2>
+<h2 id="expression-statements"><a class="header" href="#expression-statements">Expression Statements</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 expression-statement:
@@ -6235,8 +6227,8 @@ done:
   ;     // null statement needed as a label must precede a statement
 }
 </code></pre>
-<h2><a class="header" href="#selection-statements" id="selection-statements">Selection Statements</a></h2>
-<h3><a class="header" href="#general-16" id="general-16">General</a></h3>
+<h2 id="selection-statements"><a class="header" href="#selection-statements">Selection Statements</a></h2>
+<h3 id="general-16"><a class="header" href="#general-16">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 selection-statement:
@@ -6251,7 +6243,7 @@ selection-statement:
 <p><strong>Semantics</strong></p>
 <p>Based on the value of a controlling expression, a selection statement
 selects among a set of statements.</p>
-<h3><a class="header" href="#the-if-statement" id="the-if-statement">The <code>if</code> Statement</a></h3>
+<h3 id="the-if-statement"><a class="header" href="#the-if-statement">The <code>if</code> Statement</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 if-statement:
@@ -6353,7 +6345,7 @@ if (1)
 else  // this else does go with the outer if
     ...
 </code></pre>
-<h3><a class="header" href="#the-switch-statement" id="the-switch-statement">The <code>switch</code> Statement</a></h3>
+<h3 id="the-switch-statement"><a class="header" href="#the-switch-statement">The <code>switch</code> Statement</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 switch-statement:
@@ -6463,8 +6455,8 @@ case $v &lt; $a:   // non-constant expression
 // ...
 }
 </code></pre>
-<h2><a class="header" href="#iteration-statements" id="iteration-statements">Iteration Statements</a></h2>
-<h3><a class="header" href="#general-17" id="general-17">General</a></h3>
+<h2 id="iteration-statements"><a class="header" href="#iteration-statements">Iteration Statements</a></h2>
+<h3 id="general-17"><a class="header" href="#general-17">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 iteration-statement:
@@ -6480,7 +6472,7 @@ iteration-statement:
    <i><a href="spec/11-statements.html#grammar-for-statement">for-statement</a></i>
    <i><a href="spec/11-statements.html#grammar-foreach-statement">foreach-statement</a></i>
 </pre>
-<h2><a class="header" href="#the-while-statement" id="the-while-statement">The <code>while</code> Statement</a></h2>
+<h2 id="the-while-statement"><a class="header" href="#the-while-statement">The <code>while</code> Statement</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 while-statement:
@@ -6517,7 +6509,7 @@ while (TRUE)
   // ...
 }
 </code></pre>
-<h2><a class="header" href="#the-do-statement" id="the-do-statement">The <code>do</code> Statement</a></h2>
+<h2 id="the-do-statement"><a class="header" href="#the-do-statement">The <code>do</code> Statement</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 do-statement:
@@ -6547,7 +6539,7 @@ do
 }
 while ($i &lt;= 10);
 </code></pre>
-<h2><a class="header" href="#the-for-statement" id="the-for-statement">The <code>for</code> Statement</a></h2>
+<h2 id="the-for-statement"><a class="header" href="#the-for-statement">The <code>for</code> Statement</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 for-statement:
@@ -6640,7 +6632,7 @@ for ($a = 100, $i = 1; ++$i, $i &lt;= 10; ++$i, $a -= 10)
   echo &quot;$i\t$a\n&quot;;
 }
 </code></pre>
-<h2><a class="header" href="#the-foreach-statement" id="the-foreach-statement">The <code>foreach</code> Statement</a></h2>
+<h2 id="the-foreach-statement"><a class="header" href="#the-foreach-statement">The <code>foreach</code> Statement</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 foreach-statement:
@@ -6717,8 +6709,8 @@ foreach ($colors as &amp;$color)  // note the &amp;
   $color = &quot;black&quot;;
 }
 </code></pre>
-<h2><a class="header" href="#jump-statements" id="jump-statements">Jump Statements</a></h2>
-<h3><a class="header" href="#general-18" id="general-18">General</a></h3>
+<h2 id="jump-statements"><a class="header" href="#jump-statements">Jump Statements</a></h2>
+<h3 id="general-18"><a class="header" href="#general-18">General</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 jump-statement:
@@ -6736,7 +6728,7 @@ jump-statement:
    <i><a href="spec/11-statements.html#grammar-return-statement">return-statement</a></i>
    <i><a href="spec/11-statements.html#grammar-throw-statement">throw-statement</a></i>
 </pre>
-<h3><a class="header" href="#the-goto-statement" id="the-goto-statement">The <code>goto</code> Statement</a></h3>
+<h3 id="the-goto-statement"><a class="header" href="#the-goto-statement">The <code>goto</code> Statement</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 goto-statement:
@@ -6776,7 +6768,7 @@ done:
   ; // note that a label must always precede a statement
 }
 </code></pre>
-<h3><a class="header" href="#the-continue-statement" id="the-continue-statement">The <code>continue</code> Statement</a></h3>
+<h3 id="the-continue-statement"><a class="header" href="#the-continue-statement">The <code>continue</code> Statement</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 continue-statement:
@@ -6822,7 +6814,7 @@ contained within a finally-block.</p>
   echo &quot;$i is odd\n&quot;;
 }
 </code></pre>
-<h3><a class="header" href="#the-break-statement" id="the-break-statement">The <code>break</code> Statement</a></h3>
+<h3 id="the-break-statement"><a class="header" href="#the-break-statement">The <code>break</code> Statement</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 break-statement:
@@ -6875,7 +6867,7 @@ for ($i = 10; $i &lt;= 40; $i +=10)
         }
 }
 </code></pre>
-<h3><a class="header" href="#the-return-statement" id="the-return-statement">The <code>return</code> Statement</a></h3>
+<h3 id="the-return-statement"><a class="header" href="#the-return-statement">The <code>return</code> Statement</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 return-statement:
@@ -6964,7 +6956,7 @@ no other program code relies on its having happened. (For example, in
 the cases of <code>return $a++;</code> and <code>return ++$a;</code>, it is obvious what value
 must be returned in each case, but if <code>$a</code> is a variable local to the
 enclosing function, <code>$a</code> need not actually be incremented.</p>
-<h3><a class="header" href="#the-throw-statement" id="the-throw-statement">The <code>throw</code> Statement</a></h3>
+<h3 id="the-throw-statement"><a class="header" href="#the-throw-statement">The <code>throw</code> Statement</a></h3>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 throw-statement:
@@ -6992,7 +6984,7 @@ throw new Exception(&quot;Some message&quot;, 123);
 class MyException extends Exception { ... }
 throw new MyException;
 </code></pre>
-<h2><a class="header" href="#the-try-statement" id="the-try-statement">The <code>try</code> Statement</a></h2>
+<h2 id="the-try-statement"><a class="header" href="#the-try-statement">The <code>try</code> Statement</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 try-statement:
@@ -7097,7 +7089,7 @@ catch (DiskException $de) { ... }
 catch (DeviceException $dve) { ... }
 finally { ... }
 </code></pre>
-<h2><a class="header" href="#the-declare-statement" id="the-declare-statement">The <code>declare</code> Statement</a></h2>
+<h2 id="the-declare-statement"><a class="header" href="#the-declare-statement">The <code>declare</code> Statement</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 declare-statement:
@@ -7161,7 +7153,7 @@ This directive applies only to the file it appears in, and does not affect the i
 declare(encoding = 'ISO-8859-1'); // Latin-1 Western European
 declare(encoding = 'ISO-8859-5'); // Latin/Cyrillic
 </code></pre>
-<h2><a class="header" href="#the-echo-statement" id="the-echo-statement">The <code>echo</code> Statement</a></h2>
+<h2 id="the-echo-statement"><a class="header" href="#the-echo-statement">The <code>echo</code> Statement</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 echo-statement:
@@ -7200,7 +7192,7 @@ echo ('&gt;&gt;' . $v1 . '|' . $v2 . &quot;&lt;&lt;\n&quot;);   // outputs &quot
 $v3 = &quot;qqq{$v2}zzz&quot;;
 echo &quot;$v3\n&quot;;
 </code></pre>
-<h2><a class="header" href="#the-unset-statement" id="the-unset-statement">The <code>unset</code> Statement</a></h2>
+<h2 id="the-unset-statement"><a class="header" href="#the-unset-statement">The <code>unset</code> Statement</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 unset-statement:
@@ -7241,8 +7233,8 @@ method</a>, that method is called.</p>
 unset($v1, $v2, $v3);
 unset($x-&gt;m); // if m is a dynamic property, $x-&gt;__unset(&quot;m&quot;) is called
 </code></pre>
-<h1><a class="header" href="#arrays" id="arrays">Arrays</a></h1>
-<h2><a class="header" href="#general-19" id="general-19">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="arrays"><a class="header" href="#arrays">Arrays</a></h1>
+<h2 id="general-19"><a class="header" href="#general-19">General</a></h2>
 <p>An <a href="http://php.net/manual/language.types.array.php"><em>array</em></a> is a data structure that contains a collection of zero or
 more <em>elements</em>. An array element can have any type (which allows for arrays of arrays)
 and the elements of an array need not have the same type. The type of an array element can change over its lifetime.
@@ -7266,14 +7258,14 @@ arrays.</p>
 <p>Note: Arrays in PHP are different from arrays in several other languages.
 Specifically, in PHP, array elements need not have the same type, the subscript index need not be an integer,
 and there is no concept of consecutive elements of the array occupying physically adjacent memory locations).</p>
-<h2><a class="header" href="#array-creation-and-initialization" id="array-creation-and-initialization">Array Creation and Initialization</a></h2>
+<h2 id="array-creation-and-initialization"><a class="header" href="#array-creation-and-initialization">Array Creation and Initialization</a></h2>
 <p>An array is created and initialized using the
 <a href="spec/10-expressions.html#array-creation-operator">array-creation operator</a>:</p>
-<h2><a class="header" href="#element-access-and-insertion" id="element-access-and-insertion">Element Access and Insertion</a></h2>
+<h2 id="element-access-and-insertion"><a class="header" href="#element-access-and-insertion">Element Access and Insertion</a></h2>
 <p>The value (and possibly the type) of an existing element is changed, and
 new elements are inserted, using the subscript operator <a href="spec/10-expressions.html#subscript-operator"><code>[]</code></a>.</p>
-<h1><a class="header" href="#functions" id="functions">Functions</a></h1>
-<h2><a class="header" href="#general-20" id="general-20">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
+<h2 id="general-20"><a class="header" href="#general-20">General</a></h2>
 <p>When a function is called, information may be passed to it by the caller
 via an <em>argument list</em>, which contains one or more <em>argument
 expressions</em>, or more simply, <em>arguments</em>. These correspond by position
@@ -7305,9 +7297,9 @@ cf2(); // Error; call to non-existent function
 ucf2(); // now cf2 exists
 cf2(); // so we can call it
 </code></pre>
-<h2><a class="header" href="#function-calls" id="function-calls">Function Calls</a></h2>
+<h2 id="function-calls"><a class="header" href="#function-calls">Function Calls</a></h2>
 <p>A function is called via the function-call operator <a href="spec/10-expressions.html#function-call-operator"><code>()</code></a>.</p>
-<h2><a class="header" href="#function-definitions" id="function-definitions">Function Definitions</a></h2>
+<h2 id="function-definitions"><a class="header" href="#function-definitions">Function Definitions</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 function-definition:
@@ -7476,14 +7468,14 @@ type is nullable. A type is nullable if it is prefixed with <code>?</code> or if
 parameter has a default value that evaluates to <code>NULL</code>.</p>
 <p>The default value for a typed parameter must be of the type specified, or <code>NULL</code>,
 and conversion is not be performed for defaults, regardless of the mode.</p>
-<h2><a class="header" href="#return-typing" id="return-typing">Return typing</a></h2>
+<h2 id="return-typing"><a class="header" href="#return-typing">Return typing</a></h2>
 <p>If the function is defined with <em>return-type</em> declaration, the value returned by the function should
 be compatible with the defined type, using the same rules as for parameter type checks. <code>NULL</code> values
 are not allowed for typed returns. If the value of the <a href="spec/11-statements.html#the-return-statement"><code>return</code> statement</a>
 does not pass the type check, a fatal error is produced.</p>
 <p>The <code>void</code> type is a special type that can only be used as a return type, and
 not in other contexts. It has no effect at runtime, see the <a href="spec/11-statements.html#the-return-statement"><code>return</code> statement</a>.</p>
-<h2><a class="header" href="#type-check-modes" id="type-check-modes">Type check modes</a></h2>
+<h2 id="type-check-modes"><a class="header" href="#type-check-modes">Type check modes</a></h2>
 <p>The type checking can be performed in two modes, strict and coercive (default).
 The difference between modes exists only for scalar typed parameters (<code>int</code>, <code>float</code>, <code>string</code> and <code>bool</code>).</p>
 <p>For coercive mode, if the value passed is of the same type as the parameter, it is accepted.
@@ -7532,12 +7524,12 @@ accept_int(&quot;123&quot;); // fatal error
 echo substr(&quot;123&quot;, &quot;1&quot;); // fatal error
 
 </code></pre>
-<h2><a class="header" href="#variable-functions" id="variable-functions">Variable Functions</a></h2>
+<h2 id="variable-functions"><a class="header" href="#variable-functions">Variable Functions</a></h2>
 <p>If a variable name is followed by the function-call operator <a href="spec/10-expressions.html#function-call-operator"><code>()</code></a>,
 and the value of that variable designates the function currently defined and visible (see description above),
 that function will be executed. If the variable does not designate a function or this function can not be called,
 a fatal error is produced.</p>
-<h2><a class="header" href="#anonymous-functions" id="anonymous-functions">Anonymous Functions</a></h2>
+<h2 id="anonymous-functions"><a class="header" href="#anonymous-functions">Anonymous Functions</a></h2>
 <p>An <em>anonymous function</em>, also known as a <em>closure</em>, is a function
 defined with no name. As such, it must be defined in the context of an
 expression whose value is used immediately to call that function, or
@@ -7545,8 +7537,8 @@ that is saved in a variable for later execution. An anonymous function
 is defined via the <a href="spec/10-expressions.html#anonymous-function-creation">anonymous function creation operator</a>.</p>
 <p>For both <a href="spec/06-constants.html#context-dependent-constants"><code>__FUNCTION__</code> and <code>__METHOD__</code></a>, an anonymous
 function’s name is reported as <code>{closure}</code>.</p>
-<h1><a class="header" href="#classes" id="classes">Classes</a></h1>
-<h2><a class="header" href="#general-21" id="general-21">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="classes"><a class="header" href="#classes">Classes</a></h1>
+<h2 id="general-21"><a class="header" href="#general-21">General</a></h2>
 <p>A class is a type that may contain zero or more explicitly declared
 <em>members</em>, which can be any combination of <a href="spec/14-classes.html#constants"><em>class constants</em></a>;
 data members, called <a href="spec/14-classes.html#properties"><em>properties</em></a>; and function members, called
@@ -7589,7 +7581,7 @@ It is not recommended to use incompatible signatures for overriding methods.</p>
 object. As such, assignment of a handle does not copy the object itself.
 (See <a href="spec/04-basic-concepts.html#cloning-objects">cloning objects</a> for a discussion of shallow and deep copying).</p>
 <p>While PHP supports <em>anonymous class types</em>, such a type cannot be declared using <a href="spec/14-classes.html#class-declarations"><em>class-declaration</em></a>. Instead, it must be specified at the time of instantiation; that is, as part of an <a href="spec/10-expressions.html#the-new-operator"><em>object-creation-expression</em></a>.</p>
-<h2><a class="header" href="#class-declarations" id="class-declarations">Class Declarations</a></h2>
+<h2 id="class-declarations"><a class="header" href="#class-declarations">Class Declarations</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 class-declaration:
@@ -7720,7 +7712,7 @@ class MyList implements MyCollection
   ...
 }
 </code></pre>
-<h2><a class="header" href="#class-members" id="class-members">Class Members</a></h2>
+<h2 id="class-members"><a class="header" href="#class-members">Class Members</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 class-member-declarations:
@@ -7818,7 +7810,7 @@ echo &quot;Point count = &quot; . Point::getPointCount() . &quot;\n&quot;;
 $cName = 'Point';
 echo &quot;Point count = &quot; . $cName::getPointCount() . &quot;\n&quot;;
 </code></pre>
-<h2><a class="header" href="#dynamic-members" id="dynamic-members">Dynamic Members</a></h2>
+<h2 id="dynamic-members"><a class="header" href="#dynamic-members">Dynamic Members</a></h2>
 <p>Initially, the instance only has properties that are
 declared explicitly in its class’s definition. However, properties can be
 added to and removed from the instance at runtime. Static properties of a
@@ -7881,7 +7873,7 @@ Widget::sMethod(NULL, 1.234);
 <p>and the call to <code>sMethod</code> is treated as if it were</p>
 <pre><code class="language-PHP">Widget::__callStatic('sMethod', array(NULL, 1.234))
 </code></pre>
-<h2><a class="header" href="#constants-2" id="constants-2">Constants</a></h2>
+<h2 id="constants-2"><a class="header" href="#constants-2">Constants</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 const-declaration:
@@ -7936,7 +7928,7 @@ class Automobile
 }
 $col = Automobile::DEFAULT_COLOR;
 </code></pre>
-<h2><a class="header" href="#properties" id="properties">Properties</a></h2>
+<h2 id="properties"><a class="header" href="#properties">Properties</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 property-declaration:
@@ -8011,7 +8003,7 @@ case, the property is actually removed from that instance.</p>
 
 }
 </code></pre>
-<h2><a class="header" href="#methods" id="methods">Methods</a></h2>
+<h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 method-declaration:
@@ -8062,7 +8054,7 @@ derived class.</p>
 <p><strong>Examples</strong></p>
 <p>See <a href="spec/14-classes.html#class-members">class members</a> for examples of instance and static methods. See <a href="spec/14-classes.html#class-declarations">class declarations</a> for
 examples of abstract methods and their subsequent definitions.</p>
-<h2><a class="header" href="#constructors" id="constructors">Constructors</a></h2>
+<h2 id="constructors"><a class="header" href="#constructors">Constructors</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 constructor-declaration:
@@ -8131,7 +8123,7 @@ class MyRangeException extends Exception
   ...
 }
 </code></pre>
-<h2><a class="header" href="#destructors" id="destructors">Destructors</a></h2>
+<h2 id="destructors"><a class="header" href="#destructors">Destructors</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 destructor-declaration:
@@ -8163,7 +8155,7 @@ level of the hierarchy need have a destructor. A <code>private</code> destructor
 inhibits destructor calls from derived classes.</p>
 <p><strong>Examples</strong></p>
 <p>See <a href="spec/14-classes.html#constructors">constructors section</a> for an example of a constructor and destructor.</p>
-<h2><a class="header" href="#inheritance" id="inheritance">Inheritance</a></h2>
+<h2 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h2>
 <p>When a class <code>extends</code> another class it can <em>override</em> members of the parent class by declaring a
 member with the same name. Only properties and methods can be overridden.</p>
 <p>Visibility of the overridden member can not be made more restrictive, only more permissive (from <code>private</code> to <code>protected</code> to <code>public</code>).</p>
@@ -8174,8 +8166,8 @@ with the signature of the original method, by the same rule as if the original m
 and the overriding method belonged to an implementation.
 If an implemented method is overridden with an incompatible method, a non-fatal error is issued, however the
 override is still accepted by the engine. The use of incompatible overrides is not recommended.</p>
-<h2><a class="header" href="#methods-with-special-semantics" id="methods-with-special-semantics">Methods with Special Semantics</a></h2>
-<h3><a class="header" href="#general-22" id="general-22">General</a></h3>
+<h2 id="methods-with-special-semantics"><a class="header" href="#methods-with-special-semantics">Methods with Special Semantics</a></h2>
+<h3 id="general-22"><a class="header" href="#general-22">General</a></h3>
 <p>If a class contains a definition for a method having one of the
 following names, that method must have the prescribed visibility,
 signature, and semantics:</p>
@@ -8201,7 +8193,7 @@ beginning with <code>__</code> unless it is one of the special methods described
 <p>Note that while syntax definitions below use the <a href="spec/14-classes.html#methods">non-abstract syntax</a> in the method definition, the special methods,
 like any methods, can be declared <code>abstract</code>. In this case the definition does not actually define a special method but defines that
 an overriding concrete class must declare one. Nevertheless, the constraints on special methods must still be followed in such definitions.</p>
-<h3><a class="header" href="#method-__call" id="method-__call">Method <code>__call</code></a></h3>
+<h3 id="method-__call"><a class="header" href="#method-__call">Method <code>__call</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i> function  __call  (  <i>$name</i>  ,  <i>$arguments</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8244,7 +8236,7 @@ restrictions on the content of the dynamic method name designated by
 $obj = new Widget;
 $obj-&gt;iMethod(10, TRUE, &quot;abc&quot;); // $obj-&gt;__call('iMethod', array(...))
 </code></pre>
-<h3><a class="header" href="#method-__callstatic" id="method-__callstatic">Method <code>__callStatic</code></a></h3>
+<h3 id="method-__callstatic"><a class="header" href="#method-__callstatic">Method <code>__callStatic</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __callStatic  (  <i>$name</i>  ,  <i>$arguments</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8286,7 +8278,7 @@ restrictions on the spelling of the dynamic method name designated by
 
 Widget::sMethod(NULL, 1.234); // Widget::__callStatic('sMethod', array(...))
 </code></pre>
-<h3><a class="header" href="#method-__clone" id="method-__clone">Method <code>__clone</code></a></h3>
+<h3 id="method-__clone"><a class="header" href="#method-__clone">Method <code>__clone</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __clone  (  )  <i>compound-statement</i>
@@ -8357,7 +8349,7 @@ class Point
 $p1 = new Point;  // created using the constructor
 $p2 = clone $p1;  // created by cloning
 </code></pre>
-<h3><a class="header" href="#method-__debuginfo" id="method-__debuginfo">Method <code>__debugInfo</code></a></h3>
+<h3 id="method-__debuginfo"><a class="header" href="#method-__debuginfo">Method <code>__debugInfo</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i> function  __debugInfo  (  )   <i>compound-statement</i>
@@ -8396,7 +8388,7 @@ object(File)#1 {
   etc...
 */
 </code></pre>
-<h3><a class="header" href="#method-__get" id="method-__get">Method <code>__get</code></a></h3>
+<h3 id="method-__get"><a class="header" href="#method-__get">Method <code>__get</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i> function  &<sub>opt</sub>  __get  (  <i>$name</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8468,7 +8460,7 @@ performed per-property, and the special method is called only once per property 
 <p>While the <a href="spec/09-lexical-structure.html#names"><em>name</em></a> source token has a prescribed syntax, there are no
 restrictions on the spelling of the dynamic property name designated by
 <code>$name</code>. Any source character is allowed here.</p>
-<h3><a class="header" href="#method-__invoke" id="method-__invoke">Method <code>__invoke</code></a></h3>
+<h3 id="method-__invoke"><a class="header" href="#method-__invoke">Method <code>__invoke</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __invoke  ( <i>parameter-declaration-list<sub>opt</sub></i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8496,7 +8488,7 @@ $c = new C;
 is_callable($c) // returns TRUE
 $r = $c(123);   // becomes $r = $c-&gt;__invoke(123);
 </code></pre>
-<h3><a class="header" href="#method-__isset" id="method-__isset">Method <code>__isset</code></a></h3>
+<h3 id="method-__isset"><a class="header" href="#method-__isset">Method <code>__isset</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __isset  (  <i>$name</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8538,7 +8530,7 @@ restrictions on the spelling of the dynamic property name designated by
 </code></pre>
 <p><strong>Implementation Notes</strong></p>
 <p>See the Implementation Notes for <a href="spec/14-classes.html#method-__get"><code>__get</code></a>.</p>
-<h3><a class="header" href="#method-__set" id="method-__set">Method <code>__set</code></a></h3>
+<h3 id="method-__set"><a class="header" href="#method-__set">Method <code>__set</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __set  (  <i>$name</i>  ,  <i>$value</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8590,7 +8582,7 @@ $p-&gt;thing = new X;  // set dynamic property &quot;thing&quot; to instance wit
 </code></pre>
 <p><strong>Implementation Notes</strong></p>
 <p>See the Implementation Notes for <a href="spec/14-classes.html#method-__get"><code>__get</code></a>.</p>
-<h3><a class="header" href="#method-__set_state" id="method-__set_state">Method <code>__set_state</code></a></h3>
+<h3 id="method-__set_state"><a class="header" href="#method-__set_state">Method <code>__set_state</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __set_state  ( array  <i>$properties</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8688,7 +8680,7 @@ $v = var_export($d, TRUE);
 eval('$z = ' . $v . &quot;;&quot;);
 var_dump($z);
 </code></pre>
-<h3><a class="header" href="#method-__sleep" id="method-__sleep">Method <code>__sleep</code></a></h3>
+<h3 id="method-__sleep"><a class="header" href="#method-__sleep">Method <code>__sleep</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __sleep  ( )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8751,7 +8743,7 @@ $p = new Point(-1, 0);
 $s = serialize($p);   // serialize Point(-1,0)
 $v = unserialize($s); // unserialize Point(-1,0)
 </code></pre>
-<h3><a class="header" href="#method-__tostring" id="method-__tostring">Method <code>__toString</code></a></h3>
+<h3 id="method-__tostring"><a class="header" href="#method-__tostring">Method <code>__toString</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __toString  ( )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8797,7 +8789,7 @@ class MyRangeException extends Exception
   ...
 }
 </code></pre>
-<h3><a class="header" href="#method-__unset" id="method-__unset">Method <code>__unset</code></a></h3>
+<h3 id="method-__unset"><a class="header" href="#method-__unset">Method <code>__unset</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __unset  (  <i>$name</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8839,7 +8831,7 @@ restrictions on the spelling of the dynamic property name designated by
 </code></pre>
 <p><strong>Implementation Notes</strong></p>
 <p>See the Implementation Notes for <a href="spec/14-classes.html#method-__get"><code>__get</code></a>.</p>
-<h3><a class="header" href="#method-__wakeup" id="method-__wakeup">Method <code>__wakeup</code></a></h3>
+<h3 id="method-__wakeup"><a class="header" href="#method-__wakeup">Method <code>__wakeup</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __wakeup  ( )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -8865,7 +8857,7 @@ by <code>__wakeup</code> when that <code>Point</code> is unserialized. This mean
 <code>__wakeup</code> must emulate the constructor, as appropriate.</p>
 <p><strong>Examples</strong></p>
 <p>See <a href="spec/14-classes.html#method-__sleep"><code>__sleep</code></a>.</p>
-<h2><a class="header" href="#serialization" id="serialization">Serialization</a></h2>
+<h2 id="serialization"><a class="header" href="#serialization">Serialization</a></h2>
 <p>In PHP, variables can be converted into some external form suitable for
 use in file storage or inter-program communication. The process of
 converting to this form is known as <em>serialization</em> while that of
@@ -8996,8 +8988,8 @@ $v = unserialize($s);
 </code></pre>
 <p>Function <code>unserialize</code> takes an optional second argument, which specifies an array of trusted class names as strings. Objects found in the data stream whose type name is not in this trusted name list are converted to objects of type <a href="spec/14-classes.html#class-__php_incomplete_class"><code>__PHP_Incomplete_Class</code></a>.</p>
 <p>Any attempt to serialize an object having an anonymous class type results in an instance of type <code>Exception</code> being thrown.</p>
-<h2><a class="header" href="#predefined-classes" id="predefined-classes">Predefined Classes</a></h2>
-<h3><a class="header" href="#class-closure" id="class-closure">Class <code>Closure</code></a></h3>
+<h2 id="predefined-classes"><a class="header" href="#predefined-classes">Predefined Classes</a></h2>
+<h3 id="class-closure"><a class="header" href="#class-closure">Class <code>Closure</code></a></h3>
 <p>The predefined class <a href="http://php.net/manual/class.closure.php"><code>Closure</code></a> is used
 for representing an <a href="spec/13-functions.html#anonymous-functions">anonymous function</a>. It
 cannot be instantiated except by the Engine, as described below.
@@ -9082,7 +9074,7 @@ following, shown as pseudo code:</p>
 <p>It is possible for all three dynamic properties to be absent, in which
 case, the <code>Closure</code> object is empty.</p>
 <p>Closure objects can not be serialized or unserialized.</p>
-<h3><a class="header" href="#class-generator" id="class-generator">Class <code>Generator</code></a></h3>
+<h3 id="class-generator"><a class="header" href="#class-generator">Class <code>Generator</code></a></h3>
 <p>This class supports the <a href="spec/10-expressions.html#yield-operator"><code>yield</code> operator</a>. This class cannot be
 instantiated directly. It is defined, as follows:</p>
 <pre><code class="language-PHP">class Generator implements Iterator
@@ -9109,7 +9101,7 @@ instantiated directly. It is defined, as follows:</p>
 <tr><td><code>valid</code></td><td>An implementation of the instance method <a href="spec/15-interfaces.html#interface-iterator"><code>Iterator::valid</code></a>.</td></tr>
 </tbody></table>
 <p>Generator objects can not be serialized or unserialized.</p>
-<h3><a class="header" href="#class-__php_incomplete_class" id="class-__php_incomplete_class">Class <code>__PHP_Incomplete_Class</code></a></h3>
+<h3 id="class-__php_incomplete_class"><a class="header" href="#class-__php_incomplete_class">Class <code>__PHP_Incomplete_Class</code></a></h3>
 <p>There are certain circumstances in which a program can generate an
 instance of this class, which on its own contains no members. One
 involves an attempt to <a href="spec/14-classes.html#serialization">unserialize</a> a string that
@@ -9141,15 +9133,15 @@ following code, but does not contain a definition of the class Point:</p>
 </code></pre>
 <p>Object of this class can be serialized, however, any attempt to call its method or access its property
 for any other operation except serialization will result in a fatal error.</p>
-<h3><a class="header" href="#class-stdclass" id="class-stdclass">Class <code>stdClass</code></a></h3>
+<h3 id="class-stdclass"><a class="header" href="#class-stdclass">Class <code>stdClass</code></a></h3>
 <p>This class contains no members. It can be instantiated and used as a
 base class. An instance of this type is automatically created when a
 non-object is <a href="spec/08-conversions.html#converting-to-object-type">converted to an object</a>,
 or the <a href="spec/10-expressions.html#member-access-operator">member selection operator</a>
 is applied to <code>NULL</code>, <code>FALSE</code>, or an empty string.</p>
-<h3><a class="header" href="#predefined-error-classes" id="predefined-error-classes">Predefined Error Classes</a></h3>
+<h3 id="predefined-error-classes"><a class="header" href="#predefined-error-classes">Predefined Error Classes</a></h3>
 <p>PHP has a number of predefined classes that are used for error reporting. All these classes extend the base Error class.</p>
-<h4><a class="header" href="#class-error" id="class-error">Class <code>Error</code></a></h4>
+<h4 id="class-error"><a class="header" href="#class-error">Class <code>Error</code></a></h4>
 <p>This class is the base class for all internal PHP error exceptions. It is defined, as follows:</p>
 <pre><code class="language-PHP">class Error implements Throwable
 {
@@ -9167,19 +9159,19 @@ is applied to <code>NULL</code>, <code>FALSE</code>, or an empty string.</p>
 <p>For information about the base interface, see <a href="spec/15-interfaces.html#interface-throwable">Throwable</a>.
 Note that the methods from Throwable are implemented as <code>final</code> in the Error class, which means
 the extending class can not override them.</p>
-<h4><a class="header" href="#class-arithmeticerror" id="class-arithmeticerror">Class <code>ArithmeticError</code></a></h4>
+<h4 id="class-arithmeticerror"><a class="header" href="#class-arithmeticerror">Class <code>ArithmeticError</code></a></h4>
 <p>An instance of this class is thrown when an error occurs during certain mathematical operations. It is defined, as follows:</p>
 <pre><code class="language-PHP">class ArithmeticError extends Error
 {
 }
 </code></pre>
-<h4><a class="header" href="#class-assertionerror" id="class-assertionerror">Class <code>AssertionError</code></a></h4>
+<h4 id="class-assertionerror"><a class="header" href="#class-assertionerror">Class <code>AssertionError</code></a></h4>
 <p>An instance of this class is thrown when an assertion made via the intrinsic <code>assert</code> fails. The class type is defined, as follows:</p>
 <pre><code class="language-PHP">class AssertionError extends Error
 {
 }
 </code></pre>
-<h4><a class="header" href="#class-divisionbyzeroerror" id="class-divisionbyzeroerror">Class <code>DivisionByZeroError</code></a></h4>
+<h4 id="class-divisionbyzeroerror"><a class="header" href="#class-divisionbyzeroerror">Class <code>DivisionByZeroError</code></a></h4>
 <p>An instance of this class is thrown when an attempt is made to divide a number by zero, e.g. when using the remainder operators (<a href="spec/10-expressions.html#multiplicative-operators"><code>%</code></a> and <a href="spec/10-expressions.html#compound-assignment"><code>%=</code></a>).
 Note that this happens only for integer operations, regular float division (<code>/</code>) produces a non-fatal error instead.
 The class type is defined, as follows:</p>
@@ -9187,13 +9179,13 @@ The class type is defined, as follows:</p>
 {
 }
 </code></pre>
-<h4><a class="header" href="#class-parseerror" id="class-parseerror">Class <code>ParseError</code></a></h4>
+<h4 id="class-parseerror"><a class="header" href="#class-parseerror">Class <code>ParseError</code></a></h4>
 <p>An instance of this class is thrown when an error occurs while parsing PHP code (such as when calling the intrinsic  <a href="spec/10-expressions.html#eval"><code>eval</code></a>). It is defined, as follows:</p>
 <pre><code class="language-PHP">class ParseError extends Error
 {
 }
 </code></pre>
-<h4><a class="header" href="#class-typeerror" id="class-typeerror">Class <code>TypeError</code></a></h4>
+<h4 id="class-typeerror"><a class="header" href="#class-typeerror">Class <code>TypeError</code></a></h4>
 <p>An instance of this class is thrown when any of the following occurs:</p>
 <ul>
 <li>The type of an argument being passed to a function does not match its corresponding parameter’s declared type.</li>
@@ -9206,8 +9198,8 @@ The class type is defined, as follows:</p>
 }
 </code></pre>
 <p>See also class <a href="spec/17-exception-handling.html#class-exception"><code>Exception</code></a>.</p>
-<h1><a class="header" href="#interfaces" id="interfaces">Interfaces</a></h1>
-<h2><a class="header" href="#general-23" id="general-23">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="interfaces"><a class="header" href="#interfaces">Interfaces</a></h1>
+<h2 id="general-23"><a class="header" href="#general-23">General</a></h2>
 <p>A class can implement a set of capabilities — herein called a
 <em>contract</em> — through what is called an interface. An <em>interface</em> is a set
 of method declarations and constants.  Note that the methods are only
@@ -9218,7 +9210,7 @@ implement the same facilities with the same names and types without
 requiring those classes to share a common base class.</p>
 <p>An interface can extend one or more other interfaces, in which case, it
 inherits all members from its <em>base interface(s)</em>.</p>
-<h2><a class="header" href="#interface-declarations" id="interface-declarations">Interface Declarations</a></h2>
+<h2 id="interface-declarations"><a class="header" href="#interface-declarations">Interface Declarations</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 interface-declaration:
@@ -9272,7 +9264,7 @@ function processCollection(MyCollection $p1)
 processCollection(new MyList(...));
 processCollection(new MyQueue(...));
 </code></pre>
-<h2><a class="header" href="#interface-members" id="interface-members">Interface Members</a></h2>
+<h2 id="interface-members"><a class="header" href="#interface-members">Interface Members</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 interface-member-declarations:
@@ -9306,7 +9298,7 @@ interfaces.</p>
 <li><a href="spec/15-interfaces.html#methods">Methods</a> – placeholders for the computations and actions that can be
 performed by implementers of the interface.</li>
 </ul>
-<h2><a class="header" href="#constants-3" id="constants-3">Constants</a></h2>
+<h2 id="constants-3"><a class="header" href="#constants-3">Constants</a></h2>
 <p><strong>Constraints</strong></p>
 <p>All constants declared in an interface must be implicitly or explicitly public.</p>
 <p><strong>Semantics</strong></p>
@@ -9321,7 +9313,7 @@ nor by an interface that extends it.</p>
   function get();
 }
 </code></pre>
-<h2><a class="header" href="#methods-1" id="methods-1">Methods</a></h2>
+<h2 id="methods-1"><a class="header" href="#methods-1">Methods</a></h2>
 <p><strong>Constraints</strong></p>
 <p>All methods declared in an interface must be implicitly or explicitly
 public, and they must not be declared <code>abstract</code>.</p>
@@ -9335,8 +9327,8 @@ public, and they must not be declared <code>abstract</code>.</p>
   function get();
 }
 </code></pre>
-<h2><a class="header" href="#predefined-interfaces" id="predefined-interfaces">Predefined Interfaces</a></h2>
-<h3><a class="header" href="#interface-arrayaccess" id="interface-arrayaccess">Interface <code>ArrayAccess</code></a></h3>
+<h2 id="predefined-interfaces"><a class="header" href="#predefined-interfaces">Predefined Interfaces</a></h2>
+<h3 id="interface-arrayaccess"><a class="header" href="#interface-arrayaccess">Interface <code>ArrayAccess</code></a></h3>
 <p>This interface allows an instance of an implementing class to be
 accessed using array-like notation. This interface is defined, as
 follows:</p>
@@ -9355,7 +9347,7 @@ follows:</p>
 <tr><td><code>offsetSet</code></td><td>This instance method sets the value having key <code>$offset</code> to $value. It returns no value. This method is called when an instance of a class that implements this interface is <a href="spec/10-expressions.html#subscript-operator">subscripted</a> in a modifiable-lvalue context.</td></tr>
 <tr><td><code>offsetUnset</code></td><td>This instance method unsets the value having key <code>$offset</code>. It returns no value.</td></tr>
 </tbody></table>
-<h3><a class="header" href="#interface-iterator" id="interface-iterator">Interface <code>Iterator</code></a></h3>
+<h3 id="interface-iterator"><a class="header" href="#interface-iterator">Interface <code>Iterator</code></a></h3>
 <p>This interface allows instances of an implementing class to be treated
 as a collection. This interface is defined, as follows:</p>
 <pre><code class="language-PHP">interface Iterator extends Traversable
@@ -9376,7 +9368,7 @@ as a collection. This interface is defined, as follows:</p>
 <tr><td><code>rewind</code></td><td>This instance method resets the current position to the first element. It returns no value. From within a <code>foreach</code> statement, this method is called once, at the beginning.</td></tr>
 <tr><td><code>valid</code></td><td>This instance method checks if the current position is valid. It takes no arguments. It returns a bool value of <code>TRUE</code> to indicate the current position is valid; <code>FALSE</code>, otherwise. This method is called after each call to <a href="http://php.net/manual/iterator.rewind.php"><code>Iterator::rewind()</code></a> and <a href="http://php.net/manual/iterator.next.php"><code>Iterator::next()</code></a>.</td></tr>
 </tbody></table>
-<h3><a class="header" href="#interface-iteratoraggregate" id="interface-iteratoraggregate">Interface <code>IteratorAggregate</code></a></h3>
+<h3 id="interface-iteratoraggregate"><a class="header" href="#interface-iteratoraggregate">Interface <code>IteratorAggregate</code></a></h3>
 <p>This interface allows the creation of an external iterator. This
 interface is defined, as follows:</p>
 <pre><code class="language-PHP">interface IteratorAggregate extends Traversable
@@ -9388,7 +9380,7 @@ interface is defined, as follows:</p>
 <table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
 <tr><td><code>getIterator</code></td><td>This instance method retrieves an iterator, which implements <code>Iterator</code> or <code>Traversable</code>. It throws an <code>Exception</code> on failure.</td></tr>
 </tbody></table>
-<h3><a class="header" href="#interface-throwable" id="interface-throwable">Interface <code>Throwable</code></a></h3>
+<h3 id="interface-throwable"><a class="header" href="#interface-throwable">Interface <code>Throwable</code></a></h3>
 <p>This type is the base interface for the type of any object that can be thrown via a
 <a href="spec/11-statements.html#the-throw-statement">throw statement</a>. A user-written class cannot
 implement <code>Throwable</code> directly. Instead, it must extend <code>Error</code> or <code>Exception</code>.</p>
@@ -9415,7 +9407,7 @@ implement <code>Throwable</code> directly. Instead, it must extend <code>Error</
 <tr><td><code>getTrace</code></td><td><code>array</code>; retrieves the function stack <a href="spec/17-exception-handling.html#tracing-exceptions">trace information</a> as an array</td></tr>
 <tr><td><code>getTraceAsString</code></td><td><code>string</code>; retrieves the function stack trace information formatted as a single string in some unspecified format</td></tr>
 </tbody></table>
-<h3><a class="header" href="#interface-traversable" id="interface-traversable">Interface <code>Traversable</code></a></h3>
+<h3 id="interface-traversable"><a class="header" href="#interface-traversable">Interface <code>Traversable</code></a></h3>
 <p>This interface is intended as the base interface for all traversable
 classes. This interface is defined, as follows:</p>
 <pre><code class="language-PHP">interface Traversable
@@ -9423,7 +9415,7 @@ classes. This interface is defined, as follows:</p>
 }
 </code></pre>
 <p>This interface has no members.</p>
-<h3><a class="header" href="#interface--serializable" id="interface--serializable">Interface  <code>Serializable</code></a></h3>
+<h3 id="interface--serializable"><a class="header" href="#interface--serializable">Interface  <code>Serializable</code></a></h3>
 <p>This interface provides support for custom serialization. It is defined,
 as follows:</p>
 <pre><code class="language-PHP">interface Serializable
@@ -9438,8 +9430,8 @@ as follows:</p>
 <tr><td><code>serialize</code></td><td>This instance method returns a string representation of the current instance. On failure, it returns <code>NULL</code>.</td></tr>
 <tr><td><code>unserialize</code></td><td>This instance method constructs an object from its string form designated by <code>$serialized</code>. It does not return a value.</td></tr>
 </tbody></table>
-<h1><a class="header" href="#traits" id="traits">Traits</a></h1>
-<h2><a class="header" href="#general-24" id="general-24">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="traits"><a class="header" href="#traits">Traits</a></h1>
+<h2 id="general-24"><a class="header" href="#general-24">General</a></h2>
 <p>PHP’s class model allows <a href="spec/14-classes.html#general">single inheritance</a> only with contracts
 being enforced separately via <a href="spec/15-interfaces.html#general">interfaces</a>. A <em>trait</em> can provide
 both implementation and contracts. Specifically, a class can inherit
@@ -9469,7 +9461,7 @@ methods and properties. In the case of a trait with a static property,
 each class using that trait has its own instance of that property.</p>
 <p>Methods in a trait have full access to all members of any class in which
 that trait is used.</p>
-<h2><a class="header" href="#trait-declarations" id="trait-declarations">Trait Declarations</a></h2>
+<h2 id="trait-declarations"><a class="header" href="#trait-declarations">Trait Declarations</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 trait-declaration:
@@ -9529,7 +9521,7 @@ class in which the trait is used is no longer needed.</li>
   public static function getData( ... ) { ... }
 }
 </code></pre>
-<h2><a class="header" href="#trait-uses" id="trait-uses">Trait Uses</a></h2>
+<h2 id="trait-uses"><a class="header" href="#trait-uses">Trait Uses</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 trait-use-clauses:
@@ -9639,8 +9631,8 @@ trait T4
   }
 }
 </code></pre>
-<h1><a class="header" href="#exception-handling" id="exception-handling">Exception Handling</a></h1>
-<h2><a class="header" href="#general-25" id="general-25">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exception-handling"><a class="header" href="#exception-handling">Exception Handling</a></h1>
+<h2 id="general-25"><a class="header" href="#general-25">General</a></h2>
 <p>An <em>exception</em> is some unusual condition in that it is outside the
 ordinary expected behavior. Examples include dealing with situations in
 which a critical resource is needed, but is unavailable, and detecting
@@ -9677,7 +9669,7 @@ the situation.</p>
 <p>PHP errors also can be translated to exceptions via the class
 <a href="http://php.net/manual/class.errorexception.php"><code>ErrorException</code></a>
 (which is not part of this specification).</p>
-<h2><a class="header" href="#class-exception" id="class-exception">Class <code>Exception</code></a></h2>
+<h2 id="class-exception"><a class="header" href="#class-exception">Class <code>Exception</code></a></h2>
 <p>Class <code>Exception</code> is the base class of all exception types. This class is
 defined, as follows:</p>
 <pre><code class="language-PHP">class Exception implements Throwable
@@ -9706,7 +9698,7 @@ the extending class can not override them.</p>
 <tr><td><code>__construct</code></td><td>Takes three (optional) arguments – <code>string</code>: the exception message (defaults to “”), <code>int</code>: the exception code (defaults to 0), and <code>Exception</code>: the previous exception in the chain (defaults to <code>NULL</code>)</td></tr>
 <tr><td><code>__clone</code></td><td>Present to inhibit the cloning of exception objects</td></tr>
 </tbody></table>
-<h2><a class="header" href="#tracing-exceptions" id="tracing-exceptions">Tracing Exceptions</a></h2>
+<h2 id="tracing-exceptions"><a class="header" href="#tracing-exceptions">Tracing Exceptions</a></h2>
 <p>When an exception is caught, the <code>get*</code> functions in class <code>Exception</code>
 provide useful information. If one or more nested function calls were
 involved to get to the place where the exception was generated, a record
@@ -9754,7 +9746,7 @@ exists in the argument array. Only arguments present at the function-call
 site have their values recorded in array-argument.</p>
 <p>See also, library functions <a href="http://www.php.net/debug_backtrace"><code>debug_backtrace</code></a> and
 <a href="http://www.php.net/debug_print_backtrace"><code>debug_print_backtrace</code></a>.</p>
-<h2><a class="header" href="#user-defined-exception-classes" id="user-defined-exception-classes">User-Defined Exception Classes</a></h2>
+<h2 id="user-defined-exception-classes"><a class="header" href="#user-defined-exception-classes">User-Defined Exception Classes</a></h2>
 <p>An exception class is defined simply by having it extend class <a href="spec/17-exception-handling.html#class-exception"><code>Exception</code></a>.
 However, as that class’s <code>__clone</code> method is declared <a href="spec/14-classes.html#methods"><code>final</code></a>,
 exception objects cannot be cloned.</p>
@@ -9763,8 +9755,8 @@ parent class’ constructor as their first operation to ensure the
 base-class part of the new object is initialized appropriately. They
 often also provide an augmented implementation of
 <a href="spec/14-classes.html#method-__tostring"><code>__toString()</code></a>.</p>
-<h1><a class="header" href="#namespaces" id="namespaces">Namespaces</a></h1>
-<h2><a class="header" href="#general-26" id="general-26">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="namespaces"><a class="header" href="#namespaces">Namespaces</a></h1>
+<h2 id="general-26"><a class="header" href="#general-26">General</a></h2>
 <p>A problem encountered when managing large projects is that of avoiding
 the use of the same name in the same scope for different purposes. This
 is especially problematic in a language that supports modular design and
@@ -9790,7 +9782,7 @@ classes, interfaces, traits, functions, and constants are in the
 <em>default namespace</em>, which has no name, per se.</p>
 <p>The namespaces <code>PHP</code>, <code>php</code>, and sub-namespaces beginning with those
 prefixes are reserved for use by PHP.</p>
-<h2><a class="header" href="#defining-namespaces" id="defining-namespaces">Defining Namespaces</a></h2>
+<h2 id="defining-namespaces"><a class="header" href="#defining-namespaces">Defining Namespaces</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 namespace-definition:
@@ -9853,7 +9845,7 @@ namespace NS3\Sub1;
 ...       // __NAMESPACE__ is &quot;NS3\Sub1&quot;
 }
 </code></pre>
-<h2><a class="header" href="#namespace-use-declarations" id="namespace-use-declarations">Namespace Use Declarations</a></h2>
+<h2 id="namespace-use-declarations"><a class="header" href="#namespace-use-declarations">Namespace Use Declarations</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 namespace-use-declaration:
@@ -10010,7 +10002,7 @@ namespace a
   $b-&gt;foo(); // goodbye
 }
 </code></pre>
-<h2><a class="header" href="#name-lookup" id="name-lookup">Name Lookup</a></h2>
+<h2 id="name-lookup"><a class="header" href="#name-lookup">Name Lookup</a></h2>
 <p>When an existing name is used in source code, the Engine must determine
 how that name is found with respect to namespace lookup. For this
 purpose, names can have one of the three following forms:</p>
@@ -10055,10 +10047,10 @@ print mb_strlen(&quot;Life, Universe and Everything&quot;); // calls global func
 <code>PHP_INT_MAX</code>), and library functions (such as <code>is_null</code>) are defined outside
 any namespace. To refer unambiguously to such names, one can prefix them
 with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT_MAX</code>, and <code>\is_null</code>.</p>
-<h1><a class="header" href="#grammar" id="grammar">Grammar</a></h1>
-<h2><a class="header" href="#general-27" id="general-27">General</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="grammar"><a class="header" href="#grammar">Grammar</a></h1>
+<h2 id="general-27"><a class="header" href="#general-27">General</a></h2>
 <p>The grammar notation is described in <a href="spec/09-lexical-structure.html#grammars">Grammars section</a>.</p>
-<h2><a class="header" href="#lexical-grammar" id="lexical-grammar">Lexical Grammar</a></h2>
+<h2 id="lexical-grammar"><a class="header" href="#lexical-grammar">Lexical Grammar</a></h2>
 <pre>
 <i id="grammar-input-file">input-file::</i>
    <i><a href="spec/19-grammar.html#grammar-input-element">input-element</a></i>
@@ -10332,8 +10324,8 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
    &amp;   &amp;&amp;   ||   ?   :   ;   =   **=   *=   /=   %=   +=   -=   .=   &lt;&lt;=
    &gt;&gt;=   &amp;=   ^=   |=   ,   ??   &lt;=&gt;   ...   \
 </pre>
-<h2><a class="header" href="#syntactic-grammar" id="syntactic-grammar">Syntactic Grammar</a></h2>
-<h3><a class="header" href="#basic-concepts-1" id="basic-concepts-1">Basic Concepts</a></h3>
+<h2 id="syntactic-grammar"><a class="header" href="#syntactic-grammar">Syntactic Grammar</a></h2>
+<h3 id="basic-concepts-1"><a class="header" href="#basic-concepts-1">Basic Concepts</a></h3>
 <pre>
 <i id="grammar-script">script:</i>
    <i><a href="spec/19-grammar.html#grammar-script-section">script-section</a></i>
@@ -10352,7 +10344,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
 <i id="grammar-text">text:</i>
    arbitrary text not containing any of   <i><a href="spec/19-grammar.html#grammar-start-tag">start-tag</a></i>   sequences
 </pre>
-<h3><a class="header" href="#variables-2" id="variables-2">Variables</a></h3>
+<h3 id="variables-2"><a class="header" href="#variables-2">Variables</a></h3>
 <pre>
 <i id="grammar-function-static-declaration">function-static-declaration:</i>
    static   <i><a href="spec/19-grammar.html#grammar-static-variable-name-list">static-variable-name-list</a></i>   ;
@@ -10374,7 +10366,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
    <i><a href="spec/19-grammar.html#grammar-simple-variable">simple-variable</a></i>
    <i><a href="spec/19-grammar.html#grammar-variable-name-list">variable-name-list</a></i>   ,   <i><a href="spec/19-grammar.html#grammar-simple-variable">simple-variable</a></i>
 </pre>
-<h3><a class="header" href="#expressions-1" id="expressions-1">Expressions</a></h3>
+<h3 id="expressions-1"><a class="header" href="#expressions-1">Expressions</a></h3>
 <pre>
 <i id="grammar-primary-expression">primary-expression:</i>
    <i><a href="spec/19-grammar.html#grammar-variable">variable</a></i>
@@ -10761,7 +10753,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
 <i id="grammar-constant-expression">constant-expression:</i>
    <i><a href="spec/19-grammar.html#grammar-expression">expression</a></i>
 </pre>
-<h3><a class="header" href="#statements-1" id="statements-1">Statements</a></h3>
+<h3 id="statements-1"><a class="header" href="#statements-1">Statements</a></h3>
 <pre>
 <i id="grammar-statement">statement:</i>
    <i><a href="spec/19-grammar.html#grammar-compound-statement">compound-statement</a></i>
@@ -10952,7 +10944,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
 <i id="grammar-unset-statement">unset-statement:</i>
    unset   (   <i><a href="spec/19-grammar.html#grammar-variable-list">variable-list</a></i>   ,<sub>opt</sub>   )   ;
 </pre>
-<h3><a class="header" href="#functions-1" id="functions-1">Functions</a></h3>
+<h3 id="functions-1"><a class="header" href="#functions-1">Functions</a></h3>
 <pre>
 <i id="grammar-function-definition">function-definition:</i>
    <i><a href="spec/19-grammar.html#grammar-function-definition-header">function-definition-header</a></i>   <i><a href="spec/19-grammar.html#grammar-compound-statement">compound-statement</a></i>
@@ -11001,7 +10993,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
 <i id="grammar-default-argument-specifier">default-argument-specifier:</i>
    =   <i><a href="spec/19-grammar.html#grammar-constant-expression">constant-expression</a></i>
 </pre>
-<h3><a class="header" href="#classes-1" id="classes-1">Classes</a></h3>
+<h3 id="classes-1"><a class="header" href="#classes-1">Classes</a></h3>
 <pre>
 <i id="grammar-class-declaration">class-declaration:</i>
    <i><a href="spec/19-grammar.html#grammar-class-modifier">class-modifier</a></i><sub>opt</sub>   class   <i><a href="spec/19-grammar.html#grammar-name">name</a></i>   <i><a href="spec/19-grammar.html#grammar-class-base-clause">class-base-clause</a></i><sub>opt</sub>   <i><a href="spec/19-grammar.html#grammar-class-interface-clause">class-interface-clause</a></i><sub>opt</sub>   {   <i><a href="spec/19-grammar.html#grammar-class-member-declarations">class-member-declarations</a></i><sub>opt</sub>   }
@@ -11087,7 +11079,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
 <i id="grammar-destructor-declaration">destructor-declaration:</i>
    <i><a href="spec/19-grammar.html#grammar-method-modifiers">method-modifiers</a></i>   function   &amp;<sub>opt</sub>   __destruct   (   )   <i><a href="spec/19-grammar.html#grammar-compound-statement">compound-statement</a></i>
 </pre>
-<h3><a class="header" href="#interfaces-1" id="interfaces-1">Interfaces</a></h3>
+<h3 id="interfaces-1"><a class="header" href="#interfaces-1">Interfaces</a></h3>
 <pre>
 <i id="grammar-interface-declaration">interface-declaration:</i>
    interface   <i><a href="spec/19-grammar.html#grammar-name">name</a></i>   <i><a href="spec/19-grammar.html#grammar-interface-base-clause">interface-base-clause</a></i><sub>opt</sub>   {   <i><a href="spec/19-grammar.html#grammar-interface-member-declarations">interface-member-declarations</a></i><sub>opt</sub>   }
@@ -11104,7 +11096,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
    <i><a href="spec/19-grammar.html#grammar-class-const-declaration">class-const-declaration</a></i>
    <i><a href="spec/19-grammar.html#grammar-method-declaration">method-declaration</a></i>
 </pre>
-<h3><a class="header" href="#traits-1" id="traits-1">Traits</a></h3>
+<h3 id="traits-1"><a class="header" href="#traits-1">Traits</a></h3>
 <pre>
 <i id="grammar-trait-declaration">trait-declaration:</i>
    trait   <i><a href="spec/19-grammar.html#grammar-name">name</a></i>   {   <i><a href="spec/19-grammar.html#grammar-trait-member-declarations">trait-member-declarations</a></i><sub>opt</sub>   }
@@ -11150,7 +11142,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
    <i><a href="spec/19-grammar.html#grammar-name">name</a></i>   as   <i><a href="spec/19-grammar.html#grammar-visibility-modifier">visibility-modifier</a></i><sub>opt</sub>   <i><a href="spec/19-grammar.html#grammar-name">name</a></i>
    <i><a href="spec/19-grammar.html#grammar-name">name</a></i>   as   <i><a href="spec/19-grammar.html#grammar-visibility-modifier">visibility-modifier</a></i>   <i><a href="spec/19-grammar.html#grammar-name">name</a></i><sub>opt</sub>
 </pre>
-<h3><a class="header" href="#namespaces-1" id="namespaces-1">Namespaces</a></h3>
+<h3 id="namespaces-1"><a class="header" href="#namespaces-1">Namespaces</a></h3>
 <pre>
 <i id="grammar-namespace-definition">namespace-definition:</i>
    namespace   <i><a href="spec/19-grammar.html#grammar-name">name</a></i>   ;
@@ -11189,7 +11181,7 @@ with a backslash (<code>\</code>), as in <code>\Exception</code>, <code>\PHP_INT
 <i id="grammar-namespace-use-group-clause-2">namespace-use-group-clause-2:</i>
    <i><a href="spec/19-grammar.html#grammar-namespace-function-or-const">namespace-function-or-const</a></i><sub>opt</sub>   <i><a href="spec/19-grammar.html#grammar-namespace-name">namespace-name</a></i>   <i><a href="spec/19-grammar.html#grammar-namespace-aliasing-clause">namespace-aliasing-clause</a></i><sub>opt</sub>
 </pre>
-<h1><a class="header" href="#bibliography" id="bibliography">Bibliography</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bibliography"><a class="header" href="#bibliography">Bibliography</a></h1>
 <p>The following documents are useful references for implementers and users
 of this specification:</p>
 <p>IEC 60559:1989, <em>Binary floating-point arithmetic for microprocessor
@@ -11203,9 +11195,7 @@ IEEE Standard for Binary Floating-Point Arithmetic).</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -11213,49 +11203,34 @@ IEEE Standard for Binary Floating-Point Arithmetic).</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
-        
-        
+
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
         <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
 
         <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
-        
         <script type="text/javascript">
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-        
-        
 
     </body>
 </html>

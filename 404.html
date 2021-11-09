@@ -3,7 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Welcome - PHP Language Specification</title>
+        <title></title>
+        <base href="/">
 
 
         <!-- Custom HTML head -->
@@ -82,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html" class="active">Welcome</a></li><li class="chapter-item expanded "><a href="spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li class="chapter-item expanded "><a href="spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li class="chapter-item expanded "><a href="spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li class="chapter-item expanded "><a href="spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li class="chapter-item expanded "><a href="spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li class="chapter-item expanded "><a href="spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li class="chapter-item expanded "><a href="spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li class="chapter-item expanded "><a href="spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li class="chapter-item expanded "><a href="spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li class="chapter-item expanded "><a href="spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li class="chapter-item expanded "><a href="spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li class="chapter-item expanded "><a href="spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li class="chapter-item expanded "><a href="spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li class="chapter-item expanded "><a href="spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li class="chapter-item expanded "><a href="spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li class="chapter-item expanded "><a href="spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li class="chapter-item expanded "><a href="spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded "><a href="spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li class="chapter-item expanded "><a href="spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li class="chapter-item expanded "><a href="spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li class="chapter-item expanded "><a href="spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li class="chapter-item expanded "><a href="spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li class="chapter-item expanded "><a href="spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li class="chapter-item expanded "><a href="spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li class="chapter-item expanded "><a href="spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li class="chapter-item expanded "><a href="spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li class="chapter-item expanded "><a href="spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li class="chapter-item expanded "><a href="spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li class="chapter-item expanded "><a href="spec/14-classes.html"><strong aria-hidden="true">14.</strong> Classes</a></li><li class="chapter-item expanded "><a href="spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li class="chapter-item expanded "><a href="spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li class="chapter-item expanded "><a href="spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li class="chapter-item expanded "><a href="spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li class="chapter-item expanded "><a href="spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,40 +147,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="php-language-specification"><a class="header" href="#php-language-specification">PHP Language Specification</a></h1>
-<p>The PHP Language Specification intends to provide a complete and concise
-definition of the syntax and semantics of the <a href="https://php.net">PHP programming language</a>.</p>
-<h2 id="colophon"><a class="header" href="#colophon">Colophon</a></h2>
-<p>The PHP Language Specification was initially written in July 2014 by
-Facebook, Inc.</p>
-<p>Facebook has dedicated all copyright to this specification to the public
-domain worldwide under the CC0 Public Domain Dedication located at
-<a href="http://creativecommons.org/publicdomain/zero/1.0/">http://creativecommons.org/publicdomain/zero/1.0/</a>. This specification
-is distributed without any warranty.</p>
-<p>The PHP Language Specification is maintained at <a href="https://github.com/php/php-langspec">https://github.com/php/php-langspec</a>.</p>
-<p><a href="https://phplang.org">phplang.org</a> is Copyright 2019,
-<a href="https://phpcommunity.org">PHP Community Foundation, Inc.</a>.</p>
-<p>The source code files used to generate phplang.org are licensed under the
-<a href="https://opensource.org/licenses/Apache-2.0">Apache License, Version 2.0</a>.
-Original content on phplang.org is licensed under the
-<a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
-<p>The source repository for phplang.org is located at
-<a href="https://github.com/phpcommunity/phplang.org">https://github.com/phpcommunity/phplang.org</a>.</p>
-<!-- Begin Colophon -->
-<!-- This is autogenerated. Do not remove the lines "Begin Colophon" or "End Colophon". -->
-<p>This documentation was generated on 9 November 2021 at 21:15 UTC from
-<a href="https://github.com/php/php-langspec/tree/d06f3e00dc0d5cf9d90fc08d495fa6ec86704db8">php/php-langspec@d06f3e0</a>
-and <a href="https://github.com/phpcommunity/phplang.org/tree/58b47ed8bb303d51666c648caf9794c11e86828c">phpcommunity/phplang.org@58b47ed</a>.</p>
-<!-- End Colophon -->
+                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
+<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
-                            <a rel="next" href="spec/01-introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -188,9 +163,6 @@ and <a href="https://github.com/phpcommunity/phplang.org/tree/58b47ed8bb303d5166
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
-                    <a rel="next" href="spec/01-introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

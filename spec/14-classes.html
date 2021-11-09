@@ -4,13 +4,16 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Classes - PHP Language Specification</title>
-        
+
+
+        <!-- Custom HTML head -->
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
@@ -19,8 +22,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -28,17 +30,14 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="../src/css/style.css">
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -91,7 +90,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -108,11 +106,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">PHP Language Specification</h1>
@@ -121,18 +117,16 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -140,7 +134,6 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -153,8 +146,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#classes" id="classes">Classes</a></h1>
-<h2><a class="header" href="#general" id="general">General</a></h2>
+                        <h1 id="classes"><a class="header" href="#classes">Classes</a></h1>
+<h2 id="general"><a class="header" href="#general">General</a></h2>
 <p>A class is a type that may contain zero or more explicitly declared
 <em>members</em>, which can be any combination of <a href="#constants"><em>class constants</em></a>;
 data members, called <a href="#properties"><em>properties</em></a>; and function members, called
@@ -197,7 +190,7 @@ It is not recommended to use incompatible signatures for overriding methods.</p>
 object. As such, assignment of a handle does not copy the object itself.
 (See <a href="04-basic-concepts.html#cloning-objects">cloning objects</a> for a discussion of shallow and deep copying).</p>
 <p>While PHP supports <em>anonymous class types</em>, such a type cannot be declared using <a href="#class-declarations"><em>class-declaration</em></a>. Instead, it must be specified at the time of instantiation; that is, as part of an <a href="10-expressions.html#the-new-operator"><em>object-creation-expression</em></a>.</p>
-<h2><a class="header" href="#class-declarations" id="class-declarations">Class Declarations</a></h2>
+<h2 id="class-declarations"><a class="header" href="#class-declarations">Class Declarations</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 class-declaration:
@@ -328,7 +321,7 @@ class MyList implements MyCollection
   ...
 }
 </code></pre>
-<h2><a class="header" href="#class-members" id="class-members">Class Members</a></h2>
+<h2 id="class-members"><a class="header" href="#class-members">Class Members</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 class-member-declarations:
@@ -426,7 +419,7 @@ echo &quot;Point count = &quot; . Point::getPointCount() . &quot;\n&quot;;
 $cName = 'Point';
 echo &quot;Point count = &quot; . $cName::getPointCount() . &quot;\n&quot;;
 </code></pre>
-<h2><a class="header" href="#dynamic-members" id="dynamic-members">Dynamic Members</a></h2>
+<h2 id="dynamic-members"><a class="header" href="#dynamic-members">Dynamic Members</a></h2>
 <p>Initially, the instance only has properties that are
 declared explicitly in its class’s definition. However, properties can be
 added to and removed from the instance at runtime. Static properties of a
@@ -489,7 +482,7 @@ Widget::sMethod(NULL, 1.234);
 <p>and the call to <code>sMethod</code> is treated as if it were</p>
 <pre><code class="language-PHP">Widget::__callStatic('sMethod', array(NULL, 1.234))
 </code></pre>
-<h2><a class="header" href="#constants" id="constants">Constants</a></h2>
+<h2 id="constants"><a class="header" href="#constants">Constants</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 const-declaration:
@@ -544,7 +537,7 @@ class Automobile
 }
 $col = Automobile::DEFAULT_COLOR;
 </code></pre>
-<h2><a class="header" href="#properties" id="properties">Properties</a></h2>
+<h2 id="properties"><a class="header" href="#properties">Properties</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 property-declaration:
@@ -619,7 +612,7 @@ case, the property is actually removed from that instance.</p>
 
 }
 </code></pre>
-<h2><a class="header" href="#methods" id="methods">Methods</a></h2>
+<h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 method-declaration:
@@ -670,7 +663,7 @@ derived class.</p>
 <p><strong>Examples</strong></p>
 <p>See <a href="#class-members">class members</a> for examples of instance and static methods. See <a href="#class-declarations">class declarations</a> for
 examples of abstract methods and their subsequent definitions.</p>
-<h2><a class="header" href="#constructors" id="constructors">Constructors</a></h2>
+<h2 id="constructors"><a class="header" href="#constructors">Constructors</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 constructor-declaration:
@@ -739,7 +732,7 @@ class MyRangeException extends Exception
   ...
 }
 </code></pre>
-<h2><a class="header" href="#destructors" id="destructors">Destructors</a></h2>
+<h2 id="destructors"><a class="header" href="#destructors">Destructors</a></h2>
 <p><strong>Syntax</strong></p>
 <!-- GRAMMAR
 destructor-declaration:
@@ -771,7 +764,7 @@ level of the hierarchy need have a destructor. A <code>private</code> destructor
 inhibits destructor calls from derived classes.</p>
 <p><strong>Examples</strong></p>
 <p>See <a href="#constructors">constructors section</a> for an example of a constructor and destructor.</p>
-<h2><a class="header" href="#inheritance" id="inheritance">Inheritance</a></h2>
+<h2 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h2>
 <p>When a class <code>extends</code> another class it can <em>override</em> members of the parent class by declaring a
 member with the same name. Only properties and methods can be overridden.</p>
 <p>Visibility of the overridden member can not be made more restrictive, only more permissive (from <code>private</code> to <code>protected</code> to <code>public</code>).</p>
@@ -782,8 +775,8 @@ with the signature of the original method, by the same rule as if the original m
 and the overriding method belonged to an implementation.
 If an implemented method is overridden with an incompatible method, a non-fatal error is issued, however the
 override is still accepted by the engine. The use of incompatible overrides is not recommended.</p>
-<h2><a class="header" href="#methods-with-special-semantics" id="methods-with-special-semantics">Methods with Special Semantics</a></h2>
-<h3><a class="header" href="#general-1" id="general-1">General</a></h3>
+<h2 id="methods-with-special-semantics"><a class="header" href="#methods-with-special-semantics">Methods with Special Semantics</a></h2>
+<h3 id="general-1"><a class="header" href="#general-1">General</a></h3>
 <p>If a class contains a definition for a method having one of the
 following names, that method must have the prescribed visibility,
 signature, and semantics:</p>
@@ -809,7 +802,7 @@ beginning with <code>__</code> unless it is one of the special methods described
 <p>Note that while syntax definitions below use the <a href="#methods">non-abstract syntax</a> in the method definition, the special methods,
 like any methods, can be declared <code>abstract</code>. In this case the definition does not actually define a special method but defines that
 an overriding concrete class must declare one. Nevertheless, the constraints on special methods must still be followed in such definitions.</p>
-<h3><a class="header" href="#method-__call" id="method-__call">Method <code>__call</code></a></h3>
+<h3 id="method-__call"><a class="header" href="#method-__call">Method <code>__call</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i> function  __call  (  <i>$name</i>  ,  <i>$arguments</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -852,7 +845,7 @@ restrictions on the content of the dynamic method name designated by
 $obj = new Widget;
 $obj-&gt;iMethod(10, TRUE, &quot;abc&quot;); // $obj-&gt;__call('iMethod', array(...))
 </code></pre>
-<h3><a class="header" href="#method-__callstatic" id="method-__callstatic">Method <code>__callStatic</code></a></h3>
+<h3 id="method-__callstatic"><a class="header" href="#method-__callstatic">Method <code>__callStatic</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __callStatic  (  <i>$name</i>  ,  <i>$arguments</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -894,7 +887,7 @@ restrictions on the spelling of the dynamic method name designated by
 
 Widget::sMethod(NULL, 1.234); // Widget::__callStatic('sMethod', array(...))
 </code></pre>
-<h3><a class="header" href="#method-__clone" id="method-__clone">Method <code>__clone</code></a></h3>
+<h3 id="method-__clone"><a class="header" href="#method-__clone">Method <code>__clone</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __clone  (  )  <i>compound-statement</i>
@@ -965,7 +958,7 @@ class Point
 $p1 = new Point;  // created using the constructor
 $p2 = clone $p1;  // created by cloning
 </code></pre>
-<h3><a class="header" href="#method-__debuginfo" id="method-__debuginfo">Method <code>__debugInfo</code></a></h3>
+<h3 id="method-__debuginfo"><a class="header" href="#method-__debuginfo">Method <code>__debugInfo</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i> function  __debugInfo  (  )   <i>compound-statement</i>
@@ -1004,7 +997,7 @@ object(File)#1 {
   etc...
 */
 </code></pre>
-<h3><a class="header" href="#method-__get" id="method-__get">Method <code>__get</code></a></h3>
+<h3 id="method-__get"><a class="header" href="#method-__get">Method <code>__get</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i> function  &<sub>opt</sub>  __get  (  <i>$name</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1076,7 +1069,7 @@ performed per-property, and the special method is called only once per property 
 <p>While the <a href="09-lexical-structure.html#names"><em>name</em></a> source token has a prescribed syntax, there are no
 restrictions on the spelling of the dynamic property name designated by
 <code>$name</code>. Any source character is allowed here.</p>
-<h3><a class="header" href="#method-__invoke" id="method-__invoke">Method <code>__invoke</code></a></h3>
+<h3 id="method-__invoke"><a class="header" href="#method-__invoke">Method <code>__invoke</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __invoke  ( <i>parameter-declaration-list<sub>opt</sub></i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1104,7 +1097,7 @@ $c = new C;
 is_callable($c) // returns TRUE
 $r = $c(123);   // becomes $r = $c-&gt;__invoke(123);
 </code></pre>
-<h3><a class="header" href="#method-__isset" id="method-__isset">Method <code>__isset</code></a></h3>
+<h3 id="method-__isset"><a class="header" href="#method-__isset">Method <code>__isset</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __isset  (  <i>$name</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1146,7 +1139,7 @@ restrictions on the spelling of the dynamic property name designated by
 </code></pre>
 <p><strong>Implementation Notes</strong></p>
 <p>See the Implementation Notes for <a href="#method-__get"><code>__get</code></a>.</p>
-<h3><a class="header" href="#method-__set" id="method-__set">Method <code>__set</code></a></h3>
+<h3 id="method-__set"><a class="header" href="#method-__set">Method <code>__set</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __set  (  <i>$name</i>  ,  <i>$value</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1198,7 +1191,7 @@ $p-&gt;thing = new X;  // set dynamic property &quot;thing&quot; to instance wit
 </code></pre>
 <p><strong>Implementation Notes</strong></p>
 <p>See the Implementation Notes for <a href="#method-__get"><code>__get</code></a>.</p>
-<h3><a class="header" href="#method-__set_state" id="method-__set_state">Method <code>__set_state</code></a></h3>
+<h3 id="method-__set_state"><a class="header" href="#method-__set_state">Method <code>__set_state</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __set_state  ( array  <i>$properties</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1296,7 +1289,7 @@ $v = var_export($d, TRUE);
 eval('$z = ' . $v . &quot;;&quot;);
 var_dump($z);
 </code></pre>
-<h3><a class="header" href="#method-__sleep" id="method-__sleep">Method <code>__sleep</code></a></h3>
+<h3 id="method-__sleep"><a class="header" href="#method-__sleep">Method <code>__sleep</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __sleep  ( )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1359,7 +1352,7 @@ $p = new Point(-1, 0);
 $s = serialize($p);   // serialize Point(-1,0)
 $v = unserialize($s); // unserialize Point(-1,0)
 </code></pre>
-<h3><a class="header" href="#method-__tostring" id="method-__tostring">Method <code>__toString</code></a></h3>
+<h3 id="method-__tostring"><a class="header" href="#method-__tostring">Method <code>__toString</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __toString  ( )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1405,7 +1398,7 @@ class MyRangeException extends Exception
   ...
 }
 </code></pre>
-<h3><a class="header" href="#method-__unset" id="method-__unset">Method <code>__unset</code></a></h3>
+<h3 id="method-__unset"><a class="header" href="#method-__unset">Method <code>__unset</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __unset  (  <i>$name</i>  )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1447,7 +1440,7 @@ restrictions on the spelling of the dynamic property name designated by
 </code></pre>
 <p><strong>Implementation Notes</strong></p>
 <p>See the Implementation Notes for <a href="#method-__get"><code>__get</code></a>.</p>
-<h3><a class="header" href="#method-__wakeup" id="method-__wakeup">Method <code>__wakeup</code></a></h3>
+<h3 id="method-__wakeup"><a class="header" href="#method-__wakeup">Method <code>__wakeup</code></a></h3>
 <p><strong>Syntax</strong></p>
 <pre>
   <i>method-modifiers</i>  function  __wakeup  ( )  <i>return-type<sub>opt</sub></i>  <i>compound-statement</i>
@@ -1473,7 +1466,7 @@ by <code>__wakeup</code> when that <code>Point</code> is unserialized. This mean
 <code>__wakeup</code> must emulate the constructor, as appropriate.</p>
 <p><strong>Examples</strong></p>
 <p>See <a href="#method-__sleep"><code>__sleep</code></a>.</p>
-<h2><a class="header" href="#serialization" id="serialization">Serialization</a></h2>
+<h2 id="serialization"><a class="header" href="#serialization">Serialization</a></h2>
 <p>In PHP, variables can be converted into some external form suitable for
 use in file storage or inter-program communication. The process of
 converting to this form is known as <em>serialization</em> while that of
@@ -1604,8 +1597,8 @@ $v = unserialize($s);
 </code></pre>
 <p>Function <code>unserialize</code> takes an optional second argument, which specifies an array of trusted class names as strings. Objects found in the data stream whose type name is not in this trusted name list are converted to objects of type <a href="#class-__php_incomplete_class"><code>__PHP_Incomplete_Class</code></a>.</p>
 <p>Any attempt to serialize an object having an anonymous class type results in an instance of type <code>Exception</code> being thrown.</p>
-<h2><a class="header" href="#predefined-classes" id="predefined-classes">Predefined Classes</a></h2>
-<h3><a class="header" href="#class-closure" id="class-closure">Class <code>Closure</code></a></h3>
+<h2 id="predefined-classes"><a class="header" href="#predefined-classes">Predefined Classes</a></h2>
+<h3 id="class-closure"><a class="header" href="#class-closure">Class <code>Closure</code></a></h3>
 <p>The predefined class <a href="http://php.net/manual/class.closure.php"><code>Closure</code></a> is used
 for representing an <a href="13-functions.html#anonymous-functions">anonymous function</a>. It
 cannot be instantiated except by the Engine, as described below.
@@ -1690,7 +1683,7 @@ following, shown as pseudo code:</p>
 <p>It is possible for all three dynamic properties to be absent, in which
 case, the <code>Closure</code> object is empty.</p>
 <p>Closure objects can not be serialized or unserialized.</p>
-<h3><a class="header" href="#class-generator" id="class-generator">Class <code>Generator</code></a></h3>
+<h3 id="class-generator"><a class="header" href="#class-generator">Class <code>Generator</code></a></h3>
 <p>This class supports the <a href="10-expressions.html#yield-operator"><code>yield</code> operator</a>. This class cannot be
 instantiated directly. It is defined, as follows:</p>
 <pre><code class="language-PHP">class Generator implements Iterator
@@ -1717,7 +1710,7 @@ instantiated directly. It is defined, as follows:</p>
 <tr><td><code>valid</code></td><td>An implementation of the instance method <a href="15-interfaces.html#interface-iterator"><code>Iterator::valid</code></a>.</td></tr>
 </tbody></table>
 <p>Generator objects can not be serialized or unserialized.</p>
-<h3><a class="header" href="#class-__php_incomplete_class" id="class-__php_incomplete_class">Class <code>__PHP_Incomplete_Class</code></a></h3>
+<h3 id="class-__php_incomplete_class"><a class="header" href="#class-__php_incomplete_class">Class <code>__PHP_Incomplete_Class</code></a></h3>
 <p>There are certain circumstances in which a program can generate an
 instance of this class, which on its own contains no members. One
 involves an attempt to <a href="#serialization">unserialize</a> a string that
@@ -1749,15 +1742,15 @@ following code, but does not contain a definition of the class Point:</p>
 </code></pre>
 <p>Object of this class can be serialized, however, any attempt to call its method or access its property
 for any other operation except serialization will result in a fatal error.</p>
-<h3><a class="header" href="#class-stdclass" id="class-stdclass">Class <code>stdClass</code></a></h3>
+<h3 id="class-stdclass"><a class="header" href="#class-stdclass">Class <code>stdClass</code></a></h3>
 <p>This class contains no members. It can be instantiated and used as a
 base class. An instance of this type is automatically created when a
 non-object is <a href="08-conversions.html#converting-to-object-type">converted to an object</a>,
 or the <a href="10-expressions.html#member-access-operator">member selection operator</a>
 is applied to <code>NULL</code>, <code>FALSE</code>, or an empty string.</p>
-<h3><a class="header" href="#predefined-error-classes" id="predefined-error-classes">Predefined Error Classes</a></h3>
+<h3 id="predefined-error-classes"><a class="header" href="#predefined-error-classes">Predefined Error Classes</a></h3>
 <p>PHP has a number of predefined classes that are used for error reporting. All these classes extend the base Error class.</p>
-<h4><a class="header" href="#class-error" id="class-error">Class <code>Error</code></a></h4>
+<h4 id="class-error"><a class="header" href="#class-error">Class <code>Error</code></a></h4>
 <p>This class is the base class for all internal PHP error exceptions. It is defined, as follows:</p>
 <pre><code class="language-PHP">class Error implements Throwable
 {
@@ -1775,19 +1768,19 @@ is applied to <code>NULL</code>, <code>FALSE</code>, or an empty string.</p>
 <p>For information about the base interface, see <a href="15-interfaces.html#interface-throwable">Throwable</a>.
 Note that the methods from Throwable are implemented as <code>final</code> in the Error class, which means
 the extending class can not override them.</p>
-<h4><a class="header" href="#class-arithmeticerror" id="class-arithmeticerror">Class <code>ArithmeticError</code></a></h4>
+<h4 id="class-arithmeticerror"><a class="header" href="#class-arithmeticerror">Class <code>ArithmeticError</code></a></h4>
 <p>An instance of this class is thrown when an error occurs during certain mathematical operations. It is defined, as follows:</p>
 <pre><code class="language-PHP">class ArithmeticError extends Error
 {
 }
 </code></pre>
-<h4><a class="header" href="#class-assertionerror" id="class-assertionerror">Class <code>AssertionError</code></a></h4>
+<h4 id="class-assertionerror"><a class="header" href="#class-assertionerror">Class <code>AssertionError</code></a></h4>
 <p>An instance of this class is thrown when an assertion made via the intrinsic <code>assert</code> fails. The class type is defined, as follows:</p>
 <pre><code class="language-PHP">class AssertionError extends Error
 {
 }
 </code></pre>
-<h4><a class="header" href="#class-divisionbyzeroerror" id="class-divisionbyzeroerror">Class <code>DivisionByZeroError</code></a></h4>
+<h4 id="class-divisionbyzeroerror"><a class="header" href="#class-divisionbyzeroerror">Class <code>DivisionByZeroError</code></a></h4>
 <p>An instance of this class is thrown when an attempt is made to divide a number by zero, e.g. when using the remainder operators (<a href="10-expressions.html#multiplicative-operators"><code>%</code></a> and <a href="10-expressions.html#compound-assignment"><code>%=</code></a>).
 Note that this happens only for integer operations, regular float division (<code>/</code>) produces a non-fatal error instead.
 The class type is defined, as follows:</p>
@@ -1795,13 +1788,13 @@ The class type is defined, as follows:</p>
 {
 }
 </code></pre>
-<h4><a class="header" href="#class-parseerror" id="class-parseerror">Class <code>ParseError</code></a></h4>
+<h4 id="class-parseerror"><a class="header" href="#class-parseerror">Class <code>ParseError</code></a></h4>
 <p>An instance of this class is thrown when an error occurs while parsing PHP code (such as when calling the intrinsic  <a href="10-expressions.html#eval"><code>eval</code></a>). It is defined, as follows:</p>
 <pre><code class="language-PHP">class ParseError extends Error
 {
 }
 </code></pre>
-<h4><a class="header" href="#class-typeerror" id="class-typeerror">Class <code>TypeError</code></a></h4>
+<h4 id="class-typeerror"><a class="header" href="#class-typeerror">Class <code>TypeError</code></a></h4>
 <p>An instance of this class is thrown when any of the following occurs:</p>
 <ul>
 <li>The type of an argument being passed to a function does not match its corresponding parameter’s declared type.</li>
@@ -1819,17 +1812,13 @@ The class type is defined, as follows:</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../spec/13-functions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../spec/15-interfaces.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -1837,49 +1826,35 @@ The class type is defined, as follows:</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../spec/13-functions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../spec/15-interfaces.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
-        
-        
+
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

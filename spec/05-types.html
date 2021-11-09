@@ -4,13 +4,16 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Types - PHP Language Specification</title>
-        
+
+
+        <!-- Custom HTML head -->
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
@@ -19,8 +22,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -28,17 +30,14 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="../src/css/style.css">
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -91,7 +90,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -108,11 +106,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">PHP Language Specification</h1>
@@ -121,18 +117,16 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/php/php-langspec" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -140,7 +134,6 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -153,8 +146,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#types" id="types">Types</a></h1>
-<h2><a class="header" href="#general" id="general">General</a></h2>
+                        <h1 id="types"><a class="header" href="#types">Types</a></h1>
+<h2 id="general"><a class="header" href="#general">General</a></h2>
 <p>The meaning of a value is determined by its <em>type</em>. PHP’s types are
 categorized as <em>scalar types</em> and <em>composite types</em>. The scalar types
 are <a href="#the-boolean-type">Boolean</a>, <a href="#the-integer-type">integer</a>, <a href="#the-floating-point-type">floating point</a>, <a href="#the-string-type">string</a>, and <a href="#the-null-type">null</a>. The composite types are <a href="#the-array-type">array</a>,
@@ -173,8 +166,8 @@ variable’s type is determined at runtime by the value it contains.
 The same variable can contain values of different types at different times.</p>
 <p>Useful library functions for interrogating and using type information
 include <a href="http://www.php.net/gettype"><code>gettype</code></a>, <a href="http://www.php.net/is_type"><code>is_type</code></a>, <a href="http://www.php.net/settype"><code>settype</code></a>, and <a href="http://www.php.net/var_dump"><code>var_dump</code></a>.</p>
-<h2><a class="header" href="#scalar-types" id="scalar-types">Scalar Types</a></h2>
-<h3><a class="header" href="#general-1" id="general-1">General</a></h3>
+<h2 id="scalar-types"><a class="header" href="#scalar-types">Scalar Types</a></h2>
+<h3 id="general-1"><a class="header" href="#general-1">General</a></h3>
 <p>The integer and floating-point types are collectively known as
 <em>arithmetic types</em>. The library function <a href="http://www.php.net/is_numeric"><code>is_numeric</code></a> indicates if
 a given value is a number or a numeric <a href="#the-string-type">string</a>.</p>
@@ -185,14 +178,14 @@ To test for <code>NULL</code>, use <a href="http://www.php.net/is_null"><code>is
 convertible to scalar types (this is currently available only to internal classes).
 Such object types together with scalar types are called <em>scalar-compatible types</em>.
 Note that the same object type may be scalar-compatible for one operation but not for another.</p>
-<h3><a class="header" href="#the-boolean-type" id="the-boolean-type">The Boolean Type</a></h3>
+<h3 id="the-boolean-type"><a class="header" href="#the-boolean-type">The Boolean Type</a></h3>
 <p>The Boolean type is <code>bool</code>, for which the name <code>boolean</code> is a synonym. This
 type is capable of storing two distinct values, which correspond to the
 Boolean values <a href="06-constants.html#core-predefined-constants"><code>true</code> and <code>false</code></a>, respectively.
 The internal representation of this type and its values is unspecified.</p>
 <p>The library function <a href="http://www.php.net/is_bool"><code>is_bool</code></a> indicates if a given value has type
 <code>bool</code>.</p>
-<h3><a class="header" href="#the-integer-type" id="the-integer-type">The Integer Type</a></h3>
+<h3 id="the-integer-type"><a class="header" href="#the-integer-type">The Integer Type</a></h3>
 <p>There is one integer type, <code>int</code>, for which the name <code>integer</code> is a synonym.
 This type is binary, signed, and uses twos-complement representation for
 negative values. The range of values that can be stored is
@@ -211,7 +204,7 @@ cannot be represented as an integer. Examples include the following:</p>
 characteristics about type <code>int</code>.</p>
 <p>The library function <a href="http://www.php.net/is_int"><code>is_int</code></a> indicates if a given value has type
 <code>int</code>.</p>
-<h3><a class="header" href="#the-floating-point-type" id="the-floating-point-type">The Floating-Point Type</a></h3>
+<h3 id="the-floating-point-type"><a class="header" href="#the-floating-point-type">The Floating-Point Type</a></h3>
 <p>There is one floating-point type, <code>float</code>, for which the names <code>double</code> and
 <code>real</code> are synonyms. The <code>float</code> type must support at least the range and
 precision of IEEE 754 64-bit double-precision representation.</p>
@@ -221,7 +214,7 @@ floating-point value is finite. The library function <a href="http://www.php.net
 indicates if a given floating-point value is infinite. The library
 function <a href="http://www.php.net/is_nan"><code>is_nan</code></a> indicates if a given floating-point value is a
 <code>NaN</code>.</p>
-<h3><a class="header" href="#the-string-type" id="the-string-type">The String Type</a></h3>
+<h3 id="the-string-type"><a class="header" href="#the-string-type">The String Type</a></h3>
 <p>A string is a set of contiguous bytes that represents a sequence of zero
 or more characters.</p>
 <p>Conceptually, a string can be considered as an <a href="#the-array-type">array</a> of
@@ -285,25 +278,25 @@ leading zero, rather than as octal 377).</p>
 assignment, which involves the simple assignment <a href="10-expressions.html#simple-assignment">operator =</a>.</p>
 <p>The library function <a href="http://www.php.net/is_string"><code>is_string</code></a> indicates if a given value has
 type string.</p>
-<h3><a class="header" href="#the-null-type" id="the-null-type">The Null Type</a></h3>
+<h3 id="the-null-type"><a class="header" href="#the-null-type">The Null Type</a></h3>
 <p>The null type has only one possible value, <a href="06-constants.html#core-predefined-constants"><code>NULL</code></a>. The representation
 of this type and its value is unspecified.</p>
 <p>The library function <a href="http://www.php.net/is_null"><code>is_null</code></a> indicates if a given value is <code>NULL</code>.</p>
-<h2><a class="header" href="#composite-types" id="composite-types">Composite Types</a></h2>
-<h3><a class="header" href="#the-array-type" id="the-array-type">The Array Type</a></h3>
+<h2 id="composite-types"><a class="header" href="#composite-types">Composite Types</a></h2>
+<h3 id="the-array-type"><a class="header" href="#the-array-type">The Array Type</a></h3>
 <p>An array is a data structure that contains a collection of zero or more
 elements whose values are accessed through keys that are of type <code>int</code> or
 <code>string</code>. See more details in <a href="12-arrays.html#arrays">arrays chapter</a>.</p>
 <p>The library function <a href="http://www.php.net/is_array"><code>is_array</code></a> indicates if a given value is an
 array.</p>
-<h3><a class="header" href="#objects" id="objects">Objects</a></h3>
+<h3 id="objects"><a class="header" href="#objects">Objects</a></h3>
 <p>An <em>object</em> is an instance of a <a href="14-classes.html#classes">class</a>. Each distinct
 <a href="14-classes.html#class-declarations"><em>class-declaration</em></a> defines a new class type, and each class
 type is an object type. The representation of object types is unspecified.</p>
 <p>The library function <a href="http://www.php.net/is_object"><code>is_object</code></a> indicates if a given value is an
 object, and the library function
 <a href="http://php.net/manual/function.get-class.php"><code>get_class</code></a> indicates the name of an object’s class.</p>
-<h3><a class="header" href="#resources" id="resources">Resources</a></h3>
+<h3 id="resources"><a class="header" href="#resources">Resources</a></h3>
 <p>A <a href="http://php.net/manual/language.types.resource.php"><em>resource</em></a>
 is a descriptor to some sort of external entity. Examples include
 files, databases, and network sockets.</p>
@@ -319,17 +312,13 @@ resource, and the library function
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../spec/04-basic-concepts.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../spec/06-constants.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -337,49 +326,35 @@ resource, and the library function
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../spec/04-basic-concepts.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../spec/06-constants.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
-        
-        
+
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>
