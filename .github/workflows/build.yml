@@ -8,8 +8,8 @@ on:
       - "main"
 
 jobs:
-  deploy:
-    name: "Deploy to GitHub Pages"
+  build-and-deploy:
+    name: "Build and Deploy"
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
@@ -42,3 +42,9 @@ jobs:
         run: |
           mdbook build
           cp CNAME book/CNAME
+
+      - name: "Deploy to GitHub Pages"
+        uses: "JamesIves/github-pages-deploy-action@4.1.5"
+        with:
+          branch: "gh-pages"
+          folder: "book"
