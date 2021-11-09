@@ -1,0 +1,26 @@
+# GitHub Actions Documentation: https://docs.github.com/en/actions
+
+name: "build"
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  deploy:
+    name: "Deploy to GitHub Pages"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Install mdbook"
+        run: "cargo install mdbook"
+
+      - name: "Build TOC and Colophon"
+        run: |
+          php tools/toc.php
+          php tools/colophon.php
+
+      - name: "Build phplang.org"
+        run: |
+          mdbook build
+          cp CNAME book/CNAME
