@@ -34,6 +34,6 @@ git submodule update --recursive --remote
 
 ## Deploying to GitHub Pages
 
-TravisCI handles the deployment to GitHub Pages automatically:
-
-https://github.com/phpcommunity/phplang.org/blob/20448b598f0f0c391fc4a86619f32a53350f9cdc/.travis.yml#L27-L41
+GitHub Actions handles the deployment to GitHub Pages automatically. See
+[the `build.yml` workflow](https://github.com/phpcommunity/phplang.org/blob/main/.github/workflows/build.yml),
+for more information.
