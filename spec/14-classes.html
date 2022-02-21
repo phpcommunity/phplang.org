@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -821,7 +821,7 @@ is used to call an instance method that is not visible.</p>
 <p>While <code>__call</code> can be called explicitly, the two scenarios do not
 necessarily produce the same result. Consider the expression <code>p-&gt;m(...)</code>,
 where <code>p</code> is an instance and <code>m</code> is an instance-method name. If <code>m</code> is the
-name of a visible method, <code>p-&gt;m(...)</code> does not result in <code>__call</code>‘s being
+name of a visible method, <code>p-&gt;m(...)</code> does not result in <code>__call</code>’s being
 called. Instead, the visible method is used. On the other hand, the
 expression <code>p-&gt;__call('m',array(...))</code> always calls the named dynamic
 method, ignoring the fact that a visible method having the same name
@@ -863,7 +863,7 @@ is used to call a static method that is not visible.</p>
 <p>While <code>__callStatic</code> can be called explicitly, the two scenarios do not
 necessarily produce the same result. Consider the expression <code>C::m(...)</code>,
 where <code>C</code> is a class and <code>m</code> is a static-method name. If <code>m</code> is the name of a
-visible method, <code>C::m(...)</code> does not result in <code>__callStatic</code>‘s being
+visible method, <code>C::m(...)</code> does not result in <code>__callStatic</code>’s being
 called. Instead, the visible method is used. On the other hand, the
 expression <code>C::__callStatic('m',array(...))</code> always calls the named
 dynamic method, ignoring the fact that a static visible method having
@@ -1013,7 +1013,7 @@ is used in a non-lvalue context and the named property is not visible.</p>
 <p>While <code>__get</code> can be called explicitly, the two scenarios do not
 necessarily produce the same result. Consider the expression
 <code>$v = $p-&gt;m</code>, where <code>p</code> is an instance and <code>m</code> is a property name. If <code>m</code> is
-the name of a visible property, <code>p-&gt;m</code> does not result in <code>__get</code>‘s being
+the name of a visible property, <code>p-&gt;m</code> does not result in <code>__get</code>’s being
 called. Instead, the visible property is used. On the other hand, the
 expression <code>p-&gt;__get('m')</code> always gets the value of the named dynamic
 property, ignoring the fact that a visible property having the same name
@@ -1156,7 +1156,7 @@ visible.</p>
 <p>While <code>__set</code> can be called explicitly, the two scenarios
 do not necessarily produce the same result. Consider the expression
 <code>p-&gt;m = 5</code>, where <code>p</code> is an instance and <code>m</code> is a property name. If <code>m</code> is the
-name of a visible property, <code>p-&gt;m</code> does not result in <code>__set</code>‘s being
+name of a visible property, <code>p-&gt;m</code> does not result in <code>__set</code>’s being
 called. Instead, the visible property is used. On the other hand, the
 expression <code>p-&gt;__set('m',5)</code> always sets the value of the named dynamic
 property, ignoring the fact that a visible property having the same name

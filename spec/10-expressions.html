@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -1111,11 +1111,11 @@ representation of <em>member-name</em>. The value is that of the property, and i
 modifiable lvalue if <em>dereferencable-expression</em> is a modifiable lvalue.</p>
 <p>When the <code>-&gt;</code> operator is used in a modifiable lvalue context and <em>member-name</em>
 designate a property that is not visible, the property is treated as a
-<a href="14-classes.html#dynamic-members">dynamic property</a>. If <em>dereferencable-expression</em>‘s class
+<a href="14-classes.html#dynamic-members">dynamic property</a>. If <em>dereferencable-expression</em>’s class
 type defines a <a href="14-classes.html#method-__set"><code>__set</code> method</a>, it is called to store the
 property’s value. When the <code>-&gt;</code> operator is used in a non-lvalue context
 and <em>member-name</em> designate a property that is not visible, the property
-is treated as a dynamic property. If <em>dereferencable-expression</em>‘s
+is treated as a dynamic property. If <em>dereferencable-expression</em>’s
 class type defines a <a href="14-classes.html#method-__get"><code>__get</code> method</a>,
 it is called to retrieve the property’s value.</p>
 <p>If <em>dereferencable-expression</em> is <code>NULL</code>, <code>FALSE</code>, or an empty string, an expression
@@ -1193,11 +1193,11 @@ postfix-decrement-expression:
    <i><a href="#grammar-variable">variable</a></i>   --
 </pre>
 <p><strong>Constraints</strong></p>
-<p>The operand of the postfix ++ and -- operators must be a modifiable
+<p>The operand of the postfix ++ and – operators must be a modifiable
 lvalue that has scalar-compatible type.</p>
 <p><strong>Semantics</strong></p>
 <p>These operators behave like their <a href="#prefix-increment-and-decrement-operators">prefix counterparts</a> except
-that the value of a postfix ++ or -- expression is the value before any
+that the value of a postfix ++ or – expression is the value before any
 increment or decrement takes place.</p>
 <p><strong>Examples</strong></p>
 <pre><code class="language-PHP">$i = 10; $j = $i-- + 100;   // old value of $i (10) is added to 100
@@ -1241,7 +1241,7 @@ operand’s value.</p>
 <p>For a prefix <code>++</code> or <code>--</code> operator used with a Boolean-valued operand, there
 is no side effect, and the result is the operand’s value.</p>
 <p><em>NULL-valued Operands</em></p>
-<p>For a prefix -- operator used with a <code>NULL</code>-valued operand, there is no
+<p>For a prefix – operator used with a <code>NULL</code>-valued operand, there is no
 side effect, and the result is the operand’s value. For a prefix <code>++</code>
 operator used with a <code>NULL</code>-valued operand, the side effect is that the
 operand’s type is changed to int, the operand’s value is set to zero,
@@ -1265,7 +1265,7 @@ characters, for a prefix <code>++</code> operator, the operand is considered to 
 representation of a base-36 number (i.e., with digits 0–9 followed by A–Z or a–z) in
 which letter case is ignored for value purposes. The right-most digit is
 incremented by 1. For the digits 0–8, that means going to 1–9. For the
-letters “A”–”Y” (or “a”–”y”), that means going to “B”–”Z” (or “b”–”z”).
+letters “A”–“Y” (or “a”–“y”), that means going to “B”–“Z” (or “b”–“z”).
 For the digit 9, the digit becomes 0, and the carry is added to the next
 left-most digit, and so on. For the digit “Z” (or “z”), the resulting
 string has an extra digit “A” (or “a”) appended. For example, when
@@ -1952,15 +1952,15 @@ comparing arrays.</p>
 <p>The following table shows the result for comparison of different types, with the left
 operand displayed vertically and the right displayed horizontally.
 The conversions are performed according to <a href="08-conversions.html">type conversion rules</a>.</p>
-<table><thead><tr><th align="left"></th><th align="center">NULL</th><th align="center">bool</th><th align="right">int</th><th align="center">float</th><th align="center">string</th><th align="center">array</th><th align="center">object</th><th align="center">resource</th></tr></thead><tbody>
-<tr><td align="left">NULL</td><td align="center">=</td><td align="center">-&gt;</td><td align="right">-&gt;</td><td align="center">-&gt;</td><td align="center">-&gt;</td><td align="center">-&gt;</td><td align="center">&lt;</td><td align="center">&lt;</td></tr>
-<tr><td align="left">bool</td><td align="center">&lt;-</td><td align="center">1</td><td align="right">&lt;-</td><td align="center">&lt;-</td><td align="center">&lt;-</td><td align="center">&lt;-</td><td align="center">&lt;-</td><td align="center">&lt;-</td></tr>
-<tr><td align="left">int</td><td align="center">&lt;-</td><td align="center">-&gt;</td><td align="right">2</td><td align="center">2</td><td align="center">&lt;-</td><td align="center">&lt;</td><td align="center">3</td><td align="center">&lt;-</td></tr>
-<tr><td align="left">float</td><td align="center">&lt;-</td><td align="center">-&gt;</td><td align="right">2</td><td align="center">2</td><td align="center">&lt;-</td><td align="center">&lt;</td><td align="center">3</td><td align="center">&lt;-</td></tr>
-<tr><td align="left">string</td><td align="center">&lt;-</td><td align="center">-&gt;</td><td align="right">-&gt;</td><td align="center">-&gt;</td><td align="center">2, 4</td><td align="center">&lt;</td><td align="center">3</td><td align="center">2</td></tr>
-<tr><td align="left">array</td><td align="center">&lt;-</td><td align="center">-&gt;</td><td align="right">&gt;</td><td align="center">&gt;</td><td align="center">&gt;</td><td align="center">5</td><td align="center">3</td><td align="center">&gt;</td></tr>
-<tr><td align="left">object</td><td align="center">&gt;</td><td align="center">-&gt;</td><td align="right">3</td><td align="center">3</td><td align="center">3</td><td align="center">3</td><td align="center">6</td><td align="center">3</td></tr>
-<tr><td align="left">resource</td><td align="center">&gt;</td><td align="center">-&gt;</td><td align="right">-&gt;</td><td align="center">-&gt;</td><td align="center">2</td><td align="center">&lt;</td><td align="center">3</td><td align="center">2</td></tr>
+<table><thead><tr><th style="text-align: left"></th><th style="text-align: center">NULL</th><th style="text-align: center">bool</th><th style="text-align: right">int</th><th style="text-align: center">float</th><th style="text-align: center">string</th><th style="text-align: center">array</th><th style="text-align: center">object</th><th style="text-align: center">resource</th></tr></thead><tbody>
+<tr><td style="text-align: left">NULL</td><td style="text-align: center">=</td><td style="text-align: center">-&gt;</td><td style="text-align: right">-&gt;</td><td style="text-align: center">-&gt;</td><td style="text-align: center">-&gt;</td><td style="text-align: center">-&gt;</td><td style="text-align: center">&lt;</td><td style="text-align: center">&lt;</td></tr>
+<tr><td style="text-align: left">bool</td><td style="text-align: center">&lt;-</td><td style="text-align: center">1</td><td style="text-align: right">&lt;-</td><td style="text-align: center">&lt;-</td><td style="text-align: center">&lt;-</td><td style="text-align: center">&lt;-</td><td style="text-align: center">&lt;-</td><td style="text-align: center">&lt;-</td></tr>
+<tr><td style="text-align: left">int</td><td style="text-align: center">&lt;-</td><td style="text-align: center">-&gt;</td><td style="text-align: right">2</td><td style="text-align: center">2</td><td style="text-align: center">&lt;-</td><td style="text-align: center">&lt;</td><td style="text-align: center">3</td><td style="text-align: center">&lt;-</td></tr>
+<tr><td style="text-align: left">float</td><td style="text-align: center">&lt;-</td><td style="text-align: center">-&gt;</td><td style="text-align: right">2</td><td style="text-align: center">2</td><td style="text-align: center">&lt;-</td><td style="text-align: center">&lt;</td><td style="text-align: center">3</td><td style="text-align: center">&lt;-</td></tr>
+<tr><td style="text-align: left">string</td><td style="text-align: center">&lt;-</td><td style="text-align: center">-&gt;</td><td style="text-align: right">-&gt;</td><td style="text-align: center">-&gt;</td><td style="text-align: center">2, 4</td><td style="text-align: center">&lt;</td><td style="text-align: center">3</td><td style="text-align: center">2</td></tr>
+<tr><td style="text-align: left">array</td><td style="text-align: center">&lt;-</td><td style="text-align: center">-&gt;</td><td style="text-align: right">&gt;</td><td style="text-align: center">&gt;</td><td style="text-align: center">&gt;</td><td style="text-align: center">5</td><td style="text-align: center">3</td><td style="text-align: center">&gt;</td></tr>
+<tr><td style="text-align: left">object</td><td style="text-align: center">&gt;</td><td style="text-align: center">-&gt;</td><td style="text-align: right">3</td><td style="text-align: center">3</td><td style="text-align: center">3</td><td style="text-align: center">3</td><td style="text-align: center">6</td><td style="text-align: center">3</td></tr>
+<tr><td style="text-align: left">resource</td><td style="text-align: center">&gt;</td><td style="text-align: center">-&gt;</td><td style="text-align: right">-&gt;</td><td style="text-align: center">-&gt;</td><td style="text-align: center">2</td><td style="text-align: center">&lt;</td><td style="text-align: center">3</td><td style="text-align: center">2</td></tr>
 </tbody></table>
 <ul>
 <li><code>=</code> means the result is always “equals”, i.e. strict comparisons are always <code>FALSE</code> and equality comparisons are always <code>TRUE</code>.</li>
@@ -2693,7 +2693,7 @@ print-expression:
 In particular, it should not be an array and if it is an object, it must implement
 a <a href="14-classes.html#method-__tostring"><code>__toString</code> method</a>.</p>
 <p><strong>Semantics</strong></p>
-<p>After converting <em>print-expression</em>‘s value into a string, if necessary,
+<p>After converting <em>print-expression</em>’s value into a string, if necessary,
 <code>print</code> writes the resulting string to <a href="06-constants.html#core-predefined-constants"><code>STDOUT</code></a>.
 Unlike <a href="11-statements.html#the-echo-statement"><code>echo</code></a>, <code>print</code> can be used in any context
 allowing an expression. It always returns the value 1.</p>
@@ -2828,7 +2828,7 @@ configuration directive
 <a href="http://www.php.net/manual/ini.core.php#ini.include-path"><code>include_path</code></a>
 to resolve the include file’s location.</p>
 <p><strong>Examples:</strong></p>
-<p>As mentioned above, script inclusion in PHP is not a text substitution process (unlike C/C++‘s preprocessor and alike). This allows that one can specify namespaces in the included file even though nested namespaces in a single file only are not permitted:</p>
+<p>As mentioned above, script inclusion in PHP is not a text substitution process (unlike C/C++'s preprocessor and alike). This allows that one can specify namespaces in the included file even though nested namespaces in a single file only are not permitted:</p>
 <p>include.php</p>
 <pre><code>namespace foo;
 $x = 'hello';

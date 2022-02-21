@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -179,7 +179,7 @@ automatically available to all scripts; their values are not fixed and they are 
 <tr><td><code>__COMPILER_HALT_OFFSET__</code></td><td><code>int</code>; When the <a href="04-basic-concepts.html#__halt_compiler"><code>__halt_compiler();</code></a> construct is used, this constant contains the byte offset in the source file immediately following the <code>__halt_compiler();</code> token in this file.</td></tr>
 <tr><td><code>__DIR__</code></td><td><code>string</code>; The directory name of the script. A directory separator is only appended for the root directory.</td></tr>
 <tr><td><code>__FILE__</code></td><td><code>string</code>; The full name of the script.</td></tr>
-<tr><td><code>__FUNCTION__</code></td><td><code>string</code>; Inside a function, the name of the current function exactly as it was declared, with the following prepended: If a named namespace exists, that namespace name followed by ““. If used outside all functions, the result is the empty string. For a method, no parent-class prefix is present. (See <code>__METHOD__</code> and <a href="13-functions.html#anonymous-functions">anonymous functions</a>).</td></tr>
+<tr><td><code>__FUNCTION__</code></td><td><code>string</code>; Inside a function, the name of the current function exactly as it was declared, with the following prepended: If a named namespace exists, that namespace name followed by “&quot;. If used outside all functions, the result is the empty string. For a method, no parent-class prefix is present. (See <code>__METHOD__</code> and <a href="13-functions.html#anonymous-functions">anonymous functions</a>).</td></tr>
 <tr><td><code>__LINE__</code></td><td><code>int</code>; the number of the current source line.</td></tr>
 <tr><td><code>__METHOD__</code></td><td><code>string</code>; Inside a method, the name of the current method exactly as it was declared, with the following prepended, in order: If a named namespace exists, that namespace name followed by <code>\</code>; the parent class name or trait name followed by <code>::</code>. If used outside all methods, the result is the same as for <code>__FUNCTION__</code>.</td></tr>
 <tr><td><code>__NAMESPACE__</code></td><td><code>string</code>; The name of the current namespace exactly as it was declared. For the default namespace, the result is the empty string.</td></tr>
@@ -249,7 +249,7 @@ automatically available to all scripts; their values are not fixed and they are 
 <tr><td><code>PHP_MINOR_VERSION</code></td><td><code>int</code>; the current PHP minor version.</td></tr>
 <tr><td><code>PHP_OS</code></td><td><code>string</code>; the current operating system.</td></tr>
 <tr><td><code>PHP_OS_FAMILY</code></td><td><code>string</code>; the operating system family PHP was built for. Either of ‘Windows’, ‘BSD’, ‘Darwin’, ‘Solaris’, ‘Linux’ or ‘Unknown’.</td></tr>
-<tr><td><code>PHP_PREFIX</code></td><td><code>string</code>; the value to which “--prefix” was set when configured.</td></tr>
+<tr><td><code>PHP_PREFIX</code></td><td><code>string</code>; the value to which “–prefix” was set when configured.</td></tr>
 <tr><td><code>PHP_RELEASE_VERSION</code></td><td><code>int</code>; the current PHP release version.</td></tr>
 <tr><td><code>PHP_ROUND_HALF_DOWN</code></td><td><code>int</code>; Round halves down.</td></tr>
 <tr><td><code>PHP_ROUND_HALF_EVEN</code></td><td><code>int</code>; Round halves to even numbers.</td></tr>
@@ -258,7 +258,7 @@ automatically available to all scripts; their values are not fixed and they are 
 <tr><td><code>PHP_SAPI</code></td><td><code>string</code>; the Server API for this build.</td></tr>
 <tr><td><code>PHP_SHLIB_SUFFIX</code></td><td><code>string</code>; build-platform’s shared library suffix.</td></tr>
 <tr><td><code>PHP_SYSCONFDIR</code></td><td><code>string</code>; the PHP system configuration directory.</td></tr>
-<tr><td><code>PHP_VERSION</code></td><td><code>string</code>; the current PHP version in the form “major.minor.release[extra]“.</td></tr>
+<tr><td><code>PHP_VERSION</code></td><td><code>string</code>; the current PHP version in the form “major.minor.release[extra]”.</td></tr>
 <tr><td><code>PHP_VERSION_ID</code></td><td><code>int</code>; the current PHP version.</td></tr>
 <tr><td><code>PHP_ZTS</code></td><td><code>int</code>; Indicates whether the compiler was built with thread safety enabled.</td></tr>
 <tr><td><code>STDIN</code></td><td><code>resource</code>; File resource that maps to standard input (<code>php://stdin</code>).</td></tr>

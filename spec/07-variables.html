@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -181,7 +181,7 @@ top level of a script.</p>
 <p>A constant defined outside of a class or interface is a <a href="#general">superglobal</a>. A constant has static <a href="04-basic-concepts.html#storage-duration">storage duration</a>
 and is a non-modifiable lvalue.</p>
 <p><strong>Undefined Constants</strong></p>
-<p>Undefined constants are not defined implicitly -- forward usages of constants are also classified as undefined constants here. A distinction between class/interface constants and top level constants is made.</p>
+<p>Undefined constants are not defined implicitly – forward usages of constants are also classified as undefined constants here. A distinction between class/interface constants and top level constants is made.</p>
 <p>For top level constants: For unqualified usages, the name of the undefined constant (as string) is used as substitution value. Moreover, a warning is emitted stating that the corresponding constant was undefined. For qualified usages, an exception of type <a href="14-classes.html#class-error"><code>Error</code></a> is thrown.</p>
 <p>For class/interface constants: An exception of type <a href="14-classes.html#class-error"><code>Error</code></a> is thrown, stating that the corresponding constant was undefined.</p>
 <p><strong>Examples</strong></p>
@@ -248,7 +248,7 @@ for ($i = 1; $i &lt;= 3; ++$i)
   f();
 </code></pre>
 <p>Unlike the <a href="#function-statics">function static equivalent</a>, function <code>f</code> outputs
-“<code>$lv = 1</code>“ each time.</p>
+“<code>$lv = 1</code>” each time.</p>
 <p>See the recursive function example in <a href="04-basic-concepts.html#storage-duration">storage duration section</a>.</p>
 <p><a name="undefined-local-variables"></a>
 <strong>Undefined Local Variables</strong></p>
@@ -406,7 +406,7 @@ only that alias is destroyed. The next time that function is called, a new alias
 for ($i = 1; $i &lt;= 3; ++$i)
   f();
 </code></pre>
-<p>Unlike the <a href="#local-variables">local variable equivalent</a>, function <code>f</code> outputs “<code>$fs = 1</code>“, “<code>$fs = 2</code>“, and “<code>$fs = 3</code>“, as <code>$fs</code> retains its value across
+<p>Unlike the <a href="#local-variables">local variable equivalent</a>, function <code>f</code> outputs “<code>$fs = 1</code>”, “<code>$fs = 2</code>”, and “<code>$fs = 3</code>”, as <code>$fs</code> retains its value across
 calls.</p>
 <p><a name="hidingNotice"></a>
 Be also aware that declaring a function static can hide a local variable and/or a global variable with the same name. The value of the local or global variable is not taken over as initial value of the function static. Subsequent modifications of the variable only modify the function static and do not affect the local nor the global variable. An example:</p>
@@ -516,7 +516,7 @@ and static <a href="04-basic-concepts.html#storage-duration">storage duration</a
 <p>The following global variables are available to all scripts:</p>
 <table><thead><tr><th>Variable Name</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>$argc</code></td><td><code>int</code>; The number of command-line arguments passed to the script. This is at least 1. (See <code>$argv</code> below). This may not be available in non-command-line builds of the Engine.</td></tr>
-<tr><td><code>$argv</code></td><td><code>array</code>; An array of <code>$argc</code> elements containing the command-line arguments passed to the script as strings. Each element has an <code>int</code> key with the keys being numbered sequentially starting at zero through <code>$argc-1</code>. <code>$argv[0]</code> is the name of the script. It is implementation-defined as to how white space on command lines is handled, whether letter casing is preserved, which characters constitute quotes, or how <code>$argv[0]</code>‘s string is formatted. As to how command-line arguments are defined, is unspecified. This may not be available in non-command-line builds of the Engine.</td></tr>
+<tr><td><code>$argv</code></td><td><code>array</code>; An array of <code>$argc</code> elements containing the command-line arguments passed to the script as strings. Each element has an <code>int</code> key with the keys being numbered sequentially starting at zero through <code>$argc-1</code>. <code>$argv[0]</code> is the name of the script. It is implementation-defined as to how white space on command lines is handled, whether letter casing is preserved, which characters constitute quotes, or how <code>$argv[0]</code>’s string is formatted. As to how command-line arguments are defined, is unspecified. This may not be available in non-command-line builds of the Engine.</td></tr>
 <tr><td><code>$_COOKIE</code></td><td><code>array</code>; The variables passed to the current script via HTTP Cookies.</td></tr>
 <tr><td><code>$_ENV</code></td><td><code>array</code>; An array in which the environment variable names are element keys, and the environment variable value strings are element values. As to how an environment variable is defined, is unspecified.</td></tr>
 <tr><td><code>$_FILES</code></td><td><code>array</code>; The items uploaded to the current script via the HTTP POST method.</td></tr>

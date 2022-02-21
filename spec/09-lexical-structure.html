@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -719,7 +719,7 @@ b-prefix:: one of
 -->
 <pre>
 <i id="grammar-single-quoted-string-literal">single-quoted-string-literal::</i>
-   <i><a href="#grammar-b-prefix">b-prefix</a></i><sub>opt</sub>   '   <i><a href="#grammar-sq-char-sequence">sq-char-sequence</a></i><sub>opt</sub>   '
+   <i><a href="#grammar-b-prefix">b-prefix</a></i><sub>opt</sub>   &#039;   <i><a href="#grammar-sq-char-sequence">sq-char-sequence</a></i><sub>opt</sub>   &#039;
 
 <i id="grammar-sq-char-sequence">sq-char-sequence::</i>
    <i><a href="#grammar-sq-char">sq-char</a></i>
@@ -727,10 +727,10 @@ b-prefix:: one of
 
 <i id="grammar-sq-char">sq-char::</i>
    <i><a href="#grammar-sq-escape-sequence">sq-escape-sequence</a></i>
-   \<sub>opt</sub>   any member of the source character set except single-quote (') or backslash (\)
+   \<sub>opt</sub>   any member of the source character set except single-quote (&#039;) or backslash (\)
 
 <i id="grammar-sq-escape-sequence">sq-escape-sequence:: one of</i>
-   \'   \\
+   \&#039;   \\
 
 <i id="grammar-b-prefix">b-prefix:: one of</i>
    b   B
@@ -840,7 +840,7 @@ with a <em>b-prefix</em> is equivalent to one without.</p>
 in the table below:</p>
 <table><thead><tr><th>Escape sequence</th><th>Character name</th><th>Unicode character</th></tr></thead><tbody>
 <tr><td>$</td><td>Dollar sign</td><td>0x24</td></tr>
-<tr><td>“</td><td>Double quote</td><td>0x22</td></tr>
+<tr><td>&quot;</td><td>Double quote</td><td>0x22</td></tr>
 <tr><td>\</td><td>Backslash</td><td>0x5C</td></tr>
 <tr><td>\e</td><td>Escape</td><td>0x1B</td></tr>
 <tr><td>\f</td><td>Form feed</td><td>0x0C</td></tr>
@@ -1023,7 +1023,7 @@ characters—-not even comments or white space-—are permitted between the
 end identifier and the new-line that terminates that source line.</p>
 <p><strong>Semantics</strong></p>
 <p>A heredoc string literal is a string literal delimited by
-“<code>&lt;&lt;&lt; name</code>“ and “<code>name</code>“. The literal can contain any source
+“<code>&lt;&lt;&lt; name</code>” and “<code>name</code>”. The literal can contain any source
 character. Certain other (and sometimes non-printable) characters can
 also be expressed as escape sequences.</p>
 <p>A heredoc literal supports variable substitution as defined for
@@ -1049,7 +1049,7 @@ nowdoc-string-literal::
 -->
 <pre>
 <i id="grammar-nowdoc-string-literal">nowdoc-string-literal::</i>
-   <i><a href="#grammar-b-prefix">b-prefix</a></i><sub>opt</sub>   &lt;&lt;&lt;   '   <i><a href="#grammar-name">name</a></i>   '   <i><a href="#grammar-new-line">new-line</a></i>   <i><a href="#grammar-hd-body">hd-body</a></i><sub>opt</sub>   <i><a href="#grammar-name">name</a></i>   ;<sub>opt</sub>   <i><a href="#grammar-new-line">new-line</a></i>
+   <i><a href="#grammar-b-prefix">b-prefix</a></i><sub>opt</sub>   &lt;&lt;&lt;   &#039;   <i><a href="#grammar-name">name</a></i>   &#039;   <i><a href="#grammar-new-line">new-line</a></i>   <i><a href="#grammar-hd-body">hd-body</a></i><sub>opt</sub>   <i><a href="#grammar-name">name</a></i>   ;<sub>opt</sub>   <i><a href="#grammar-new-line">new-line</a></i>
 </pre>
 <p><strong>Constraints</strong></p>
 <p>The start and end identifier names must be the same.

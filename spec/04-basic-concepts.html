@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -344,7 +344,7 @@ VStores, and HStores:</p>
                                                       [VStore int 1]  [VStore int 3]
 </code></pre>
 <p>In this picture the VSlot in the upper left corner represents the
-variable <code>$a</code>, and it points to a VStore that represents <code>$a</code>‘s current
+variable <code>$a</code>, and it points to a VStore that represents <code>$a</code>’s current
 value, which is a object. This VStore contains a handle pointing to an
 HStore which represents the contents of an object of type Point with two
 instance properties <code>$x</code> and <code>$y</code>. The HStore contains two VSlots representing instance
@@ -442,8 +442,8 @@ to the VStore.</p>
 
 [VSlot $b *]--&gt;[VStore int 123]
 </code></pre>
-<p>The integer value 123 is read from <code>$a</code>‘s VStore and is written into
-<code>$b</code>‘s VStore, overwriting its previous contents. As we can see, the two
+<p>The integer value 123 is read from <code>$a</code>’s VStore and is written into
+<code>$b</code>’s VStore, overwriting its previous contents. As we can see, the two
 variables are completely independent, each has its own VStore
 containing the integer value 123. Value assignment
 reads the contents of one VStore and overwrites the contents of the
@@ -491,8 +491,8 @@ $b = $a;
 
 [VSlot $b *]--&gt;[VStore string 'gg']
 </code></pre>
-<p><code>$a</code>‘s string value and <code>$b</code>‘s string values are distinct from each other,
-and mutating <code>$a</code>‘s string will not affect <code>$b</code>. Consider <code>++$b</code>, for
+<p><code>$a</code>’s string value and <code>$b</code>’s string values are distinct from each other,
+and mutating <code>$a</code>’s string will not affect <code>$b</code>. Consider <code>++$b</code>, for
 example:</p>
 <pre><code>[VSlot $a *]--&gt;[VStore string 'gg']
 
@@ -531,16 +531,16 @@ of the form <code>move(newX, newY)</code> moves a <code>Point</code> to the new 
 </code></pre>
 <p>Variable <code>$a</code> is given its own VSlot, which points to a VStore that
 contains a handle pointing to an HStore allocated by <a href="10-expressions.html#the-new-operator"><code>new</code></a> and
-that is initialized by <code>Point</code>‘s constructor.</p>
+that is initialized by <code>Point</code>’s constructor.</p>
 <p>Now consider the value assignment <code>$b = $a</code>:</p>
 <pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
                                      ^                     |            |
                                      |                     V            V
 [VSlot $b *]--&gt;[VStore object *]-----+             [VStore int 1] [VStore int 3]
 </code></pre>
-<p><code>$b</code>‘s VStore contains a handle that points to the same object as does
-<code>$a</code>‘s VStore’s handle. Note that the Point object itself was not copied,
-and note that <code>$a</code>‘s and <code>$b</code>‘s VSlots point to distinct VStores.</p>
+<p><code>$b</code>’s VStore contains a handle that points to the same object as does
+<code>$a</code>’s VStore’s handle. Note that the Point object itself was not copied,
+and note that <code>$a</code>’s and <code>$b</code>’s VSlots point to distinct VStores.</p>
 <p>Let’s modify the value of the Point whose handle is stored in <code>$b</code> using
 <code>$b-&gt;move(4, 6)</code>:</p>
 <pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
@@ -549,7 +549,7 @@ and note that <code>$a</code>‘s and <code>$b</code>‘s VSlots point to distin
 [VSlot $b *]--&gt;[VStore object *]-----+            [VStore int 4] [VStore int 6]
                                        (1 was overwritten) (3 was overwritten)
 </code></pre>
-<p>As we can see, changing <code>$b</code>‘s Point changes <code>$a</code>‘s as well.</p>
+<p>As we can see, changing <code>$b</code>’s Point changes <code>$a</code>’s as well.</p>
 <p>Now, let’s make <code>$a</code> point to a different object using <code>$a = new Point(2, 1)</code>:</p>
 <pre><code>[VSlot $a *]--&gt;[VStore object *]--&gt;[HStore Point [VSlot $x *] [VSlot $y *]]
                                                            |            |
@@ -597,8 +597,8 @@ semantics:</p>
                  |
 [VSlot $b *]-----+     [VStore bool false (dead)]
 </code></pre>
-<p>In this example, byRef assignment changes <code>$b</code>‘s VSlot point to the same
-VStore that <code>$a</code>‘s VSlot points to. The old VStore that <code>$b</code>‘s VSlot used
+<p>In this example, byRef assignment changes <code>$b</code>’s VSlot point to the same
+VStore that <code>$a</code>’s VSlot points to. The old VStore that <code>$b</code>’s VSlot used
 to point to is now unreachable.</p>
 <p>When multiple variables’ VSlots point to the same VStore,
 the variables are said to be <em>aliases</em> of each other or they are said to
@@ -613,8 +613,8 @@ after becoming aliases they are absolutely symmetrical and equal in their relati
                  |
 [VSlot $b *]-----+
 </code></pre>
-<p><code>$b</code>‘s value, which is stored in the VStore that <code>$b</code>‘s VSlot points, is
-changed to 124. And as that VStore is also aliased by <code>$a</code>‘s VSlot, the
+<p><code>$b</code>’s value, which is stored in the VStore that <code>$b</code>’s VSlot points, is
+changed to 124. And as that VStore is also aliased by <code>$a</code>’s VSlot, the
 value of <code>$a</code> is also 124. Indeed, any variable’s VSlot that is aliased
 to that VStore will have the value 124.</p>
 <p>Now consider the value assignment <code>$a = 99</code>:</p>
@@ -632,7 +632,7 @@ using <code>unset</code> on variable <code>$a</code> or variable <code>$b</code>
 [VSlot $b *]-------------+
 </code></pre>
 <p>Unsetting <code>$a</code> causes variable <code>$a</code> to be destroyed and its link
-to the VStore to be removed, leaving <code>$b</code>‘s VSlot as the only
+to the VStore to be removed, leaving <code>$b</code>’s VSlot as the only
 pointer remaining to the VStore.</p>
 <p>Other operations can also break an alias relationship between two or
 more variables. For example, <code>$a = 123</code> and <code>$b =&amp; $a</code>, and <code>$c = 'hi'</code>:</p>
@@ -718,9 +718,9 @@ to distinct VStores pointing to the same HStore.</p>
                                      [VStore int 4 (dead)] [VStore int 6 (dead)]
 </code></pre>
 <p>As we can see, <code>$b</code> continues to have an alias relationship with <code>$a</code>.
-Here’s what’s involved in that assignment: <code>$a</code> and <code>$b</code>‘s VStore’s handle
+Here’s what’s involved in that assignment: <code>$a</code> and <code>$b</code>’s VStore’s handle
 pointing to <code>Point(4,6)</code> is removed, <code>Point(2,1)</code> is created, and <code>$a</code> and
-<code>$b</code>‘s VStore is overwritten to contain a handle pointing to that new
+<code>$b</code>’s VStore is overwritten to contain a handle pointing to that new
 <code>Point</code>. As there are now no VStores pointing to <code>Point(4,6)</code>, it can be destroyed.</p>
 <p>We can remove these aliases using <code>unset($a, $b)</code>:</p>
 <pre><code>[VSlot $a (dead)]       [HStore Point [VSlot $x *] [VSlot $y *] (dead)]
@@ -745,13 +745,13 @@ assignment of other types. Recall the <code>Point</code> class from <a href="#va
                                                         V            V
                                             [VStore int 1]  [VStore int 3]
 </code></pre>
-<p>In the example above, <code>$a</code>‘s VStore is initialized to contain a handle to
+<p>In the example above, <code>$a</code>’s VStore is initialized to contain a handle to
 an HStore for an array containing two elements, where one element is an
 integer and the other is a handle to an HStore for an object.</p>
 <p>Now consider the following value assignment <code>$b = $a</code>. A conforming
 implementation must implement value assignment of arrays in one of the
 following ways: (1) eager copying, where the implementation makes a copy
-of <code>$a</code>‘s array during value assignment and changes <code>$b</code>‘s VSlot to point
+of <code>$a</code>’s array during value assignment and changes <code>$b</code>’s VSlot to point
 to the copy; or (2) deferred copying, where the implementation uses a
 deferred copy mechanism that meets certain requirements. This section
 describes eager copying, and the section that immediately follows
@@ -772,17 +772,17 @@ the value assignment <code>$b = $a</code>:</p>
                                                             V            V
                                                  [VStore int 1]  [VStore int 3]
 </code></pre>
-<p>The value assignment <code>$b = $a</code> made a copy of <code>$a</code>‘s array. Note how
-<code>$b</code>‘s VSlot points to a different VStore than <code>$a</code>‘s VSlot, and <code>$b</code>‘s
-VStore points to a different HStore than <code>$a</code>‘s VStore. Each source array
+<p>The value assignment <code>$b = $a</code> made a copy of <code>$a</code>’s array. Note how
+<code>$b</code>’s VSlot points to a different VStore than <code>$a</code>’s VSlot, and <code>$b</code>’s
+VStore points to a different HStore than <code>$a</code>’s VStore. Each source array
 element is copied using <em>member-copy assignment</em> <code>=*</code>, which is defined
 as follows:</p>
 <pre><code>   $destination =* $source
 </code></pre>
 <ul>
-<li>If <code>$source</code>‘s VStore has a refcount equal to 1, the Engine copies the
+<li>If <code>$source</code>’s VStore has a refcount equal to 1, the Engine copies the
 array element using  value assignment (<code>destination = $source</code>).</li>
-<li>If <code>$source</code>‘s VStore has a refcount that is greater than 1, the Engine
+<li>If <code>$source</code>’s VStore has a refcount that is greater than 1, the Engine
 uses an implementation-defined algorithm to decide whether to copy the element
 using value assignment (<code>$destination = $source</code>) or byRef
 assignment (<code>$destination =&amp; $source</code>).</li>
@@ -793,9 +793,9 @@ describe behavior for the engine for array copying and other operations.</p>
 <p>For the particular example above, member-copy assignment exhibits the
 same semantics as value assignment for all conforming implementations
 because all of the array elements’ VStores have a refcount equal to 1.
-The first element VSlots in <code>$a</code>‘s array and <code>$b</code>‘s array point
+The first element VSlots in <code>$a</code>’s array and <code>$b</code>’s array point
 to distinct VStores, each of which contain a distinct copy of the
-integer value 10. The second element VSlots in <code>$a</code>‘s array and <code>$b</code>‘s
+integer value 10. The second element VSlots in <code>$a</code>’s array and <code>$b</code>’s
 array point to distinct VStores, each of which contain a handle to the
 same object HStore.</p>
 <p>Let’s consider another example:</p>
@@ -843,10 +843,10 @@ implementation. Here is the first possible outcome:</p>
                                   [VStore int 123]  [VStore string 'hi']
 </code></pre>
 <p>In both possible outcomes, value assignment with eager copying makes a
-copy of <code>$a</code>‘s array, copying the array’s single element using
+copy of <code>$a</code>’s array, copying the array’s single element using
 member-copy assignment (which in this case will exhibit the same
 semantics of value assignment for all implementations), which in turn
-makes a copy of the inner array inside <code>$a</code>‘s array, copying the inner
+makes a copy of the inner array inside <code>$a</code>’s array, copying the inner
 array’s elements using member-copy assignment. The inner array’s first
 element VSlot points to a VStore that has a refcount that is greater than 1,
 so an implementation-defined algorithm is used to decide whether to use value
@@ -912,7 +912,7 @@ $b = $a;
                                                                            V
                                                                [VStore string 'hi']
 </code></pre>
-<p>As we can see, both <code>$a</code>‘s VStore (the source VStore) and <code>$b</code>‘s VStore
+<p>As we can see, both <code>$a</code>’s VStore (the source VStore) and <code>$b</code>’s VStore
 (the destination VStore) point to the same array HStore. Note the
 asymmetric nature of how deferred array copies are represented in the
 abstract model. In the above example the source VStore’s type tag
@@ -970,22 +970,22 @@ outcomes:</p>
                                                            |
  [VSlot $x *]----------------------------------------------+
 </code></pre>
-<p>As we can see in the outcome shown above, <code>$b</code>‘s VStore was
-array-separated and now <code>$a</code>‘s VStore and <code>$b</code>‘s VStore point to distinct
-array HStores. Performing array-separation on <code>$b</code>‘s VStore was necessary
-to satisfy the copy-on-write requirement. <code>$a</code>‘s array remains unchanged
+<p>As we can see in the outcome shown above, <code>$b</code>’s VStore was
+array-separated and now <code>$a</code>’s VStore and <code>$b</code>’s VStore point to distinct
+array HStores. Performing array-separation on <code>$b</code>’s VStore was necessary
+to satisfy the copy-on-write requirement. <code>$a</code>’s array remains unchanged
 and that <code>$x</code> and <code>$a[0][0]</code> still have an alias relationship with each
 other. For this particular example, conforming implementations are
-required to preserve <code>$a</code>‘s array’s contents and to preserve the alias
+required to preserve <code>$a</code>’s array’s contents and to preserve the alias
 relationship between <code>$x</code> and <code>$a[0][0]</code>. Finally, note that <code>$a[0]</code> and
 <code>$b[0]</code> have a deferred copy relationship with each other in the outcome
 shown above. For this particular example, a conforming implementation is
-not required to array-separate <code>$b[0]</code>‘s VStore, and the outcome shown
-above demonstrates what happens when <code>$b[0]</code>‘s VStore is not
+not required to array-separate <code>$b[0]</code>’s VStore, and the outcome shown
+above demonstrates what happens when <code>$b[0]</code>’s VStore is not
 array-separated. However, an implementation can choose to array-separate
-<code>$b[0]</code>‘s VStore at any time if desired. The other two possible outcomes
+<code>$b[0]</code>’s VStore at any time if desired. The other two possible outcomes
 shown below demonstrate what can possibly happen if the implementation
-choose to array-separate <code>$b[0]</code>‘s VStore as well. Here is the second
+choose to array-separate <code>$b[0]</code>’s VStore as well. Here is the second
 possible outcome:</p>
 <pre><code>[VSlot $a *]----&gt;[VStore array *]----&gt;[HStore Array [VSlot 0 *]]
                                                              |
@@ -1025,13 +1025,13 @@ possible outcome:</p>
  [VSlot $x *]---------------------&gt;[VStore int 123]&lt;---------+
 </code></pre>
 <p>The second and third possible outcomes show what can possibly happen if
-the implementation chooses to array-separate <code>$b[0]</code>‘s VStore. In the
+the implementation chooses to array-separate <code>$b[0]</code>’s VStore. In the
 second outcome, <code>$b[0][0]</code> has an alias relationship with <code>$x</code> and
 <code>$a[0][0]</code>. In the third outcome, <code>$b[0][0]</code> does not have an alias
 relationship, though <code>$x</code> and <code>$a[0][0]</code> still have an alias relationship
 with each other. The differences between the second and third outcome
 are reflect that different possibilities when the engine uses
-member-copy assignment to copy <code>$a[0]</code>‘s arrays’s elements into <code>$b[0]</code>‘s
+member-copy assignment to copy <code>$a[0]</code>’s arrays’s elements into <code>$b[0]</code>’s
 array.</p>
 <p>Finally, let’s briefly consider one more example:</p>
 <pre><code class="language-PHP">$x = 0;
@@ -1193,11 +1193,11 @@ some type(s) or to an instance of some other type.</p>
                  [VStore int 10] [VStore object *]----------+
 </code></pre>
 <p>The clone operator will create another object HStore of the same class
-as the original and copy <code>$a</code>‘s object’s instance properties using
+as the original and copy <code>$a</code>’s object’s instance properties using
 <a href="#value-assignment-of-array-types-to-local-variables">member-copy assignment</a>. For the example shown above, the
 handle to the newly created HStore stored into <code>$b</code> using value
 assignment. Note that the clone operator will not recursively clone
-objects held in <code>$a</code>‘s instance properties; hence the object copying
+objects held in <code>$a</code>’s instance properties; hence the object copying
 performed by the clone operator is often referred to as a <em>shallow
 copy</em>. If a <em>deep copy</em> of an object is desired, the programmer must
 achieve this manually by using the <a href="14-classes.html#method-__clone">method <code>__clone</code></a> which
