@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,10 +8,9 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
@@ -33,15 +32,16 @@
         <link rel="stylesheet" href="../src/css/style.css">
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -57,50 +57,81 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded affix "><a href="../welcome.html">Welcome</a></li><li class="chapter-item expanded "><a href="../spec/01-introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../spec/02-conformance.html"><strong aria-hidden="true">2.</strong> Conformance</a></li><li class="chapter-item expanded "><a href="../spec/03-terms-and-definitions.html"><strong aria-hidden="true">3.</strong> Terms and Definitions</a></li><li class="chapter-item expanded "><a href="../spec/04-basic-concepts.html"><strong aria-hidden="true">4.</strong> Basic Concepts</a></li><li class="chapter-item expanded "><a href="../spec/05-types.html"><strong aria-hidden="true">5.</strong> Types</a></li><li class="chapter-item expanded "><a href="../spec/06-constants.html"><strong aria-hidden="true">6.</strong> Constants</a></li><li class="chapter-item expanded "><a href="../spec/07-variables.html"><strong aria-hidden="true">7.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../spec/08-conversions.html"><strong aria-hidden="true">8.</strong> Conversions</a></li><li class="chapter-item expanded "><a href="../spec/09-lexical-structure.html"><strong aria-hidden="true">9.</strong> Lexical Structure</a></li><li class="chapter-item expanded "><a href="../spec/10-expressions.html"><strong aria-hidden="true">10.</strong> Expressions</a></li><li class="chapter-item expanded "><a href="../spec/11-statements.html"><strong aria-hidden="true">11.</strong> Statements</a></li><li class="chapter-item expanded "><a href="../spec/12-arrays.html"><strong aria-hidden="true">12.</strong> Arrays</a></li><li class="chapter-item expanded "><a href="../spec/13-functions.html"><strong aria-hidden="true">13.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../spec/14-classes.html" class="active"><strong aria-hidden="true">14.</strong> Classes</a></li><li class="chapter-item expanded "><a href="../spec/15-interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li class="chapter-item expanded "><a href="../spec/16-traits.html"><strong aria-hidden="true">16.</strong> Traits</a></li><li class="chapter-item expanded "><a href="../spec/17-exception-handling.html"><strong aria-hidden="true">17.</strong> Exception Handling</a></li><li class="chapter-item expanded "><a href="../spec/18-namespaces.html"><strong aria-hidden="true">18.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="../spec/19-grammar.html"><strong aria-hidden="true">19.</strong> Grammar</a></li><li class="chapter-item expanded "><a href="../spec/20-bibliography.html"><strong aria-hidden="true">20.</strong> Bibliography</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -136,7 +167,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -780,7 +811,7 @@ override is still accepted by the engine. The use of incompatible overrides is n
 <p>If a class contains a definition for a method having one of the
 following names, that method must have the prescribed visibility,
 signature, and semantics:</p>
-<table><thead><tr><th>Method Name</th><th>Description</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Method Name</th><th>Description</th></tr></thead><tbody>
 <tr><td><a href="#method-__call"><code>__call</code></a></td><td>Calls a dynamic method in the context of an instance method call.</td></tr>
 <tr><td><a href="#method-__callstatic"><code>__callStatic</code></a></td><td>Calls a dynamic method in the context of a static method call.</td></tr>
 <tr><td><a href="#method-__clone"><code>__clone</code></a></td><td>Typically used to make a <a href="04-basic-concepts.html#cloning-objects">deep copy</a> of an object.</td></tr>
@@ -797,6 +828,7 @@ signature, and semantics:</p>
 <tr><td><a href="#method-__unset"><code>__unset</code></a></td><td>Removes a given dynamic property.</td></tr>
 <tr><td><a href="#method-__wakeup"><code>__wakeup</code></a></td><td>Executed after <a href="#serialization">unserialization</a> of an instance of this class.</td></tr>
 </tbody></table>
+</div>
 <p>In general, method names beginning with <code>__</code> are reserved for special methods. The code should not define methods with names
 beginning with <code>__</code> unless it is one of the special methods described here.</p>
 <p>Note that while syntax definitions below use the <a href="#methods">non-abstract syntax</a> in the method definition, the special methods,
@@ -1622,11 +1654,12 @@ unbound closures must be unscoped.</p>
 
 </code></pre>
 <p>The class members are defined below:</p>
-<table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
 <tr><td><code>bind</code></td><td>Duplicates closure <code>$closure</code> with a specific bound object <code>$newthis</code> and class scope <code>$newscope</code>. If <code>$newthis</code> is <code>NULL</code> then the closure is to be unbound if no scope is specified, or static if a scope is specified. <code>$newscope</code> is the scope the closure is to be given (either a string containing the name of a class, or an object whose class will be used), or <code>&quot;static&quot;</code> to keep the current one. Returns a new <code>Closure</code> object or <code>FALSE</code> on failure. This function must not violate the invariant that closures must either be both scoped and bound or static, or otherwise both unscoped and unbound. This function must prevent binding an object to the new closure if the <code>$closure</code> is static, however the new closure may have a different scope.</td></tr>
 <tr><td><code>bindTo</code></td><td>Duplicates the closure designated by the current instance with a new-bound object and class scope. This method is an instance version of bind.</td></tr>
 <tr><td><code>call</code></td><td>Calls the closure (the current instance) with <code>$this</code> bound to <code>$newthis</code>, the class scope of the class of <code>$newthis</code>, and the parameters specified by <code>$parameters</code>. This function must fail if <code>$newthis</code> is NULL, or if the closure is static.</td></tr>
 </tbody></table>
+</div>
 <p>When the <a href="10-expressions.html#anonymous-function-creation">anonymous function creation operator</a> is evaluated,
 the result is an object of type <code>Closure</code> (or some unspecified class
 derived from that type) created by the Engine. This object is referred
@@ -1699,7 +1732,7 @@ instantiated directly. It is defined, as follows:</p>
 }
 </code></pre>
 <p>The class members are defined below:</p>
-<table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Purpose</th></tr></thead><tbody>
 <tr><td><code>current</code></td><td>An implementation of the instance method <a href="15-interfaces.html#interface-iterator"><code>Iterator::current</code></a>.</td></tr>
 <tr><td><code>getReturn</code></td><td>Returns the final expression from a generator, which was produced by a <code>return</code> statement rather than a <code>yield</code>. This function can only be called meaningfully once the generator has finishing yielding values; otherwise, an instance of <code>Exception</code> is thrown.</td></tr>
 <tr><td><code>key</code></td><td>An implementation of the instance method <a href="15-interfaces.html#interface-iterator"><code>Iterator::key</code></a>.</td></tr>
@@ -1709,6 +1742,7 @@ instantiated directly. It is defined, as follows:</p>
 <tr><td><code>throw</code></td><td>This instance method throws an exception into the generator and resumes execution of the generator. The behavior is as if the current <code>yield</code> expression was replaced with throw <code>$exception</code>. If the generator is already closed when this method is invoked, the exception will be thrown in the caller’s context instead. This method returns the yielded value.</td></tr>
 <tr><td><code>valid</code></td><td>An implementation of the instance method <a href="15-interfaces.html#interface-iterator"><code>Iterator::valid</code></a>.</td></tr>
 </tbody></table>
+</div>
 <p>Generator objects can not be serialized or unserialized.</p>
 <h3 id="class-__php_incomplete_class"><a class="header" href="#class-__php_incomplete_class">Class <code>__PHP_Incomplete_Class</code></a></h3>
 <p>There are certain circumstances in which a program can generate an
@@ -1816,7 +1850,7 @@ The class type is defined, as follows:</p>
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../spec/15-interfaces.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../spec/15-interfaces.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -1830,7 +1864,7 @@ The class type is defined, as follows:</p>
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../spec/15-interfaces.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../spec/15-interfaces.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -1840,21 +1874,22 @@ The class type is defined, as follows:</p>
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>
